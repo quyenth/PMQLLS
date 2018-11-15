@@ -1,0 +1,114 @@
+2018-11-12 16:33:03.151 +07:00 [Information] User profile is available. Using '"C:\Users\quyenth\AppData\Local\ASP.NET\DataProtection-Keys"' as key repository and Windows DPAPI to encrypt keys at rest.
+2018-11-12 16:33:03.189 +07:00 [Debug] Reading data from file '"C:\Users\quyenth\AppData\Local\ASP.NET\DataProtection-Keys\key-af100183-8952-43d9-ba45-bcb8dfbe231b.xml"'.
+2018-11-12 16:33:03.196 +07:00 [Debug] Found key {af100183-8952-43d9-ba45-bcb8dfbe231b}.
+2018-11-12 16:33:03.203 +07:00 [Debug] Considering key {af100183-8952-43d9-ba45-bcb8dfbe231b} with expiration date 2019-02-04 02:51:05Z as default key.
+2018-11-12 16:33:03.207 +07:00 [Debug] Forwarded activator type request from "Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" to "Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60"
+2018-11-12 16:33:03.209 +07:00 [Debug] Decrypting secret element using Windows DPAPI.
+2018-11-12 16:33:03.209 +07:00 [Debug] Forwarded activator type request from "Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=2.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60" to "Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60"
+2018-11-12 16:33:03.212 +07:00 [Debug] Opening CNG algorithm '"AES"' from provider 'null' with chaining mode CBC.
+2018-11-12 16:33:03.214 +07:00 [Debug] Opening CNG algorithm '"SHA256"' from provider 'null' with HMAC.
+2018-11-12 16:33:03.216 +07:00 [Debug] Using key {af100183-8952-43d9-ba45-bcb8dfbe231b} as the default key.
+2018-11-12 16:33:03.217 +07:00 [Debug] Key ring with default key {af100183-8952-43d9-ba45-bcb8dfbe231b} was loaded during application startup.
+2018-11-12 16:33:03.265 +07:00 [Information] You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2018-11-12 16:33:03.275 +07:00 [Debug] Using "Identity.Application" as default scheme for authentication
+2018-11-12 16:33:03.276 +07:00 [Debug] Using "Identity.External" as default scheme for sign-in
+2018-11-12 16:33:03.276 +07:00 [Debug] Using "Identity.External" as default scheme for sign-out
+2018-11-12 16:33:03.276 +07:00 [Debug] Using "Identity.Application" as default scheme for challenge
+2018-11-12 16:33:03.276 +07:00 [Debug] Using "Identity.Application" as default scheme for forbid
+2018-11-12 16:33:03.335 +07:00 [Debug] Hosting starting
+2018-11-12 16:33:03.391 +07:00 [Debug] Hosting started
+2018-11-12 16:33:03.391 +07:00 [Debug] Loaded hosting startup assembly "AspNetCore"
+2018-11-12 16:33:03.391 +07:00 [Debug] Loaded hosting startup assembly "Microsoft.AspNetCore.Server.IISIntegration"
+2018-11-12 16:33:03.391 +07:00 [Debug] Loaded hosting startup assembly "Microsoft.AspNetCore.ApplicationInsights.HostingStartup"
+2018-11-12 16:33:03.565 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" started.
+2018-11-12 16:33:03.620 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/  
+2018-11-12 16:33:03.653 +07:00 [Debug] The request path "/" does not match a supported file type
+2018-11-12 16:33:03.675 +07:00 [Debug] AuthenticationScheme: "Identity.Application" was not authenticated.
+2018-11-12 16:33:03.679 +07:00 [Debug] AuthenticationScheme: "Identity.Application" was not authenticated.
+2018-11-12 16:33:03.691 +07:00 [Debug] AuthenticationScheme: "Identity.Application" was not authenticated.
+2018-11-12 16:33:03.696 +07:00 [Verbose] No endpoint entry found for request path: "/"
+2018-11-12 16:33:03.969 +07:00 [Debug] Request successfully matched the route with name 'null' and template '""'.
+2018-11-12 16:33:06.312 +07:00 [Debug] Compilation of the generated code for the Razor file at '"D:\Working\DotNetCore\DotnetCore\AspNetCore\Pages\Index.cshtml"' started.
+2018-11-12 16:33:07.771 +07:00 [Debug] Compilation of the generated code for the Razor file at '"D:\Working\DotNetCore\DotnetCore\AspNetCore\Pages\Index.cshtml"' completed in 1455.9907ms.
+2018-11-12 16:33:07.873 +07:00 [Debug] Compilation of the generated code for the Razor file at '"D:\Working\DotNetCore\DotnetCore\AspNetCore\Pages\_ViewStart.cshtml"' started.
+2018-11-12 16:33:07.935 +07:00 [Debug] Compilation of the generated code for the Razor file at '"D:\Working\DotNetCore\DotnetCore\AspNetCore\Pages\_ViewStart.cshtml"' completed in 62.6609ms.
+2018-11-12 16:33:07.954 +07:00 [Debug] Executing action "/Index"
+2018-11-12 16:33:07.966 +07:00 [Information] Executing handler method "OnGet" with arguments (null) - ModelState is Valid
+2018-11-12 16:33:07.967 +07:00 [Debug] Executed handler method "OnGet", returned result "".
+2018-11-12 16:33:08.006 +07:00 [Debug] View lookup cache miss for view '"_Layout"' in controller 'null'.
+2018-11-12 16:33:08.093 +07:00 [Debug] Compilation of the generated code for the Razor file at '"D:\Working\DotNetCore\DotnetCore\AspNetCore\Pages\_Layout.cshtml"' started.
+2018-11-12 16:33:08.226 +07:00 [Debug] Compilation of the generated code for the Razor file at '"D:\Working\DotNetCore\DotnetCore\AspNetCore\Pages\_Layout.cshtml"' completed in 131.8555ms.
+2018-11-12 16:33:08.233 +07:00 [Debug] Tag helper component '"Microsoft.AspNetCore.ApplicationInsights.HostingStartup.JavaScriptSnippetTagHelperComponent"' initialized.
+2018-11-12 16:33:08.234 +07:00 [Debug] Tag helper component '"Microsoft.AspNetCore.ApplicationInsights.HostingStartup.JavaScriptSnippetTagHelperComponent"' processed.
+2018-11-12 16:33:08.242 +07:00 [Debug] Tag helper component '"Microsoft.AspNetCore.ApplicationInsights.HostingStartup.JavaScriptSnippetTagHelperComponent"' initialized.
+2018-11-12 16:33:08.242 +07:00 [Debug] Tag helper component '"Microsoft.AspNetCore.ApplicationInsights.HostingStartup.JavaScriptSnippetTagHelperComponent"' processed.
+2018-11-12 16:33:08.286 +07:00 [Debug] View lookup cache miss for view '"_LoginPartial"' in controller 'null'.
+2018-11-12 16:33:08.343 +07:00 [Debug] Compilation of the generated code for the Razor file at '"D:\Working\DotNetCore\DotnetCore\AspNetCore\Pages\_LoginPartial.cshtml"' started.
+2018-11-12 16:33:08.406 +07:00 [Debug] Compilation of the generated code for the Razor file at '"D:\Working\DotNetCore\DotnetCore\AspNetCore\Pages\_LoginPartial.cshtml"' completed in 62.2997ms.
+2018-11-12 16:33:08.538 +07:00 [Debug] An 'IServiceProvider' was created for internal use by Entity Framework.
+2018-11-12 16:33:08.704 +07:00 [Information] Executed action "/Index" in 750.1509ms
+2018-11-12 16:33:08.707 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:08.708 +07:00 [Information] Request finished in 5093.1035ms 200 text/html; charset=utf-8
+2018-11-12 16:33:08.741 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/lib/bootstrap/dist/css/bootstrap.css  
+2018-11-12 16:33:08.767 +07:00 [Information] The file "/lib/bootstrap/dist/css/bootstrap.css" was not modified
+2018-11-12 16:33:08.769 +07:00 [Debug] Handled. Status code: 304 File: "/lib/bootstrap/dist/css/bootstrap.css"
+2018-11-12 16:33:08.771 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:08.771 +07:00 [Information] Request finished in 30.6589ms 304 text/css
+2018-11-12 16:33:08.786 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/css/site.css  
+2018-11-12 16:33:08.786 +07:00 [Information] The file "/css/site.css" was not modified
+2018-11-12 16:33:08.787 +07:00 [Debug] Handled. Status code: 304 File: "/css/site.css"
+2018-11-12 16:33:08.787 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:08.787 +07:00 [Information] Request finished in 0.7458ms 304 text/css
+2018-11-12 16:33:08.812 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/lib/jquery/dist/jquery.js  
+2018-11-12 16:33:08.812 +07:00 [Information] The file "/lib/jquery/dist/jquery.js" was not modified
+2018-11-12 16:33:08.812 +07:00 [Debug] Handled. Status code: 304 File: "/lib/jquery/dist/jquery.js"
+2018-11-12 16:33:08.812 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:08.812 +07:00 [Information] Request finished in 0.6876ms 304 application/javascript
+2018-11-12 16:33:08.938 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/lib/bootstrap/dist/js/bootstrap.js  
+2018-11-12 16:33:08.938 +07:00 [Information] The file "/lib/bootstrap/dist/js/bootstrap.js" was not modified
+2018-11-12 16:33:08.939 +07:00 [Debug] Handled. Status code: 304 File: "/lib/bootstrap/dist/js/bootstrap.js"
+2018-11-12 16:33:08.939 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:08.939 +07:00 [Information] Request finished in 1.0993ms 304 application/javascript
+2018-11-12 16:33:08.942 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/js/site.js?v=EWaMeWsJBYWmL2g_KkgXZQ5nPe-a3Ichp0LEgzXczKo  
+2018-11-12 16:33:08.943 +07:00 [Information] The file "/js/site.js" was not modified
+2018-11-12 16:33:08.943 +07:00 [Debug] Handled. Status code: 304 File: "/js/site.js"
+2018-11-12 16:33:08.943 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:08.943 +07:00 [Information] Request finished in 1.2969ms 304 application/javascript
+2018-11-12 16:33:08.954 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/images/banner1.svg  
+2018-11-12 16:33:08.955 +07:00 [Debug] Connection id ""0HLI8G7C40FT8"" started.
+2018-11-12 16:33:08.955 +07:00 [Information] The file "/images/banner1.svg" was not modified
+2018-11-12 16:33:08.955 +07:00 [Debug] Handled. Status code: 304 File: "/images/banner1.svg"
+2018-11-12 16:33:08.955 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/images/banner2.svg  
+2018-11-12 16:33:08.955 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:08.955 +07:00 [Information] Request finished in 1.2675ms 304 image/svg+xml
+2018-11-12 16:33:08.956 +07:00 [Information] The file "/images/banner2.svg" was not modified
+2018-11-12 16:33:08.956 +07:00 [Debug] Handled. Status code: 304 File: "/images/banner2.svg"
+2018-11-12 16:33:08.956 +07:00 [Debug] Connection id ""0HLI8G7C40FT8"" completed keep alive response.
+2018-11-12 16:33:08.956 +07:00 [Information] Request finished in 0.7116ms 304 image/svg+xml
+2018-11-12 16:33:08.969 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/images/banner3.svg  
+2018-11-12 16:33:08.969 +07:00 [Information] The file "/images/banner3.svg" was not modified
+2018-11-12 16:33:08.970 +07:00 [Debug] Handled. Status code: 304 File: "/images/banner3.svg"
+2018-11-12 16:33:08.970 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:08.970 +07:00 [Information] Request finished in 0.9371ms 304 image/svg+xml
+2018-11-12 16:33:08.986 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2  
+2018-11-12 16:33:08.987 +07:00 [Information] The file "/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" was not modified
+2018-11-12 16:33:08.987 +07:00 [Debug] Handled. Status code: 304 File: "/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
+2018-11-12 16:33:08.987 +07:00 [Debug] Connection id ""0HLI8G7C40FT8"" completed keep alive response.
+2018-11-12 16:33:08.987 +07:00 [Information] Request finished in 0.6984ms 304 font/woff2
+2018-11-12 16:33:09.115 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/images/banner4.svg  
+2018-11-12 16:33:09.116 +07:00 [Information] The file "/images/banner4.svg" was not modified
+2018-11-12 16:33:09.116 +07:00 [Debug] Handled. Status code: 304 File: "/images/banner4.svg"
+2018-11-12 16:33:09.116 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" completed keep alive response.
+2018-11-12 16:33:09.116 +07:00 [Information] Request finished in 1.5563ms 304 image/svg+xml
+2018-11-12 16:33:09.138 +07:00 [Information] Request starting HTTP/1.1 GET http://localhost:44302/favicon.ico  
+2018-11-12 16:33:09.139 +07:00 [Information] Sending file. Request path: '"/favicon.ico"'. Physical path: '"D:\Working\DotNetCore\DotnetCore\AspNetCore\wwwroot\favicon.ico"'
+2018-11-12 16:33:09.183 +07:00 [Debug] Connection id ""0HLI8G7C40FT8"" completed keep alive response.
+2018-11-12 16:33:09.184 +07:00 [Information] Request finished in 45.1296ms 200 image/x-icon
+2018-11-12 16:35:03.545 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" reset.
+2018-11-12 16:35:03.545 +07:00 [Debug] Connection id ""0HLI8G7C40FT8"" reset.
+2018-11-12 16:35:03.545 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" disconnecting.
+2018-11-12 16:35:03.545 +07:00 [Debug] Connection id ""0HLI8G7C40FT8"" disconnecting.
+2018-11-12 16:35:03.546 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" sending FIN.
+2018-11-12 16:35:03.548 +07:00 [Debug] Connection id ""0HLI8G7C40FT7"" stopped.
+2018-11-12 16:35:03.572 +07:00 [Debug] Connection id ""0HLI8G7C40FT8"" sending FIN.
+2018-11-12 16:35:03.572 +07:00 [Debug] Connection id ""0HLI8G7C40FT8"" stopped.
