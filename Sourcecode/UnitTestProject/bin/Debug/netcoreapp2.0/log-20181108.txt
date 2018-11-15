@@ -1,0 +1,9 @@
+2018-11-08 14:38:03.120 +07:00 [Information] test log
+2018-11-08 14:39:01.574 +07:00 [Information] test log
+2018-11-08 14:40:59.477 +07:00 [Information] test log { SourceContext: "Application.Domain.Entity.Pupil", process: "Worker" }
+2018-11-08 14:46:53.746 +07:00 [Information] test log { SourceContext: "Application.Domain.Entity.Pupil", process: "Worker" }
+2018-11-08 14:50:13.384 +07:00 [Information] test log { SourceContext: "Pupil", process: "Worker" }
+2018-11-08 15:30:15.443 +07:00 [Information] test log 1 { SourceContext: "Application.Domain.Entity.Pupil", process: "Worker" }
+2018-11-08 15:32:06.840 +07:00 [Information] test log 1 { SourceContext: "Application.Domain.Entity.Pupil", process: "Worker" }
+2018-11-08 15:33:59.159 +07:00 [Information] test log 1 { SourceContext: "Application.Domain.Entity.Pupil", process: "Worker" }
+2018-11-08 15:38:59.625 +07:00 [Information] test log 1 { SourceContext: "abc", process: "Worker" }
