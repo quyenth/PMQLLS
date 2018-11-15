@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotnetCore</name>
+    </assembly>
+    <members>
+        <member name="T:DotnetCore.Controllers.DefaultController">
+            <summary>
+            Default API
+            </summary>
+        </member>
+        <member name="M:DotnetCore.Controllers.DefaultController.Index">
+            <summary>
+            test api dongna
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotnetCore.Controllers.DefaultController.GetStr(System.String)">
+            <summary>
+            get string value truyen vao tu api
+            </summary>
+            <param name="str">gia tri truyen vao tu api</param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:DotnetCore.Controllers.DefaultController.generateToken(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+             <summary>
+             generate token
+             </summary>
+             <remarks>
+             Sample request:
+            
+                 POST /Todo
+                 [
+                     { "Key": "Value"},
+                     { "Key1": "Value1"}
+                 ]
+            
+             </remarks>
+             <param name="ob"></param>
+             <returns></returns>
+        </member>
+        <member name="M:DotnetCore.Controllers.HomeController.Index">
+            <summary>
+            test
+            </summary>
+            <returns></returns>
+            
+        </member>
+    </members>
+</doc>
