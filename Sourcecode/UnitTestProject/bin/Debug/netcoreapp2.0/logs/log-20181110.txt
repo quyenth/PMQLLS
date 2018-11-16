@@ -1,2 +1,0 @@
-2018-11-10 10:37:59.420 +07:00 [Verbose] Get records from database with limit return records
-2018-11-10 10:37:59.533 +07:00 [Information] Get records from database with limit return records
