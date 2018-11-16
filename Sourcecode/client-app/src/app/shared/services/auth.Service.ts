@@ -22,21 +22,16 @@ export class AuthService extends BaseService implements OnInit {
       .post(this.BaseUrl + '/api/auth/login', {
         userName: username,
         passWord: password
-      }, {
-          params: {
-            username: username,
-            password: password
-          }
-        }
+      }
 
       ).pipe(user => {
         console.log(user);
         return user;
-      }).subscribe(b => {
+      }).subscribe((result:any) => {
         localStorage.setItem('currentUser', JSON.stringify({
-          token: b
+          token: result.data
         }));
-        console.log(b);
+        console.log(result);
       });
   }
 

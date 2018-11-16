@@ -105,7 +105,11 @@ namespace Application.IdentityServer
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseIdentityServer();
