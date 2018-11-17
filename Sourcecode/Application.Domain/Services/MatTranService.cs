@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class MatTranService : BaseService<MatTran, PupilContext>, IMatTranService
+    public class MatTranService : BaseService<MatTran, ApplicationContext>, IMatTranService
     {
         public MatTranService(ILogger<MatTranService> logger) : base(logger)
         {

@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface IXaService : IBaseService<Xa, PupilContext>
+    public interface IXaService : IBaseService<Xa, ApplicationContext>
     {
         
     }

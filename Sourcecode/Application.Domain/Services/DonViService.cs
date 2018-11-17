@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class DonViService : BaseService<DonVi, PupilContext>, IDonViService
+    public class DonViService : BaseService<DonVi, ApplicationContext>, IDonViService
     {
         public DonViService(ILogger<DonViService> logger) : base(logger)
         {

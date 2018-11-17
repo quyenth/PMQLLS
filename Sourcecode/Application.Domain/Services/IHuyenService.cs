@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface IHuyenService : IBaseService<Huyen, PupilContext>
+    public interface IHuyenService : IBaseService<Huyen, ApplicationContext>
     {
         
     }

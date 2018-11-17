@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class DiemCaoService : BaseService<DiemCao, PupilContext>, IDiemCaoService
+    public class DiemCaoService : BaseService<DiemCao, ApplicationContext>, IDiemCaoService
     {
         public DiemCaoService(ILogger<DiemCaoService> logger) : base(logger)
         {

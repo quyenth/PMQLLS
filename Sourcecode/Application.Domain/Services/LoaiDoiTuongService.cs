@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class LoaiDoiTuongService : BaseService<LoaiDoiTuong, PupilContext>, ILoaiDoiTuongService
+    public class LoaiDoiTuongService : BaseService<LoaiDoiTuong, ApplicationContext>, ILoaiDoiTuongService
     {
         public LoaiDoiTuongService(ILogger<LoaiDoiTuongService> logger) : base(logger)
         {

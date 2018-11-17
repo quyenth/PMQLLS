@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Domain.Services
 {
-    public interface IPupilService : IBaseService<Pupil, PupilContext>
+    public interface IPupilService : IBaseService<Pupil, ApplicationContext>
     {
 
     }

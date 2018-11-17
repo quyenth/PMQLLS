@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface ILoaiDoiTuongService : IBaseService<LoaiDoiTuong, PupilContext>
+    public interface ILoaiDoiTuongService : IBaseService<LoaiDoiTuong, ApplicationContext>
     {
         
     }

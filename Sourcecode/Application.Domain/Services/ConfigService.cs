@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class ConfigService : BaseService<Config, PupilContext>, IConfigService
+    public class ConfigService : BaseService<Config, ApplicationContext>, IConfigService
     {
         public ConfigService(ILogger<ConfigService> logger) : base(logger)
         {

@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class HuyenService : BaseService<Huyen, PupilContext>, IHuyenService
+    public class HuyenService : BaseService<Huyen, ApplicationContext>, IHuyenService
     {
         public HuyenService(ILogger<HuyenService> logger) : base(logger)
         {

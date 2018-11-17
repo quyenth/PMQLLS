@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface IDonViService : IBaseService<DonVi, PupilContext>
+    public interface IDonViService : IBaseService<DonVi, ApplicationContext>
     {
         
     }

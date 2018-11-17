@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class AccessHistoryService : BaseService<AccessHistory, PupilContext>, IAccessHistoryService
+    public class AccessHistoryService : BaseService<AccessHistory, ApplicationContext>, IAccessHistoryService
     {
         public AccessHistoryService(ILogger<AccessHistoryService> logger) : base(logger)
         {

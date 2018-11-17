@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class DoiTuongService : BaseService<DoiTuong, PupilContext>, IDoiTuongService
+    public class DoiTuongService : BaseService<DoiTuong, ApplicationContext>, IDoiTuongService
     {
         public DoiTuongService(ILogger<DoiTuongService> logger) : base(logger)
         {

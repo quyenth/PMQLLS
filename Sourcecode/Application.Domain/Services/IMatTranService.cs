@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface IMatTranService : IBaseService<MatTran, PupilContext>
+    public interface IMatTranService : IBaseService<MatTran, ApplicationContext>
     {
         
     }

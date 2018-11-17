@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Domain.Services
 {
-    public class PupilService : BaseService<Pupil, PupilContext>, IPupilService
+    public class PupilService : BaseService<Pupil, ApplicationContext>, IPupilService
     {
         public PupilService(ILogger<PupilService> logger) : base(logger)
         {

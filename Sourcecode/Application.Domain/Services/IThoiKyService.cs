@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface IThoiKyService : IBaseService<ThoiKy, PupilContext>
+    public interface IThoiKyService : IBaseService<ThoiKy, ApplicationContext>
     {
         
     }

@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface IRoleInfoService : IBaseService<RoleInfo, PupilContext>
+    public interface IRoleInfoService : IBaseService<RoleInfo, ApplicationContext>
     {
         
     }

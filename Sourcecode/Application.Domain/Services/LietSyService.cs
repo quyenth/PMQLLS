@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class LietSyService : BaseService<LietSy, PupilContext>, ILietSyService
+    public class LietSyService : BaseService<LietSy, ApplicationContext>, ILietSyService
     {
         public LietSyService(ILogger<LietSyService> logger) : base(logger)
         {

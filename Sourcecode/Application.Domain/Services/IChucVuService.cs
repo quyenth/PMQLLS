@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface IChucVuService : IBaseService<ChucVu, PupilContext>
+    public interface IChucVuService : IBaseService<ChucVu, ApplicationContext>
     {
         
     }

@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 
 namespace Application.Domain.Services
 {
-    public interface IConfigService : IBaseService<Config, PupilContext>
+    public interface IConfigService : IBaseService<Config, ApplicationContext>
     {
         
     }

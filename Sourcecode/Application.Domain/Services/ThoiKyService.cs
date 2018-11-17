@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class ThoiKyService : BaseService<ThoiKy, PupilContext>, IThoiKyService
+    public class ThoiKyService : BaseService<ThoiKy, ApplicationContext>, IThoiKyService
     {
         public ThoiKyService(ILogger<ThoiKyService> logger) : base(logger)
         {

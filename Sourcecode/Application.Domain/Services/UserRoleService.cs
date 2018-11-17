@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class UserRoleService : BaseService<UserRole, PupilContext>, IUserRoleService
+    public class UserRoleService : BaseService<UserRole, ApplicationContext>, IUserRoleService
     {
         public UserRoleService(ILogger<UserRoleService> logger) : base(logger)
         {

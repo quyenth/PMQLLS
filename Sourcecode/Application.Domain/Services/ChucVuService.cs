@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Domain.Services
 {
-    public class ChucVuService : BaseService<ChucVu, PupilContext>, IChucVuService
+    public class ChucVuService : BaseService<ChucVu, ApplicationContext>, IChucVuService
     {
         public ChucVuService(ILogger<ChucVuService> logger) : base(logger)
         {
