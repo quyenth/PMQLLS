@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, Observable, observable } from 'rxjs';
+import { Subject, Observable, observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/observable/from';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chucvu-list',
@@ -16,36 +17,22 @@ export class ChucvuListComponent implements OnInit {
 
   ngOnInit() {
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers', //'full_numbers',
       pageLength: 2,
-      paging:true,
-      processing: true
+      select: true,
+      searching:false,
+      dom:'t<l<".col-lg-8 float-right"ip>>'
+      // paging:true,
+      // processing: true
     };
-    // this.getUsers().subscribe(users=>{
-    //   console.log(users);
-    //   this.users$.push(users) ;
+    this.getUsers().subscribe(users=>{
+      console.log(users);
+      this.users$ = users;
+      this.dtTrigger.next();
       
-    // })
-    this.users$ =[
-      {
-        name: "quyenth",
-        email: "thai hong quyen"
-      },
-      {
-        name: "quyenth1",
-        email: "thai hong quyen"
-      },
-      {
-        name: "quyenth2",
-        email: "thai hong quyen"
-      },
-      {
-        name: "quyenth",
-        email: "thai hong quyen"
-      }
-    ];
-    debugger;
-    this.dtTrigger.next();
+    })
+  
+   
     // this.data.getUsers().subscribe(data => {
     //   this.users$ = data;
     //   this.dtTrigger.next();
@@ -72,7 +59,7 @@ export class ChucvuListComponent implements OnInit {
         email: "thai hong quyen"
       }
     ];
-    return Observable.from(users);
+    return  of(users).pipe(delay(200));
   };
 
   ngOnDestroy(): void {
