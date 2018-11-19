@@ -1,8 +1,0 @@
-E:\TBLS\PMQLLS\Sourcecode\Framework\bin\Debug\netcoreapp2.0\Framework.deps.json
-E:\TBLS\PMQLLS\Sourcecode\Framework\bin\Debug\netcoreapp2.0\Framework.dll
-E:\TBLS\PMQLLS\Sourcecode\Framework\bin\Debug\netcoreapp2.0\Framework.pdb
-E:\TBLS\PMQLLS\Sourcecode\Framework\obj\Debug\netcoreapp2.0\Framework.csproj.CoreCompileInputs.cache
-E:\TBLS\PMQLLS\Sourcecode\Framework\obj\Debug\netcoreapp2.0\Framework.AssemblyInfoInputs.cache
-E:\TBLS\PMQLLS\Sourcecode\Framework\obj\Debug\netcoreapp2.0\Framework.AssemblyInfo.cs
-E:\TBLS\PMQLLS\Sourcecode\Framework\obj\Debug\netcoreapp2.0\Framework.dll
-E:\TBLS\PMQLLS\Sourcecode\Framework\obj\Debug\netcoreapp2.0\Framework.pdb
