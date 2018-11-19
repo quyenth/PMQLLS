@@ -1,0 +1,12 @@
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\obj\Debug\netcoreapp2.0\Application.Domain.csprojAssemblyReference.cache
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\obj\Debug\netcoreapp2.0\Application.Domain.csproj.CoreCompileInputs.cache
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\obj\Debug\netcoreapp2.0\Application.Domain.AssemblyInfoInputs.cache
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\obj\Debug\netcoreapp2.0\Application.Domain.AssemblyInfo.cs
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\bin\Debug\netcoreapp2.0\Application.Domain.deps.json
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\bin\Debug\netcoreapp2.0\Application.Domain.dll
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\bin\Debug\netcoreapp2.0\Application.Domain.pdb
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\bin\Debug\netcoreapp2.0\Framework.dll
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\bin\Debug\netcoreapp2.0\Framework.pdb
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\obj\Debug\netcoreapp2.0\Application.Domain.csproj.CopyComplete
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\obj\Debug\netcoreapp2.0\Application.Domain.dll
+E:\TBLS\PMQLLS\Sourcecode\Application.Domain\obj\Debug\netcoreapp2.0\Application.Domain.pdb
