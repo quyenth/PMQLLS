@@ -8,6 +8,7 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ChucvuDialogComponent } from '../../chucvu-dialog/chucvu-dialog.component';
+import { ChucvuAdComponent } from '../chucvu-ad/chucvu-ad.component';
 
 @Component({
   selector: 'app-chucvu-list',
@@ -22,12 +23,15 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy {
   list$: any[] = [];
   private modalRef: BsModalRef;
   dtTrigger: Subject<any> = new Subject();
-  constructor(private http: HttpClient, private modalService: ModalService) {
-
+  modalDataResult: any;
+  constructor(private http: HttpClient, private modalService:ModalService) { 
+    this.modalService.data.subscribe(result=>{
+      //console.log(result);
+      //do somthing when data change
+    });
   }
 
   ngOnInit() {
-
 
     this.dtOptions = {
       pagingType: 'simple_numbers',
@@ -95,9 +99,11 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy {
     console.log(changes);
   }
 
-  openModal() {
-    this.modalRef = this.modalService.openModalWithComponent(ChucvuDialogComponent , 'modal-lg');
-
+  openModal(){
+    //change data to child component
+    this.modalService.changeDataSource({nam:'quyenth' + new Date().getMilliseconds()});
+    this.modalRef = this.modalService.openModalWithComponent(ChucvuAdComponent);
+    
   }
 
   getUsers(): Observable<any> {
