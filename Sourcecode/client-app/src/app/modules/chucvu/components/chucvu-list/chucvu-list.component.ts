@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Subject, Observable, of, empty, observable, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/observable/from';
@@ -6,29 +6,29 @@ import { delay } from 'rxjs/operators';
 import { DataTableDirective } from 'angular-datatables';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { ModalService } from 'src/app/shared/services/modal.Service';
-import {ChucvuAdComponent} from 'src/app/modules/chucvu/components/chucvu-ad/chucvu-ad.component'
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ChucvuDialogComponent } from '../../chucvu-dialog/chucvu-dialog.component';
 
 @Component({
   selector: 'app-chucvu-list',
   templateUrl: './chucvu-list.component.html',
   styleUrls: []
 })
-export class ChucvuListComponent implements OnInit,OnChanges {
+export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy {
   @ViewChild(DataTableDirective)
   private datatableElement: DataTableDirective;
-  checkall:boolean=false;
+  checkall: boolean = false;
   dtOptions: DataTables.Settings = {};
   list$: any[] = [];
-  private modalRef:BsModalRef;
+  private modalRef: BsModalRef;
   dtTrigger: Subject<any> = new Subject();
-  constructor(private http: HttpClient, private modalService:ModalService) { 
-   
+  constructor(private http: HttpClient, private modalService: ModalService) {
+
   }
-  
+
   ngOnInit() {
 
-    
+
     this.dtOptions = {
       pagingType: 'simple_numbers',
       // pageLength: 2,
@@ -38,13 +38,13 @@ export class ChucvuListComponent implements OnInit,OnChanges {
       processing: true,
       columnDefs: [{
         targets: 0,
-        defaultContent:'',
-        width:'20px',
-        orderable:false        
+        defaultContent: '',
+        width: '20px',
+        orderable: false
       },
-      
+
       ],
-   
+
       // select: {
       //   style: 'os',
       //   selector: 'td:first-child'
@@ -56,48 +56,48 @@ export class ChucvuListComponent implements OnInit,OnChanges {
         this.getUsers().subscribe(users => {
 
           this.list$ = users;
-          this.checkall=false;
+          this.checkall = false;
           callback({
             recordsTotal: 10,
             recordsFiltered: 100,
-            data:[]// this.users$,
-            
+            data: []// this.users$,
+
           });
-         
-        })
+
+        });
 
       },
-      rowCallback:(row:Node,data:any,index:number)=>{
+      rowCallback: ( row: Node, data: any, index: number) => {
         $('td', row).unbind('click');
         $('td', row).bind('click', () => {
           debugger;
-          this.datatableElement.dtInstance.then((tbInstant:DataTables.Api)=>{
+          this.datatableElement.dtInstance.then((tbInstant: DataTables.Api) => {
            console.log( tbInstant.rows(".selected").data().length) ;
-          })
+          });
         });
         return row;
       }
 
-      
-     
+
+
 
       // processing: true
     };
     setTimeout(() => {
-      (this.datatableElement.dtInstance).then((dtInstant:DataTables.Api)=>{
+      (this.datatableElement.dtInstance).then((dtInstant: DataTables.Api) => {
         console.log(dtInstant);
-      })
+      });
     }, 500);
-   
+
   }
 
-  ngOnChanges(changes: SimpleChanges){
+  ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
   }
 
-  openModal(){
-    this.modalRef = this.modalService.openModalWithComponent(ChucvuAdComponent);
-    
+  openModal() {
+    this.modalRef = this.modalService.openModalWithComponent(ChucvuDialogComponent , 'modal-lg');
+
   }
 
   getUsers(): Observable<any> {
@@ -125,17 +125,16 @@ export class ChucvuListComponent implements OnInit,OnChanges {
 
   onCheckAllChange(){
     console.log("change");
-    this.list$.map(c=>{
-      c.selected=this.checkall;
-    })    
+    this.list$.map(c => {
+      c.selected = this.checkall;
+    });
   }
- 
-  onCheckOneChange(){
-    if(this.list$.length===this.list$.filter(c=>c.selected==true).length){
-      this.checkall=true;
-    }
-    else{
-      this.checkall=false;
+
+  onCheckOneChange() {
+    if ( this.list$.length === this.list$.filter(c => c.selected === true).length ) {
+      this.checkall = true;
+    } else {
+      this.checkall = false;
     }
   }
   ngOnDestroy(): void {

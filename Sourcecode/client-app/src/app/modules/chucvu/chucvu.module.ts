@@ -3,27 +3,27 @@ import { CommonModule } from '@angular/common';
 
 import { ChucvuListComponent } from './components/chucvu-list/chucvu-list.component';
 import { DataTablesModule } from 'angular-datatables';
-import { FormsModule } from '@angular/forms';
-import { ChucvuAdComponent } from './components/chucvu-ad/chucvu-ad.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
+import { ChucvuDialogComponent } from './chucvu-dialog/chucvu-dialog.component';
 
 @NgModule({
   imports: [
     CommonModule,
     DataTablesModule,
     FormsModule,
-    ModalModule.forRoot()
-
+    ModalModule.forRoot(),
+    ReactiveFormsModule
   ],
-  providers:[
+  providers: [
     BsModalService,
     ComponentLoaderFactory
   ],
-  entryComponents:[
-    ChucvuAdComponent
+  entryComponents: [
+    ChucvuDialogComponent
   ],
-  declarations: [ChucvuListComponent, ChucvuAdComponent],
+  declarations: [ChucvuListComponent, ChucvuDialogComponent, ChucvuDialogComponent],
   exports: [ChucvuListComponent]
 })
 export class ChucvuModule { }

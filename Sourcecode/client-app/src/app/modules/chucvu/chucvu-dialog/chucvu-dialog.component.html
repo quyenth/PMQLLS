@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Chức vụ</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form [formGroup]="myForm">
+          <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('name').valid }">
+                <label class="col-sm-2 col-form-label">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="name">
+                <span class="form-text m-b-none text-danger" *ngIf="submited && !myForm.get('name').valid && myForm.get('name').errors['required']">Trường này là bắt buộc.</span>
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+          <div class="form-group row" [ngClass]="{'has-error': submited && !myForm.get('email').valid }" >
+            <label class="col-sm-2 col-form-label">Email</label>
+              <div class="col-sm-10">
+                   <input type="text" class="form-control" formControlName="email">
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && !myForm.get('email').valid && myForm.get('email').errors['required']">Trường này là bắt buộc.</span>
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && !myForm.get('email').valid && myForm.get('email').errors['email']">Sai định dạng mail.</span>
+
+              </div>
+          </div>
+          <div class="hr-line-dashed"></div>
+          <div class="form-group row"><label class="col-sm-2 col-form-label">Website</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="website">
+              </div>
+          </div>
+
+      </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="onSubmit()">Save</button>
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+  </div>

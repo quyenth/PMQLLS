@@ -7,7 +7,7 @@ import {
   HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 
 @Injectable()

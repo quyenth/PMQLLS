@@ -9,9 +9,8 @@ export class ModalService {
   constructor(private modalService: BsModalService) {
 
   }
-  openModalWithComponent(component){
-    debugger;
-    this.bsModalRef = this.modalService.show(component);
+  openModalWithComponent(component, modalClass: string = null) {
+    this.bsModalRef = this.modalService.show(component , Object.assign({}, { class: modalClass }));
     return this.bsModalRef;
   }
 }
