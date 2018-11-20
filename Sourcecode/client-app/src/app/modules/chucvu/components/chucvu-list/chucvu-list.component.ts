@@ -1,45 +1,101 @@
-import { Component, OnInit } from '@angular/core';
-import { Subject, Observable, observable, of } from 'rxjs';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Subject, Observable, of, empty, observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/observable/from';
 import { delay } from 'rxjs/operators';
+import { DataTableDirective } from 'angular-datatables';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 @Component({
   selector: 'app-chucvu-list',
   templateUrl: './chucvu-list.component.html',
   styleUrls: []
 })
-export class ChucvuListComponent implements OnInit {
-  dtOptions:DataTables.Settings={};
-  users$: any[] = [];
-  dtTrigger:Subject<any>=new Subject();
-  constructor(private http: HttpClient) { }
-
+export class ChucvuListComponent implements OnInit,OnChanges {
+  @ViewChild(DataTableDirective)
+  private datatableElement: DataTableDirective;
+  checkall:boolean=false;
+  dtOptions: DataTables.Settings = {};
+  list$: any[] = [];
+  
+  dtTrigger: Subject<any> = new Subject();
+  private proxy = of(this.checkall).pipe();
+  constructor(private http: HttpClient) { 
+   
+  }
+  
   ngOnInit() {
+
+    
     this.dtOptions = {
-      pagingType: 'simple_numbers', //'full_numbers',
-      pageLength: 2,
-      select: true,
-      searching:false,
-      dom:'t<l<".col-lg-8 float-right"ip>>'
-      // paging:true,
+      pagingType: 'simple_numbers',
+      // pageLength: 2,
+
+      searching: false,
+      serverSide: true,
+      processing: true,
+      columnDefs: [{
+        targets: 0,
+        defaultContent:'',
+        width:'20px',
+        orderable:false        
+      },
+      
+      ],
+   
+      // select: {
+      //   style: 'os',
+      //   selector: 'td:first-child'
+      // },
+      dom: 't<l<".col-lg-8 float-right"ip>>',
+      order: [[ 1, 'asc' ]],
+      ajax: (dataTableParameters: any, callback) => {
+        console.log(dataTableParameters);
+        this.getUsers().subscribe(users => {
+
+          this.list$ = users;
+          this.checkall=false;
+          callback({
+            recordsTotal: 10,
+            recordsFiltered: 100,
+            data:[]// this.users$,
+            
+          });
+         
+        })
+
+      },
+      rowCallback:(row:Node,data:any,index:number)=>{
+        $('td', row).unbind('click');
+        $('td', row).bind('click', () => {
+          debugger;
+          this.datatableElement.dtInstance.then((tbInstant:DataTables.Api)=>{
+           console.log( tbInstant.rows(".selected").data().length) ;
+          })
+        });
+        return row;
+      }
+
+      
+     
+
       // processing: true
     };
-    this.getUsers().subscribe(users=>{
-      console.log(users);
-      this.users$ = users;
-      this.dtTrigger.next();
-      
-    })
-  
+    setTimeout(() => {
+      (this.datatableElement.dtInstance).then((dtInstant:DataTables.Api)=>{
+        console.log(dtInstant);
+      })
+    }, 500);
    
-    // this.data.getUsers().subscribe(data => {
-    //   this.users$ = data;
-    //   this.dtTrigger.next();
-    // });
   }
 
-  getUsers():Observable<any> {
+  ngOnChanges(changes: SimpleChanges){
+    console.log(changes);
+  }
+
+
+
+  getUsers(): Observable<any> {
     console.log("get users");
     var users = [
       {
@@ -59,9 +115,24 @@ export class ChucvuListComponent implements OnInit {
         email: "thai hong quyen"
       }
     ];
-    return  of(users).pipe(delay(200));
+    return of(users).pipe(delay(100));
   };
 
+  onCheckAllChange(){
+    console.log("change");
+    this.list$.map(c=>{
+      c.selected=this.checkall;
+    })    
+  }
+ 
+  onCheckOneChange(){
+    if(this.list$.length===this.list$.filter(c=>c.selected==true).length){
+      this.checkall=true;
+    }
+    else{
+      this.checkall=false;
+    }
+  }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }

@@ -12,6 +12,7 @@ import { HeaderRightComponent } from './shared/header/header-right/header-right.
 import { HeaderDropdownMenuComponent } from './shared/header/header-dropdown-menu/header-dropdown-menu.component';
 import { HeaderLogoComponent } from './shared/header/header-logo/header-logo.component';
 import { ChucvuModule } from './modules/chucvu/chucvu.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ChucvuModule } from './modules/chucvu/chucvu.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    ChucvuModule
+    ChucvuModule,
+    FormsModule
   ],
   providers: [
     AuthService

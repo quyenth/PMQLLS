@@ -1,17 +1,64 @@
-<table class="table table-striped table-bordered row-border hover" datatable [dtOptions]="dtOptions" style="width:100%"
-  [dtTrigger]="dtTrigger">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Website</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users$">
-      <td>{{ user.name }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.website }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="ibox ">
+  <div class="ibox-title">
+    <h5>Title box</h5>
+    <div class="ibox-tools">
+
+    </div>
+  </div>
+
+  <div class="ibox-content inspinia-timeline">
+
+    <div class="row search-box">
+      <div class="col-sm-5 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
+          <option value="0">Option 1</option>
+          <option value="1">Option 2</option>
+          <option value="2">Option 3</option>
+          <option value="3">Option 4</option>
+        </select>
+      </div>
+
+      <div class="col-sm-3">
+        <div class="input-group"><input placeholder="Search" type="text" class="form-control form-control-sm"> <span
+            class="input-group-append"> <button type="button" class="btn btn-sm btn-primary">Go!
+            </button> </span></div>
+
+      </div>
+      <div class="col-sm-4 m-b-xs">
+        <div class="html5buttons">
+          <div class="dt-buttons btn-group">
+            <a class="btn btn-primary buttons-copy buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Thêm mới</span></a>
+            <a class="btn btn-default buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Cập nhật</span></a>
+            <a class="btn btn-default buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Xóa</span></a>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered row-border hover" datatable [dtOptions]="dtOptions" style="width:100%">
+      <thead>
+        <tr>
+          <th style="text-align: center; width: 20px;">
+            <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()">
+          </th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Website</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list$" [ngClass]="{'selected':item.selected}">
+          <td style="text-align: center;">
+            <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
+          </td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.website }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+  </div>
+</div>
