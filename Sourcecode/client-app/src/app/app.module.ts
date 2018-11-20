@@ -13,6 +13,9 @@ import { HeaderDropdownMenuComponent } from './shared/header/header-dropdown-men
 import { HeaderLogoComponent } from './shared/header/header-logo/header-logo.component';
 import { ChucvuModule } from './modules/chucvu/chucvu.module';
 import { FormsModule } from '@angular/forms';
+import { ModalService } from './shared/services/modal.Service';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     ChucvuModule,
-    FormsModule
+    FormsModule,
+    ModalModule
   ],
   providers: [
     AuthService
@@ -40,7 +44,8 @@ import { FormsModule } from '@angular/forms';
       provide: HTTP_INTERCEPTORS,
       useClass: ResponseInterceptor,
       multi: true
-    }
+    },
+    ModalService,
   ],
   bootstrap: [AppComponent]
 })

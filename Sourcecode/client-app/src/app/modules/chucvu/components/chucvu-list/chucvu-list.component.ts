@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
-import { Subject, Observable, of, empty, observable } from 'rxjs';
+import { Subject, Observable, of, empty, observable, from } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/observable/from';
 import { delay } from 'rxjs/operators';
 import { DataTableDirective } from 'angular-datatables';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { ModalService } from 'src/app/shared/services/modal.Service';
+import {ChucvuAdComponent} from 'src/app/modules/chucvu/components/chucvu-ad/chucvu-ad.component'
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-chucvu-list',
@@ -17,10 +20,9 @@ export class ChucvuListComponent implements OnInit,OnChanges {
   checkall:boolean=false;
   dtOptions: DataTables.Settings = {};
   list$: any[] = [];
-  
+  private modalRef:BsModalRef;
   dtTrigger: Subject<any> = new Subject();
-  private proxy = of(this.checkall).pipe();
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private modalService:ModalService) { 
    
   }
   
@@ -93,7 +95,10 @@ export class ChucvuListComponent implements OnInit,OnChanges {
     console.log(changes);
   }
 
-
+  openModal(){
+    this.modalRef = this.modalService.openModalWithComponent(ChucvuAdComponent);
+    
+  }
 
   getUsers(): Observable<any> {
     console.log("get users");
