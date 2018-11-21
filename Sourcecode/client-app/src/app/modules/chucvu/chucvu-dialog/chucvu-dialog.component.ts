@@ -3,6 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ModalService } from 'src/app/shared/services/modal.Service';
+import { ActionType } from 'src/app/shared/commons/action-type';
 
 @Component({
   selector: 'app-chucvu-dialog',
@@ -21,7 +22,7 @@ export class ChucvuDialogComponent implements OnInit, OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder,private modalService:ModalService) { 
     
-    this.subscription = this.modalService.parentdata.subscribe(data=>{
+    this.subscription = this.modalService.dialogData.subscribe(data=>{
       console.log(data);
       //do something with data pass form parent
     });
@@ -36,6 +37,10 @@ export class ChucvuDialogComponent implements OnInit, OnDestroy {
   onSubmit() {
     console.log(this.myForm);
     this.submited = true;
+
+    //do something to save data 
+    this.bsModalRef.hide();
+    this.modalService.passDataToParent({action:ActionType.SUBMIT});
   }
 
   
@@ -45,7 +50,7 @@ export class ChucvuDialogComponent implements OnInit, OnDestroy {
    */
   onClose(){
     this.bsModalRef.hide();
-    this.modalService.passDataToParent({action:'close'});
+    this.modalService.passDataToParent({action:ActionType.CLOSE});
   }
 
   ngOnDestroy(){

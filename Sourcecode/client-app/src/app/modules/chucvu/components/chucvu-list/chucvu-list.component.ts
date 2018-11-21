@@ -10,6 +10,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ChucvuDialogComponent } from '../../chucvu-dialog/chucvu-dialog.component';
 import {FromType} from 'src/app/shared/commons/form-type';
 import { ModalSize } from 'src/app/shared/commons/modal-size';
+import { ActionType } from 'src/app/shared/commons/action-type';
 
 @Component({
   selector: 'app-chucvu-list',
@@ -25,12 +26,13 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy, After
   list$: any[] = [];
   dtTrigger: Subject<any> = new Subject();
   constructor(private http: HttpClient, private modalService:ModalService) { 
-    this.subscription = this.modalService.dialogData.subscribe(data=>{
+    this.subscription = this.modalService.parentData.subscribe(data=>{
       //do some thing when data change from modal
       //reload if action is submit
       console.log(data);
-      if(data && data.action ==='submit'){
-
+      if(data && data.action === ActionType.SUBMIT){
+        //reload data
+        this.onSearch();
       }
     });
   }
@@ -163,6 +165,12 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy, After
       this.checkall = false;
     }
   }
+
+  getSelectedItems(){
+    return this.list$.filter(c=>c.selected==true);
+  }
+
+
   /**
    * do something on distroy
    */

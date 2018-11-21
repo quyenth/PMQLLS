@@ -10,13 +10,13 @@ export class ModalService {
   private parentDataSource = new Subject<any>();
   //data of dialog component
   private dialogDataSource = new Subject<any>();
-  parentdata = this.parentDataSource.asObservable();
+  parentData = this.parentDataSource.asObservable();
   dialogData = this.dialogDataSource.asObservable();
   constructor(private modalService: BsModalService) {
 
   }
   openModalWithComponent(component,data:any, modalClass: string = null) {
-    this.bsModalRef = this.modalService.show(component , Object.assign({}, { class: modalClass }));
+    this.bsModalRef = this.modalService.show(component , Object.assign({}, { class: modalClass}));
     this.passDataToDialog(data);
   }
   /**
