@@ -15,6 +15,7 @@ import { ChucvuModule } from './modules/chucvu/chucvu.module';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './shared/services/modal.Service';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { LoginPageComponent } from './modules/login/login-page/login-page.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FooterComponent,
     HeaderRightComponent,
     HeaderDropdownMenuComponent,
-    HeaderLogoComponent
+    HeaderLogoComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
