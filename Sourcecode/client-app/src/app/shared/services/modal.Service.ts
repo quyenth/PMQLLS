@@ -6,16 +6,30 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 @Injectable()
 export class ModalService {
   bsModalRef: BsModalRef;
-  private dataSource = new BehaviorSubject({});
-  data = this.dataSource.asObservable();
+  //data of parent component
+  private parentDataSource = new Subject<any>();
+  //data of dialog component
+  private dialogDataSource = new Subject<any>();
+  parentdata = this.parentDataSource.asObservable();
+  dialogData = this.dialogDataSource.asObservable();
   constructor(private modalService: BsModalService) {
 
   }
-  openModalWithComponent(component, modalClass: string = null) {
+  openModalWithComponent(component,data:any, modalClass: string = null) {
     this.bsModalRef = this.modalService.show(component , Object.assign({}, { class: modalClass }));
-    return this.bsModalRef;
+    this.passDataToDialog(data);
   }
-  changeDataSource (data:any){
-    this.dataSource.next(data);
+  /**
+   * pass data to dialog via subscription.
+   * @param data 
+   */
+  passDataToDialog (data:any){
+    this.dialogDataSource.next(data);
   }
+
+  passDataToParent(data:any){
+    this.parentDataSource.next(data);
+  }
+
+
 }

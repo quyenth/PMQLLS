@@ -1,28 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ModalService } from 'src/app/shared/services/modal.Service';
 
 @Component({
   selector: 'app-chucvu-dialog',
   templateUrl: './chucvu-dialog.component.html',
   styleUrls: ['./chucvu-dialog.component.css']
 })
-export class ChucvuDialogComponent implements OnInit {
-
-  constructor(public bsModalRef: BsModalRef , private fb: FormBuilder) {}
-
-   submited: boolean;
-
+export class ChucvuDialogComponent implements OnInit, OnDestroy {
+  
+  subscription:Subscription;
+  submited: boolean;
   myForm = this.fb.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     website: ['', Validators.required]
   });
 
+  constructor(public bsModalRef: BsModalRef, private fb: FormBuilder,private modalService:ModalService) { 
+    
+    this.subscription = this.modalService.parentdata.subscribe(data=>{
+      console.log(data);
+      //do something with data pass form parent
+    });
+  }
+  /**
+   * do somthing on init
+   */
   ngOnInit() {
   }
-  onSubmit () {
+ 
+
+  onSubmit() {
     console.log(this.myForm);
     this.submited = true;
   }
+
+  
+
+  /**
+   * do something when close.
+   */
+  onClose(){
+    this.bsModalRef.hide();
+    this.modalService.passDataToParent({action:'close'});
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
 }

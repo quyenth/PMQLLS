@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
 import { ChucvuDialogComponent } from './chucvu-dialog/chucvu-dialog.component';
-import { ChucvuAdComponent } from './components/chucvu-ad/chucvu-ad.component';
 
 @NgModule({
   imports: [
@@ -23,9 +22,8 @@ import { ChucvuAdComponent } from './components/chucvu-ad/chucvu-ad.component';
   ],
   entryComponents: [
     ChucvuDialogComponent,
-    ChucvuAdComponent
   ],
-  declarations: [ChucvuListComponent, ChucvuDialogComponent, ChucvuAdComponent],
+  declarations: [ChucvuListComponent, ChucvuDialogComponent],
   exports: [ChucvuListComponent]
 })
 export class ChucvuModule { }

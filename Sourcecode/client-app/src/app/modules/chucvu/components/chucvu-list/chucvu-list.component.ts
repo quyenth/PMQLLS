@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { Subject, Observable, of, empty, observable, from } from 'rxjs';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges, OnDestroy, AfterViewInit } from '@angular/core';
+import { Subject, Observable, of,  Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/observable/from';
 import { delay } from 'rxjs/operators';
@@ -8,28 +8,33 @@ import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ChucvuDialogComponent } from '../../chucvu-dialog/chucvu-dialog.component';
-import { ChucvuAdComponent } from '../chucvu-ad/chucvu-ad.component';
+import {FromType} from 'src/app/shared/commons/form-type';
+import { ModalSize } from 'src/app/shared/commons/modal-size';
 
 @Component({
   selector: 'app-chucvu-list',
   templateUrl: './chucvu-list.component.html',
   styleUrls: []
 })
-export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy {
+export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy, AfterViewInit {
   @ViewChild(DataTableDirective)
-  private datatableElement: DataTableDirective;
+  private dtElement: DataTableDirective;
+  subscription:Subscription;
   checkall: boolean = false;
   dtOptions: DataTables.Settings = {};
   list$: any[] = [];
-  private modalRef: BsModalRef;
   dtTrigger: Subject<any> = new Subject();
-  modalDataResult: any;
   constructor(private http: HttpClient, private modalService:ModalService) { 
-    this.modalService.data.subscribe(result=>{
-      //console.log(result);
-      //do somthing when data change
+    this.subscription = this.modalService.dialogData.subscribe(data=>{
+      //do some thing when data change from modal
+      //reload if action is submit
+      console.log(data);
+      if(data && data.action ==='submit'){
+
+      }
     });
   }
+
 
   ngOnInit() {
 
@@ -71,28 +76,27 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy {
         });
 
       },
-      rowCallback: ( row: Node, data: any, index: number) => {
-        $('td', row).unbind('click');
-        $('td', row).bind('click', () => {
-          debugger;
-          this.datatableElement.dtInstance.then((tbInstant: DataTables.Api) => {
-           console.log( tbInstant.rows(".selected").data().length) ;
-          });
-        });
-        return row;
-      }
+      // rowCallback: ( row: Node, data: any, index: number) => {
+      //   $('td', row).unbind('click');
+      //   $('td', row).bind('click', () => {
+      //     debugger;
+      //     this.datatableElement.dtInstance.then((tbInstant: DataTables.Api) => {
+      //      console.log( tbInstant.rows(".selected").data().length) ;
+      //     });
+      //   });
+      //   return row;
+      // }
 
 
 
 
       // processing: true
     };
-    setTimeout(() => {
-      (this.datatableElement.dtInstance).then((dtInstant: DataTables.Api) => {
-        console.log(dtInstant);
-      });
-    }, 500);
+    
+  }
 
+  ngAfterViewInit(): void {
+    this.dtTrigger.next();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -101,11 +105,13 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy {
 
   openModal(){
     //change data to child component
-    this.modalService.changeDataSource({nam:'quyenth' + new Date().getMilliseconds()});
-    this.modalRef = this.modalService.openModalWithComponent(ChucvuAdComponent);
+    this.modalService.openModalWithComponent(ChucvuDialogComponent,{formType:FromType.INSERT,id:0},ModalSize.LARGE);
     
   }
 
+  /**
+   * get data
+   */
   getUsers(): Observable<any> {
     console.log("get users");
     var users = [
@@ -129,13 +135,27 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy {
     return of(users).pipe(delay(100));
   };
 
+ onSearch(){
+  //reset pagsize to 1
+  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    // Destroy the table first
+    dtInstance.destroy();
+    // Call the dtTrigger to rerender again
+    this.dtTrigger.next();
+  });
+ }
+  /**
+   * select all rows on data table
+   */
   onCheckAllChange(){
-    console.log("change");
     this.list$.map(c => {
       c.selected = this.checkall;
     });
   }
 
+  /**
+   * select one row on datatable
+   */
   onCheckOneChange() {
     if ( this.list$.length === this.list$.filter(c => c.selected === true).length ) {
       this.checkall = true;
@@ -143,8 +163,14 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy {
       this.checkall = false;
     }
   }
+  /**
+   * do something on distroy
+   */
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+    this.subscription.unsubscribe();
   }
+
+
 
 }
