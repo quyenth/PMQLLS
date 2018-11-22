@@ -489,24 +489,24 @@ namespace Framework.Common
             if (filterCondition.Paging)
             {
                 total = query.Filter(db.Set<T>()).Count();
-            }
-
-
-            foreach (var order in filterCondition.Orders)
-            {
-                if (order.OrderDesc)
+                var queryable = Get(query);
+                foreach (var order in filterCondition.Orders)
                 {
-                    var query1 = query.OrderBy(c => c.Desc(order.FieldName));
-                }
-                else
-                {
-                    var query2 = query.OrderBy(c => c.Asc(order.FieldName));
-                }
+                    if (order.OrderDesc)
+                    {
+                        queryable = queryable.OrderByProperty(order.FieldName);
+                    }
+                    else
+                    {
+                        queryable = queryable.OrderByPropertyDescending(order.FieldName);
+                    }
 
+                }
+                var skip = (filterCondition.PageIndex - 1) * filterCondition.PageSize;
+                return queryable.Skip(skip).Take(filterCondition.PageSize).AsNoTracking();
             }
-
-
-            return Get(query, filterCondition.PageIndex, filterCondition.PageSize);
+            
+            return Get(query);
         }
     }
 }

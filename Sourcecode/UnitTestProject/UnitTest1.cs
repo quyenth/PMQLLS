@@ -22,7 +22,7 @@ namespace UnitTestProject
         [TestMethod]
         public void TestMethod1()
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder().AddJsonFile(@"D:\Working\TBLS\PMQLLS\Sourcecode\UnitTestProject\appsettings.json").Build();
+            IConfigurationRoot configuration = new ConfigurationBuilder().AddJsonFile(@"C:\Working\PMQLLS\PMQLLS\Sourcecode\UnitTestProject\appsettings.json").Build();
 
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
 
@@ -68,16 +68,16 @@ namespace UnitTestProject
             service.Add(pupils);
             var filter = Query<Pupil>.Create("ClassName", OperationType.Contains, "FU");
             filter = filter.And(Query<Pupil>.Create("PupilName", OperationType.Contains, "dongna"));
-            var orderFilter = filter.OrderBy(c => c.Desc("PupilName"));
-           
-           
-            var result = orderFilter.Filter(new ApplicationContext().Pupils).ToList();
+            //var orderFilter = filter.OrderBy(c => c.Desc("PupilName"));
+
+
+            var result = filter.Filter(new ApplicationContext().Pupils).OrderByProperty("ClassName").OrderByPropertyDescending("PupilName");
 
             int total = 0;
             var filterConditions = new FilterCondition()
             {
                 Paging = true,
-                PageIndex = 1,
+                PageIndex = 2,
                 PageSize = 2,
                 Orders = new List<OrderInfo>
                 {
