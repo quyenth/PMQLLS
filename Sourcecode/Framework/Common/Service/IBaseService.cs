@@ -1,7 +1,9 @@
 ﻿
+using Framework.DynamicQuery;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -163,5 +165,34 @@ namespace Framework.Common
         /// <returns></returns>
         TreeNode GetGroupTree(params string[] fields);
 
+
+        /// <summary>
+        /// get all data dbset
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<T> GetAll();
+        /// <summary>
+        /// get data by query
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        IQueryable<T> Get(IQuery<T> query);
+        /// <summary>
+        /// get data by query and paging
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        IQueryable<T> Get(IQuery<T> query, int pageIndex, int pageSize);
+
+        /// <summary>
+        /// filter data by filter condition
+        /// </summary>
+        /// <param name="filterCondition">
+        /// <paramref name="filterCondition"/>
+        /// </param>
+        /// <returns></returns>
+        IQueryable<T> Filter(FilterCondition filterCondition,out int total);
     }
 }

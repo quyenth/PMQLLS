@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Linq.Dynamic.Core;
-
+using Framework.DynamicQuery;
 
 namespace Framework.Common
 {
@@ -458,6 +458,55 @@ namespace Framework.Common
 
             var dc = new DC();
             return dc;
+        }
+
+
+        public IQueryable<T> GetAll()
+        {
+            var db = OpenContext();
+            return db.Set<T>();
+        }
+        public IQueryable<T> Get(IQuery<T> query)
+        {
+            var db = OpenContext();
+            return query.Filter(db.Set<T>());
+        }
+        public IQueryable<T> Get(IQuery<T> query, int pageIndex, int pageSize)
+        {
+            int skipItems = (pageIndex - 1) * pageSize;
+            return Get(query).Skip(skipItems).Take(pageSize).AsNoTracking();
+        }
+
+        public IQueryable<T> Filter(FilterCondition filterCondition, out int total)
+        {
+            var db = OpenContext();
+            Query<T> query = Query<T>.Create(c => (1 == 1));
+            foreach (var searchCondition in filterCondition.SearchCondition)
+            {
+                query = query.And(Query<T>.Create(searchCondition.FieldName, searchCondition.OperationType, searchCondition.Value));
+            }
+            total = 0;
+            if (filterCondition.Paging)
+            {
+                total = query.Filter(db.Set<T>()).Count();
+            }
+
+
+            foreach (var order in filterCondition.Orders)
+            {
+                if (order.OrderDesc)
+                {
+                    var query1 = query.OrderBy(c => c.Desc(order.FieldName));
+                }
+                else
+                {
+                    var query2 = query.OrderBy(c => c.Asc(order.FieldName));
+                }
+
+            }
+
+
+            return Get(query, filterCondition.PageIndex, filterCondition.PageSize);
         }
     }
 }

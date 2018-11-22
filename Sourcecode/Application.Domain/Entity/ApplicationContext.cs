@@ -35,9 +35,10 @@ namespace Application.Domain.Entity
             optionsBuilder.UseInMemoryDatabase("ESchool");
             base.OnConfiguring(optionsBuilder);
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
+            builder.Entity<RoleInfo>().HasKey(c => c.RoleID);
         }
     }
 }
