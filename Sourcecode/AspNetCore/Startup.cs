@@ -19,7 +19,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
-
 namespace AspNetCore
 {
     public class Startup
@@ -34,11 +33,12 @@ namespace AspNetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationIdentityContext>(options =>
+            services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("AspNetCore")));
+           
             //add aspnet identity
             services.AddIdentity<Framework.AspNetIdentity.ApplicationUser, ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationIdentityContext>()
+                .AddEntityFrameworkStores<ApplicationContext>()
                 .AddUserManager<ApplicationUserManager>()
                 .AddDefaultTokenProviders();
 

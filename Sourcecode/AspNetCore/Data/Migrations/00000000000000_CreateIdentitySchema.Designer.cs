@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspNetCore.Data.Migrations
 {
-    [DbContext(typeof(ApplicationIdentityContext))]
+    [DbContext(typeof(ApplicationContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

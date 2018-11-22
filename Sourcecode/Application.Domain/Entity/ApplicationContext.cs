@@ -32,8 +32,17 @@ namespace Application.Domain.Entity
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseInMemoryDatabase("ESchool");
+            //optionsBuilder.UseInMemoryDatabase("ESchool");
             base.OnConfiguring(optionsBuilder);
+        }
+
+        public ApplicationContext():base()
+        {
+
+        }
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+        : base(options)
+        {
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {

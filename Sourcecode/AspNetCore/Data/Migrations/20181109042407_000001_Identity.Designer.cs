@@ -11,7 +11,7 @@ using System;
 
 namespace AspNetCore.Data.Migrations
 {
-    [DbContext(typeof(ApplicationIdentityContext))]
+    [DbContext(typeof(ApplicationContext))]
     [Migration("20181109042407_000001_Identity")]
     partial class _000001_Identity
     {

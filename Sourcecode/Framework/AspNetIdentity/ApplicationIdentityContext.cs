@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Framework.AspNetIdentity
 {
-    public class ApplicationIdentityContext :  IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>,
+    public class ApplicationContext :  IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>,
     ApplicationUserRole, IdentityUserLogin<string>,
     IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
-        public ApplicationIdentityContext(DbContextOptions<ApplicationIdentityContext> options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
         }

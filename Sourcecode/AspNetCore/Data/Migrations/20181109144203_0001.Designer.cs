@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AspNetCore.Data.Migrations
 {
-    [DbContext(typeof(ApplicationIdentityContext))]
+    [DbContext(typeof(ApplicationContext))]
     [Migration("20181109144203_0001")]
     partial class _0001
     {

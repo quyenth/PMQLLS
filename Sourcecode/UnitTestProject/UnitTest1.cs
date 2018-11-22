@@ -12,7 +12,7 @@ using Serilog.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace UnitTestProject
 {
@@ -36,11 +36,13 @@ namespace UnitTestProject
             var loggerFactory = new LoggerFactory().AddSerilog(Log.Logger);//.AddConsole(includeScopes: true, minLevel: LogLevel.Debug);
 
 
-            var provider = new ServiceCollection().AddSingleton<IPupilService, PupilService>()
+            var provider = new ServiceCollection();
+            provider.AddSingleton<IPupilService, PupilService>()
                 .AddSingleton(loggerFactory)
-                .AddLogging()
-                .BuildServiceProvider();
-            var service = provider.GetService<IPupilService>();
+                .AddLogging();
+            provider.AddDbContext<ApplicationContext>(options => options.UseInMemoryDatabase("ESchool"));
+          var t =  provider.BuildServiceProvider();
+            var service = t.GetService<IPupilService>();
             //IPupilService service = new PupilService(logger);
             IList<Pupil> pupils = new List<Pupil>(){
                 new Pupil()

@@ -30,11 +30,13 @@ namespace Application.IdentityServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationIdentityContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("AspNetCore")));
+            //services.AddDbContext<ApplicationContext>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("AspNetCore")));
+            services.AddDbContext<Application.Domain.Entity.ApplicationContext>(options =>
+              options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Application.IdentityServer")));
             //add aspnet identity
             services.AddIdentity<Framework.AspNetIdentity.ApplicationUser, ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationIdentityContext>()
+                .AddEntityFrameworkStores<ApplicationContext>()
                 .AddUserManager<ApplicationUserManager>()
                 .AddDefaultTokenProviders();
 
