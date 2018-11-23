@@ -122,10 +122,18 @@ namespace Application.IdentityServer
 
 
                 // Set the comments path for the Swagger JSON and UI.
+                //get all .document.xml in directory
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Framework.xml"));
+                var d = new DirectoryInfo(AppContext.BaseDirectory);
+                var files = d.GetFiles();
+                foreach (var file in files)
+                {
+                    if (file.Name.EndsWith(".document.xml"))
+                    {
+
+                        c.IncludeXmlComments(file.FullName);
+                    }
+                }
                 c.EnableAnnotations();
             });
 

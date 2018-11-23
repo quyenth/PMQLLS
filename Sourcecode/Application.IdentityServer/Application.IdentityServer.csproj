@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\Application.IdentityServer.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.0\Application.IdentityServer.documnet.xml</DocumentationFile>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
 
@@ -30,8 +30,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application.Domain\Application.Domain.csproj" />
-    <ProjectReference Include="..\Framework\Framework.csproj" />
+    <ProjectReference Include="..\Application.Domain\Application.Domain.csproj">
+      <Private>true</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Private>true</Private>
+    </ProjectReference>
   </ItemGroup>
 
 </Project>
