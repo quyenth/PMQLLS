@@ -34,8 +34,8 @@ namespace Framework.AspNetIdentity
              claims = new List<Claim>
             {
                 new Claim("username", user.UserName),
-                new Claim("email", user.Email),
-                new Claim("fullname", user.FullName)
+                new Claim("email", string.IsNullOrEmpty( user.Email)?string.Empty:user.Email),
+                new Claim("fullname",string.IsNullOrEmpty( user.FullName)?string.Empty:user.FullName)
             };
 
             var roles = await _userManager.GetRolesAsync(user);

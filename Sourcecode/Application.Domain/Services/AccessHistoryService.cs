@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class AccessHistoryService : BaseService<AccessHistory, ApplicationContext>, IAccessHistoryService
     {
-        public AccessHistoryService(ILogger<AccessHistoryService> logger) : base(logger)
+        public AccessHistoryService(ILogger<AccessHistoryService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

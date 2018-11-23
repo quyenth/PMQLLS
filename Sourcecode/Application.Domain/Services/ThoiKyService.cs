@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class ThoiKyService : BaseService<ThoiKy, ApplicationContext>, IThoiKyService
     {
-        public ThoiKyService(ILogger<ThoiKyService> logger) : base(logger)
+        public ThoiKyService(ILogger<ThoiKyService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class DiemCaoService : BaseService<DiemCao, ApplicationContext>, IDiemCaoService
     {
-        public DiemCaoService(ILogger<DiemCaoService> logger) : base(logger)
+        public DiemCaoService(ILogger<DiemCaoService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

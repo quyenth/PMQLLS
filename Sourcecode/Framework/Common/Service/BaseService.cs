@@ -21,10 +21,12 @@ namespace Framework.Common
     {
 
         private readonly ILogger Logger;
+        private readonly DC dc;
 
-        public BaseService(ILogger logger)
+        public BaseService(ILogger logger, DC dc)
         {
             Logger = logger;
+            this.dc = dc;
         }
         /// <summary>
         /// Adds a new record to the DB
@@ -35,11 +37,10 @@ namespace Framework.Common
         /// <returns><see cref="System.Object"/> </returns>
         public virtual object Add(T entity, string IdPropertyName)
         {
-            using (var db = OpenContext())
-            {
-                db.Set<T>().Add(entity);
-                db.SaveChanges();
-            }
+            
+                dc.Set<T>().Add(entity);
+                dc.SaveChanges();
+            
 
             var property = entity.GetType().GetProperty(IdPropertyName);
 
@@ -58,13 +59,12 @@ namespace Framework.Common
         {
             try
             {
-                using (var db = OpenContext())
-                {
-                    db.Set<T>().Add(entity);
-                    db.SaveChanges();
+                
+                    dc.Set<T>().Add(entity);
+                    dc.SaveChanges();
 
                     return entity;
-                }
+                
             }
             catch (ValidationException ex)
             {
@@ -80,15 +80,20 @@ namespace Framework.Common
         /// <param name="entities">a collection of entity</param>
         public virtual void Add(IList<T> entities)
         {
-            using (var context = OpenContext())
-            {
-                foreach (var entity in entities)
-                {
-                    context.Set<T>().Add(entity);
-                }
+            //using (var context = OpenContext())
+            //{
+            //    foreach (var entity in entities)
+            //    {
+            //        context.Set<T>().Add(entity);
+            //    }
 
-                context.SaveChanges();
+            //    context.SaveChanges();
+            //}
+            foreach (var entity in entities)
+            {
+                dc.Set<T>().Add(entity);
             }
+            dc.SaveChanges();
         }
 
         /// <summary>
@@ -100,17 +105,26 @@ namespace Framework.Common
         {
             Logger.LogTrace("Get records from database with limit return records");
             Logger.LogInformation("Get records from database with limit return records");
-            using (var db = OpenContext())
+            //using (var db = OpenContext())
+            //{
+            //    var q = dc.Set<T>().AsQueryable();
+
+            //    if (query != null)
+            //    {
+            //        q = q.Where(query);
+            //    }
+
+            //    return q.ToList();
+            //}
+
+            var q = dc.Set<T>().AsQueryable();
+
+            if (query != null)
             {
-                var q = db.Set<T>().AsQueryable();
-
-                if (query != null)
-                {
-                    q = q.Where(query);
-                }
-
-                return q.ToList();
+                q = q.Where(query);
             }
+
+            return q.ToList();
         }
 
         /// <summary>
@@ -121,18 +135,16 @@ namespace Framework.Common
         /// <returns>records with</returns>
         public virtual IList<T> Get(Expression<Func<T, bool>> query, int limit)
         {
-            using (var db = OpenContext())
+
+            var q = dc.Set<T>().AsQueryable();
+
+            if (query != null)
             {
-
-                var q = db.Set<T>().AsQueryable();
-
-                if (query != null)
-                {
-                    q = q.Where(query);
-                }
-
-                return q.Take(limit).ToList();
+                q = q.Where(query);
             }
+
+            return q.Take(limit).ToList();
+
         }
 
         /// <summary>
@@ -165,34 +177,32 @@ namespace Framework.Common
                 pageSize = paging.PageSize;
             }
 
-            using (DC db = OpenContext())
+            var q = dc.Set<T>().AsQueryable();
+
+            if (null != query)
             {
-                var q = db.Set<T>().AsQueryable();
-
-                if (null != query)
-                {
-                    q = q.Where(query);
-                }
-
-                paging.TotalCount = q.Count();
-
-                if (orderBy != null)
-                {
-                    if (sortAsc)
-                    {
-                        q = q.OrderBy(orderBy);
-                    }
-                    else
-                    {
-                        q = q.OrderByDescending(orderBy);
-                    }
-
-                }
-
-                q = q.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
-
-                return q.ToList();
+                q = q.Where(query);
             }
+
+            paging.TotalCount = q.Count();
+
+            if (orderBy != null)
+            {
+                if (sortAsc)
+                {
+                    q = q.OrderBy(orderBy);
+                }
+                else
+                {
+                    q = q.OrderByDescending(orderBy);
+                }
+
+            }
+
+            q = q.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
+
+            return q.ToList();
+
         }
 
         /// <summary>
@@ -231,39 +241,37 @@ namespace Framework.Common
                 pageSize = paging.PageSize;
             }
 
-            using (DC db = OpenContext())
+            var q = dc.Set<T>().AsQueryable();
+
+            if (null != query)
             {
-                var q = db.Set<T>().AsQueryable();
-
-                if (null != query)
-                {
-                    q = q.Where(query);
-                }
-
-                foreach (var relate in relates)
-                {
-                    db.Set<T>().Include(relate);
-                }
-
-                paging.TotalCount = q.Count();
-
-                if (orderBy != null)
-                {
-                    if (sortAsc)
-                    {
-                        q = q.OrderBy(orderBy);
-                    }
-                    else
-                    {
-                        q = q.OrderByDescending(orderBy);
-                    }
-
-                }
-
-                q = q.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
-
-                return q.ToList();
+                q = q.Where(query);
             }
+
+            foreach (var relate in relates)
+            {
+                dc.Set<T>().Include(relate);
+            }
+
+            paging.TotalCount = q.Count();
+
+            if (orderBy != null)
+            {
+                if (sortAsc)
+                {
+                    q = q.OrderBy(orderBy);
+                }
+                else
+                {
+                    q = q.OrderByDescending(orderBy);
+                }
+
+            }
+
+            q = q.Skip(pageSize * (pageIndex - 1)).Take(pageSize);
+
+            return q.ToList();
+
         }
 
         /// <summary>
@@ -272,18 +280,16 @@ namespace Framework.Common
         /// <returns></returns>
         public virtual IList<T> All()
         {
-            using (var db = OpenContext())
-            {
-                return db.Set<T>().ToList();
-            }
+
+            return dc.Set<T>().ToList();
+
         }
 
         public virtual bool Contains(Expression<Func<T, bool>> query)
         {
-            using (var db = OpenContext())
-            {
-                return db.Set<T>().Any(query);
-            }
+
+            return dc.Set<T>().Any(query);
+
         }
 
         /// <summary>
@@ -292,18 +298,18 @@ namespace Framework.Common
         /// <param name="query">Delete Query</param>
         public virtual void Delete(Expression<Func<T, bool>> query)
         {
-            using (var db = OpenContext())
+
+            
+            IQueryable<T> result = dc.Set<T>().Where(query);
+
+            foreach (T item in result)
             {
-                IQueryable<T> result = db.Set<T>().Where(query);
-
-                foreach (T item in result)
-                {
-                    db.Set<T>().Remove(item);
-                }
-
-                if (result.Count() > 0)
-                    db.SaveChanges();
+                dc.Set<T>().Remove(item);
             }
+
+            if (result.Count() > 0)
+                dc.SaveChanges();
+
         }
 
         /// <summary>
@@ -352,14 +358,13 @@ namespace Framework.Common
         /// <param name="category">Entity which hold the updated information</param>
         public virtual void Update(T category)
         {
-            using (DC db = OpenContext())
-            {
-                db.Set<T>().Attach(category);
+           
+                dc.Set<T>().Attach(category);
 
-                db.Entry<T>(category).State = EntityState.Modified;
+                dc.Entry<T>(category).State = EntityState.Modified;
 
-                db.SaveChanges();
-            }
+                dc.SaveChanges();
+            
         }
 
         /// <summary>
@@ -369,12 +374,11 @@ namespace Framework.Common
         /// <returns></returns>
         public virtual T Single(Expression<Func<T, bool>> query)
         {
-            using (DC db = OpenContext())
-            {
-                T result = db.Set<T>().Where(query).SingleOrDefault();
+            
+                T result = dc.Set<T>().Where(query).SingleOrDefault();
 
                 return result;
-            }
+            
         }
 
         /// <summary>
@@ -384,32 +388,30 @@ namespace Framework.Common
         /// <returns></returns>
         public virtual T Find(params object[] keyValues)
         {
-            using (DC db = OpenContext())
-            {
+           
                 //var objectContext = ((IObjectContextAdapter)db).ObjectContext;
 
                 //var objectSet = objectContext.CreateObjectSet<T>();
 
                 //var keyNames = objectSet.EntitySet.ElementType.KeyMembers.Select(m => m.Name);
 
-                T result = db.Set<T>().Find(keyValues);
+                T result = dc.Set<T>().Find(keyValues);
 
                 return result;
-            }
+            
         }
 
         public virtual TreeNode GetGroupTree(params string[] fields)
         {
-            using (var context = OpenContext())
-            {
-                var q = context.Set<T>().AsQueryable();
+           
+                var q = dc.Set<T>().AsQueryable();
                 foreach (var field in fields)
                 {
                     q.Select(field);
                 }
 
                 return null;
-            }
+            
         }
 
 
@@ -463,13 +465,13 @@ namespace Framework.Common
 
         public IQueryable<T> GetAll()
         {
-            var db = OpenContext();
-            return db.Set<T>();
+           
+            return dc.Set<T>();
         }
         public IQueryable<T> Get(IQuery<T> query)
         {
-            var db = OpenContext();
-            return query.Filter(db.Set<T>());
+            
+            return query.Filter(dc.Set<T>());
         }
         public IQueryable<T> Get(IQuery<T> query, int pageIndex, int pageSize)
         {
@@ -479,7 +481,7 @@ namespace Framework.Common
 
         public IQueryable<T> Filter(FilterCondition filterCondition, out int total)
         {
-            var db = OpenContext();
+            
             Query<T> query = Query<T>.Create(c => (1 == 1));
             foreach (var searchCondition in filterCondition.SearchCondition)
             {
@@ -488,7 +490,7 @@ namespace Framework.Common
             total = 0;
             if (filterCondition.Paging)
             {
-                total = query.Filter(db.Set<T>()).Count();
+                total = query.Filter(dc.Set<T>()).Count();
                 var queryable = Get(query);
                 foreach (var order in filterCondition.Orders)
                 {
@@ -505,7 +507,7 @@ namespace Framework.Common
                 var skip = (filterCondition.PageIndex - 1) * filterCondition.PageSize;
                 return queryable.Skip(skip).Take(filterCondition.PageSize).AsNoTracking();
             }
-            
+
             return Get(query);
         }
     }

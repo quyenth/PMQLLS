@@ -13,7 +13,8 @@ using Framework.Common;
 namespace Application.IdentityServer.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]/[action]")]
+    [Route("api/Auth/[action]")]
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class AuthController : Controller
     {
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -33,6 +34,8 @@ namespace Application.IdentityServer.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns>typeof(ApiResult)</returns>
+        /// 
+        [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
 

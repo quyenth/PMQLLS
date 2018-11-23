@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class RoleInfoService : BaseService<RoleInfo, ApplicationContext>, IRoleInfoService
     {
-        public RoleInfoService(ILogger<RoleInfoService> logger) : base(logger)
+        public RoleInfoService(ILogger<RoleInfoService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

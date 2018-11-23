@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class XaService : BaseService<Xa, ApplicationContext>, IXaService
     {
-        public XaService(ILogger<XaService> logger) : base(logger)
+        public XaService(ILogger<XaService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

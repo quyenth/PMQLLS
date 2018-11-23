@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Framework.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.IdentityServer.Controllers
 {
     [Route("api/[controller]")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ValuesController : Controller
     {
         // GET api/values
         [HttpGet]
-        [Authorize(AuthenticationSchemes = "Bearer")]
+        [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

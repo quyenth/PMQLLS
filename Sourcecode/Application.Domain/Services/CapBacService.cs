@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class CapBacService : BaseService<CapBac, ApplicationContext>, ICapBacService
     {
-        public CapBacService(ILogger<CapBacService> logger) : base(logger)
+        public CapBacService(ILogger<CapBacService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

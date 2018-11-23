@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Framework.AspNetIdentity;
+using Framework.Common;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,7 @@ namespace Application.IdentityServer.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class AccountController : Controller
     {
        private readonly ILogger logger;
@@ -25,6 +27,8 @@ namespace Application.IdentityServer.Controllers
             this.signInManager = signInManager;
 
         }
+
+        [HttpGet]
         public async Task<IActionResult> Signin(string userName, string password,string clientId= "ApiApplication", string secret= "secret", string scope= "api")
         {
 
@@ -59,5 +63,21 @@ namespace Application.IdentityServer.Controllers
 
             return BadRequest("Invalid username or password.");
         }
+
+        [HttpPost]
+        public async Task<ApiResult> SignUp([FromBody] LoginModel model)
+        {
+            ApplicationUser user = new ApplicationUser()
+            {
+                UserName=model.UserName
+            };
+           await  userManager.CreateAsync(user, model.Password);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK
+
+            };
+        }
+
     }
 }

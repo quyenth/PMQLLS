@@ -8,7 +8,7 @@ namespace Application.Domain.Services
 {
     public class DonViService : BaseService<DonVi, ApplicationContext>, IDonViService
     {
-        public DonViService(ILogger<DonViService> logger) : base(logger)
+        public DonViService(ILogger<DonViService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

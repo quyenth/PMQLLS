@@ -22,7 +22,7 @@ namespace UnitTestProject
         [TestMethod]
         public void TestMethod1()
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder().AddJsonFile(@"C:\Working\PMQLLS\PMQLLS\Sourcecode\UnitTestProject\appsettings.json").Build();
+            IConfigurationRoot configuration = new ConfigurationBuilder().AddJsonFile(AppDomain.CurrentDomain.BaseDirectory  + @"\appsettings.json").Build();
 
             Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
 
@@ -43,6 +43,7 @@ namespace UnitTestProject
             provider.AddDbContext<ApplicationContext>(options => options.UseInMemoryDatabase("ESchool"));
           var t =  provider.BuildServiceProvider();
             var service = t.GetService<IPupilService>();
+            ApplicationContext applicationContext = t.GetService<ApplicationContext>();
             //IPupilService service = new PupilService(logger);
             IList<Pupil> pupils = new List<Pupil>(){
                 new Pupil()
@@ -73,7 +74,7 @@ namespace UnitTestProject
             //var orderFilter = filter.OrderBy(c => c.Desc("PupilName"));
 
 
-            var result = filter.Filter(new ApplicationContext().Pupils).OrderByProperty("ClassName").OrderByPropertyDescending("PupilName");
+            var result = filter.Filter(applicationContext.Pupils).OrderByProperty("ClassName").OrderByPropertyDescending("PupilName");
 
             int total = 0;
             var filterConditions = new FilterCondition()

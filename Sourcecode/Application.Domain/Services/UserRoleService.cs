@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class UserRoleService : BaseService<UserRole, ApplicationContext>, IUserRoleService
     {
-        public UserRoleService(ILogger<UserRoleService> logger) : base(logger)
+        public UserRoleService(ILogger<UserRoleService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

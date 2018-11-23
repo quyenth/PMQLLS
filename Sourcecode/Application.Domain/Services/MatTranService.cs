@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class MatTranService : BaseService<MatTran, ApplicationContext>, IMatTranService
     {
-        public MatTranService(ILogger<MatTranService> logger) : base(logger)
+        public MatTranService(ILogger<MatTranService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

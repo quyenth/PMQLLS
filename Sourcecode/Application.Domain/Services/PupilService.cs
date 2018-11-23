@@ -9,7 +9,8 @@ namespace Application.Domain.Services
 {
     public class PupilService : BaseService<Pupil, ApplicationContext>, IPupilService
     {
-        public PupilService(ILogger<PupilService> logger) : base(logger)
+        
+        public PupilService(ILogger<PupilService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using AspNetCore.Data;
 using Framework.AspNetIdentity;
 using Microsoft.AspNetCore.Authorization;
 using IdentityModel.Client;

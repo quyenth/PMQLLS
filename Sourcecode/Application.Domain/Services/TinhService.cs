@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class TinhService : BaseService<Tinh, ApplicationContext>, ITinhService
     {
-        public TinhService(ILogger<TinhService> logger) : base(logger)
+        public TinhService(ILogger<TinhService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

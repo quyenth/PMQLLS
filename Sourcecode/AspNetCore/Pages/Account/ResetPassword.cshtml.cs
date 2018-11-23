@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using AspNetCore.Data;
 using Framework.AspNetIdentity;
 
 namespace AspNetCore.Pages.Account

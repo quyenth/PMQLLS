@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class Ncc_PhieuCungCapService : BaseService<Ncc_PhieuCungCap, ApplicationContext>, INcc_PhieuCungCapService
     {
-        public Ncc_PhieuCungCapService(ILogger<Ncc_PhieuCungCapService> logger) : base(logger)
+        public Ncc_PhieuCungCapService(ILogger<Ncc_PhieuCungCapService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

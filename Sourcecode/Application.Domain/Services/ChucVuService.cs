@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class ChucVuService : BaseService<ChucVu, ApplicationContext>, IChucVuService
     {
-        public ChucVuService(ILogger<ChucVuService> logger) : base(logger)
+        public ChucVuService(ILogger<ChucVuService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

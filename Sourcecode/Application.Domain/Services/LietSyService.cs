@@ -8,7 +8,7 @@ namespace Application.Domain.Services
 {
     public class LietSyService : BaseService<LietSy, ApplicationContext>, ILietSyService
     {
-        public LietSyService(ILogger<LietSyService> logger) : base(logger)
+        public LietSyService(ILogger<LietSyService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

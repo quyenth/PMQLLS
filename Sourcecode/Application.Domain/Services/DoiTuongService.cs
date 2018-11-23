@@ -8,7 +8,7 @@ namespace Application.Domain.Services
 {
     public class DoiTuongService : BaseService<DoiTuong, ApplicationContext>, IDoiTuongService
     {
-        public DoiTuongService(ILogger<DoiTuongService> logger) : base(logger)
+        public DoiTuongService(ILogger<DoiTuongService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

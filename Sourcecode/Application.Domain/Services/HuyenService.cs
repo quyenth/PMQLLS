@@ -7,7 +7,7 @@ namespace Application.Domain.Services
 {
     public class HuyenService : BaseService<Huyen, ApplicationContext>, IHuyenService
     {
-        public HuyenService(ILogger<HuyenService> logger) : base(logger)
+        public HuyenService(ILogger<HuyenService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }

@@ -6,7 +6,7 @@ namespace Application.Domain.Services
 {
     public class ConfigService : BaseService<Config, ApplicationContext>, IConfigService
     {
-        public ConfigService(ILogger<ConfigService> logger) : base(logger)
+        public ConfigService(ILogger<ConfigService> logger, ApplicationContext context) : base(logger,context)
         {
         }
     }
