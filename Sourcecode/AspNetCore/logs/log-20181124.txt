@@ -1,0 +1,4 @@
+2018-11-24 00:00:17.308 +07:00 [Debug] Connection id ""0HLIHCIHRTF6V"" disconnecting.
+2018-11-24 00:00:17.312 +07:00 [Debug] Connection id ""0HLIHCIHRTF6V"" stopped.
+2018-11-24 00:00:17.312 +07:00 [Debug] Connection id ""0HLIHCIHRTF6V"" sending FIN.
+2018-11-24 00:01:41.643 +07:00 [Debug] Hosting shutdown

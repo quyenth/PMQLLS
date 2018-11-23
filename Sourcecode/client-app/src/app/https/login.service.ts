@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService extends BaseService {
 
   constructor(private http: HttpClient) {
-
+    super();
    }
 
   /**
@@ -18,7 +18,7 @@ export class LoginService {
    * @param userinfo thong tin dang nhap
    */
   login(userName: string, password: string): Observable<HttpResult> {
-    let url = this.BaseUrl + "/Account/Signin" ;
+    let url = this.BaseUrl + '/Account/Signin' ;
     return this.http.post<HttpResult>(url, { username: userName, password: password });
   }
 

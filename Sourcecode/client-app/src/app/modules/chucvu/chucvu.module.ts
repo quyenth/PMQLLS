@@ -6,7 +6,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
-import { ChucvuDialogComponent } from './chucvu-dialog/chucvu-dialog.component';
+import { ChucvuDialogComponent } from './components/chucvu-dialog/chucvu-dialog.component';
 
 @NgModule({
   imports: [

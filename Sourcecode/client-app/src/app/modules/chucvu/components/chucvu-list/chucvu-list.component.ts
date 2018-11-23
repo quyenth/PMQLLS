@@ -7,7 +7,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { toBase64String } from '@angular/compiler/src/output/source_map';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ChucvuDialogComponent } from '../../chucvu-dialog/chucvu-dialog.component';
+import { ChucvuDialogComponent } from '../chucvu-dialog/chucvu-dialog.component';
 import {FromType} from 'src/app/shared/commons/form-type';
 import { ModalSize } from 'src/app/shared/commons/modal-size';
 import { ActionType } from 'src/app/shared/commons/action-type';
@@ -20,18 +20,18 @@ import { ActionType } from 'src/app/shared/commons/action-type';
 export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy, AfterViewInit {
   @ViewChild(DataTableDirective)
   private dtElement: DataTableDirective;
-  subscription:Subscription;
-  checkall: boolean = false;
+  subscription: Subscription;
+  checkall = false;
   dtOptions: DataTables.Settings = {};
   list$: any[] = [];
   dtTrigger: Subject<any> = new Subject();
-  constructor(private http: HttpClient, private modalService:ModalService) { 
-    this.subscription = this.modalService.parentData.subscribe(data=>{
-      //do some thing when data change from modal
-      //reload if action is submit
+  constructor(private http: HttpClient, private modalService: ModalService) {
+    this.subscription = this.modalService.parentData.subscribe(data => {
+      // do some thing when data change from modal
+      // reload if action is submit
       console.log(data);
-      if(data && data.action === ActionType.SUBMIT){
-        //reload data
+      if ( data && data.action === ActionType.SUBMIT) {
+        // reload data
         this.onSearch();
       }
     });
@@ -94,7 +94,7 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy, After
 
       // processing: true
     };
-    
+
   }
 
   ngAfterViewInit(): void {
@@ -105,40 +105,40 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy, After
     console.log(changes);
   }
 
-  openModal(){
-    //change data to child component
-    this.modalService.openModalWithComponent(ChucvuDialogComponent,{formType:FromType.INSERT,id:0},ModalSize.LARGE);
-    
+  openModal() {
+    // change data to child component
+    this.modalService.openModalWithComponent(ChucvuDialogComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
+
   }
 
   /**
    * get data
    */
   getUsers(): Observable<any> {
-    console.log("get users");
-    var users = [
+    console.log('get users');
+    const users = [
       {
-        name: "quyenth",
-        email: "thai hong quyen"
+        name: 'quyenth',
+        email: 'thai hong quyen'
       },
       {
-        name: "quyenth1",
-        email: "thai hong quyen"
+        name: 'quyenth1',
+        email: 'thai hong quyen'
       },
       {
-        name: "quyenth2",
-        email: "thai hong quyen"
+        name: 'quyenth2',
+        email: 'thai hong quyen'
       },
       {
-        name: "quyenth",
-        email: "thai hong quyen"
+        name: 'quyenth',
+        email: 'thai hong quyen'
       }
     ];
     return of(users).pipe(delay(100));
-  };
+  }
 
- onSearch(){
-  //reset pagsize to 1
+ onSearch() {
+  // reset pagsize to 1
   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
     // Destroy the table first
     dtInstance.destroy();
@@ -149,7 +149,7 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy, After
   /**
    * select all rows on data table
    */
-  onCheckAllChange(){
+  onCheckAllChange() {
     this.list$.map(c => {
       c.selected = this.checkall;
     });
@@ -166,8 +166,8 @@ export class ChucvuListComponent implements OnInit, OnChanges , OnDestroy, After
     }
   }
 
-  getSelectedItems(){
-    return this.list$.filter(c=>c.selected==true);
+  getSelectedItems() {
+    return this.list$.filter(c => c.selected === true);
   }
 
 

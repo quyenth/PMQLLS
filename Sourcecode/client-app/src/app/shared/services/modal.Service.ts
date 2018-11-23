@@ -1,33 +1,33 @@
-import { Subject, BehaviorSubject } from "rxjs";
-import { Injectable } from "@angular/core";
+import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Injectable()
 export class ModalService {
   bsModalRef: BsModalRef;
-  //data of parent component
+  // data of parent component
   private parentDataSource = new Subject<any>();
-  //data of dialog component
+  // data of dialog component
   private dialogDataSource = new Subject<any>();
   parentData = this.parentDataSource.asObservable();
   dialogData = this.dialogDataSource.asObservable();
   constructor(private modalService: BsModalService) {
 
   }
-  openModalWithComponent(component,data:any, modalClass: string = null) {
+  openModalWithComponent(component, data: any, modalClass: string = null) {
     this.bsModalRef = this.modalService.show(component , Object.assign({}, { class: modalClass}));
     this.passDataToDialog(data);
   }
   /**
    * pass data to dialog via subscription.
-   * @param data 
+   * @param data ;
    */
-  passDataToDialog (data:any){
+  passDataToDialog (data: any) {
     this.dialogDataSource.next(data);
   }
 
-  passDataToParent(data:any){
+  passDataToParent(data: any) {
     this.parentDataSource.next(data);
   }
 
