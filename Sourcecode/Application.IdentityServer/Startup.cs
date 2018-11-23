@@ -125,7 +125,8 @@ namespace Application.IdentityServer
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "Framework.xml"));
+                c.EnableAnnotations();
             });
 
             //add serilog

@@ -9,6 +9,10 @@ namespace Framework.Common
 
         public object Data { get; set; }
         public string Message { get; set; }
+
+        /// <summary>
+        /// http status code
+        /// </summary>
         public HttpStatus Status { get; set; }
 
     }
