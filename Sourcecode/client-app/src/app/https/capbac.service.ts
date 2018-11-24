@@ -22,7 +22,7 @@ export class CapbacService extends BaseService {
   }
 
   save(model: CapBac): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/capbac/save';
+    const url = this.BaseUrl + '/api/capbac';
     return this.http.post<HttpResult>(url, model);
   }
 

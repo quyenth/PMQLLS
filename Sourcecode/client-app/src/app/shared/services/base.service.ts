@@ -2,7 +2,7 @@ import {  OnInit } from '@angular/core';
 
 
 export class BaseService implements OnInit {
-  public BaseUrl = 'http://localhost:57906';
+  public BaseUrl = 'http://localhost:52246';
   ngOnInit() {
 
   }

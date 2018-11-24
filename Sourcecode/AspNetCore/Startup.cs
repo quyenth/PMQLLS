@@ -152,7 +152,6 @@ namespace AspNetCore
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseIdentityServer();
-          
 
             app.UseMvc();
         }

@@ -24,7 +24,7 @@
             ],
             "styles": [
               "src/assets/css/bootstrap.min.css",
-              "src/assets/font-awesome/css/font-awesome.min.css",
+              "src/assets/fontawesome-5.5/css/all.css",
               "src/assets/css/animate.css",
               "src/assets/css/style.css",
               "src/styles.css",

@@ -13,8 +13,8 @@ import { ChucvuDialogComponent } from './components/chucvu-dialog/chucvu-dialog.
     CommonModule,
     DataTablesModule,
     FormsModule,
-    ModalModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
   ],
   providers: [
     BsModalService,
