@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class ChucvuService extends BaseService {
 
-  constructor(private http:HttpClient) {
+  constructor(private http: HttpClient) {
     super();
   }
 
@@ -19,20 +19,18 @@ export class ChucvuService extends BaseService {
    * insert/update chuc vu. id=0=> insert else update
    * @param item chuc vu iteam
    */
-  save(item:any):Observable<HttpResult>{
-    let url = this.BaseUrl+"/api/chucvu/save";
-    return this.http.post<HttpResult>(url,item);
+  save(item: any): Observable<HttpResult> {
+    const url = this.BaseUrl + '/api/chucvu/save';
+    return this.http.post<HttpResult>(url, item);
   }
 
   /**
    * insert/update chuc vu. id=0=> insert else update
    * @param searchCondition search condition
    */
-  search(searchCondition:any):Observable<HttpResult>{
-    let url = this.BaseUrl+"/api/chucvu/search";
-    return this.http.post<HttpResult>(url,searchCondition);
+  search(searchCondition: any): Observable<HttpResult> {
+    const url = this.BaseUrl + '/api/chucvu/search';
+    return this.http.post<HttpResult>(url, searchCondition);
   }
-
-  
 
 }
