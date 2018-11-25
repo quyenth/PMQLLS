@@ -65,6 +65,8 @@ namespace Application.IdentityServer
 
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
             services.AddTransient<IChucVuService, ChucVuService>();
+            services.AddTransient<ICapBacService, CapBacService>();
+
 
             services.AddMvc();
             //  .AddRazorPagesOptions(options =>

@@ -3,21 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Domain.Entity;
-using Microsoft.AspNetCore.Http;
+using Application.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace AspNetCore.Controllers
 {
-    [Produces("application/json")]
     [Route("api/CapBac")]
-    public class CapBacController : Controller
-    {       
+    public class CapBacController : ControllerBase
+    {
+        private ILogger<CapBacService> logger;
+        private ApplicationContext context;
+        private ICapBacService CapBacService;
+
+        public CapBacController(ILogger<CapBacService> logger , DbContext context)
+        {
+            this.logger = logger;     
+        }
 
         [HttpPost]
         [Route("")]
-        public IActionResult save(CapBac model)
+        public IActionResult save([FromBody] CapBac model)
         {
-            return Json(model);
+            return Ok(model);
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IActionResult search()
+        {
+            return Ok(1);
         }
     }
 }
