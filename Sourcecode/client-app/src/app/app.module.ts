@@ -16,6 +16,7 @@ import { HeaderLogoComponent } from './shared/component/header/header-logo/heade
 import { ChucvuModule } from './modules/chucvu/chucvu.module';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './shared/services/modal.Service';
+import { TinhModule } from './modules/tinh/tinh.module';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { PageNotFoundComponent } from './shared/component/page-not-found/page-not-found.component';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
@@ -38,6 +39,7 @@ import { RouterModule, Routes } from '@angular/router';
     HttpClientModule,
     ChucvuModule,
     CapbacModule,
+    TinhModule,
     FormsModule,
     ModalModule,
     LoginModule,
