@@ -1,5 +1,5 @@
 export class HttpResult {
-    public HttpStatus: number;
-    public Message: string;
-    public Data: any;
+    public status: number;
+    public message: string;
+    public data: any;
 }

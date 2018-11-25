@@ -45,9 +45,9 @@ namespace Application.IdentityServer.Controllers.QLLS
             }
         }
 
-        [HttpGet]
-        [Route("")]
-        public async Task<ApiResult> search(FilterCondition filterCondition)
+        [HttpPost]
+        [Route("search")]
+        public ApiResult search([FromBody]FilterCondition filterCondition)
         {
             int total = 0;
             var list = capBacService.Filter(filterCondition , out total);
@@ -88,7 +88,7 @@ namespace Application.IdentityServer.Controllers.QLLS
 
         [HttpPost]
         [Route("DeleteList")]
-        public ApiResult DeleteList(List<CapBac> items)
+        public ApiResult DeleteList([FromBody]List<CapBac> items)
         {
             var ids = items.Select(item => item.CapBacId).ToList();
             capBacService.Delete(c => ids.Contains(c.CapBacId));
@@ -101,7 +101,7 @@ namespace Application.IdentityServer.Controllers.QLLS
 
         [HttpPost]
         [Route("AddList")]
-        public ApiResult AddList(List<CapBac> items)
+        public ApiResult AddList([FromBody]List<CapBac> items)
         {
             capBacService.Add(items);
             return new ApiResult()

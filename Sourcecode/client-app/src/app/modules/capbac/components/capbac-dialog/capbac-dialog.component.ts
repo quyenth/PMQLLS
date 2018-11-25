@@ -24,9 +24,7 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private capbacService: CapbacService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
-      console.log(data);
       this.id = data.id;
-      // do something with data pass form parent
     });
   }
 

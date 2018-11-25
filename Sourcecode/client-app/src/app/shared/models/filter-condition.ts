@@ -5,6 +5,6 @@ export class FilterCondition {
   public Paging: boolean;
    public PageSize: number;
    public PageIndex: number;
-   public Search: SearchInfo[];
+   public SearchCondition: SearchInfo[];
    public Orders: OrderInfo[];
 }
