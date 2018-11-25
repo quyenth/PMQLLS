@@ -62,7 +62,7 @@ namespace AspNetCore
                .AddAspNetIdentity<ApplicationUser>();
 
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
-
+            services.AddCors();
             services.AddMvc();
             //  .AddRazorPagesOptions(options =>
             //  {
@@ -149,11 +149,19 @@ namespace AspNetCore
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseCors(
+                    options => options.WithOrigins("http://localhost:4200")
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader()
+                                    .AllowCredentials()
+                );
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseIdentityServer();
 
+           
             app.UseMvc();
+
         }
 
 

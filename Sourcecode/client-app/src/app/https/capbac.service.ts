@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { BaseService } from '../shared/services/base.service';
 import { FilterCondition } from '../shared/models/filter-condition';
@@ -23,7 +23,8 @@ export class CapbacService extends BaseService {
 
   save(model: CapBac): Observable<HttpResult> {
     const url = this.BaseUrl + '/api/capbac';
-    return this.http.post<HttpResult>(url, model);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post<HttpResult>(url, JSON.stringify(model), {headers: headers});
   }
 
   delete(id: number): Observable<HttpResult> {
