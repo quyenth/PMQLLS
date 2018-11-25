@@ -17,9 +17,10 @@ import { ChucvuModule } from './modules/chucvu/chucvu.module';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './shared/services/modal.Service';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
-import { LoginPageComponent } from './modules/login/login-page/login-page.component';
 import { PageNotFoundComponent } from './shared/component/page-not-found/page-not-found.component';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
+import { LoginModule } from './modules/login/login.module';
+import { RouterModule, Routes } from '@angular/router';
 
 
 @NgModule({
@@ -30,7 +31,6 @@ import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
     HeaderRightComponent,
     HeaderDropdownMenuComponent,
     HeaderLogoComponent,
-    LoginPageComponent,
     PageNotFoundComponent
   ],
   imports: [
@@ -40,6 +40,7 @@ import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
     CapbacModule,
     FormsModule,
     ModalModule,
+    LoginModule,
     AppRoutingModule
   ],
   providers: [

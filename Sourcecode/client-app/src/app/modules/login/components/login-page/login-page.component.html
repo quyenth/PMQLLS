@@ -1,0 +1,22 @@
+<div class="middle-box text-center loginscreen animated fadeInDown">
+  <div style="padding:20px; background-color: #F9F9F9;">
+      <h3>HỆ THỐNG QUẢN LÝ THÔNG TIN LIỆT SỸ</h3>
+      <br>
+
+      <div class="m-t">
+          <form [formGroup]="myForm">
+              <div class="form-group" [ngClass]="{'has-error': submited && !myForm.get('username').valid }">
+                  <input type="text" class="form-control" formControlName="username" placeholder="Tài khoản" required="" maxlength="500">
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && !myForm.get('username').valid && myForm.get('username').errors['required']">Trường này là bắt buộc.</span>
+              </div>
+              <div class="form-group" [ngClass]="{'has-error': submited && !myForm.get('password').valid }">
+                  <input type="password" class="form-control" formControlName="password" placeholder="Mật khẩu" required="" maxlength="500">
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && !myForm.get('password').valid && myForm.get('password').errors['required']">Trường này là bắt buộc.</span>
+              </div>
+              <button type="button" (click)="onSubmit()" class="btn btn-primary block full-width m-b">Đăng nhập </button>
+          </form>
+
+      </div>
+
+  </div>
+</div>

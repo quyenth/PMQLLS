@@ -27,7 +27,7 @@ export class AuthService extends BaseService implements OnInit {
       ).pipe(user => {
         console.log(user);
         return user;
-      }).subscribe((result:any) => {
+      }).subscribe((result: any) => {
         localStorage.setItem('currentUser', JSON.stringify({
           token: result.data
         }));
