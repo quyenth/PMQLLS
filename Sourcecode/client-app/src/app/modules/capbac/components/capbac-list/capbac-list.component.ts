@@ -1,3 +1,4 @@
+import { ModalType } from './../../../../shared/commons/modal-type';
 import { CapbacDialogComponent } from './../capbac-dialog/capbac-dialog.component';
 import { HttpResult } from './../../../../shared/commons/http-result';
 import { CapbacService } from './../../../../https/capbac.service';
@@ -10,6 +11,8 @@ import { OperationType } from 'src/app/shared/commons/operation-type';
 import { SearchInfo } from 'src/app/shared/models/search-info';
 import { ActionType } from 'src/app/shared/commons/action-type';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 
 @Component({
   selector: 'app-capbac-list',
@@ -21,15 +24,15 @@ export class CapbacListComponent implements OnInit, OnDestroy {
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
-  pageSize = 20;
-  itemFrom = 0;
-  itemTo = 0;
+  pageSize = 2;
+
   data = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
   subscription: Subscription;
   checkall = false;
-  constructor(private capbacService: CapbacService, private modalService: ModalService) { }
+  constructor(private capbacService: CapbacService, private modalService: ModalService,
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
@@ -45,22 +48,21 @@ export class CapbacListComponent implements OnInit, OnDestroy {
     this.capbacService.search(this.filterCondition).subscribe((res: HttpResult) => {
       this.data = res.data.list;
       this.totalCount = res.data.total;
-      this.itemFrom = (this.currentPage - 1) * this.pageSize + 1;
-      this.itemTo = this.itemFrom + this.data.length;
-      this.itemTo = this.itemFrom + this.data.length - 1;
     });
   }
 
   onSearch (pageIndex: number = 1) {
+      this.spinner.show();
       const val = this.searchInput.nativeElement.value;
       this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, val)];
       this.filterCondition.PageIndex = pageIndex;
       this.capbacService.search(this.filterCondition).subscribe((res: HttpResult) => {
-      this.data = res.data.list;
-      this.totalCount = res.data.total;
-      this.itemFrom = (this.currentPage - 1) * this.pageSize + 1;
-      this.itemTo = this.itemFrom + this.data.length - 1;
-    });
+        this.spinner.hide();
+        this.data = res.data.list;
+        this.totalCount = res.data.total;
+      }, (err) => {
+        this.spinner.hide();
+      });
   }
 
   onAddCapBac () {
@@ -76,21 +78,59 @@ export class CapbacListComponent implements OnInit, OnDestroy {
   }
 
   onCheckAllChangse () {
-      for ( let item of this.data) {
+      for ( const item of this.data) {
         item.selected = this.checkall;
       }
+  }
+  onPageSizeChange (pageSize: number) {
+    this.pageSize = pageSize;
+    this.filterCondition.PageSize = this.pageSize;
+    this.onSearch();
+  }
+
+  goToPage (page: number) {
+    this.onSearch(page);
   }
   openModal() {
     this.modalService.openModalWithComponent(CapbacDialogComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
   }
 
   onEditItem(item) {
-
+    this.modalService.openModalWithComponent(CapbacDialogComponent, { formType: FromType.UPDATE, id: item.capBacId} , ModalSize.LARGE);
   }
 
   onDeleteItem (item) {
+    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+        dialogCloseSubscription.unsubscribe();
+        if ( data === ActionType.ACCEPT) {
+          this.capbacService.delete(item).subscribe((res) => {
+            this.onSearch();
+        });
+      }
+    });
+  }
+
+  onDeleteListItem () {
+    const listSelected = this.data.filter(c => c.selected === true);
+    if (listSelected.length === 0) {
+        this.confirmationDialogService.confirm('Thông tin!', 'Bạn chưa chọn mục nào?' , ModalType.INFO);
+        return;
+    }
+
+
+      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
+      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+          dialogCloseSubscription.unsubscribe();
+          if ( data === ActionType.ACCEPT) {
+            this.capbacService.delectList(listSelected).subscribe((res) => {
+              this.onSearch();
+          });
+      }
+      });
 
   }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

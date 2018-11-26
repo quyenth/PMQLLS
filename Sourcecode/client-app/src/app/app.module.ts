@@ -21,7 +21,8 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { PageNotFoundComponent } from './shared/component/page-not-found/page-not-found.component';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
 import { LoginModule } from './modules/login/login.module';
-import { RouterModule, Routes } from '@angular/router';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ConfirmationDialogService } from './shared/services/confirmDialog.service';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { RouterModule, Routes } from '@angular/router';
     FormsModule,
     ModalModule,
     LoginModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxSpinnerModule
   ],
   providers: [
     AuthService
@@ -59,7 +61,8 @@ import { RouterModule, Routes } from '@angular/router';
     },
     ModalService,
     BsModalService,
-    ComponentLoaderFactory
+    ComponentLoaderFactory,
+    ConfirmationDialogService
   ],
   bootstrap: [AppComponent]
 })

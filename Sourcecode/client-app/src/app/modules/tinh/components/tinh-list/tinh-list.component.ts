@@ -124,7 +124,7 @@ export class TinhListComponent implements OnInit, OnChanges , OnDestroy, AfterVi
   getList(): Observable<any> {
     console.log('Get List Tinh');
     this.tinhService.search(this.filterCondition).subscribe((res: HttpResult) => {
-      this.data = res.Data;
+      this.data = res.data;
     });
     return of(this.data).pipe(delay(100));
   }

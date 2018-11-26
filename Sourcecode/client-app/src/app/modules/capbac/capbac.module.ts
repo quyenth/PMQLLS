@@ -1,3 +1,4 @@
+import { ConfirmDialogComponent } from './../../shared/component/confirm-dialog/confirm-dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -15,6 +16,7 @@ import { CapbacDialogComponent } from './components/capbac-dialog/capbac-dialog.
     ],
   entryComponents: [
     CapbacDialogComponent,
+    ConfirmDialogComponent
   ],
   declarations: [CapbacListComponent, CapbacDialogComponent]
 })

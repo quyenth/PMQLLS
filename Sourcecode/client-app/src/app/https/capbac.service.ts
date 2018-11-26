@@ -12,7 +12,7 @@ import { CapBac } from '../shared/models/cap-bac.model';
 })
 export class CapbacService extends BaseService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient ) {
     super();
   }
 
@@ -26,13 +26,25 @@ export class CapbacService extends BaseService {
     return this.http.post<HttpResult>(url, JSON.stringify(model), this.getHeader());
     }
 
-  delete(id: number): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/capbac/save' + id;
-    return this.http.delete<HttpResult>(url);
+  delete(model: CapBac): Observable<HttpResult> {
+    const url = this.BaseUrl + '/api/capbac/Delete';
+    return this.http.post<HttpResult>(url, model , this.getHeader());
   }
 
   saveList(list: CapBac[]): Observable<HttpResult> {
     const url = this.BaseUrl + '/api/capbac/saveList';
     return this.http.post<HttpResult>(url, list);
+  }
+  delectList(list: CapBac[]): Observable<HttpResult> {
+    const url = this.BaseUrl + '/api/capbac/DeleteList';
+    return this.http.post<HttpResult>(url, list , this.getHeader());
+  }
+  getById(id: number): Observable<HttpResult> {
+    const url = this.BaseUrl + '/api/capbac/' + id;
+    return this.http.get<HttpResult>(url);
+  }
+
+  checkNameIsUnique ()  {
+
   }
 }
