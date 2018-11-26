@@ -10,10 +10,10 @@
 
     <div class="row search-box">
         <div class="col-sm-3">
-            <input placeholder="Search" #SearchName type="text" class="form-control form-control-sm">
+            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm">
       </div>
       <div class="col-sm-3">
-            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Search</button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
       </div>
             <div class="html5buttons col-sm-6">
                 <div class="html5buttons">
@@ -50,11 +50,11 @@
     </div>
 
     <div>
-       <app-paging 
-                [TotalCount]='totalCount' 
-                [PageIndex]='currentPage' 
-                [PageSize]='pageSize' 
-                [DataLength]= 'data.length' 
+       <app-paging
+                [TotalCount]='totalCount'
+                [PageIndex]='currentPage'
+                [PageSize]='pageSize'
+                [DataLength]= 'data.length'
                 (pageSizeChangge)="onPageSizeChange($event)"
                 (currentPageChangge)="goToPage($event)"></app-paging>
     </div>

@@ -1,7 +1,8 @@
+import { map, switchMap } from 'rxjs/operators';
 import { CapBac } from './../../../../shared/models/cap-bac.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, timer, of } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { ActionType } from 'src/app/shared/commons/action-type';
@@ -21,7 +22,7 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
   submited: boolean;
   data: CapBac = new CapBac();
   myForm = this.fb.group({
-    name: ['', [Validators.required, Validators.maxLength(50)] , this.validateNameUnique.bind(this)]
+    name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
@@ -47,23 +48,27 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
+    this.submited = true;
     console.log(this.myForm);
-    // this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
-    // const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-    //   dialogCloseSubscription.unsubscribe();
-    //   if ( data === ActionType.ACCEPT) {
-    //     this.submitData();
-    //   }
-    // });
+    if ( !this.myForm.valid) {
+      return;
+    }
+
+    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+      dialogCloseSubscription.unsubscribe();
+      if ( data === ActionType.ACCEPT) {
+        this.submitData();
+      }
+    });
   }
 
   submitData() {
-      console.log(this.myForm);
     this.spinner.show();
     this.submited = true;
     const submitData = new CapBac ();
     submitData.capBacId = this.data.capBacId;
-    submitData.text = this.myForm.value.name;
+    submitData.text = this.myForm.value.name.trim();
     this.capbacService.save(submitData).subscribe((res) => {
       this.spinner.hide();
       this.bsModalRef.hide();
@@ -84,11 +89,19 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
   }
 
   validateNameUnique(control: FormControl) {
-      const primise = new Promise((resole, reject) => {
-        setTimeout(() => {
-          resole({'isNameDuplicate' : true});
-        }, 1500);
-      });
-      return primise;
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.capbacService.checkNameIsUnique(this.data.capBacId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isNameDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
   }
 }

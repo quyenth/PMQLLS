@@ -56,6 +56,7 @@ export class CapbacListComponent implements OnInit, OnDestroy {
       const val = this.searchInput.nativeElement.value;
       this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, val)];
       this.filterCondition.PageIndex = pageIndex;
+      this.currentPage = pageIndex;
       this.capbacService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.data = res.data.list;

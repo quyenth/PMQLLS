@@ -21,7 +21,7 @@ namespace Framework.Common
     {
 
         private readonly ILogger Logger;
-        private readonly DC dc;
+        public readonly DC dc;
 
         public BaseService(ILogger logger, DC dc)
         {

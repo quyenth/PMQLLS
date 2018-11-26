@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient , HttpHeaders  } from '@angular/common/http';
+import { HttpClient , HttpHeaders, HttpParams  } from '@angular/common/http';
 
 import { BaseService } from '../shared/services/base.service';
 import { FilterCondition } from '../shared/models/filter-condition';
@@ -44,7 +44,9 @@ export class CapbacService extends BaseService {
     return this.http.get<HttpResult>(url);
   }
 
-  checkNameIsUnique ()  {
-
+  checkNameIsUnique (capBacId: number, name: string)  {
+    const params = new HttpParams().set('capBacId', capBacId.toString()).set('name', name);
+    const url = this.BaseUrl + '/api/capbac/checkNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
   }
 }

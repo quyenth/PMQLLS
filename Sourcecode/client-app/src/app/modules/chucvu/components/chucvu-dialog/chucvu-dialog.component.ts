@@ -39,8 +39,8 @@ export class ChucvuDialogComponent implements OnInit, OnDestroy {
     this.submited = true;
 
     // do something to save data
-    this.bsModalRef.hide();
-    this.modalService.passDataToParent({action: ActionType.SUBMIT});
+    // this.bsModalRef.hide();
+    // this.modalService.passDataToParent({action: ActionType.SUBMIT});
   }
 
 

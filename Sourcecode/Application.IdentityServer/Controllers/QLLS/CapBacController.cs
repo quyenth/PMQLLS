@@ -110,5 +110,19 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = null
             };
         }
+
+
+
+        [HttpGet]
+        [Route("checkNameIsUnique")]
+        public ApiResult CheckNameIsUnique(int capBacId, string name)
+        {
+            var result = capBacService.CheckNameIsUnique(capBacId, name);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }
