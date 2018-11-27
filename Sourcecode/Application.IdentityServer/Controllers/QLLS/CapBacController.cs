@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
-    [Route("api/CapBac")]
+    [Route("api/CapBac/[action]")]
     [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
     public class CapBacController : ControllerBase
     {
@@ -23,8 +23,7 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         [HttpPost]
-        [Route("")]
-        public async Task<ApiResult> save([FromBody] CapBac model)
+        public async Task<ApiResult> Save([FromBody] CapBac model)
         {
             if (model.CapBacId == 0)
             {
@@ -48,8 +47,7 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         [HttpPost]
-        [Route("search")]
-        public ApiResult search([FromBody]FilterCondition filterCondition)
+        public async Task< ApiResult> Search([FromBody]FilterCondition filterCondition)
         {
             int total = 0;
             var list = capBacService.Filter(filterCondition , out total);
@@ -77,8 +75,7 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         [HttpPost]
-        [Route("Delete")]
-        public ApiResult Delete([FromBody] CapBac model)
+        public async Task< ApiResult> Delete([FromBody] CapBac model)
         {
             capBacService.Delete(c => c.CapBacId == model.CapBacId);
             return new ApiResult()
@@ -89,8 +86,7 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         [HttpPost]
-        [Route("DeleteList")]
-        public ApiResult DeleteList([FromBody]List<CapBac> items)
+        public async Task< ApiResult> DeleteList([FromBody]List<CapBac> items)
         {
             var ids = items.Select(item => item.CapBacId).ToList();
             capBacService.Delete(c => ids.Contains(c.CapBacId));
@@ -102,8 +98,7 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         [HttpPost]
-        [Route("AddList")]
-        public ApiResult AddList([FromBody]List<CapBac> items)
+        public async Task< ApiResult> AddList([FromBody]List<CapBac> items)
         {
             capBacService.Add(items);
             return new ApiResult()
@@ -116,8 +111,7 @@ namespace Application.IdentityServer.Controllers.QLLS
 
 
         [HttpGet]
-        [Route("checkNameIsUnique")]
-        public ApiResult CheckNameIsUnique(int capBacId, string name)
+        public async Task< ApiResult> CheckNameIsUnique(int capBacId, string name)
         {
             var result = capBacService.CheckNameIsUnique(capBacId, name);
             return new ApiResult()
