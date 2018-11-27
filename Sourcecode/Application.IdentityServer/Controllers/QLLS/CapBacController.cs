@@ -74,6 +74,12 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// Delete 1 bản ghi
+        /// </summary>
+        /// <param name="model">cap bac entity</param>
+        /// <returns></returns>
+
         [HttpPost]
         public async Task< ApiResult> Delete([FromBody] CapBac model)
         {
