@@ -66,7 +66,7 @@ export class CapbacListComponent implements OnInit, OnDestroy {
       });
   }
 
-  
+
   onCheckOneChange() {
     if ( this.list$.length === this.list$.filter(c => c.selected === true).length ) {
       this.checkall = true;
@@ -89,7 +89,7 @@ export class CapbacListComponent implements OnInit, OnDestroy {
   goToPage (page: number) {
     this.onSearch(page);
   }
- 
+
 
   onAddCapBac () {
     this.modalService.openModalWithComponent(CapbacDialogComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
@@ -112,7 +112,7 @@ export class CapbacListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteSelected () {
-    let listSelected = this.list$.filter(c => c.selected === true);
+    const listSelected = this.list$.filter(c => c.selected === true);
     if (listSelected.length === 0) {
         this.confirmationDialogService.confirm('Thông tin!', 'Bạn chưa chọn mục nào?' , ModalType.INFO);
         return;
@@ -120,7 +120,7 @@ export class CapbacListComponent implements OnInit, OnDestroy {
 
 
       this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.capbacService.delectList(listSelected).subscribe((res) => {
@@ -131,9 +131,11 @@ export class CapbacListComponent implements OnInit, OnDestroy {
 
   }
 
-
+  onEnter() {
+    this.onSearch();
+  }
   getSelectedItems() {
-    return this.list$.filter(c => c.selected == true);
+    return this.list$.filter(c => c.selected === true);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

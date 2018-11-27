@@ -9582,3 +9582,15 @@ body.md-skin {
   text-align: center;
   padding-top: 14px;
 }
+.action-icon{
+  margin-right: 10px
+}
+.action-col{
+  display: flex
+}
+.html5buttons button {
+  margin-left: 5px
+}
+.tbl-div {
+  margin-top: 20px
+}

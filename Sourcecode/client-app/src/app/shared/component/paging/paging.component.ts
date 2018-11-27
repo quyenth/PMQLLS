@@ -27,6 +27,9 @@ export class PagingComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
       this.itemFrom = (this.PageIndex - 1) * this.PageSize + 1;
       this.itemTo = this.itemFrom + this.DataLength - 1;
+      if (this.DataLength === 0 && this.PageIndex === 1) {
+            this.itemFrom = 0;
+      }
   }
   onChangePageSize(pageSize) {
     this.pageSizeChangge.emit(pageSize);

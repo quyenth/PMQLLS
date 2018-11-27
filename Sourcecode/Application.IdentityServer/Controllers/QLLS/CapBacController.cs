@@ -13,7 +13,6 @@ namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
     [Route("api/CapBac/[action]")]
-    [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
     public class CapBacController : ControllerBase
     {
         private ICapBacService capBacService;
@@ -21,7 +20,14 @@ namespace Application.IdentityServer.Controllers.QLLS
         {
             this.capBacService = capBacService;
         }
-
+        /// <summary>
+        /// save cấp bậc
+        /// </summary>
+        /// <param name="model"></param>
+        /// <remarks>
+        /// if capbacId = 0 => add else update
+        /// </remarks>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ApiResult> Save([FromBody] CapBac model)
         {
@@ -45,7 +51,11 @@ namespace Application.IdentityServer.Controllers.QLLS
                 };
             }
         }
-
+        /// <summary>
+        /// get list cap bac 
+        /// </summary>
+        /// <param name="filterCondition"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task< ApiResult> Search([FromBody]FilterCondition filterCondition)
         {
@@ -61,7 +71,11 @@ namespace Application.IdentityServer.Controllers.QLLS
                 }
             };
         }
-
+        /// <summary>
+        /// get cap bac by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
         public async Task<ApiResult> GetById(int id)
@@ -90,7 +104,11 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = model.CapBacId
             };
         }
-
+        /// <summary>
+        /// delete list cap bac
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task< ApiResult> DeleteList([FromBody]List<CapBac> items)
         {
@@ -102,7 +120,11 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = null
             };
         }
-
+        /// <summary>
+        /// add list cap bac
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task< ApiResult> AddList([FromBody]List<CapBac> items)
         {
@@ -115,7 +137,12 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
 
-
+        /// <summary>
+        /// Check cấp bậc is unique 
+        /// </summary>
+        /// <param name="capBacId"></param>
+        /// <param name="name"></param>
+        /// <returns>bool</returns>
         [HttpGet]
         public async Task< ApiResult> CheckNameIsUnique(int capBacId, string name)
         {

@@ -17,7 +17,7 @@ export class CapbacService extends BaseService {
   }
 
   search(filterCondition: FilterCondition): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/capbac/search';
+    const url = this.BaseUrl + '/api/CapBac/Search';
     return this.http.post<HttpResult>(url, filterCondition);
   }
 
@@ -40,7 +40,7 @@ export class CapbacService extends BaseService {
     return this.http.post<HttpResult>(url, list , this.getHeader());
   }
   getById(id: number): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/capbac/GetById/' + id;
+    const url = this.BaseUrl + '/api/Capbac/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
 

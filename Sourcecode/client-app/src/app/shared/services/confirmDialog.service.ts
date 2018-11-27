@@ -19,8 +19,8 @@ export class ConfirmationDialogService {
     type: string = ModalType.CONRIRM ,
     btnOkText: string = 'Có',
     btnCancelText: string = 'Cancel',
-    dialogSize: 'sm'|'lg' = 'sm') {
-    const modalRef: BsModalRef = this.modalService.show(ConfirmDialogComponent, { class : dialogSize , backdrop : true });
+    dialogSize: 'modal-sm'|'lg' = 'modal-sm') {
+    const modalRef: BsModalRef = this.modalService.show(ConfirmDialogComponent, { class : dialogSize , backdrop: 'static' });
     modalRef.content.title = title;
     modalRef.content.message = message;
     modalRef.content.btnOkText = btnOkText;
