@@ -48,6 +48,7 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
+    debugger;
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {

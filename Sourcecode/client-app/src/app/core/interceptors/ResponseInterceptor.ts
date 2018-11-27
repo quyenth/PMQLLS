@@ -9,36 +9,24 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import 'rxjs/add/operator/do'
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
+  constructor( private router: Router){}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    return next.handle(req).pipe(
-      tap(
-
-
-        // Succeeds when there is a response; ignore other events
-       (event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
-            console.log(event);
-          }
-          return event;
-        },
-        // Operation failed; error is an HttpErrorResponse
-        (error: HttpEvent<any>) => {
-          // code handle error hear
-          console.log(error);
-          return error;
-        },
-      )
-      , finalize(() => {
-        // do somthing with finalize
-        console.log('finalize function');
-        return event;
+    return next.handle(req).do((event: HttpEvent<any>) => {
+      if (event instanceof HttpResponse) {
       }
-      )
-
-    );
+    }, (err: any) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+            this.router.navigate(['/login']);
+        }
+      }
+    });
+    
   }
 }

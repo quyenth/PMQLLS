@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
 
  }
   ngOnInit() {
-    this.autService.login('quyenth@gmail.com', 'Admin@123');
-    this.autService.getValues();
+    // this.autService.login('quyenth@gmail.com', 'Admin@123');
+    // this.autService.getValues();
   }
 
 }

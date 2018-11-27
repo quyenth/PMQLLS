@@ -8,3 +8,12 @@ table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc, table.d
 .dataTables_empty {
     display: none;
 }
+table.dataTable thead th, table.dataTable thead td,table.dataTable.no-footer{
+    border-bottom: 1px solid #CCC !important;
+}
+td.action-col{
+    text-align: center;
+}
+td.action-col a{
+    padding-left: 5px; 
+}

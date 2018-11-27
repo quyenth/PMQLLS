@@ -1,6 +1,6 @@
 <div class="ibox ">
   <div class="ibox-title">
-    <h5>Title box</h5>
+    <h5>Chức vụ</h5>
     <div class="ibox-tools">
 
     </div>
@@ -9,51 +9,61 @@
   <div class="ibox-content inspinia-timeline">
 
     <div class="row search-box">
-      <div class="col-sm-5 m-b-xs"><select class="form-control-sm form-control input-s-sm inline">
-          <option value="0">Option 1</option>
-          <option value="1">Option 2</option>
-          <option value="2">Option 3</option>
-          <option value="3">Option 4</option>
-        </select>
-      </div>
+    
 
-      <div class="col-sm-3">
-        <div class="input-group"><input placeholder="Search" type="text" class="form-control form-control-sm"> <span
-            class="input-group-append"> <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()">Go!
-            </button> </span></div>
+      <div class="col-sm-4">
+        <div class="input-group">
+          <input placeholder="Search" type="text" class="form-control form-control-sm" [(ngModel)]="searchdata"  > 
+          <span class="input-group-append">
+             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()">Tìm
+            </button> 
+          </span></div>
 
       </div>
-      <div class="col-sm-4 m-b-xs">
+      <div class="col-sm-8 m-b-xs">
+     
         <div class="html5buttons">
-          <div class="dt-buttons btn-group">
-            <button class="btn btn-primary buttons-copy buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="javascript:void(0)" (click)="openModal()" ><span>Thêm mới</span></button>
-            <button [disabled]="getSelectedItems().length!=1" class="btn btn-default buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Cập nhật</span></button>
-            <button [disabled]="getSelectedItems().length==0" class="btn btn-danger buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Xóa</span></button>
+        
+            <button class="btn btn-primary buttons-copy buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="javascript:void(0)" (click)="openModal()" ><span><i class="fa fa-plus"></i>Thêm mới</span></button>
+             <button [disabled]="getSelectedItems().length==0" class="btn btn-danger buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="javascript:void(0)" (click)="onDeleteSelected()" ><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
             
             
-          </div>
+        
         </div>
       </div>
     </div>
+
+
     <table class="table table-striped table-bordered row-border hover" datatable [dtOptions]="dtOptions" style="width:100%" [dtTrigger]="dtTrigger">
+      <colgroup>
+        <col style="width: 30px">
+        <col>
+        <col>
+        <col style="width: 60px;">
+      </colgroup>
       <thead>
+        
         <tr>
-          <th style="text-align: center; width: 20px;">
+          <th style="text-align: center;">
             <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()">
           </th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Website</th>
+          <th>Mã</th>
+          <th>Tên</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
+        
         <tr *ngFor="let item of list$" [ngClass]="{'selected':item.selected}">
           <td style="text-align: center;">
             <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
           </td>
+          <td>{{ item.code }}</td>
           <td>{{ item.name }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.website }}</td>
+          <td class="action-col">
+              <a><i class="fas fa-pen-fancy"></i></a>
+              <a><i class="far fa-trash-alt"></i></a>
+          </td>
         </tr>
       </tbody>
     </table>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Domain.Entity;
 using Application.Domain.Services;
 using Framework.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
     [Route("api/CapBac")]
+    [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
     public class CapBacController : ControllerBase
     {
         private ICapBacService capBacService;

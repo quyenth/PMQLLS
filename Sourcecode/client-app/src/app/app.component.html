@@ -1,38 +1,11 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>INSPINIA | Dashboard v.4</title>
-<!--
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet"> -->
-
-</head>
-
-<body class="top-navigation">
-
-    <div id="wrapper">
-        <div id="page-wrapper" class="gray-bg">
-            <div class="row border-bottom white-bg">
-                <app-header></app-header>
-            </div>
-            <div>
-                   <router-outlet></router-outlet>
-            </div>
-            <app-footer></app-footer>
-            <ngx-spinner
-                bdColor = "rgba(162,160,160,0.8)"
-                size = "medium"
-                color = "#fff"
-                type = "ball-clip-rotate-multiple"
-                ></ngx-spinner>
+<div id="wrapper">
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom white-bg">
+            <app-header></app-header>
         </div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+        <app-footer></app-footer>
     </div>
-</body>
-</html>
+</div>

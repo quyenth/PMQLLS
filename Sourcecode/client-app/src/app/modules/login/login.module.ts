@@ -21,6 +21,7 @@ import { LoginPageComponent } from './components/login-page/login-page.component
   entryComponents: [
     LoginPageComponent,
   ],
-  declarations: [LoginPageComponent]
+  declarations: [LoginPageComponent],
+  exports:[LoginPageComponent]
 })
 export class LoginModule { }

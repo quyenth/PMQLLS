@@ -13,7 +13,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
-    [Route("api/Tinh")]
+    [Route("api/Tinh/[action]")]
     [ApiExplorerSettings(IgnoreApi = false)]
 
     [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]

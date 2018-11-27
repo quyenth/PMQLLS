@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Application.Domain.Entity;
 using Application.Domain.Services;
@@ -94,6 +95,23 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+
+        /// <summary>
+        /// delete list chuc vu
+        /// </summary>
+        /// <param name="items">list chuc vu</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ApiResult Deletes([FromBody]List<ChucVu> items)
+        {
+            var ids = items.Select(item => item.ChucVuId).ToList();
+            chucVuService.Delete(c => ids.Contains(c.ChucVuId));
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = null
+            };
+        }
 
     }
 }

@@ -23,6 +23,7 @@ import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
 import { LoginModule } from './modules/login/login.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConfirmationDialogService } from './shared/services/confirmDialog.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { ConfirmationDialogService } from './shared/services/confirmDialog.servi
     ModalModule,
     LoginModule,
     AppRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
   providers: [
     AuthService

@@ -29,8 +29,17 @@ export class ChucvuService extends BaseService {
    * @param searchCondition search condition
    */
   search(searchCondition: any): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/chucvu/search';
+    const url = this.BaseUrl + '/api/chucvu/filter';
     return this.http.post<HttpResult>(url, searchCondition);
+  }
+
+  /**
+   * delete list chuc vu
+   * @param items list chuc vu
+   */
+  deletes(items:any[]):Observable<HttpResult>{
+    let url = this.BaseUrl +"/api/chucvu/deletes";
+    return this.http.post<HttpResult>(url,items);
   }
 
 }
