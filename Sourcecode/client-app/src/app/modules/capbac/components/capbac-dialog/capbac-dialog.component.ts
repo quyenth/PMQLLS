@@ -10,6 +10,7 @@ import { CapbacService } from 'src/app/https/capbac.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-capbac-dialog',
@@ -27,7 +28,7 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private capbacService: CapbacService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.capBacId = data.id;
       this.getDataByID(data);
@@ -48,7 +49,6 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
-    debugger;
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -72,6 +72,7 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
     submitData.text = this.myForm.value.name.trim();
     this.capbacService.save(submitData).subscribe((res) => {
       this.spinner.hide();
+      this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {

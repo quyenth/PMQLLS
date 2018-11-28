@@ -13,6 +13,7 @@ import { ActionType } from 'src/app/shared/commons/action-type';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
+import { OrderInfo } from 'src/app/shared/models/order-info';
 
 @Component({
   selector: 'app-capbac-list',
@@ -29,10 +30,13 @@ export class CapbacListComponent implements OnInit, OnDestroy {
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
+  orderInfo: OrderInfo = new OrderInfo('', true);
+
   subscription: Subscription;
   checkall = false;
   constructor(private capbacService: CapbacService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService,
+      private toastr: ToastrService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
@@ -56,6 +60,11 @@ export class CapbacListComponent implements OnInit, OnDestroy {
       const val = this.searchInput.nativeElement.value;
       this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, val)];
       this.filterCondition.PageIndex = pageIndex;
+      if(this.orderInfo.FieldName){
+        this.filterCondition.Orders = [{...this.orderInfo}];
+      }else{
+        this.filterCondition.Orders = [];
+      }
       this.currentPage = pageIndex;
       this.capbacService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
@@ -101,10 +110,11 @@ export class CapbacListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.capbacService.delete(item).subscribe((res) => {
+            this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
@@ -124,13 +134,23 @@ export class CapbacListComponent implements OnInit, OnDestroy {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.capbacService.delectList(listSelected).subscribe((res) => {
+              this.toastr.success('Xóa thành công!');
               this.onSearch();
           });
       }
       });
 
   }
-
+  reSort(text: string ) {
+    console.log(text);
+    if ( this.orderInfo.FieldName === text) {
+      this.orderInfo.OrderDesc = !this.orderInfo.OrderDesc;
+    } else {
+      this.orderInfo.FieldName = text;
+      this.orderInfo.OrderDesc = false;
+    }
+    this.onSearch();
+  }
   onEnter() {
     this.onSearch();
   }

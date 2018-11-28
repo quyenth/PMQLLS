@@ -9594,3 +9594,35 @@ body.md-skin {
 .tbl-div {
   margin-top: 20px
 }
+table.dataDiplayTable thead .sorting:before, table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .sorting_desc:before, table.dataDiplayTable thead .sorting_asc_disabled:before, table.dataDiplayTable thead .sorting_desc_disabled:before {
+    right: 1em;
+    content: "\2191";
+}
+
+table.dataDiplayTable thead .sorting:after, table.dataDiplayTable thead .sorting_asc:after, table.dataDiplayTable thead .sorting_desc:after, table.dataDiplayTable thead .sorting_asc_disabled:after, table.dataDiplayTable thead .sorting_desc_disabled:after {
+    right: 0.5em;
+    content: "\2193";
+}
+
+table.dataDiplayTable thead .sorting, table.dataDiplayTable thead .sorting_asc, table.dataDiplayTable thead .sorting_desc, table.dataDiplayTable thead .sorting_asc_disabled, table.dataDiplayTable thead .sorting_desc_disabled {
+    cursor: pointer;
+    position: relative;
+}
+
+.dataDiplayTable thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+table.dataDiplayTable thead .sorting:before, table.dataDiplayTable thead .sorting:after, table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .sorting_asc:after, table.dataDiplayTable thead .sorting_desc:before, table.dataDiplayTable thead .sorting_desc:after, table.dataDiplayTable thead .sorting_asc_disabled:before, table.dataDiplayTable thead .sorting_asc_disabled:after, table.dataDiplayTable thead .sorting_desc_disabled:before, table.dataDiplayTable thead .sorting_desc_disabled:after {
+    position: absolute;
+    bottom: 0.9em;
+    display: block;
+    opacity: 0.3;
+}
+.dataDiplayTable thead th.no-sort , table.dataDiplayTable thead .sorting , table.dataDiplayTable thead .sorting_desc {
+   background-color: transparent;
+}
+
+table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .sorting_desc:after {
+    opacity: 1;
+}

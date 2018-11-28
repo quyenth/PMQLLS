@@ -7,6 +7,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConfirmDialogComponent } from '../component/confirm-dialog/confirm-dialog.component';
 import { PagingComponent } from '../component/paging/paging.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -17,11 +19,14 @@ import { PagingComponent } from '../component/paging/paging.component';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     PaginationModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ToastrModule.forRoot({progressBar : true, closeButton : true}),
+    BrowserAnimationsModule
   ],
   declarations: [ConfirmDialogComponent, PagingComponent],
   exports : [
-    DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule , PaginationModule, NgxSpinnerModule, PagingComponent
+    DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule ,
+    PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule , BrowserAnimationsModule
   ]
 })
 export class ShareModule { }
