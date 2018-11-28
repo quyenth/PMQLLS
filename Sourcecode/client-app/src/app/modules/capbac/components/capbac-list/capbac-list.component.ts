@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { OrderInfo } from 'src/app/shared/models/order-info';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-capbac-list',
