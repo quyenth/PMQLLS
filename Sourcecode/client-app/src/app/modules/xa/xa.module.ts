@@ -1,10 +1,10 @@
-import { ChucVuListComponent } from './components/chucvu-list/chucvu-list.component';
-import { ChucVuSaveComponent } from './components/chucvu-save/chucvu-save.component';
 import { ConfirmDialogComponent } from './../../shared/component/confirm-dialog/confirm-dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ShareModule } from './../../shared/module/share-module.module';
+import { XaListComponent } from './components/xa-list/xa-list.component';
+import { XaSaveComponent } from './components/xa-save/xa-save.component';
 
 
 
@@ -15,10 +15,9 @@ import { ShareModule } from './../../shared/module/share-module.module';
     ShareModule
     ],
   entryComponents: [
-    ChucVuSaveComponent,
+    XaSaveComponent,
     ConfirmDialogComponent
   ],
-  declarations: [ChucVuListComponent, ChucVuSaveComponent],
-  exports:[ChucVuSaveComponent]
+  declarations: [XaListComponent, XaSaveComponent]
 })
-export class ChucVuModule { }
+export class XaModule { }

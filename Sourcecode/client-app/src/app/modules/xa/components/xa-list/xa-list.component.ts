@@ -1,7 +1,7 @@
-import { ChucVuSaveComponent } from './../chucvu-save/chucvu-save.component';
 import { ModalType } from './../../../../shared/commons/modal-type';
+import { XaSaveComponent } from './../xa-save/xa-save.component';
 import { HttpResult } from './../../../../shared/commons/http-result';
-import { ChucVuService } from './../../../../https/chucVu.service';
+import { XaService } from './../../xa.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { ModalService } from 'src/app/shared/services/modal.Service';
@@ -15,10 +15,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 
 @Component({
-  selector: 'app-chucVu-list',
-  templateUrl: './chucvu-list.component.html'
+  selector: 'app-xa-list',
+  templateUrl: './xa-list.component.html'
 })
-export class ChucVuListComponent implements OnInit, OnDestroy {
+export class XaListComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('SearchName') searchInput: ElementRef ;
@@ -30,7 +30,7 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
   filterCondition: FilterCondition = new FilterCondition();
   subscription: Subscription;
   checkall = false;
-  constructor(private chucVuService: ChucVuService, private modalService: ModalService,
+  constructor(private xaService: XaService, private modalService: ModalService,
       private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
     this.filterCondition.PageSize = this.pageSize;
     this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, '')];
     this.filterCondition.Orders = [ ];
-    this.chucVuService.search(this.filterCondition).subscribe((res: HttpResult) => {
+    this.xaService.search(this.filterCondition).subscribe((res: HttpResult) => {
       this.list$ = res.data.list;
       this.totalCount = res.data.total;
     });
@@ -56,7 +56,7 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
       this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, val)];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
-      this.chucVuService.search(this.filterCondition).subscribe((res: HttpResult) => {
+      this.xaService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
         this.totalCount = res.data.total;
@@ -91,11 +91,11 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
 
 
   onAddNew () {
-    this.modalService.openModalWithComponent(ChucVuSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(XaSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
   }
 
   onEditItem(item) {
-    this.modalService.openModalWithComponent(ChucVuSaveComponent, { formType: FromType.UPDATE, id: item.chucVuId} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(XaSaveComponent, { formType: FromType.UPDATE, id: item.xaId} , ModalSize.LARGE);
   }
 
   onDeleteItem (item) {
@@ -103,7 +103,7 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
     let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
-          this.chucVuService.delete(item).subscribe((res) => {
+          this.xaService.delete(item).subscribe((res) => {
             this.onSearch();
         });
       }
@@ -122,7 +122,7 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
       const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
-            this.chucVuService.delectList(listSelected).subscribe((res) => {
+            this.xaService.delectList(listSelected).subscribe((res) => {
               this.onSearch();
           });
       }

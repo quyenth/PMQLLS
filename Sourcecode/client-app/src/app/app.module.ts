@@ -1,3 +1,5 @@
+import { XaModule } from './modules/xa/xa.module';
+import { ChucVuModule } from './modules/chucvu/chucvu.module';
 import { CapbacModule } from './modules/capbac/capbac.module';
 import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { ResponseInterceptor } from './core/interceptors/ResponseInterceptor';
@@ -13,7 +15,6 @@ import { FooterComponent } from './shared/component/footer/footer.component';
 import { HeaderRightComponent } from './shared/component/header/header-right/header-right.component';
 import { HeaderDropdownMenuComponent } from './shared/component/header/header-dropdown-menu/header-dropdown-menu.component';
 import { HeaderLogoComponent } from './shared/component/header/header-logo/header-logo.component';
-import { ChucvuModule } from './modules/chucvu/chucvu.module';
 import { FormsModule } from '@angular/forms';
 import { ModalService } from './shared/services/modal.Service';
 import { TinhModule } from './modules/tinh/tinh.module';
@@ -39,9 +40,10 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     HttpClientModule,
-    ChucvuModule,
+    ChucVuModule,
     CapbacModule,
     TinhModule,
+    XaModule,
     FormsModule,
     ModalModule,
     LoginModule,

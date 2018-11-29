@@ -1,6 +1,6 @@
 <div class="ibox ">
   <div class="ibox-title">
-    <h5>ChucVu</h5>
+    <h5>Xa</h5>
     <div class="ibox-tools">
 
     </div>
@@ -31,11 +31,21 @@
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                           <th>ChucVuId</th>
+                           <th>XaId</th>
                           
-                           <th>Code</th>
+                           <th>MaXa</th>
                           
-                           <th>Name</th>
+                           <th>TenXa</th>
+                          
+                           <th>HuyenId</th>
+                          
+                           <th>MaDiaChi</th>
+                          
+                           <th>Type</th>
+                          
+                           <th>Active</th>
+                          
+                           <th>Is1990</th>
                           
             <th style="width:60px;"></th>
           </tr>
@@ -46,11 +56,21 @@
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
 
-                               <td>{{item.chucVuId}}</td>
+                               <td>{{item.xaId}}</td>
                           
-                               <td>{{item.code}}</td>
+                               <td>{{item.maXa}}</td>
                           
-                               <td>{{item.name}}</td>
+                               <td>{{item.tenXa}}</td>
+                          
+                               <td>{{item.huyenId}}</td>
+                          
+                               <td>{{item.maDiaChi}}</td>
+                          
+                               <td>{{item.type}}</td>
+                          
+                               <td>{{item.active}}</td>
+                          
+                               <td>{{item.is1990}}</td>
                                      
 
             <td class="action-col">
