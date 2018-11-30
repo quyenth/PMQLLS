@@ -25,6 +25,9 @@ export class ResponseInterceptor implements HttpInterceptor {
         if (err.status === 401) {
             this.router.navigate(['/login']);
         }
+        else{
+          alert(err.message);
+        }
       }
     });
     

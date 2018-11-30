@@ -203,7 +203,7 @@ namespace Application.IdentityServer
             app.UseAuthentication();
             app.UseIdentityServer();
 
-
+            app.UseAccessControlAllowOriginAlways();
             app.UseMvc();
         }
 
