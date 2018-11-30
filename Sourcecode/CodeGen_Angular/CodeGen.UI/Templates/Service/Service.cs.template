@@ -1,0 +1,19 @@
+﻿using PrivateCloud.Framework.Common;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+
+
+namespace $config.NameSpace$
+{
+    public class $item.TableName$Service : BaseService<$item.TableName$, $config.Module$Context>, I$item.TableName$Service
+    {
+
+    }
+}
+

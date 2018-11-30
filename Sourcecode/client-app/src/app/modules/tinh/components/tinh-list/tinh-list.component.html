@@ -1,44 +1,51 @@
 <div class="ibox ">
-    <div class="ibox-title">
-      <h5>Tỉnh</h5>
-      <div class="ibox-tools">
+  <div class="ibox-title">
+    <h5>Tinh</h5>
+    <div class="ibox-tools">
 
+    </div>
+  </div>
+
+  <div class="ibox-content inspinia-timeline">
+
+    <div class="row search-box">
+        <div class="col-sm-3">
+            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
+      <div class="col-sm-3">
+            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
+      </div>
+            <div class="html5buttons col-sm-6">
+                <div class="html5buttons">
+                  <button class="btn btn-primary buttons-copy buttons-html5"  (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
+                  <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
+              </div>
+          </div>
     </div>
 
-    <div class="ibox-content inspinia-timeline">
-      <div class="row search-box">
-        <div class="col-sm-3">
-              <input placeholder="Search" type="text" class="form-control form-control-sm">
-        </div>
-        <div class="col-sm-3">
-              <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Search</button>
-        </div>
-        <div class="col-sm-4 m-b-xs">
-          <div class="html5buttons">
-            <div class="dt-buttons btn-group">
-              <button class="btn btn-primary buttons-copy buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="javascript:void(0)" (click)="openModal()" ><span>Thêm mới</span></button>
-              <button [disabled]="getSelectedItems().length!=1" class="btn btn-default buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Cập nhật</span></button>
-              <button [disabled]="getSelectedItems().length==0" class="btn btn-danger buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Xóa</span></button>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <table class="table table-striped table-bordered row-border hover" datatable [dtOptions]="dtOptions" style="width:100%" [dtTrigger]="dtTrigger">
+    <div class='tbl-div'>
+      <table class="table table-bordered table-hover" style="width:100%">
         <thead>
-          <tr>
+          <tr >
             <th style="text-align: center; width: 20px;">
-              <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()">
+              <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
-            <th>Mã Tỉnh</th>
-            <th>Tên Tỉnh</th>
-            <th>Loại</th>
-            <th>Kích hoạt</th>
-            <th>Is1990</th>
-            <th>Ghi chú</th>
+
+                           <th>TinhId</th>
+                          
+                           <th>MaTinh</th>
+                          
+                           <th>TenTinh</th>
+                          
+                           <th>Type</th>
+                          
+                           <th>Active</th>
+                          
+                           <th>Is1990</th>
+                          
+                           <th>GhiChu</th>
+                          
+            <th style="width:60px;"></th>
           </tr>
         </thead>
         <tbody>
@@ -46,17 +53,40 @@
             <td style="text-align: center;">
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
-            <td>{{ item.MaTinh }}</td>
-            <td>{{ item.TenTinh }}</td>
-            <td>{{ item.Type }}</td>
-            <td>{{ item.Active }}</td>
-            <td>{{ item.Is1990 }}</td>
-            <td>{{ item.GhiChu }}</td>
+
+                               <td>{{item.tinhId}}</td>
+                          
+                               <td>{{item.maTinh}}</td>
+                          
+                               <td>{{item.tenTinh}}</td>
+                          
+                               <td>{{item.type}}</td>
+                          
+                               <td>{{item.active}}</td>
+                          
+                               <td>{{item.is1990}}</td>
+                          
+                               <td>{{item.ghiChu}}</td>
+                                     
+
+            <td class="action-col">
+                <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
+                <a class="action-icon" (click)="onDeleteItem(item)"><i class="far fa-trash-alt"></i></a>
+            </td>
           </tr>
         </tbody>
       </table>
-
-
-
     </div>
+
+    <div>
+       <app-paging
+                [TotalCount]='totalCount'
+                [PageIndex]='currentPage'
+                [PageSize]='pageSize'
+                [DataLength]= 'list$.length'
+                (pageSizeChangge)="onPageSizeChange($event)"
+                (currentPageChangge)="goToPage($event)"></app-paging>
+    </div>
+
   </div>
+</div>

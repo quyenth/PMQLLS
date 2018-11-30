@@ -1,0 +1,13 @@
+D:\Working\Tool\CodeGen\CodeGen.Data\bin\Release\CodeGen.Data.dll
+D:\Working\Tool\CodeGen\CodeGen.Data\bin\Release\CodeGen.Data.pdb
+D:\Working\Tool\CodeGen\CodeGen.Data\bin\Release\antlr.runtime.dll
+D:\Working\Tool\CodeGen\CodeGen.Data\bin\Release\StringTemplate.dll
+D:\Working\Tool\CodeGen\CodeGen.Data\obj\Release\CodeGen.Data.csprojResolveAssemblyReference.cache
+D:\Working\Tool\CodeGen\CodeGen.Data\obj\Release\CodeGen.Data.dll
+D:\Working\Tool\CodeGen\CodeGen.Data\obj\Release\CodeGen.Data.pdb
+C:\Working\CodeGen\CodeGen_20180129\CodeGen\CodeGen.Data\bin\Release\CodeGen.Data.dll
+C:\Working\CodeGen\CodeGen_20180129\CodeGen\CodeGen.Data\bin\Release\CodeGen.Data.pdb
+C:\Working\CodeGen\CodeGen_20180129\CodeGen\CodeGen.Data\bin\Release\antlr.runtime.dll
+C:\Working\CodeGen\CodeGen_20180129\CodeGen\CodeGen.Data\bin\Release\StringTemplate.dll
+C:\Working\CodeGen\CodeGen_20180129\CodeGen\CodeGen.Data\obj\Release\CodeGen.Data.dll
+C:\Working\CodeGen\CodeGen_20180129\CodeGen\CodeGen.Data\obj\Release\CodeGen.Data.pdb

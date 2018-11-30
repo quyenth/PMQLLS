@@ -1,0 +1,73 @@
+﻿
+<div class="row">
+    <div class="col-sm-7">
+        <h3 class="page-tile">$item.TableName$</h3>
+    </div>
+    <div class="col-sm-5">
+        <div style="float: right;" class="button-div">
+            <button class="btn btn-primary" title="" ng-click="addNew()">Thêm mới</button>
+            <button class="btn btn-danger" ng-click="deleteListItem()">Xóa mục chọn</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped dataTable no-footer table-responsive" role="grid" aria-describedby="dataTable_info">
+            <thead class="header-table">
+                <tr role="row">
+                    <th style="width: 40px;">STT</th>
+                    <th style="width: 40px;text-align: center;"><input type="checkbox" ng-click="checkAll()" ng-model="checkedall" /></th>
+                    $item.ColumnInfos:{it|
+                    <th>$it.ColumnName$</th>
+                    };separator=""$
+                 
+                               
+                    <th style="width: 80px;"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr role="row" ng-repeat="item in list">
+                    <td>{{paging.from + 1 + \$index}}</td>
+                    <td style="text-align: center;"><input type="checkbox" ng-model="item.selected" ng-click="checkOne(item)" /></td>
+
+                  $item.ColumnInfos:{it|
+                  <td>{{item.$it.ColumnNameCamel$}}</td>
+                  };separator=""$
+
+                  <th class="action-col">
+                        <a ng-click="editItem(item.$item.PrimaryKeyCamel$)" class="btn btn-primary btn-xs close-box">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a ng-click="deleteItem(item)" class="btn btn-danger btn-xs close-box">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="pag-size-div" id="">
+            <p class="show-text">Hiển thị</p>
+            <select ng-model="paging.pageSize" ng-options="item for item in itemPerpages" ng-change="getList(1)" name="dataTable_length" aria-controls="dataTable" class="form-control input-sm" >
+                
+            </select>
+            <p class="entries-text">kết quả trên một trang</p>
+        </div>
+    </div>
+   
+    <div class="col-sm-4 pagging_text">
+        <p>Bản ghi từ {{paging.from + 1}} đến {{paging.from + list.length }} trong {{paging.totalCount}} bản ghi</p>
+    </div>
+
+    <div class="col-sm-4">
+        <ul uib-pagination boundary-links="true" total-items="paging.totalCount" ng-model="paging.pageIndex" items-per-page="paging.pageSize" ng-change="getList()" max-size="10" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+    </div>
+
+</div>

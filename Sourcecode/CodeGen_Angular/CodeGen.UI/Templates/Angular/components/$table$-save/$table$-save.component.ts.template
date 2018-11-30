@@ -1,0 +1,101 @@
+﻿import { map, switchMap } from 'rxjs/operators';
+import { $item.TableName$Model } from './../../$item.TableNameLowerCase$.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Validators, FormBuilder, FormControl } from '@angular/forms';
+import { Subscription, timer, of } from 'rxjs';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalService } from 'src/app/shared/services/modal.Service';
+import { ActionType } from 'src/app/shared/commons/action-type';
+import { $item.TableName$Service } from './../../$item.TableNameLowerCase$.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
+import { FromType } from 'src/app/shared/commons/form-type';
+
+@Component({
+  selector: 'app-$item.TableNameCamel$-save',
+  templateUrl: './$item.TableNameLowerCase$-save.component.html'
+})
+export class $item.TableName$SaveComponent implements OnInit , OnDestroy {
+
+  subscription: Subscription;
+  submited: boolean;
+  data: $item.TableName$Model = new $item.TableName$Model();
+  myForm = this.fb.group({
+   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
+   $item.ColumnInfos:{it|
+	    $it.ColumnNameCamel$: [''],
+      };separator=""$
+  });
+
+  constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
+          private $item.TableNameCamel$Service: $item.TableName$Service, private spinner: NgxSpinnerService,
+          private confirmationDialogService: ConfirmationDialogService) {
+    this.subscription = this.modalService.dialogData.subscribe(data => {
+      this.data.$item.PrimaryKeyCamel$ = data.id;
+      this.getDataByID(data);
+    });
+  }
+
+  ngOnInit() {
+
+  }
+
+  getDataByID (data) {
+    if (data.formType === FromType.UPDATE) {
+      this.$item.TableNameCamel$Service.getById(this.data.$item.PrimaryKeyCamel$).subscribe((res) => {
+       $item.ColumnInfos:{it|
+	    this.myForm.patchValue({'$it.ColumnNameCamel$': res.data.$it.ColumnNameCamel$});
+      };separator=""$
+	  
+      });
+    }
+	else{
+		this.myForm.patchValue({'$item.PrimaryKeyCamel$': data.id});
+	}
+  }
+
+  onSubmit() {
+    
+    this.submited = true;
+    console.log(this.myForm);
+    if ( !this.myForm.valid) {
+      return;
+    }
+
+    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+      dialogCloseSubscription.unsubscribe();
+      if ( data === ActionType.ACCEPT) {
+        this.submitData();
+      }
+    });
+  }
+
+  submitData() {
+    this.spinner.show();
+    this.submited = true;
+    const submitData = new $item.TableName$Model();
+    //submitData.$item.PrimaryKeyCamel$ = this.data.$item.PrimaryKeyCamel$;
+    //submitData.text = this.myForm.value.name.trim();
+    this.$item.TableNameCamel$Service.save(this.myForm.value).subscribe((res) => {
+      this.spinner.hide();
+      this.bsModalRef.hide();
+      this.modalService.passDataToParent({action: ActionType.SUBMIT});
+    }, (error) => {
+      console.log(error);
+      this.spinner.hide();
+    });
+  }
+
+  onClose() {
+    this.bsModalRef.hide();
+    this.modalService.passDataToParent({action: ActionType.CLOSE});
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  
+  
+}

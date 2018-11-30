@@ -1,0 +1,111 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Tinh</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onClose()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="myForm">
+      <!--   <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('name').valid }">
+              <label class="col-sm-2 col-form-label">Tên</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="name">
+             <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('required')">Trường này là bắt buộc.</span>
+              <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('maxlength')">Độ dài tối đa là 30 ký tự.</span>
+              <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('isNameDuplicate')">Tên đã tồn tại.</span>
+			  
+            </div>
+        </div>
+	-->
+
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('tinhId').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    TinhId
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="tinhId" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maTinh').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    MaTinh
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="maTinh" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('tenTinh').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    TenTinh
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="tenTinh" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('type').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Type
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="type" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('active').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Active
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="active" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('is1990').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Is1990
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="is1990" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ghiChu').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    GhiChu
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ghiChu" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+
+    </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="onSubmit()"><i class="far fa-save"></i> Lưu</button>
+  <button type="button" class="btn btn-default" (click)="onClose()"><i class="fas fa-times"></i> Đóng</button>
+</div>

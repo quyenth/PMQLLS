@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,36 +8,32 @@ using Framework.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
     [Route("api/Tinh/[action]")]
-    [ApiExplorerSettings(IgnoreApi = false)]
-
-    [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
-    public class TinhController : Controller
+    public class TinhController : ControllerBase
     {
         private ITinhService tinhService;
-
-        public TinhController(ITinhService tinhService)
+        public TinhController (ITinhService tinhService)
         {
             this.tinhService = tinhService;
         }
-
         /// <summary>
-        /// Create or Update Tinh
+        /// save tinh
         /// </summary>
-        /// <param name="modal">Tinh modal</param>
+        /// <param name="model"></param>
+        /// <remarks>
+        /// if TinhId = 0 => add else update
+        /// </remarks>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ApiResult> Save([FromBody] Tinh modal)
+        public async Task<ApiResult> Save([FromBody] Tinh model)
         {
-            //add
-            if (modal.TinhId == 0)
+            if (model.TinhId == 0)
             {
-                var added = tinhService.Add(modal);
+                var added = tinhService.Add(model);
                 return new ApiResult()
                 {
                     Status = HttpStatus.OK,
@@ -47,44 +43,24 @@ namespace Application.IdentityServer.Controllers.QLLS
             //edit
             else
             {
-                tinhService.Update(modal);
+                tinhService.Update(model);
                 return new ApiResult()
                 {
                     Status = HttpStatus.OK,
-                    Data = modal
+                    Data = model
                 };
             }
         }
-
-
         /// <summary>
-        /// filter data by multiple condition
+        /// get list Tinh
         /// </summary>
-        /// <param name="filter">
-        /// </param>
-        /// <remarks>
-        /// OperationType:
-        /// 0:EqualTo,
-        /// 1:NotEqualTo,
-        /// 2:GreaterThan,
-        /// 3:GreaterThanEqualTo,
-        /// 4:LessThan,
-        /// 5:LessThanEqualTo,
-        /// 6:Contains,
-        /// 7:StartsWith,
-        /// 8:EndsWith
-        /// </remarks>
-        /// <returns>
-        /// </returns>
+        /// <param name="filterCondition"></param>
+        /// <returns></returns>
         [HttpPost]
-
-        [SwaggerResponse(200, "Result", typeof(ApiResult))]
-        [SwaggerResponse(2001, "ApiResult.data", typeof(List<Tinh>))]
-
-        public async Task<ApiResult> Filter([FromBody] FilterCondition filter)
+        public async Task< ApiResult> Search([FromBody]FilterCondition filterCondition)
         {
             int total = 0;
-            var list = tinhService.Filter(filter, out total);
+            var list = tinhService.Filter(filterCondition , out total);
             return new ApiResult()
             {
                 Status = HttpStatus.OK,
@@ -95,6 +71,72 @@ namespace Application.IdentityServer.Controllers.QLLS
                 }
             };
         }
+        /// <summary>
+        /// get Tinh by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ApiResult> GetById(int id)
+        {
+            var result = tinhService.Find(id);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
 
+        /// <summary>
+        /// Delete 1 bản ghi
+        /// </summary>
+        /// <param name="model">Tinh entity</param>
+        /// <returns></returns>
+
+        [HttpPost]
+        public async Task< ApiResult> Delete([FromBody] Tinh model)
+        {
+            tinhService.Delete(c => c.TinhId == model.TinhId);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = model.TinhId
+            };
+        }
+        /// <summary>
+        /// delete list Tinh
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task< ApiResult> DeleteList([FromBody]List<Tinh> items)
+        {
+            var ids = items.Select(item => item.TinhId).ToList();
+            tinhService.Delete(c => ids.Contains(c.TinhId));
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = null
+            };
+        }
+        /// <summary>
+        /// add list tinh
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task< ApiResult> AddList([FromBody]List<Tinh> items)
+        {
+            tinhService.Add(items);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = null
+            };
+        }
+
+
+        
     }
 }

@@ -77,6 +77,9 @@ export class XaSaveComponent implements OnInit , OnDestroy {
 	  
       });
     }
+	else{
+		this.myForm.patchValue({'xaId': data.id});
+	}
   }
 
   onSubmit() {

@@ -1,0 +1,399 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Ncc_PhieuCungCap</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onClose()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="myForm">
+      <!--   <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('name').valid }">
+              <label class="col-sm-2 col-form-label">Tên</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="name">
+             <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('required')">Trường này là bắt buộc.</span>
+              <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('maxlength')">Độ dài tối đa là 30 ký tự.</span>
+              <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('isNameDuplicate')">Tên đã tồn tại.</span>
+			  
+            </div>
+        </div>
+	-->
+
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('id').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Id
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="id" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('donViId').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    DonViId
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="donViId" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_HoTen').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_HoTen
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_HoTen" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_NamSinh').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_NamSinh
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_NamSinh" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_QueXa').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_QueXa
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_QueXa" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_QueHuyen').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_QueHuyen
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_QueHuyen" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_QueTinh').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_QueTinh
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_QueTinh" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_LiemHe').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_LiemHe
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_LiemHe" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_BanThan').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_BanThan
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_BanThan" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_LienHeVoiLietSi').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_LienHeVoiLietSi
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_LienHeVoiLietSi" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_DonVi').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_DonVi
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_DonVi" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ncc_KienNghi').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    Ncc_KienNghi
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="ncc_KienNghi" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSiHoTien').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSiHoTien
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSiHoTien" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyQueThon').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyQueThon
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyQueThon" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyQueXa').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyQueXa
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyQueXa" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyQueHuyen').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyQueHuyen
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyQueHuyen" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyQueTinh').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyQueTinh
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyQueTinh" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyCapBac').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyCapBac
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyCapBac" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('letSyChucVu').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LetSyChucVu
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="letSyChucVu" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyDonVi').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyDonVi
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyDonVi" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyNgayHySinh').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyNgayHySinh
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyNgayHySinh" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyDacDiem').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyDacDiem
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyDacDiem" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyMaiTang').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyMaiTang
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyMaiTang" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyMaiTangXa').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyMaiTangXa
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyMaiTangXa" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyMaiTangHuyen').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyMaiTangHuyen
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyMaiTangHuyen" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyMaiTangTinh').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyMaiTangTinh
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyMaiTangTinh" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyToaDo').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyToaDo
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyToaDo" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lieSySoDoViTri').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LieSySoDoViTri
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lieSySoDoViTri" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('lietSyLyDoBietMo').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    LietSyLyDoBietMo
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="lietSyLyDoBietMo" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('nguoiBietKhac').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    NguoiBietKhac
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="nguoiBietKhac" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+		  			
+		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('nguoiBietKhacLienHe').valid }">
+		                  <label class="col-form-label col-sm-2">
+		                    NguoiBietKhacLienHe
+		                  </label>
+		                  <div class="col-sm-8">
+		                    <input type="text" class="form-control" formControlName="nguoiBietKhacLienHe" />
+		                  </div>
+		                 </div>
+		          
+		  
+		  		   
+
+    </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="onSubmit()"><i class="far fa-save"></i> Lưu</button>
+  <button type="button" class="btn btn-default" (click)="onClose()"><i class="fas fa-times"></i> Đóng</button>
+</div>

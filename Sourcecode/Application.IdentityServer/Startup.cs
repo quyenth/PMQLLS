@@ -66,6 +66,16 @@ namespace Application.IdentityServer
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
             services.AddTransient<IChucVuService, ChucVuService>();
             services.AddTransient<ICapBacService, CapBacService>();
+            services.AddTransient<IDiemCaoService, DiemCaoService>();
+            services.AddTransient<IDoiTuongService, DoiTuongService>();
+            services.AddTransient<IDonViService, DonViService>();
+            services.AddTransient<IHuyenService, HuyenService>();
+            services.AddTransient<ILietSyService, LietSyService>();
+            services.AddTransient<ILoaiDoiTuongService, LoaiDoiTuongService>();
+            services.AddTransient<IMatTranService, MatTranService>();
+            services.AddTransient<IThoiKyService, ThoiKyService>();
+            services.AddTransient<ITinhService, TinhService>();
+            services.AddTransient<IXaService, XaService>();
 
 
             services.AddMvc();
@@ -187,7 +197,8 @@ namespace Application.IdentityServer
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowCredentials()
+                );
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseIdentityServer();

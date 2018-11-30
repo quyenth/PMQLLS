@@ -1,12 +1,12 @@
 import { map, switchMap } from 'rxjs/operators';
-import { ChucVuModel } from './../../../../shared/models/chucvu.model';
+import { ChucVuModel } from './../../chucvu.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription, timer, of } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { ActionType } from 'src/app/shared/commons/action-type';
-import { ChucVuService } from 'src/app/https/chucVu.service';
+import { ChucVuService } from './../../chucvu.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
@@ -27,7 +27,7 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
          
    	    code: [''],
          
-   	    name: ['']
+   	    name: [''],
          
   });
 
@@ -57,6 +57,9 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
 	  
       });
     }
+	else{
+		this.myForm.patchValue({'chucVuId': data.id});
+	}
   }
 
   onSubmit() {

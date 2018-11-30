@@ -1,0 +1,136 @@
+<div class="ibox ">
+  <div class="ibox-title">
+    <h5>DonVi</h5>
+    <div class="ibox-tools">
+
+    </div>
+  </div>
+
+  <div class="ibox-content inspinia-timeline">
+
+    <div class="row search-box">
+        <div class="col-sm-3">
+            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-3">
+            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
+      </div>
+            <div class="html5buttons col-sm-6">
+                <div class="html5buttons">
+                  <button class="btn btn-primary buttons-copy buttons-html5"  (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
+                  <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
+              </div>
+          </div>
+    </div>
+
+    <div class='tbl-div'>
+      <table class="table table-bordered table-hover" style="width:100%">
+        <thead>
+          <tr >
+            <th style="text-align: center; width: 20px;">
+              <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
+            </th>
+
+                           <th>DonViId</th>
+                          
+                           <th>MaDonVi</th>
+                          
+                           <th>TenDonVi</th>
+                          
+                           <th>TenVietTat</th>
+                          
+                           <th>MaDonViCha</th>
+                          
+                           <th>PhanMuc</th>
+                          
+                           <th>PhanCap</th>
+                          
+                           <th>PhanKhoi</th>
+                          
+                           <th>GhiChu</th>
+                          
+                           <th>Active</th>
+                          
+                           <th>CQCS_Ten</th>
+                          
+                           <th>CQCS_DiaChi</th>
+                          
+                           <th>CQCS_DienThoai</th>
+                          
+                           <th>CQCS_HomThu</th>
+                          
+                           <th>CQCS_ThuTruong</th>
+                          
+                           <th>CQCS_ThuTruongChucVu</th>
+                          
+                           <th>CQCS_NguoiPhuTrach</th>
+                          
+                           <th>CQCS_NguoiPhuTrachPhone</th>
+                          
+            <th style="width:60px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list$" [ngClass]="{'selected':item.selected}">
+            <td style="text-align: center;">
+              <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
+            </td>
+
+                               <td>{{item.donViId}}</td>
+                          
+                               <td>{{item.maDonVi}}</td>
+                          
+                               <td>{{item.tenDonVi}}</td>
+                          
+                               <td>{{item.tenVietTat}}</td>
+                          
+                               <td>{{item.maDonViCha}}</td>
+                          
+                               <td>{{item.phanMuc}}</td>
+                          
+                               <td>{{item.phanCap}}</td>
+                          
+                               <td>{{item.phanKhoi}}</td>
+                          
+                               <td>{{item.ghiChu}}</td>
+                          
+                               <td>{{item.active}}</td>
+                          
+                               <td>{{item.cQCS_Ten}}</td>
+                          
+                               <td>{{item.cQCS_DiaChi}}</td>
+                          
+                               <td>{{item.cQCS_DienThoai}}</td>
+                          
+                               <td>{{item.cQCS_HomThu}}</td>
+                          
+                               <td>{{item.cQCS_ThuTruong}}</td>
+                          
+                               <td>{{item.cQCS_ThuTruongChucVu}}</td>
+                          
+                               <td>{{item.cQCS_NguoiPhuTrach}}</td>
+                          
+                               <td>{{item.cQCS_NguoiPhuTrachPhone}}</td>
+                                     
+
+            <td class="action-col">
+                <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
+                <a class="action-icon" (click)="onDeleteItem(item)"><i class="far fa-trash-alt"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+       <app-paging
+                [TotalCount]='totalCount'
+                [PageIndex]='currentPage'
+                [PageSize]='pageSize'
+                [DataLength]= 'list$.length'
+                (pageSizeChangge)="onPageSizeChange($event)"
+                (currentPageChangge)="goToPage($event)"></app-paging>
+    </div>
+
+  </div>
+</div>

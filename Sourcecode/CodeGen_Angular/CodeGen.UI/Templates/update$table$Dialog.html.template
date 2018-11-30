@@ -1,0 +1,102 @@
+﻿<div class="modal-content">
+    <div class="modal-header">
+        <span type="button" class="close" data-dismiss="modal" ng-click="close()">
+            <i class="fa fa-close"></i>
+        </span>
+        <h4 class="modal-title" ng-if="!isEdit">Thêm mới</h4>
+        <h4 class="modal-title" ng-if="isEdit">Cập nhật</h4>
+    </div>
+    <div class="modal-body">
+        <div id="div-1" class="body collapse in" aria-expanded="true" style="">
+            <form class="form-horizontal" novalidate name="myForm">
+               
+              $item.ColumnInfos:{it|
+              $if(it.isInputText)$
+              <div class="form-group">
+                <label class="control-label col-lg-4">
+                  $it.ColumnName$ <span class="text-danger">*</span>
+                </label>
+                <div class="col-lg-8">
+                 
+                  <input type="text" class="form-control" ng-model="model.$it.ColumnNameCamel$" name="$it.ColumnNameCamel$" maxlength="$it.MaxLength$" ng-class="{'has-error':submitted && myForm.$it.ColumnNameCamel$.\$invalid}" required=""  />
+                  <span ng-show="submitted && myForm.$it.ColumnNameCamel$.\$invalid" class="help-block has-error">Hãy nhập trường thông tin này.</span>
+                  
+                </div>
+               </div>
+              $endif$
+              $if(it.isTextArea)$
+              <div class="form-group">
+                <label class="control-label col-lg-4">
+                  $it.ColumnName$ <span class="text-danger">*</span>
+                </label>
+                <div class="col-lg-8">
+
+                  <textarea type="text" style="height:90px;" class="form-control" ng-model="model.$it.ColumnNameCamel$" name="$it.ColumnNameCamel$" maxlength="$it.MaxLength$" ng-class="{'has-error':submitted && myForm.$it.ColumnNameCamel$.\$invalid}" required=""  />
+                  <span ng-show="submitted && myForm.$it.ColumnNameCamel$.\$invalid" class="help-block has-error">Hãy nhập trường thông tin này.</span>
+
+                </div>
+              </div>
+              $endif$
+              $if(it.isHtmlEditor)$
+              <div class="form-group">
+                <label class="control-label col-lg-4">
+                  $it.ColumnName$ <span class="text-danger">*</span>
+                </label>
+                <div class="col-lg-8">
+
+                  <textarea ckeditor="ckeditorOption.full" class="form-control" ng-model="model.$it.ColumnNameCamel$" name="$it.ColumnNameCamel$" maxlength="$it.MaxLength$" ng-class="{'has-error':submitted && myForm.$it.ColumnNameCamel$.\$invalid}" required=""  />
+                  <span ng-show="submitted && myForm.$it.ColumnNameCamel$.\$invalid" class="help-block has-error">Hãy nhập trường thông tin này.</span>
+
+                </div>
+              </div>
+
+              $endif$
+
+              $if(it.IsBoolean)$
+              <div class="form-group">
+                <label class="control-label col-lg-4">
+                  $it.ColumnName$ <span class="text-danger">*</span>
+                </label>
+                <div class="col-lg-8">
+
+                  <input type="checkbox" ng-model="model.$it.ColumnNameCamel$" class="form-control"   />
+
+                </div>
+              </div>
+              $endif$
+              $if(it.IsDateTime)$
+              <div class="form-group">
+                <label class="control-label col-lg-4">
+                  $it.ColumnName$ <span class="text-danger"></span>
+                </label>
+                <div class="col-lg-8">
+                  <datetime-picker dateoptions="dateOptions" ng-model="model.$it.ColumnNameCamel$" ></datetime-picker>
+
+                </div>
+              </div>
+
+              $endif$
+              $if(it.IsNumber)$
+              <div class="form-group">
+                <label class="control-label col-lg-4">
+                  $it.ColumnName$ <span class="text-danger"></span>
+                </label>
+                <div class="col-lg-8">
+                  <input type="text" numeric-only ng-model="model.$it.ColumnNameCamel$"  />
+
+                </div>
+              </div>
+              $endif$
+              };separator=""$
+
+
+
+
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" title="" ng-click="save(myForm)">Lưu</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close()">Close</button>
+    </div>
+</div>

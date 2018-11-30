@@ -1,0 +1,92 @@
+﻿<div class="fs-page-dependents-info" id="fs-page-depentdent-info">
+    <div class="form-group">
+
+        <div ui-grid="gridOptions" ui-grid-pagination ui-grid-pinning class="grid m-b-lg">
+
+        </div>
+
+
+      
+    </div>
+   
+</div>
+
+<!--template for item in grid-->
+<script type="text/ng-template" id="commandColumn.html">
+    <div class="ui-grid-cell-contents">
+        <a href="javascript:void(0)" style="margin:5px;margin-top:10px;color: #555555;" ng-if="row.entity.isEdit != true" ng-click="grid.appScope.editItem(row.entity)">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+        </a>
+        <a href="javascript:void(0)" style="margin:5px;margin-top:10px;color: #555555;" ng-if="row.entity.isEdit != true" ng-click="grid.appScope.delete(row.entity)">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </a>
+        <a href="javascript:void(0)" style="margin:5px;margin-top:10px;color: #555555;" ng-if="row.entity.isEdit == true" ng-click="grid.appScope.save(row.entity)">
+            <i class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></i>
+        </a>
+        <a href="javascript:void(0)" style="margin:5px;margin-top:10px;color: #555555;" ng-if="row.entity.isEdit == true" ng-click="grid.appScope.cancelEdit(row.entity)">
+            <i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+        </a>
+    </div>
+</script>
+
+<script type="text/ng-template" id="headerActionTemplate.html">
+    <div class="ui-grid-cell-contents ui-grid-header-cell-primary-focus">
+        <a href="javascript:void(0)" class="fs-td-btn-add" ng-click="grid.appScope.addNew()" style="float:left" title="add new">
+            <i class="glyphicon glyphicon-plus-sign"></i>
+        </a>
+    </div>
+</script>
+<!--end template for item in grid-->
+
+
+<!--Model dialog-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">{{'Information' | translate}}</h3>
+            </div>
+            <div class="modal-body" style="overflow-y: scroll;height:{{modalbodyHeight}}">
+              
+                    <form>
+					$item.ColumnInfos:{it|
+					$if(it.IsString)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <input type="text" ng-model="model.$it.ColumnNameCamel$"  uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "form-control {{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true" />
+                    </div>
+					$endif$
+					$if(it.IsBoolean)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <input type="checkbox" ng-model="model.$it.ColumnNameCamel$"  uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "form-control {{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true"/>
+                    </div>
+					$endif$
+					$if(it.IsDateTime)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <datetime-picker dateoptions="dateOptions" ng-model="model.$it.ColumnNameCamel$" uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "{{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true"></datetime-picker>
+                    </div>
+					$endif$
+					$if(it.IsNumber)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <input type="text" numeric-only ng-model="model.$it.ColumnNameCamel$" uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "form-control {{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true"></input>
+                    </div>
+					$endif$
+					};separator=""$ 
+                        
+                    </form>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="save(model)">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

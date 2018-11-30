@@ -1,0 +1,238 @@
+﻿
+webApp.controller("manage$item.TableName$Ctr", function (\$rootScope, \$scope, \$http, \$translate, \$location, \$uibModal, \$timeout, \$ngConfirm) {
+
+    \$scope.dateTimeOptions = angular.extend({}, \$rootScope.dateTimeOptions, {});
+    \$scope.paging = {
+        pageSize: '20',
+        pageIndex: 1
+    }
+    \$scope.itemPerpages = [20, 30, 50];
+    \$scope.checkedall = false;
+    
+
+    \$scope.setPage = function (pageNo) {
+        \$scope.currentPage = pageNo;
+    };
+    \$scope.pageChanged = function () {
+        \$log.log('Page changed to: ' + \$scope.currentPage);
+    };
+  
+    \$scope.addNew = addNew;
+    \$scope.editItem = editItem;
+    \$scope.getList = getList;
+    \$scope.deleteListItem = deleteListItem;
+    \$scope.deleteItem = deleteItem;
+    \$scope.checkAll = checkAll;
+    \$scope.checkOne = checkOne;
+    getList();
+
+    function addNew() {
+        openDialog(0);
+    }
+
+    function editItem(id) {
+        openDialog(id);
+    }
+    function checkAll() {
+       
+        angular.forEach(\$scope.list, function (item, index) {
+            item.selected = \$scope.checkedall;
+        });
+    }
+
+    function checkOne(item) {
+        var checkedItems = \$scope.list.filter((obj) => obj.selected === true);
+        if (checkedItems.length == \$scope.list.length) {
+            \$scope.checkedall = true;
+        }
+        else {
+            \$scope.checkedall = false;
+        }
+    }
+
+    function openDialog(id) {
+        var modalInstance = \$uibModal.open({
+            animation: true,
+            templateUrl: utils.rootPath + '/html/admin/update$item.TableName$Dialog.html',
+            controller: "update$item.TableName$Ctr",
+            windowClass: 'd-modal',
+            size: 'md',
+            resolve: {
+                Id: function () {
+                    return id;
+                }
+            }
+        });
+
+        modalInstance.result.then(function () {
+            getList();
+        }, function () {
+        });
+    }
+
+    function getList(pageIndex) {
+        if (pageIndex != undefined) {
+            \$scope.paging.pageIndex = pageIndex;
+        }
+        \$http({
+            method: 'POST',
+            //Change:
+            url: utils.rootPath + '/$item.TableName$/GetList',
+            data: \$scope.paging
+        }).then(function successCallback(respone) {
+            \$scope.list = respone.data.list;
+            \$scope.paging = respone.data.paging;
+        }, function errorCallback(response) {
+
+        });
+    }
+
+    function deleteListItem() {
+        var checkedItems = \$scope.list.filter((obj) => obj.selected === true);
+        if (checkedItems.length == 0) {
+            \$ngConfirm({
+                title: 'Thông báo!',
+                content: 'Chưa có mục nào được chọn!',
+                scope: \$scope,
+                buttons: {
+                   
+                    Cancel: {
+                        text: 'Đóng',
+                        btnClass: 'btn-default',
+                        action: function (scope, button) {
+                            return;
+                        }
+                    }
+                }
+            });
+            return;
+        }
+        
+        \$ngConfirm({
+            title: 'Xác nhận!',
+            content: 'Bạn thật sự muốn xóa các mục đã chọn?',
+            scope: \$scope,
+            buttons: {
+                OK: {
+                    text: 'Đồng ý',
+                    btnClass: 'btn-primary',
+                    action: function (scope, button) {
+                        \$http({
+                            method: 'POST',
+                            //Change:
+                            url: utils.rootPath + '/$item.TableName$/Delete',
+                            data: checkedItems
+                        }).then(function successCallback(respone) {
+                            \$.notify("Delete item successfully");
+                            \$scope.getList();
+                        }, function errorCallback(response) {
+
+                        });
+                        \$scope.\$apply();
+                    }
+                },
+                Cancel: {
+                    text: 'Hủy bỏ',
+                    btnClass: 'btn-default',
+                    action: function (scope, button) {
+
+                    }
+                }
+            }
+        });
+    }
+
+    function deleteItem(item) {
+        \$ngConfirm({
+            title: 'Xác nhận!',
+            content: 'Bạn thật sự muốn xóa mục này?',
+            scope: \$scope,
+            buttons: {
+                OK: {
+                    text: 'Đồng ý',
+                    btnClass: 'btn-primary',
+                    action: function (scope, button) {
+                        \$http({
+                            method: 'POST',
+                            //Change:
+                            url: utils.rootPath + '/$item.TableName$/Delete',
+                            data: item
+                        }).then(function successCallback(respone) {
+                            \$.notify("Delete item successfully");
+                            \$scope.getList();
+                        }, function errorCallback(response) {
+
+                        });
+                        \$scope.\$apply();
+                    }
+                },
+                Cancel: {
+                    text: 'Hủy bỏ',
+                    btnClass: 'btn-default',
+                    action: function (scope, button) {
+
+                    }
+                }
+            }
+        });
+    }
+
+});
+
+webApp.controller("update$item.TableName$Ctr", function (\$rootScope, \$scope, \$http, \$translate, \$location, \$uibModalInstance, \$timeout, \$ngConfirm, Id) {
+
+    \$scope.close = close;
+    \$scope.isEdit = false;
+    \$scope.save = save;
+
+
+    if (Id == 0) {
+        \$scope.title = "Thêm mới";
+    } else {
+        \$scope.title = "Chỉnh sửa";
+        \$scope.isEdit = true;
+        getDataById();
+    }
+
+    function save() {
+        \$scope.submitted = true;
+        if (!this.myForm.\$valid) {
+            return;
+        }
+
+        \$http({
+            method: 'POST',
+            //Change:
+            url: utils.rootPath + '/$item.TableName$/Save',
+            data: \$scope.model
+        }).then(function successCallback(respone) {
+            
+                \$uibModalInstance.close();
+                \$.notify("Save data successfully!");
+                \$scope.getList();
+
+            
+        }, function errorCallback(response) {
+
+        });
+    }
+
+    function getDataById() {
+        \$http({
+            method: 'POST',
+            //Change:
+            url: utils.rootPath + '/$item.TableName$/GetById',
+            data: { id: Id }
+        }).then(function successCallback(respone) {
+            \$scope.model = respone.data;
+           
+        }, function errorCallback(response) {
+
+        });
+
+    }
+
+    function close() {
+        \$uibModalInstance.close();
+    }
+});

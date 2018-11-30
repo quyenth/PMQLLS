@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Linq.Dynamic.Core;
 using Framework.DynamicQuery;
+//using System.Linq.Dynamic;
 
 namespace Framework.Common
 {
@@ -407,7 +408,7 @@ namespace Framework.Common
                 var q = dc.Set<T>().AsQueryable();
                 foreach (var field in fields)
                 {
-                    q.Select(field);
+                   // q.Select(field);
                 }
 
                 return null;
@@ -421,42 +422,7 @@ namespace Framework.Common
 
         protected virtual DC OpenContext()
         {
-            //if (typeof(DC) == typeof(CKFrameworkEntities))
-            //{
-            //    return new DC();
-            //}
-
-            //string regionId = PropertyService.GetValue<string>(HttpContext.Current.Session.CurrentUser().AccountName, Constant.USER_REGION);
-
-            //int rId;
-            //if (regionId != null && int.TryParse(regionId, out rId))
-            //{
-            //    Region r = RegionService.Single(c => c.Id == rId);
-
-            //    var sqlBuilder = new SqlConnectionStringBuilder
-            //    {
-            //        DataSource = r.DataSource,
-            //        InitialCatalog = r.InitialCatalog,
-            //        IntegratedSecurity = false,
-            //        PersistSecurityInfo = true,
-            //        UserID = r.SchemaLogin,
-            //        Password = r.SchemaPassword,
-            //        MultipleActiveResultSets = true,
-            //    };
-
-            //    var entityBuilder = new EntityConnectionStringBuilder
-            //    {
-            //        Provider = "System.Data.SqlClient",
-            //        ProviderConnectionString = sqlBuilder.ToString(),
-            //        Metadata = r.Metadata,
-            //    };
-
-            //    DbConnection con = new EntityConnection(entityBuilder.ToString());
-
-            //    var context = (DC)Activator.CreateInstance(typeof(DC), con);
-
-            //    return context;
-            //}
+          
 
             var dc = new DC();
             return dc;
@@ -481,34 +447,94 @@ namespace Framework.Common
 
         public IQueryable<T> Filter(FilterCondition filterCondition, out int total)
         {
-            
-            Query<T> query = Query<T>.Create(c => (1 == 1));
+          var query =  dc.Set<T>().AsQueryable();
+            total = 0;
             foreach (var searchCondition in filterCondition.SearchCondition)
             {
-                query = query.And(Query<T>.Create(searchCondition.FieldName, searchCondition.OperationType, searchCondition.Value));
+                string operation = string.Empty;
+                switch (searchCondition.OperationType)
+                {
+                    case OperationType.EqualTo:
+                        operation = searchCondition.FieldName + " = @0";
+                        break;
+                    case OperationType.NotEqualTo:
+                        operation = searchCondition.FieldName + " != @0";
+                        break;
+                    case OperationType.GreaterThan:
+                        operation = searchCondition.FieldName + " <= @0";
+                        break;
+                    case OperationType.GreaterThanEqualTo:
+                        operation = searchCondition.FieldName + " >= @0";
+                        break;
+                    case OperationType.LessThan:
+                        operation = searchCondition.FieldName + " < @0";
+                        break;
+                    case OperationType.LessThanEqualTo:
+                        operation = searchCondition.FieldName + " <= @0";
+                        break;
+                    case OperationType.Contains:
+                        operation = searchCondition.FieldName + ".Contains(@0)";
+                        break;
+                    case OperationType.StartsWith:
+                        operation = searchCondition.FieldName + ".StartsWith(@0)";
+                        break;
+                    case OperationType.EndsWith:
+                        operation = searchCondition.FieldName + ".EndsWith(@0)";
+                        break;
+                    default:
+                        break;
+                }
+
+                query = query.Where(operation, searchCondition.Value);
             }
-            total = 0;
+
+            total = query.Count();
+            foreach (var sort in filterCondition.Orders)
+            {
+                if (sort.OrderDesc)
+                {
+                    query = query.OrderByPropertyDescending(sort.FieldName);
+                }
+                else
+                {
+                    query = query.OrderByProperty(sort.FieldName);
+                }
+            }
             if (filterCondition.Paging)
             {
-                total = query.Filter(dc.Set<T>()).Count();
-                var queryable = Get(query);
-                foreach (var order in filterCondition.Orders)
-                {
-                    if (order.OrderDesc)
-                    {
-                        queryable = queryable.OrderByProperty(order.FieldName);
-                    }
-                    else
-                    {
-                        queryable = queryable.OrderByPropertyDescending(order.FieldName);
-                    }
-
-                }
                 var skip = (filterCondition.PageIndex - 1) * filterCondition.PageSize;
-                return queryable.Skip(skip).Take(filterCondition.PageSize).AsNoTracking();
+                query = query.Skip(skip).Take(filterCondition.PageSize).AsNoTracking();
             }
 
-            return Get(query);
+            return query;
+            
+            //Query<T> query = Query<T>.Create(c => (1 == 1));
+            //foreach (var searchCondition in filterCondition.SearchCondition)
+            //{
+            //    query = query.And(Query<T>.Create(searchCondition.FieldName, searchCondition.OperationType, searchCondition.Value));
+            //}
+            //total = 0;
+            //if (filterCondition.Paging)
+            //{
+            //    total = query.Filter(dc.Set<T>()).Count();
+            //    var queryable = Get(query);
+            //    foreach (var order in filterCondition.Orders)
+            //    {
+            //        if (order.OrderDesc)
+            //        {
+            //            queryable = queryable.OrderByProperty(order.FieldName);
+            //        }
+            //        else
+            //        {
+            //            queryable = queryable.OrderByPropertyDescending(order.FieldName);
+            //        }
+
+            //    }
+            //    var skip = (filterCondition.PageIndex - 1) * filterCondition.PageSize;
+            //    return queryable.Skip(skip).Take(filterCondition.PageSize).AsNoTracking();
+            //}
+
+            //return Get(query);
         }
     }
 }

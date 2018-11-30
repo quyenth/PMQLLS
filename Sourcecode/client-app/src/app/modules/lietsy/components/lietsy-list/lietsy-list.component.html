@@ -1,0 +1,388 @@
+<div class="ibox ">
+  <div class="ibox-title">
+    <h5>LietSy</h5>
+    <div class="ibox-tools">
+
+    </div>
+  </div>
+
+  <div class="ibox-content inspinia-timeline">
+
+    <div class="row search-box">
+        <div class="col-sm-3">
+            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-3">
+            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
+      </div>
+            <div class="html5buttons col-sm-6">
+                <div class="html5buttons">
+                  <button class="btn btn-primary buttons-copy buttons-html5"  (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
+                  <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
+              </div>
+          </div>
+    </div>
+
+    <div class='tbl-div'>
+      <table class="table table-bordered table-hover" style="width:100%">
+        <thead>
+          <tr >
+            <th style="text-align: center; width: 20px;">
+              <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
+            </th>
+
+                           <th>Id</th>
+                          
+                           <th>ThuTu</th>
+                          
+                           <th>SoGoSo</th>
+                          
+                           <th>SoQuyen</th>
+                          
+                           <th>HoTen</th>
+                          
+                           <th>Ten</th>
+                          
+                           <th>TenKhac</th>
+                          
+                           <th>BiDanh</th>
+                          
+                           <th>GioiTinh</th>
+                          
+                           <th>NamSinh</th>
+                          
+                           <th>DanToc</th>
+                          
+                           <th>QuocTich</th>
+                          
+                           <th>QueThon</th>
+                          
+                           <th>QueXaId</th>
+                          
+                           <th>QueHuyenId</th>
+                          
+                           <th>QueTinhId</th>
+                          
+                           <th>TruQuanThon</th>
+                          
+                           <th>TruQuanXaId</th>
+                          
+                           <th>TruQuanHuyenId</th>
+                          
+                           <th>TruQuanTinhId</th>
+                          
+                           <th>DiaPhuongNhapNgu</th>
+                          
+                           <th>NgayNhapNgu</th>
+                          
+                           <th>NgayXuatNgu</th>
+                          
+                           <th>NgayTaiNgu</th>
+                          
+                           <th>NgayDiBCK</th>
+                          
+                           <th>DonViHuanLuyen</th>
+                          
+                           <th>DoanVien</th>
+                          
+                           <th>NgayVaoDoan</th>
+                          
+                           <th>DangVien</th>
+                          
+                           <th>NgayVaoDang</th>
+                          
+                           <th>KhenThuong</th>
+                          
+                           <th>NgayHiSinh</th>
+                          
+                           <th>HiSinhLyDoID</th>
+                          
+                           <th>HySinhLyDoChiTiet</th>
+                          
+                           <th>HySinhThoiKyId</th>
+                          
+                           <th>DoiTuongId</th>
+                          
+                           <th>HySinhMatTranId</th>
+                          
+                           <th>HySinhTranDanh</th>
+                          
+                           <th>HySinhDiaDiem</th>
+                          
+                           <th>HySinhXaId</th>
+                          
+                           <th>HySinhHuyenId</th>
+                          
+                           <th>HySinhTinhId</th>
+                          
+                           <th>MaiTangXaId</th>
+                          
+                           <th>MaiTangHuyenId</th>
+                          
+                           <th>MaiTangTinhId</th>
+                          
+                           <th>MaiTangBanDo</th>
+                          
+                           <th>MaiTangToaDo</th>
+                          
+                           <th>MaiTangDiemCaoId</th>
+                          
+                           <th>NghiaTrang</th>
+                          
+                           <th>ViTriMo</th>
+                          
+                           <th>QuyTap</th>
+                          
+                           <th>MaiTang</th>
+                          
+                           <th>MatThiHai</th>
+                          
+                           <th>MatTich</th>
+                          
+                           <th>NgayBaoTu</th>
+                          
+                           <th>GiayBaoTu</th>
+                          
+                           <th>ThanNhanCha</th>
+                          
+                           <th>ThanNhanMe</th>
+                          
+                           <th>ThanNhanVo</th>
+                          
+                           <th>ThanNhanCon</th>
+                          
+                           <th>ThanNhanKhac</th>
+                          
+                           <th>ThanNhanBaoTin</th>
+                          
+                           <th>ThanNhanDiaChi</th>
+                          
+                           <th>NgayCapBangTQGC</th>
+                          
+                           <th>SoBangTQGC</th>
+                          
+                           <th>DonViLuuTruId</th>
+                          
+                           <th>DonViQuanLyId</th>
+                          
+                           <th>HySinhDonVi</th>
+                          
+                           <th>DonVi_B_C_D</th>
+                          
+                           <th>DonVi_E</th>
+                          
+                           <th>DonVi_F</th>
+                          
+                           <th>DonVi_G</th>
+                          
+                           <th>HomThuDonVi</th>
+                          
+                           <th>HySinhCapBac</th>
+                          
+                           <th>HySinhChucVu</th>
+                          
+                           <th>GhiChu</th>
+                          
+                           <th>Active</th>
+                          
+                           <th>Created</th>
+                          
+                           <th>CreatdedBy</th>
+                          
+                           <th>Updated</th>
+                          
+                           <th>UpdatedBy</th>
+                          
+            <th style="width:60px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of list$" [ngClass]="{'selected':item.selected}">
+            <td style="text-align: center;">
+              <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
+            </td>
+
+                               <td>{{item.id}}</td>
+                          
+                               <td>{{item.thuTu}}</td>
+                          
+                               <td>{{item.soGoSo}}</td>
+                          
+                               <td>{{item.soQuyen}}</td>
+                          
+                               <td>{{item.hoTen}}</td>
+                          
+                               <td>{{item.ten}}</td>
+                          
+                               <td>{{item.tenKhac}}</td>
+                          
+                               <td>{{item.biDanh}}</td>
+                          
+                               <td>{{item.gioiTinh}}</td>
+                          
+                               <td>{{item.namSinh}}</td>
+                          
+                               <td>{{item.danToc}}</td>
+                          
+                               <td>{{item.quocTich}}</td>
+                          
+                               <td>{{item.queThon}}</td>
+                          
+                               <td>{{item.queXaId}}</td>
+                          
+                               <td>{{item.queHuyenId}}</td>
+                          
+                               <td>{{item.queTinhId}}</td>
+                          
+                               <td>{{item.truQuanThon}}</td>
+                          
+                               <td>{{item.truQuanXaId}}</td>
+                          
+                               <td>{{item.truQuanHuyenId}}</td>
+                          
+                               <td>{{item.truQuanTinhId}}</td>
+                          
+                               <td>{{item.diaPhuongNhapNgu}}</td>
+                          
+                               <td>{{item.ngayNhapNgu}}</td>
+                          
+                               <td>{{item.ngayXuatNgu}}</td>
+                          
+                               <td>{{item.ngayTaiNgu}}</td>
+                          
+                               <td>{{item.ngayDiBCK}}</td>
+                          
+                               <td>{{item.donViHuanLuyen}}</td>
+                          
+                               <td>{{item.doanVien}}</td>
+                          
+                               <td>{{item.ngayVaoDoan}}</td>
+                          
+                               <td>{{item.dangVien}}</td>
+                          
+                               <td>{{item.ngayVaoDang}}</td>
+                          
+                               <td>{{item.khenThuong}}</td>
+                          
+                               <td>{{item.ngayHiSinh}}</td>
+                          
+                               <td>{{item.hiSinhLyDoID}}</td>
+                          
+                               <td>{{item.hySinhLyDoChiTiet}}</td>
+                          
+                               <td>{{item.hySinhThoiKyId}}</td>
+                          
+                               <td>{{item.doiTuongId}}</td>
+                          
+                               <td>{{item.hySinhMatTranId}}</td>
+                          
+                               <td>{{item.hySinhTranDanh}}</td>
+                          
+                               <td>{{item.hySinhDiaDiem}}</td>
+                          
+                               <td>{{item.hySinhXaId}}</td>
+                          
+                               <td>{{item.hySinhHuyenId}}</td>
+                          
+                               <td>{{item.hySinhTinhId}}</td>
+                          
+                               <td>{{item.maiTangXaId}}</td>
+                          
+                               <td>{{item.maiTangHuyenId}}</td>
+                          
+                               <td>{{item.maiTangTinhId}}</td>
+                          
+                               <td>{{item.maiTangBanDo}}</td>
+                          
+                               <td>{{item.maiTangToaDo}}</td>
+                          
+                               <td>{{item.maiTangDiemCaoId}}</td>
+                          
+                               <td>{{item.nghiaTrang}}</td>
+                          
+                               <td>{{item.viTriMo}}</td>
+                          
+                               <td>{{item.quyTap}}</td>
+                          
+                               <td>{{item.maiTang}}</td>
+                          
+                               <td>{{item.matThiHai}}</td>
+                          
+                               <td>{{item.matTich}}</td>
+                          
+                               <td>{{item.ngayBaoTu}}</td>
+                          
+                               <td>{{item.giayBaoTu}}</td>
+                          
+                               <td>{{item.thanNhanCha}}</td>
+                          
+                               <td>{{item.thanNhanMe}}</td>
+                          
+                               <td>{{item.thanNhanVo}}</td>
+                          
+                               <td>{{item.thanNhanCon}}</td>
+                          
+                               <td>{{item.thanNhanKhac}}</td>
+                          
+                               <td>{{item.thanNhanBaoTin}}</td>
+                          
+                               <td>{{item.thanNhanDiaChi}}</td>
+                          
+                               <td>{{item.ngayCapBangTQGC}}</td>
+                          
+                               <td>{{item.soBangTQGC}}</td>
+                          
+                               <td>{{item.donViLuuTruId}}</td>
+                          
+                               <td>{{item.donViQuanLyId}}</td>
+                          
+                               <td>{{item.hySinhDonVi}}</td>
+                          
+                               <td>{{item.donVi_B_C_D}}</td>
+                          
+                               <td>{{item.donVi_E}}</td>
+                          
+                               <td>{{item.donVi_F}}</td>
+                          
+                               <td>{{item.donVi_G}}</td>
+                          
+                               <td>{{item.homThuDonVi}}</td>
+                          
+                               <td>{{item.hySinhCapBac}}</td>
+                          
+                               <td>{{item.hySinhChucVu}}</td>
+                          
+                               <td>{{item.ghiChu}}</td>
+                          
+                               <td>{{item.active}}</td>
+                          
+                               <td>{{item.created}}</td>
+                          
+                               <td>{{item.creatdedBy}}</td>
+                          
+                               <td>{{item.updated}}</td>
+                          
+                               <td>{{item.updatedBy}}</td>
+                                     
+
+            <td class="action-col">
+                <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
+                <a class="action-icon" (click)="onDeleteItem(item)"><i class="far fa-trash-alt"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+       <app-paging
+                [TotalCount]='totalCount'
+                [PageIndex]='currentPage'
+                [PageSize]='pageSize'
+                [DataLength]= 'list$.length'
+                (pageSizeChangge)="onPageSizeChange($event)"
+                (currentPageChangge)="goToPage($event)"></app-paging>
+    </div>
+
+  </div>
+</div>

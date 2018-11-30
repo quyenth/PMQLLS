@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace $config.NameSpace$
+{
+    public class $item.TableName$$config.Suffix$
+    {
+
+        $item.ColumnInfos:{it|
+            public $it.DataTypeForCode$ $it.ColumnName$ { get; set; }
+        };separator=""$ 
+    }
+}

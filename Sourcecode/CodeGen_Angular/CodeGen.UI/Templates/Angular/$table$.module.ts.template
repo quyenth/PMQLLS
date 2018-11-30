@@ -1,0 +1,23 @@
+﻿import { ConfirmDialogComponent } from './../../shared/component/confirm-dialog/confirm-dialog.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { ShareModule } from './../../shared/module/share-module.module';
+import { $item.TableName$ListComponent } from './components/$item.TableNameLowerCase$-list/$item.TableNameLowerCase$-list.component';
+import { $item.TableName$SaveComponent } from './components/$item.TableNameLowerCase$-save/$item.TableNameLowerCase$-save.component';
+
+
+
+
+@NgModule({
+  imports: [
+    CommonModule,
+    ShareModule
+    ],
+  entryComponents: [
+    $item.TableName$SaveComponent,
+    ConfirmDialogComponent
+  ],
+  declarations: [$item.TableName$ListComponent, $item.TableName$SaveComponent]
+})
+export class $item.TableName$Module { }

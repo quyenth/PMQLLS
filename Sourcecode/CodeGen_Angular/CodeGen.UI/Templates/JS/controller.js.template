@@ -1,0 +1,233 @@
+﻿(function () {
+
+    webApp.controller('$item.TableName$ManagerCtr', function (\$rootScope, \$scope, \$http, \$timeout) {
+		\$rootScope.title="$item.TableName$";
+        \$scope.dateTimeOptions = angular.extend({}, \$rootScope.dateTimeOptions, {});
+        \$scope.list = [];
+        function modelObject() {
+            return {
+                $item.ColumnInfos:{it|
+				$it.ColumnNameCamel$:"",
+				};separator=""$ 
+               
+            }
+        }
+        /* grid options*/
+        \$scope.paging = {
+            pageSize: 20,
+            pageIndex: 1
+        }
+		     
+		
+        //get list
+        \$scope.getList = function () {
+
+            \$http({
+                method: 'POST',
+				//Change:
+                url: utils.rootPath + '/$config.Module$/$item.TableName$/GetList',
+                data: \$scope.paging
+            }).then(function successCallback(respone) {
+                var list = angular.forEach(respone.data.list, function (item, index) {
+                    item.index = (\$scope.paging.pageIndex - 1) * \$scope.paging.pageSize + index + 1;
+                })
+
+                \$scope.list = list;
+                \$scope.paging = respone.data.paging;
+            }, function errorCallback(response) {
+
+            });
+
+        }
+
+
+        //function addNew
+        function addNew() {
+            model = new modelObject();
+            \$scope.model = model;
+			\$scope.modaltitle = "Add new item";
+            \$("#myModal").modal().on('shown.bs.modal', function () {
+                \$(".modal-body").scrollTop(0);
+            });
+        };
+
+        //function edit
+        function editItem(item) {
+			\$scope.modaltitle = "Update item";
+            \$http({
+                method: 'POST',
+				//Change:
+                url: utils.rootPath + '/$config.Module$/$item.TableName$/GetById',
+                data: { id: item.$item.PrimaryKeyCamel$ }
+            }).then(function successCallback(respone) {
+                \$scope.model = respone.data;
+                console.log(respone);
+                \$("#myModal").modal().on('shown.bs.modal', function () {
+					\$(".modal-body").scrollTop(0);
+				});
+            }, function errorCallback(response) {
+
+            });
+
+        };
+
+        \$scope.serializeDayones = function () {
+            return JSON.stringify(\$scope.list);
+        }
+
+
+
+
+        function init() {
+            \$scope.getList();
+
+        }
+
+        //submit
+        function deleteItem(item) {
+            utils.confirm({
+                callback: function () {
+                    // if record is not exist in the database
+
+                    // if record is exists in the database and set flag to execute deleting on the  server code
+                    \$http({
+                        method: 'POST',
+						//Change:
+                        url: utils.rootPath + '/$config.Module$/$item.TableName$/Delete',
+                        data: item
+                    }).then(function successCallback(respone) {
+                        \$.notify("Delete item successfully");
+                        \$scope.getList();
+                    }, function errorCallback(response) {
+
+                    });
+
+
+
+                    \$scope.\$apply();
+
+                }, msg: "Do you want to delete?"
+            });
+
+        }
+
+
+
+        //validate item before save
+        \$scope.validate = function (item) {
+            var result = true;
+       /*
+	        var checkRequiredFields = [
+            "classCode",
+            "location",
+            "startTime",
+            "endTime",
+            "description"
+            ]
+            item.errors = {};
+            utils.checkRequiredFields(item, checkRequiredFields)
+
+            if (item.startTime !== "" && item.endTime !== "") {
+                var diff = utils.diffDays(item.startTime, item.endTime);
+               
+            }
+
+		*/
+		
+            //check exist any value of error
+            for (var key in item.errors) {
+                if (Object.prototype.hasOwnProperty.call(item.errors, key)) {
+                    var val = item.errors[key];
+                    if (val !== "") {
+                        result = false;
+                        break;
+                    }
+                    // use val
+                }
+            }
+
+
+            return result;
+        }
+
+        function save(item) {
+
+            \$scope.\$watch('serializeDayones()', function (oldValue, newValue) {
+                if (oldValue !== newValue) {
+                    \$scope.validate(item);
+                }
+            }, true);
+            var isValid = \$scope.validate(item);
+            if (isValid) {
+                utils.confirm({
+                    msg: "Do you want to save?",
+                    callback: function () {
+                        //call to server to save dayone
+                        \$http({
+                            method: 'POST',
+							//Change:
+                            url: utils.rootPath + '/$config.Module$/$item.TableName$/Save',
+                            data: item
+                        }).then(function successCallback(respone) {
+                            if (respone.data.msgType === "Success") {
+                                \$("#myModal").modal("hide");
+                                \$.notify("Save data successfully!");
+                                \$scope.getList();
+
+                            }
+                        }, function errorCallback(response) {
+
+                        });
+                    }
+                })
+            }
+            else {
+                \$timeout(function () {
+                    var firstErrorElement = \$(".error").first();
+                    if (firstErrorElement.is("input")) {
+                        firstErrorElement.focus();
+                    }
+                    else {
+                        firstErrorElement.find("input").focus();
+                        firstErrorElement.find("textarea").focus();
+                    }
+                }, 500)
+            }
+
+        }
+
+		/*
+		function getCategories() {
+            \$http({
+                method: 'GET',
+                url: utils.rootPath + '/$config.Module$/ArticleCategory/GetAllCategories'
+            }).then(function successCallback(respone) {
+                var list = angular.forEach(respone.data, function (item, index) {
+                    item.id = item.categoryId,
+                        item.text = item.name
+                })
+
+                var treeDepartments = utils.buildTree(list, "categoryId", "parentId");;
+                \$scope.select2CategoryOptions = angular.extend({}, \$rootScope.select2Options, {
+                    data: treeDepartments,
+                    placeholder:"Select data"
+                });
+
+                \$timeout(function () { \$scope.\$apply(); });
+            }, function errorCallback(response) {
+
+            });
+        }
+
+		*/
+
+        \$scope.addNew = addNew;
+        \$scope.editItem = editItem;
+        \$scope.save = save;//save item insert, update
+        \$scope.delete = deleteItem;
+        \$scope.init = init;
+        //call load at first time
+        init();
+    })
+
+})();

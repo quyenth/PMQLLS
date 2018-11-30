@@ -1,0 +1,115 @@
+﻿<div class="fs-page-dependents-info" id="fs-page-depentdent-info">
+    <div class="form-group">
+  
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" style="width:40px;">#</th>
+                  $item.ColumnInfos:{it|
+                     <th scope="col">$it.ColumnName$</th>
+                  };separator=""$ 
+                  
+                    <th scope="col" style="width:60px;">
+                        <a href="javascript:void(0)" class="fs-td-btn-add" ng-click="addNew()" style="float:left" title="add new">
+                            <i class="glyphicon glyphicon-plus-sign"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in list">
+                    <td>{{paging.from + 1 + \$index}}</td>
+                    $item.ColumnInfos:{it|
+                     <td scope="col">{{item.$it.ColumnNameCamel$}}</td>
+                    };separator=""$ 
+                  
+                    <td style="width:60px;">
+                        <a href="javascript:void(0)" style="margin:5px;margin-top:10px;color: #555555;" ng-click="editItem(item)">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0)" style="margin:5px;margin-top:10px;color: #555555;"  ng-click="delete(item)">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <ul ng-show="paging.totalCount>paging.pageSize" uib-pagination boundary-links="true" total-items="paging.totalCount" ng-model="paging.pageIndex" items-per-page="paging.pageSize" ng-change="getList()" max-size="10" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+       
+    </div>
+   
+</div>
+
+
+
+
+<!--Model dialog-->
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">{{modaltitle}}</h3>
+            </div>
+            <div class="modal-body" style="overflow-y: scroll;height:{{modalbodyHeight}}">
+              
+                    <form>
+					$item.ColumnInfos:{it|
+					$if(it.isInputText)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <input type="text" ng-model="model.$it.ColumnNameCamel$"  uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "form-control {{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true" maxlength="$it.MaxLength$" />
+                    </div>
+					$endif$
+          $if(it.isTextArea)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <textarea style="height:90px" ng-model="model.$it.ColumnNameCamel$"  uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "form-control {{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true" maxlength="$it.MaxLength$" />
+                    </div>
+					$endif$
+           $if(it.isHtmlEditor)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                           <textarea ckeditor="ckeditorOption.full" ng-model="model.$it.ColumnNameCamel$"  uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "form-control {{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true"/>
+                    </div>
+					$endif$
+          
+					$if(it.IsBoolean)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <input type="checkbox" ng-model="model.$it.ColumnNameCamel$"  uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "form-control {{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true"/>
+                    </div>
+					$endif$
+					$if(it.IsDateTime)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <datetime-picker dateoptions="dateOptions" ng-model="model.$it.ColumnNameCamel$" uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "{{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true"></datetime-picker>
+                    </div>
+					$endif$
+					$if(it.IsNumber)$
+					<div class="form-group">
+                            <label>$it.ColumnName$</label>
+                            <input type="text" numeric-only ng-model="model.$it.ColumnNameCamel$" uib-tooltip="{{model.errors['$it.ColumnNameCamel$']}}" class= "form-control {{model.errors['$it.ColumnNameCamel$']| messageClass}}" tooltip-append-to-body="true"></input>
+                    </div>
+					$endif$
+					};separator=""$ 
+                       
+                       
+               <!--<ckupload ng-model="model.image"></ckupload>-->
+                <!--<div uib-tooltip="{{model.errors['categoryId']}}" class="elementvalidate {{model.errors['categoryId']| messageClass}}" tooltip-append-to-body="true">
+                            <input type="text" ui-select2="select2CategoryOptions" ng-model="model.categoryId" class="form-control" />
+                        </div>-->
+                    </form>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="save(model)">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

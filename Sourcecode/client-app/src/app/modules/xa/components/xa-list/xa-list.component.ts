@@ -36,24 +36,25 @@ export class XaListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
       if ( data && data.action === ActionType.SUBMIT) {
-        this.onSearch();
+        debugger;
+        console.log(this.currentPage);
+        this.onSearch(this.currentPage);
       }
     });
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-    this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, '')];
+   
     this.filterCondition.Orders = [ ];
-    this.xaService.search(this.filterCondition).subscribe((res: HttpResult) => {
-      this.list$ = res.data.list;
-      this.totalCount = res.data.total;
-    });
+    this.onSearch();
   }
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, val)];
+      this.filterCondition.SearchCondition = [ 
+	      new SearchInfo('Tenxa', OperationType.Contains, val)
+	  ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       this.xaService.search(this.filterCondition).subscribe((res: HttpResult) => {
@@ -104,7 +105,7 @@ export class XaListComponent implements OnInit, OnDestroy {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.xaService.delete(item).subscribe((res) => {
-            this.onSearch();
+            this.onSearch(this.currentPage);
         });
       }
     });

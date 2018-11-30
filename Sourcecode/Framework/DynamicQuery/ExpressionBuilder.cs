@@ -79,15 +79,29 @@ namespace Framework.DynamicQuery
 
         private static Expression CallMethodOnString(Expression instance, string methodName, Expression parameter)
         {
-            if (methodName=="Contains")
+            if (methodName == "Contains")
             {
-                Expression indexOf = Expression.Call(instance, "IndexOf", null,
-                        parameter,
-                        Expression.Constant(StringComparison.OrdinalIgnoreCase));
+                //Expression indexOf = Expression.Call(instance, "IndexOf", null,
+                //        parameter,
+                //        Expression.Constant(StringComparison.OrdinalIgnoreCase));
 
-                Expression condition = Expression.NotEqual(indexOf, Expression.Constant(-1));
+                //Expression condition = Expression.NotEqual(indexOf, Expression.Constant(-1));
 
-                return condition;
+                //return condition;
+
+
+
+                var m = typeof(string).GetMethod("IndexOf",
+                new[] { typeof(string), typeof(StringComparison) });
+
+                var left = Expression.Parameter(typeof(string), "left");
+                var right = Expression.Parameter(typeof(string), "right");
+
+                Expression[] parms = new Expression[] { right,
+                Expression.Constant(StringComparison.OrdinalIgnoreCase) };
+
+                var indexOf = Expression.Call(left, m, parms);
+
             }
             var method = typeof(string).GetMethods().Single(m => m.Name == methodName && m.GetParameters().Count() == 1);
             return Expression.Call(instance, method, parameter);

@@ -1,0 +1,65 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Framework.Common;
+using ESchool.Data.Services;
+using ESchool.Data.Common;
+namespace $config.ControllerNameSpace$
+{
+    public class $item.TableName$Controller : Controller
+    {
+        public I$item.TableName$Service $item.TableName$Service { get; set; }
+        //
+        // GET: /$item.TableName$/
+        
+        public ActionResult GetList(PagingInfo paging)
+        {
+            //xu ly get du lieu
+            List<$item.TableName$> list = $item.TableName$Service.All().AsQueryable().OrderBy(c => c.$item.PrimaryKey$).Paging(paging).ToList();
+            //return data
+            return new Framework.Common.JsonCamelCaseResult(new { list = list, paging = paging }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Save($item.TableName$ item)
+        {
+		
+            //insert if id = 0
+            if (item.$item.PrimaryKey$ == 0)
+            {
+                $item.TableName$Service.Add(item);
+            }
+            else
+            {//update
+				
+                $item.TableName$Service.Update(item);
+            }
+			 var result = new RestResult() { Result = RestStatus.OK.GetHashCode() };
+            return new JsonCamelCaseResult(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Delete($item.TableName$ item)
+        {
+            $item.TableName$Service.Delete(c=>c.$item.PrimaryKey$ == item.$item.PrimaryKey$);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+		[HttpPost]
+        public ActionResult Delete(List<$item.TableName$> items)
+        {
+            var ids = items.Select(item => item.$item.PrimaryKey$).ToList();
+            $item.TableName$Service.Delete(c =>  ids.Contains(c.$item.PrimaryKey$));
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult GetById(int id)
+        {
+            var result = $item.TableName$Service.Find(id);
+            return new Framework.Common.JsonCamelCaseResult(result);
+        }
+    }
+}

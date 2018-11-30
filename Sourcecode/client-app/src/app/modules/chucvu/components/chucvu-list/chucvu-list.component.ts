@@ -1,7 +1,7 @@
-import { ChucVuSaveComponent } from './../chucvu-save/chucvu-save.component';
 import { ModalType } from './../../../../shared/commons/modal-type';
+import { ChucVuSaveComponent } from './../chucvu-save/chucvu-save.component';
 import { HttpResult } from './../../../../shared/commons/http-result';
-import { ChucVuService } from './../../../../https/chucVu.service';
+import { ChucVuService } from './../../chucvu.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { ModalService } from 'src/app/shared/services/modal.Service';
@@ -42,18 +42,17 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-    this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, '')];
+   
     this.filterCondition.Orders = [ ];
-    this.chucVuService.search(this.filterCondition).subscribe((res: HttpResult) => {
-      this.list$ = res.data.list;
-      this.totalCount = res.data.total;
-    });
+    this.onSearch();
   }
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ new SearchInfo('Text', OperationType.Contains, val)];
+      this.filterCondition.SearchCondition = [ 
+		//new SearchInfo('Text', OperationType.Contains, val)
+	  ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       this.chucVuService.search(this.filterCondition).subscribe((res: HttpResult) => {

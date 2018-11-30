@@ -1,0 +1,16 @@
+﻿export class $item.TableName$Model {
+	$item.ColumnInfos:{it|
+		$if(it.IsString)$
+		 $it.ColumnNameCamel$: string;
+		$endif$
+		$if(it.IsNumber)$
+		 $it.ColumnNameCamel$: number;
+		$endif$
+		$if(it.IsBoolean)$
+		 $it.ColumnNameCamel$: boolean;
+		$endif$
+		$if(it.IsDateTime)$
+		 $it.ColumnNameCamel$: Date;
+		$endif$
+	 };separator=""$
+}

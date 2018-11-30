@@ -1,0 +1,16 @@
+﻿using Framework.Common;
+//using Onboard.Data.Db;
+//using Onboard.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace $config.NameSpace$
+{
+    public interface I$item.TableName$Service : IBaseService<$item.TableName$, OnboardEntities>
+    {
+        
+    }
+}
