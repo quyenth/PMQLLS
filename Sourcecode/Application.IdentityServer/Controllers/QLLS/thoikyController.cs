@@ -136,6 +136,23 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// check name is unique
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task< ApiResult> CheckNameIsUnique(int id, string name)
+        {
+            var result = thoiKyService.CheckNameIsUnique(id, name);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
+
 
         
     }

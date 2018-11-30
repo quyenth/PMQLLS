@@ -17,7 +17,7 @@ namespace Application.IdentityServer.Controllers.QLLS
     [Route("api/Chucvu/[action]")]
     [ApiExplorerSettings(IgnoreApi = false)]
 
-    [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
     public class ChucvuController : Controller
     {
         private IChucVuService chucVuService;

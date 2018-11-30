@@ -5,7 +5,7 @@ import { AppRoutingModule } from './modules/app-routing/app-routing.module';
 import { ResponseInterceptor } from './core/interceptors/ResponseInterceptor';
 import { AuthService } from './shared/services/auth.Service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -24,7 +24,7 @@ import { ComponentLoaderFactory } from 'ngx-bootstrap/loader';
 import { LoginModule } from './modules/login/login.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ConfirmationDialogService } from './shared/services/confirmDialog.service';
-import { RouterModule } from '@angular/router';
+import { ThoiKyModule } from './modules/thoiky/thoiky.module';
 
 
 @NgModule({
@@ -49,6 +49,7 @@ import { RouterModule } from '@angular/router';
     LoginModule,
     AppRoutingModule,
     NgxSpinnerModule,
+    ThoiKyModule
   ],
   providers: [
     AuthService

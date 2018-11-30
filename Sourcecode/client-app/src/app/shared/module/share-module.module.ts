@@ -9,7 +9,15 @@ import { ConfirmDialogComponent } from '../component/confirm-dialog/confirm-dial
 import { PagingComponent } from '../component/paging/paging.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
+
+export function getDatepickerConfig(): BsDatepickerConfig {
+  return Object.assign(new BsDatepickerConfig(), {
+    dateInputFormat: 'DD/MM/YYYY',
+    containerClass: 'theme-green'
+  });
+}
 
 @NgModule({
   imports: [
@@ -21,12 +29,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PaginationModule.forRoot(),
     NgxSpinnerModule,
     ToastrModule.forRoot({progressBar : true, closeButton : true}),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot()
   ],
   declarations: [ConfirmDialogComponent, PagingComponent],
   exports : [
     DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule ,
-    PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule , BrowserAnimationsModule
+    PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule , BrowserAnimationsModule , BsDatepickerModule
   ]
 })
 export class ShareModule { }

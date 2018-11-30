@@ -43,4 +43,10 @@ export class ThoiKyService extends BaseService {
     const url = this.BaseUrl + '/api/thoiKy/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+
+  checkNameIsUnique (id: number, name: string)  {
+    const params = new HttpParams().set('id', id.toString()).set('name', name);
+    const url = this.BaseUrl + '/api/thoiky/checkNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
 }

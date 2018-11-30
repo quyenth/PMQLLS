@@ -13,9 +13,10 @@ import { ActionType } from 'src/app/shared/commons/action-type';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
+import { OrderInfo } from 'src/app/shared/models/order-info';
 
 @Component({
-  selector: 'app-thoiKy-list',
+  selector: 'app-thoi-ky-list',
   templateUrl: './thoiky-list.component.html'
 })
 export class ThoiKyListComponent implements OnInit, OnDestroy {
@@ -29,6 +30,8 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
   subscription: Subscription;
+  orderInfo: OrderInfo = new OrderInfo('', true);
+
   checkall = false;
   constructor(private thoiKyService: ThoiKyService, private modalService: ModalService,
       private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
@@ -42,7 +45,8 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
+    this.filterCondition.SearchCondition = [ new SearchInfo('name', OperationType.Contains, '')];
+
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
@@ -50,11 +54,14 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-		//new SearchInfo('Text', OperationType.Contains, val)
-	  ];
       this.filterCondition.PageIndex = pageIndex;
+      this.filterCondition.SearchCondition = [ new SearchInfo('name', OperationType.Contains, val)];
       this.currentPage = pageIndex;
+      if (this.orderInfo.FieldName) {
+        this.filterCondition.Orders = [{...this.orderInfo}];
+       } else {
+        this.filterCondition.Orders = [];
+      }
       this.thoiKyService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
@@ -99,7 +106,7 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.thoiKyService.delete(item).subscribe((res) => {
@@ -129,6 +136,15 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
 
   }
 
+  reSort(text: string ) {
+    if ( this.orderInfo.FieldName === text) {
+      this.orderInfo.OrderDesc = !this.orderInfo.OrderDesc;
+    } else {
+      this.orderInfo.FieldName = text;
+      this.orderInfo.OrderDesc = false;
+    }
+    this.onSearch();
+  }
   onEnter() {
     this.onSearch();
   }

@@ -7,6 +7,7 @@ import { TinhListComponent } from './../tinh/components/tinh-list/tinh-list.comp
 import { LoginPageComponent } from './../login/components/login-page/login-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ThoiKyListComponent } from '../thoiky/components/thoiky-list/thoiky-list.component';
 
 const routes: Routes = [
   { path: '', component: ChucVuListComponent },
@@ -15,8 +16,8 @@ const routes: Routes = [
   { path: 'capbac', component: CapbacListComponent },
   { path: 'xa', component: XaListComponent },
   { path: 'tinh', component: TinhListComponent },
+  { path: 'thoiky', component: ThoiKyListComponent },
   { path: '**', component: PageNotFoundComponent }
-
 ];
 
 @NgModule({

@@ -5,6 +5,6 @@ namespace Application.Domain.Services
 {
     public interface IThoiKyService : IBaseService<ThoiKy, ApplicationContext>
     {
-        
+        bool CheckNameIsUnique(int id, string name);
     }
 }
