@@ -18,20 +18,22 @@ import { OrderInfo } from 'src/app/shared/models/order-info';
 
 
 @Component({
-  selector: 'app-loaiDoiTuong-list',
+  selector: 'app-loai-doi-tuong-list',
   templateUrl: './loaidoituong-list.component.html'
 })
 export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild('SearchName') searchInput: ElementRef ;
+  @ViewChild('SearchName') searchName: ElementRef ;
+  @ViewChild('SearchMa') searchMa: ElementRef ;
+
   currentPage = 1;
   pageSize = 2;
 
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
-  orderInfo: OrderInfo;
+  orderInfo: OrderInfo = new OrderInfo('', true);
 
   subscription: Subscription;
   checkall = false;
@@ -47,19 +49,27 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
+
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
-      const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-		//new SearchInfo('Text', OperationType.Contains, val)
-	  ];
+      const nameVal = this.searchName.nativeElement.value;
+      const maVal = this.searchMa.nativeElement.value;
+
+      this.filterCondition.SearchCondition = [
+        new SearchInfo('Name', OperationType.Contains, nameVal),
+        new SearchInfo('Code', OperationType.Contains, maVal)
+    ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
+      if (this.orderInfo.FieldName) {
+        this.filterCondition.Orders = [{...this.orderInfo}];
+       } else {
+        this.filterCondition.Orders = [];
+      }
       this.loaiDoiTuongService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
@@ -104,11 +114,11 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.loaiDoiTuongService.delete(item).subscribe((res) => {
-		    this.toastr.success('Xóa thành công!');
+          this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
@@ -128,7 +138,7 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.loaiDoiTuongService.delectList(listSelected).subscribe((res) => {
-			   this.toastr.success('Xóa thành công!');
+            this.toastr.success('Xóa thành công!');
               this.onSearch();
           });
       }
@@ -139,7 +149,7 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
   onEnter() {
     this.onSearch();
   }
-  
+
   reSort(text: string ) {
     console.log(text);
     if ( this.orderInfo.FieldName === text) {
@@ -150,7 +160,7 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
     }
     this.onSearch();
   }
-  
+
   getSelectedItems() {
     return this.list$.filter(c => c.selected === true);
   }

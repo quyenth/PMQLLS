@@ -43,4 +43,14 @@ export class DiemCaoService extends BaseService {
     const url = this.BaseUrl + '/api/diemCao/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+  checkNameIsUnique (id: number, name: string)  {
+    const params = new HttpParams().set('id', id.toString()).set('name', name);
+    const url = this.BaseUrl + '/api/diemCao/checkNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
+  checkCodeIsUnique (id: number, code: string)  {
+    const params = new HttpParams().set('id', id.toString()).set('code', code);
+    const url = this.BaseUrl + '/api/diemCao/CheckCodeIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
 }

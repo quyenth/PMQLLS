@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-diemCao-save',
+  selector: 'app-diem-cao-save',
   templateUrl: './diemcao-save.component.html'
 })
 export class DiemCaoSaveComponent implements OnInit , OnDestroy {
@@ -24,18 +24,17 @@ export class DiemCaoSaveComponent implements OnInit , OnDestroy {
   isUpdate: boolean;
   data: DiemCaoModel = new DiemCaoModel();
   myForm = this.fb.group({
-   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
 
-   	    diemCaoId: [''],
-         
-   	    ma: [''],
-         
-   	    ten: [''],
-         
-   	    diaChi: [''],
-         
-   	    note: [''],
-         
+        diemCaoId: [''],
+
+        ma: ['', [Validators.required, Validators.maxLength(30)], this.validateCodeUnique.bind(this)],
+
+        ten: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)],
+
+        diaChi: ['' , [Validators.required, Validators.maxLength(100)]],
+
+        note: ['', [ Validators.maxLength(500)]],
+
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
@@ -53,29 +52,27 @@ export class DiemCaoSaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
-	  this.isUpdate = true;
+      this.isUpdate = true;
       this.diemCaoService.getById(this.data.diemCaoId).subscribe((res) => {
 
-       	    this.myForm.patchValue({'diemCaoId': res.data.diemCaoId});
-             
-       	    this.myForm.patchValue({'ma': res.data.ma});
-             
-       	    this.myForm.patchValue({'ten': res.data.ten});
-             
-       	    this.myForm.patchValue({'diaChi': res.data.diaChi});
-             
-       	    this.myForm.patchValue({'note': res.data.note});
-             
-	  
+            this.myForm.patchValue({'diemCaoId': res.data.diemCaoId});
+
+            this.myForm.patchValue({'ma': res.data.ma});
+
+            this.myForm.patchValue({'ten': res.data.ten});
+
+            this.myForm.patchValue({'diaChi': res.data.diaChi});
+
+            this.myForm.patchValue({'note': res.data.note});
+
       });
+    }	else {
+    this.myForm.patchValue({'diemCaoId': data.id});
     }
-	else{
-		this.myForm.patchValue({'diemCaoId': data.id});
-	}
   }
 
   onSubmit() {
-    
+
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -94,12 +91,9 @@ export class DiemCaoSaveComponent implements OnInit , OnDestroy {
   submitData() {
     this.spinner.show();
     this.submited = true;
-    const submitData = new DiemCaoModel();
-    //submitData.diemCaoId = this.data.diemCaoId;
-    //submitData.text = this.myForm.value.name.trim();
     this.diemCaoService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
-	  this.toastr.success('Lưu thành công!');
+      this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {
@@ -117,6 +111,37 @@ export class DiemCaoSaveComponent implements OnInit , OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  
-  
+  validateNameUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.diemCaoService.checkNameIsUnique(this.data.diemCaoId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isNameDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+  validateCodeUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.diemCaoService.checkCodeIsUnique(this.data.diemCaoId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isCodeDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+
 }

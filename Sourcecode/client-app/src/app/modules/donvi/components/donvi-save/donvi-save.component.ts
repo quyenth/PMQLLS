@@ -10,6 +10,8 @@ import { DonViService } from './../../donvi.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-donVi-save',
@@ -19,6 +21,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
   subscription: Subscription;
   submited: boolean;
+  isUpdate: boolean;
   data: DonViModel = new DonViModel();
   myForm = this.fb.group({
    //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
@@ -63,7 +66,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private donViService: DonViService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.donViId = data.id;
       this.getDataByID(data);
@@ -76,6 +79,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
+	  this.isUpdate = true;
       this.donViService.getById(this.data.donViId).subscribe((res) => {
 
        	    this.myForm.patchValue({'donViId': res.data.donViId});
@@ -147,6 +151,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
     //submitData.text = this.myForm.value.name.trim();
     this.donViService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
+	  this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {

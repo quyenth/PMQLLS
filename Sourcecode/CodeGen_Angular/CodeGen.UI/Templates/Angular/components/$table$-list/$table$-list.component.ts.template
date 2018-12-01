@@ -31,7 +31,7 @@ export class $item.TableName$ListComponent implements OnInit, OnDestroy {
   list\$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
-  orderInfo: OrderInfo;
+  orderInfo: OrderInfo = new OrderInfo('', true);
 
   subscription: Subscription;
   checkall = false;
@@ -60,6 +60,11 @@ export class $item.TableName$ListComponent implements OnInit, OnDestroy {
 	  ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
+	  if (this.orderInfo.FieldName) {
+        this.filterCondition.Orders = [{...this.orderInfo}];
+       } else {
+        this.filterCondition.Orders = [];
+      }
       this.$item.TableNameCamel$Service.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list\$ = res.data.list;

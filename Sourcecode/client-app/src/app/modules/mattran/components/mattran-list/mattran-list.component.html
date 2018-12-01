@@ -39,7 +39,7 @@
             </th>
 
 
-                           <th class="no-sort">Mã</th>
+                           <th [ngClass]="{'sorting': orderInfo.FieldName != 'Ma', 'sorting_desc': orderInfo.FieldName == 'Ma' && orderInfo.OrderDesc , 'sorting_asc': orderInfo.FieldName == 'Ma'  && !orderInfo.OrderDesc}" (click)="reSort('Ma')">Mã</th>
 
                            <th class="no-sort">Thời gian</th>
 
@@ -47,7 +47,7 @@
 
                            <th class="no-sort">Ghi chú</th>
 
-            <th style="width:60px;"></th>
+            <th style="width:60px;" class="no-sort"></th>
           </tr>
         </thead>
         <tbody>

@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-loaiDoiTuong-save',
+  selector: 'app-loai-doi-tuong-save',
   templateUrl: './loaidoituong-save.component.html'
 })
 export class LoaiDoiTuongSaveComponent implements OnInit , OnDestroy {
@@ -24,14 +24,13 @@ export class LoaiDoiTuongSaveComponent implements OnInit , OnDestroy {
   isUpdate: boolean;
   data: LoaiDoiTuongModel = new LoaiDoiTuongModel();
   myForm = this.fb.group({
-   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
 
-   	    id: [''],
-         
-   	    code: [''],
-         
-   	    name: [''],
-         
+        id: [''],
+
+        code: ['', [Validators.required, Validators.maxLength(30)] , this.validateCodeUnique.bind(this)],
+
+        name: ['', [Validators.required, Validators.maxLength(100)] , this.validateNameUnique.bind(this)],
+
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
@@ -49,25 +48,24 @@ export class LoaiDoiTuongSaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
-	  this.isUpdate = true;
+    this.isUpdate = true;
       this.loaiDoiTuongService.getById(this.data.id).subscribe((res) => {
 
-       	    this.myForm.patchValue({'id': res.data.id});
-             
-       	    this.myForm.patchValue({'code': res.data.code});
-             
-       	    this.myForm.patchValue({'name': res.data.name});
-             
-	  
+            this.myForm.patchValue({'id': res.data.id});
+
+            this.myForm.patchValue({'code': res.data.code});
+
+            this.myForm.patchValue({'name': res.data.name});
+
+
       });
+    } 	else  {
+      this.myForm.patchValue({'id': data.id});
     }
-	else{
-		this.myForm.patchValue({'id': data.id});
-	}
   }
 
   onSubmit() {
-    
+
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -86,12 +84,9 @@ export class LoaiDoiTuongSaveComponent implements OnInit , OnDestroy {
   submitData() {
     this.spinner.show();
     this.submited = true;
-    const submitData = new LoaiDoiTuongModel();
-    //submitData.id = this.data.id;
-    //submitData.text = this.myForm.value.name.trim();
     this.loaiDoiTuongService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
-	  this.toastr.success('Lưu thành công!');
+      this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {
@@ -109,6 +104,37 @@ export class LoaiDoiTuongSaveComponent implements OnInit , OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  
-  
+  validateNameUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.loaiDoiTuongService.checkNameIsUnique(this.data.id, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isNameDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+  validateCodeUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.loaiDoiTuongService.checkCodeIsUnique(this.data.id, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isCodeDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+
 }

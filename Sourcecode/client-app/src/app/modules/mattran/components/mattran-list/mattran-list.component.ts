@@ -32,7 +32,7 @@ export class MatTranListComponent implements OnInit, OnDestroy {
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
-  orderInfo: OrderInfo;
+  orderInfo: OrderInfo = new OrderInfo('', true);
   subscription: Subscription;
   checkall = false;
   constructor(private matTranService: MatTranService, private modalService: ModalService,
@@ -66,6 +66,11 @@ export class MatTranListComponent implements OnInit, OnDestroy {
       ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
+      if (this.orderInfo.FieldName) {
+        this.filterCondition.Orders = [{...this.orderInfo}];
+       } else {
+        this.filterCondition.Orders = [];
+      }
       this.matTranService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;

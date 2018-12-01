@@ -29,7 +29,7 @@ export class DoiTuongListComponent implements OnInit, OnDestroy {
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
-  orderInfo: OrderInfo;
+  orderInfo: OrderInfo = new OrderInfo('', true);
   subscription: Subscription;
   checkall = false;
   constructor(private doiTuongService: DoiTuongService, private modalService: ModalService,
@@ -55,6 +55,11 @@ export class DoiTuongListComponent implements OnInit, OnDestroy {
       this.filterCondition.SearchCondition = [ new SearchInfo('Name', OperationType.Contains, val) ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
+      if (this.orderInfo.FieldName) {
+        this.filterCondition.Orders = [{...this.orderInfo}];
+       } else {
+        this.filterCondition.Orders = [];
+      }
       this.doiTuongService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;

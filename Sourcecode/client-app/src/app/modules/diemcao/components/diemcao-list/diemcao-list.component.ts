@@ -18,20 +18,23 @@ import { OrderInfo } from 'src/app/shared/models/order-info';
 
 
 @Component({
-  selector: 'app-diemCao-list',
+  selector: 'app-diem-cao-list',
   templateUrl: './diemcao-list.component.html'
 })
 export class DiemCaoListComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild('SearchName') searchInput: ElementRef ;
+  @ViewChild('SearchMa') searchMa: ElementRef ;
+  @ViewChild('SearchTen') searchTen: ElementRef ;
+  @ViewChild('SearchDiachi') searchDiachi: ElementRef ;
+
   currentPage = 1;
   pageSize = 2;
 
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
-  orderInfo: OrderInfo;
+  orderInfo: OrderInfo = new OrderInfo('', true);
 
   subscription: Subscription;
   checkall = false;
@@ -47,19 +50,29 @@ export class DiemCaoListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
+    this.filterCondition.SearchCondition = [];
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
-      const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-		//new SearchInfo('Text', OperationType.Contains, val)
-	  ];
+      const maVal = this.searchMa.nativeElement.value;
+      const tenVal = this.searchTen.nativeElement.value;
+      const diaChiVal = this.searchDiachi.nativeElement.value;
+
+      this.filterCondition.SearchCondition = [
+          new SearchInfo('Ma', OperationType.Contains, maVal),
+          new SearchInfo('Ten', OperationType.Contains, tenVal),
+          new SearchInfo('DiaChi', OperationType.Contains, diaChiVal)
+    ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
+      if (this.orderInfo.FieldName) {
+        this.filterCondition.Orders = [{...this.orderInfo}];
+       } else {
+        this.filterCondition.Orders = [];
+      }
       this.diemCaoService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
@@ -104,11 +117,11 @@ export class DiemCaoListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.diemCaoService.delete(item).subscribe((res) => {
-		    this.toastr.success('Xóa thành công!');
+          this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
@@ -128,7 +141,7 @@ export class DiemCaoListComponent implements OnInit, OnDestroy {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.diemCaoService.delectList(listSelected).subscribe((res) => {
-			   this.toastr.success('Xóa thành công!');
+            this.toastr.success('Xóa thành công!');
               this.onSearch();
           });
       }
@@ -139,9 +152,8 @@ export class DiemCaoListComponent implements OnInit, OnDestroy {
   onEnter() {
     this.onSearch();
   }
-  
+
   reSort(text: string ) {
-    console.log(text);
     if ( this.orderInfo.FieldName === text) {
       this.orderInfo.OrderDesc = !this.orderInfo.OrderDesc;
     } else {
@@ -150,7 +162,7 @@ export class DiemCaoListComponent implements OnInit, OnDestroy {
     }
     this.onSearch();
   }
-  
+
   getSelectedItems() {
     return this.list$.filter(c => c.selected === true);
   }

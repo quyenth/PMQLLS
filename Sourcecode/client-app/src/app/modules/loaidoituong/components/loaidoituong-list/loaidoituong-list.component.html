@@ -1,6 +1,6 @@
 <div class="ibox ">
   <div class="ibox-title">
-    <h5>LoaiDoiTuong</h5>
+    <h5>Loại đối tượng</h5>
     <div class="ibox-tools">
 
     </div>
@@ -9,10 +9,13 @@
   <div class="ibox-content inspinia-timeline">
 
     <div class="row search-box">
-        <div class="col-sm-3">
-            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <div class="col-sm-2">
+            <input placeholder="Mã" #SearchMa type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
+          <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
       </div>
             <div class="html5buttons col-sm-6">
@@ -31,12 +34,11 @@
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                           <th class='no-sort'>Id</th>
-                          
-                           <th class='no-sort'>Code</th>
-                          
-                           <th class='no-sort'>Name</th>
-                          
+
+                           <th [ngClass]="{'sorting': orderInfo.FieldName != 'Code', 'sorting_desc': orderInfo.FieldName == 'Code' && orderInfo.OrderDesc , 'sorting_asc': orderInfo.FieldName == 'Code'  && !orderInfo.OrderDesc}" (click)="reSort('Code')">Mã</th>
+
+                           <th [ngClass]="{'sorting': orderInfo.FieldName != 'name', 'sorting_desc': orderInfo.FieldName == 'name' && orderInfo.OrderDesc , 'sorting_asc': orderInfo.FieldName == 'name'  && !orderInfo.OrderDesc}" (click)="reSort('name')">Tên</th>
+
             <th style="width:60px;" class='no-sort'></th>
           </tr>
         </thead>
@@ -46,12 +48,11 @@
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
 
-                               <td>{{item.id}}</td>
-                          
+
                                <td>{{item.code}}</td>
-                          
+
                                <td>{{item.name}}</td>
-                                     
+
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>

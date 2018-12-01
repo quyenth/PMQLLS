@@ -10,6 +10,8 @@ import { ChucVuService } from './../../chucvu.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-chucVu-save',
@@ -19,6 +21,7 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
 
   subscription: Subscription;
   submited: boolean;
+  isUpdate: boolean;
   data: ChucVuModel = new ChucVuModel();
   myForm = this.fb.group({
    //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
@@ -33,7 +36,7 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private chucVuService: ChucVuService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.chucVuId = data.id;
       this.getDataByID(data);
@@ -46,6 +49,7 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
+	  this.isUpdate = true;
       this.chucVuService.getById(this.data.chucVuId).subscribe((res) => {
 
        	    this.myForm.patchValue({'chucVuId': res.data.chucVuId});
@@ -87,6 +91,7 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
     //submitData.text = this.myForm.value.name.trim();
     this.chucVuService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
+	  this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {

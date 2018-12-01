@@ -107,7 +107,7 @@ export class MatTranSaveComponent implements OnInit , OnDestroy {
         if (!control.value) {
           return of(null);
         }
-        return this.matTranService.checkNameIsUnique(this.data.id, control.value.trim())
+        return this.matTranService.checkCodeIsUnique(this.data.id, control.value.trim())
         .pipe(map((res) => {
              if (!res.data) {
                return {'isNameDuplicate' : true};
