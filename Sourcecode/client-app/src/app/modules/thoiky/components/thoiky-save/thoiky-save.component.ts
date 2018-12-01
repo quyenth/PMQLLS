@@ -10,6 +10,7 @@ import { ThoiKyService } from './../../thoiky.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-thoi-ky-save',
@@ -28,7 +29,7 @@ export class ThoiKySaveComponent implements OnInit , OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private thoiKyService: ThoiKyService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -76,6 +77,7 @@ export class ThoiKySaveComponent implements OnInit , OnDestroy {
      submitData.name = this.myForm.value.name.trim();
     this.thoiKyService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
+      this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {

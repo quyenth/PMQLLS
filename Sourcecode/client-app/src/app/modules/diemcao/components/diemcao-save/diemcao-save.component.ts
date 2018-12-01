@@ -10,6 +10,8 @@ import { DiemCaoService } from './../../diemcao.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-diemCao-save',
@@ -19,6 +21,7 @@ export class DiemCaoSaveComponent implements OnInit , OnDestroy {
 
   subscription: Subscription;
   submited: boolean;
+  isUpdate: boolean;
   data: DiemCaoModel = new DiemCaoModel();
   myForm = this.fb.group({
    //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
@@ -37,7 +40,7 @@ export class DiemCaoSaveComponent implements OnInit , OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private diemCaoService: DiemCaoService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.diemCaoId = data.id;
       this.getDataByID(data);
@@ -50,6 +53,7 @@ export class DiemCaoSaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
+	  this.isUpdate = true;
       this.diemCaoService.getById(this.data.diemCaoId).subscribe((res) => {
 
        	    this.myForm.patchValue({'diemCaoId': res.data.diemCaoId});
@@ -95,6 +99,7 @@ export class DiemCaoSaveComponent implements OnInit , OnDestroy {
     //submitData.text = this.myForm.value.name.trim();
     this.diemCaoService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
+	  this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {

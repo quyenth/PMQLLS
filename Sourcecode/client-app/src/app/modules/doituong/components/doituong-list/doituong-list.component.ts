@@ -13,6 +13,7 @@ import { ActionType } from 'src/app/shared/commons/action-type';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
+import { OrderInfo } from 'src/app/shared/models/order-info';
 
 @Component({
   selector: 'app-doi-tuong-list',
@@ -28,6 +29,7 @@ export class DoiTuongListComponent implements OnInit, OnDestroy {
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
+  orderInfo: OrderInfo;
   subscription: Subscription;
   checkall = false;
   constructor(private doiTuongService: DoiTuongService, private modalService: ModalService,
@@ -42,7 +44,7 @@ export class DoiTuongListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-
+    this.filterCondition.SearchCondition = [];
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
@@ -50,9 +52,7 @@ export class DoiTuongListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [
-    // new SearchInfo('Text', OperationType.Contains, val)
-    ];
+      this.filterCondition.SearchCondition = [ new SearchInfo('Name', OperationType.Contains, val) ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       this.doiTuongService.search(this.filterCondition).subscribe((res: HttpResult) => {
@@ -137,5 +137,15 @@ export class DoiTuongListComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+  reSort(text: string ) {
+    console.log(text);
+    if ( this.orderInfo.FieldName === text) {
+      this.orderInfo.OrderDesc = !this.orderInfo.OrderDesc;
+    } else {
+      this.orderInfo.FieldName = text;
+      this.orderInfo.OrderDesc = false;
+    }
+    this.onSearch();
   }
 }

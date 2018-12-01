@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { OrderInfo } from 'src/app/shared/models/order-info';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-thoi-ky-list',
@@ -34,7 +35,8 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
 
   checkall = false;
   constructor(private thoiKyService: ThoiKyService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService,
+      private toastr: ToastrService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
@@ -110,6 +112,7 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.thoiKyService.delete(item).subscribe((res) => {
+            this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
@@ -129,6 +132,7 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.thoiKyService.delectList(listSelected).subscribe((res) => {
+              this.toastr.success('Xóa thành công!');
               this.onSearch();
           });
       }

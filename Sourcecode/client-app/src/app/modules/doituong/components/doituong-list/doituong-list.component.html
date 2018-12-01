@@ -1,6 +1,6 @@
 <div class="ibox ">
   <div class="ibox-title">
-    <h5>DoiTuong</h5>
+    <h5>Đối tượng</h5>
     <div class="ibox-tools">
 
     </div>
@@ -24,18 +24,16 @@
     </div>
 
     <div class='tbl-div'>
-      <table class="table table-bordered table-hover" style="width:100%">
+      <table class="table table-bordered table-hover table-striped dataDiplayTable" style="width:100%">
         <thead>
           <tr >
-            <th style="text-align: center; width: 20px;">
+            <th style="text-align: center; width: 20px;" class="no-sort">
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                           <th>DoiTuongId</th>
-                          
-                           <th>Name</th>
-                          
-            <th style="width:60px;"></th>
+                           <th class="no-sort">Tên</th>
+
+            <th style="width:60px;" class="no-sort"></th>
           </tr>
         </thead>
         <tbody>
@@ -44,10 +42,9 @@
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
 
-                               <td>{{item.doiTuongId}}</td>
-                          
+
                                <td>{{item.name}}</td>
-                                     
+
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>

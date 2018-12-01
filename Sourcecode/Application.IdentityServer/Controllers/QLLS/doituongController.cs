@@ -135,8 +135,23 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = null
             };
         }
+        /// <summary>
+        /// CheckNameIsUnique
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckNameIsUnique(int id, string name)
+        {
+            var result = doiTuongService.CheckNameIsUnique(id, name);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
 
 
-        
     }
 }

@@ -10,28 +10,26 @@ import { DoiTuongService } from './../../doituong.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-doiTuong-save',
+  selector: 'app-doi-tuong-save',
   templateUrl: './doituong-save.component.html'
 })
 export class DoiTuongSaveComponent implements OnInit , OnDestroy {
 
   subscription: Subscription;
   submited: boolean;
+  isUpdate: boolean;
   data: DoiTuongModel = new DoiTuongModel();
   myForm = this.fb.group({
-   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
-
-   	    doiTuongId: [''],
-         
-   	    name: [''],
-         
+      doiTuongId: [''],
+      name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)],
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private doiTuongService: DoiTuongService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.doiTuongId = data.id;
       this.getDataByID(data);
@@ -44,22 +42,18 @@ export class DoiTuongSaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
+      this.isUpdate = true;
       this.doiTuongService.getById(this.data.doiTuongId).subscribe((res) => {
-
-       	    this.myForm.patchValue({'doiTuongId': res.data.doiTuongId});
-             
-       	    this.myForm.patchValue({'name': res.data.name});
-             
-	  
+            this.myForm.patchValue({'doiTuongId': res.data.doiTuongId});
+            this.myForm.patchValue({'name': res.data.name});
       });
+    } else {
+      this.myForm.patchValue({'doiTuongId': data.id});
     }
-	else{
-		this.myForm.patchValue({'doiTuongId': data.id});
-	}
   }
 
   onSubmit() {
-    
+
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -79,10 +73,9 @@ export class DoiTuongSaveComponent implements OnInit , OnDestroy {
     this.spinner.show();
     this.submited = true;
     const submitData = new DoiTuongModel();
-    //submitData.doiTuongId = this.data.doiTuongId;
-    //submitData.text = this.myForm.value.name.trim();
     this.doiTuongService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
+      this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {
@@ -100,6 +93,21 @@ export class DoiTuongSaveComponent implements OnInit , OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  
-  
+  validateNameUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.doiTuongService.checkNameIsUnique(this.data.doiTuongId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isNameDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+
 }

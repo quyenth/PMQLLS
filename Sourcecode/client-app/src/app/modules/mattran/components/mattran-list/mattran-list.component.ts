@@ -1,3 +1,4 @@
+import { OrderInfo } from 'src/app/shared/models/order-info';
 import { ModalType } from './../../../../shared/commons/modal-type';
 import { MatTranSaveComponent } from './../mattran-save/mattran-save.component';
 import { HttpResult } from './../../../../shared/commons/http-result';
@@ -13,6 +14,7 @@ import { ActionType } from 'src/app/shared/commons/action-type';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-mat-tran-list',
@@ -30,10 +32,12 @@ export class MatTranListComponent implements OnInit, OnDestroy {
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
+  orderInfo: OrderInfo;
   subscription: Subscription;
   checkall = false;
   constructor(private matTranService: MatTranService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService,
+      private toastr: ToastrService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
@@ -110,6 +114,7 @@ export class MatTranListComponent implements OnInit, OnDestroy {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.matTranService.delete(item).subscribe((res) => {
+            this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
@@ -129,6 +134,7 @@ export class MatTranListComponent implements OnInit, OnDestroy {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.matTranService.delectList(listSelected).subscribe((res) => {
+              this.toastr.success('Xóa thành công!');
               this.onSearch();
           });
       }
@@ -144,5 +150,16 @@ export class MatTranListComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  reSort(text: string ) {
+    console.log(text);
+    if ( this.orderInfo.FieldName === text) {
+      this.orderInfo.OrderDesc = !this.orderInfo.OrderDesc;
+    } else {
+      this.orderInfo.FieldName = text;
+      this.orderInfo.OrderDesc = false;
+    }
+    this.onSearch();
   }
 }

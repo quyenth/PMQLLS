@@ -24,24 +24,24 @@
     </div>
 
     <div class='tbl-div'>
-      <table class="table table-bordered table-hover" style="width:100%">
+      <table class="table table-bordered table-hover table-striped dataDiplayTable" style="width:100%">
         <thead>
           <tr >
-            <th style="text-align: center; width: 20px;">
+            <th style="text-align: center; width: 20px;" class='no-sort'>
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                           <th>DiemCaoId</th>
+                           <th class='no-sort'>DiemCaoId</th>
                           
-                           <th>Ma</th>
+                           <th class='no-sort'>Ma</th>
                           
-                           <th>Ten</th>
+                           <th class='no-sort'>Ten</th>
                           
-                           <th>DiaChi</th>
+                           <th class='no-sort'>DiaChi</th>
                           
-                           <th>Note</th>
+                           <th class='no-sort'>Note</th>
                           
-            <th style="width:60px;"></th>
+            <th style="width:60px;" class='no-sort'></th>
           </tr>
         </thead>
         <tbody>

@@ -1,3 +1,4 @@
+import { DiemCaoModule } from './modules/diemcao/diemcao.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -29,6 +30,7 @@ import { LoginModule } from './modules/login/login.module';
 import { ConfirmationDialogService } from './shared/services/confirmDialog.service';
 import { ThoiKyModule } from './modules/thoiky/thoiky.module';
 import { MatTranModule } from './modules/mattran/mattran.module';
+import { LoaiDoiTuongModule } from './modules/loaidoituong/loaidoituong.module';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { MatTranModule } from './modules/mattran/mattran.module';
     ThoiKyModule,
     MatTranModule,
     DoiTuongModule,
-    DonViModule
+    DonViModule,
+    LoaiDoiTuongModule,
+    DiemCaoModule
   ],
   providers: [
     AuthService

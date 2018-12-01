@@ -10,6 +10,8 @@ import { $item.TableName$Service } from './../../$item.TableNameLowerCase$.servi
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-$item.TableNameCamel$-save',
@@ -19,6 +21,7 @@ export class $item.TableName$SaveComponent implements OnInit , OnDestroy {
 
   subscription: Subscription;
   submited: boolean;
+  isUpdate: boolean;
   data: $item.TableName$Model = new $item.TableName$Model();
   myForm = this.fb.group({
    //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
@@ -29,7 +32,7 @@ export class $item.TableName$SaveComponent implements OnInit , OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private $item.TableNameCamel$Service: $item.TableName$Service, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.$item.PrimaryKeyCamel$ = data.id;
       this.getDataByID(data);
@@ -42,6 +45,7 @@ export class $item.TableName$SaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
+	  this.isUpdate = true;
       this.$item.TableNameCamel$Service.getById(this.data.$item.PrimaryKeyCamel$).subscribe((res) => {
        $item.ColumnInfos:{it|
 	    this.myForm.patchValue({'$it.ColumnNameCamel$': res.data.$it.ColumnNameCamel$});
@@ -79,6 +83,7 @@ export class $item.TableName$SaveComponent implements OnInit , OnDestroy {
     //submitData.text = this.myForm.value.name.trim();
     this.$item.TableNameCamel$Service.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
+	  this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {

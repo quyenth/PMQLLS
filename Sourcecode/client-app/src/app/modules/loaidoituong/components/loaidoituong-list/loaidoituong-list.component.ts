@@ -13,6 +13,9 @@ import { ActionType } from 'src/app/shared/commons/action-type';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
+import { ToastrService } from 'ngx-toastr';
+import { OrderInfo } from 'src/app/shared/models/order-info';
+
 
 @Component({
   selector: 'app-loaiDoiTuong-list',
@@ -28,10 +31,12 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
+  orderInfo: OrderInfo;
+
   subscription: Subscription;
   checkall = false;
   constructor(private loaiDoiTuongService: LoaiDoiTuongService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
@@ -103,6 +108,7 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.loaiDoiTuongService.delete(item).subscribe((res) => {
+		    this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
@@ -122,6 +128,7 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.loaiDoiTuongService.delectList(listSelected).subscribe((res) => {
+			   this.toastr.success('Xóa thành công!');
               this.onSearch();
           });
       }
@@ -132,6 +139,18 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
   onEnter() {
     this.onSearch();
   }
+  
+  reSort(text: string ) {
+    console.log(text);
+    if ( this.orderInfo.FieldName === text) {
+      this.orderInfo.OrderDesc = !this.orderInfo.OrderDesc;
+    } else {
+      this.orderInfo.FieldName = text;
+      this.orderInfo.OrderDesc = false;
+    }
+    this.onSearch();
+  }
+  
   getSelectedItems() {
     return this.list$.filter(c => c.selected === true);
   }

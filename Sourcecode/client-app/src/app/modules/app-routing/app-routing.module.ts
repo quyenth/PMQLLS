@@ -1,3 +1,5 @@
+import { DiemCaoListComponent } from './../diemcao/components/diemcao-list/diemcao-list.component';
+import { LoaiDoiTuongListComponent } from './../loaidoituong/components/loaidoituong-list/loaidoituong-list.component';
 import { DonViListComponent } from './../donvi/components/donvi-list/donvi-list.component';
 import { DoiTuongListComponent } from './../doituong/components/doituong-list/doituong-list.component';
 import { NgModule } from '@angular/core';
@@ -24,7 +26,8 @@ const routes: Routes = [
   { path: 'mattran', component: MatTranListComponent },
   { path: 'doituong', component: DoiTuongListComponent },
   { path: 'donvi', component: DonViListComponent },
-
+  { path: 'loaidoituong', component: LoaiDoiTuongListComponent },
+  { path: 'diemcao', component: DiemCaoListComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
