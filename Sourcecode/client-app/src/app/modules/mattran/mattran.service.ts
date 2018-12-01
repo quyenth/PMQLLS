@@ -43,4 +43,10 @@ export class MatTranService extends BaseService {
     const url = this.BaseUrl + '/api/matTran/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+
+  checkNameIsUnique (id: number, ma: string)  {
+    const params = new HttpParams().set('id', id.toString()).set('ma', ma);
+    const url = this.BaseUrl + '/api/matTran/CheckCodeIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
 }

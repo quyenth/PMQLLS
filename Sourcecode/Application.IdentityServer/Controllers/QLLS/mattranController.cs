@@ -135,8 +135,22 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = null
             };
         }
+        /// <summary>
+        /// CheckCodeIsUnique
+        /// </summary>
+        /// <param name="capBacId"></param>
+        /// <param name="name"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckCodeIsUnique(int id, string ma)
+        {
+            var result = matTranService.CheckCodeIsUnique(id, ma);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
 
-
-        
     }
 }

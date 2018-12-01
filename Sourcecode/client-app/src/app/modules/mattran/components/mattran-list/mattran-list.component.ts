@@ -20,7 +20,10 @@ import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog
 })
 export class MatTranListComponent implements OnInit, OnDestroy {
 
-  @ViewChild('SearchMa') searchInput: ElementRef ;
+  @ViewChild('SearchMa') searchMa: ElementRef ;
+  @ViewChild('SearchThoiGian') searchThoiGian: ElementRef ;
+  @ViewChild('SearchDiaBan') searchDiaBan: ElementRef ;
+
   currentPage = 1;
   pageSize = 2;
 
@@ -41,17 +44,22 @@ export class MatTranListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-
+    this.filterCondition.SearchCondition = [];
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
-      const val = this.searchInput.nativeElement.value;
+      const maVal = this.searchMa.nativeElement.value;
+      const diabanVal = this.searchDiaBan.nativeElement.value;
+      const thoiGianVal = this.searchThoiGian.nativeElement.value;
+
       this.filterCondition.SearchCondition = [
-     // new SearchInfo('Text', OperationType.Contains, val)
-    ];
+          new SearchInfo('Ma', OperationType.Contains, maVal),
+          new SearchInfo('ThoiGian', OperationType.Contains, thoiGianVal),
+          new SearchInfo('DiaBan', OperationType.Contains, diabanVal)
+      ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       this.matTranService.search(this.filterCondition).subscribe((res: HttpResult) => {

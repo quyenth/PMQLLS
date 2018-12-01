@@ -1,3 +1,4 @@
+import { CheckboxComponent } from './../component/checkbox/checkbox.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataTablesModule } from 'angular-datatables';
@@ -32,11 +33,11 @@ export function getDatepickerConfig(): BsDatepickerConfig {
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot()
   ],
-  declarations: [ConfirmDialogComponent, PagingComponent],
+  declarations: [ConfirmDialogComponent, PagingComponent , CheckboxComponent],
   exports : [
     DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule ,
     PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule ,
-    BrowserAnimationsModule , BsDatepickerModule
+    BrowserAnimationsModule , BsDatepickerModule , CheckboxComponent
   ]
 })
 export class ShareModule { }

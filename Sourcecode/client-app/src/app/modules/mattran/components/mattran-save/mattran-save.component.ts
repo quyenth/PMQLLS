@@ -23,10 +23,10 @@ export class MatTranSaveComponent implements OnInit , OnDestroy {
   data: MatTranModel = new MatTranModel();
   myForm = this.fb.group({
         id: [''],
-        ma: [''],
+        ma: ['', [Validators.required, Validators.maxLength(30)], [this.validateNameUnique.bind(this)] ],
         thoiGian: [''],
-        diaBan: [''],
-        ghiChu: [''],
+        diaBan: ['', [Validators.maxLength(100)]],
+        ghiChu: ['', [Validators.maxLength(250)]]
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
@@ -78,8 +78,8 @@ export class MatTranSaveComponent implements OnInit , OnDestroy {
     this.spinner.show();
     this.submited = true;
     const submitData = new MatTranModel();
-    //submitData.id = this.data.id;
-    //submitData.text = this.myForm.value.name.trim();
+    // submitData.id = this.data.id;
+    // submitData.text = this.myForm.value.name.trim();
     this.matTranService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
       this.bsModalRef.hide();
@@ -97,5 +97,22 @@ export class MatTranSaveComponent implements OnInit , OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  validateNameUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.matTranService.checkNameIsUnique(this.data.id, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isNameDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
   }
 }
