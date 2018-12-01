@@ -15,13 +15,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 
 @Component({
-  selector: 'app-matTran-list',
+  selector: 'app-mat-tran-list',
   templateUrl: './mattran-list.component.html'
 })
 export class MatTranListComponent implements OnInit, OnDestroy {
 
-
-  @ViewChild('SearchName') searchInput: ElementRef ;
+  @ViewChild('SearchMa') searchInput: ElementRef ;
   currentPage = 1;
   pageSize = 2;
 
@@ -42,7 +41,7 @@ export class MatTranListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
+
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
@@ -50,9 +49,9 @@ export class MatTranListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-		//new SearchInfo('Text', OperationType.Contains, val)
-	  ];
+      this.filterCondition.SearchCondition = [
+     // new SearchInfo('Text', OperationType.Contains, val)
+    ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       this.matTranService.search(this.filterCondition).subscribe((res: HttpResult) => {
@@ -99,7 +98,7 @@ export class MatTranListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.matTranService.delete(item).subscribe((res) => {

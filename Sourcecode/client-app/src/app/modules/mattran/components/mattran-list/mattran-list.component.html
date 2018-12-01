@@ -1,6 +1,6 @@
 <div class="ibox ">
   <div class="ibox-title">
-    <h5>MatTran</h5>
+    <h5>Mặt trận</h5>
     <div class="ibox-tools">
 
     </div>
@@ -9,38 +9,44 @@
   <div class="ibox-content inspinia-timeline">
 
     <div class="row search-box">
-        <div class="col-sm-3">
-            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <div class="col-sm-2">
+            <input placeholder="Mã" #SearchMa type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
+          <input placeholder="Thời gian" #SearchThoiGian type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Địa bàn" #SearchGhiChu type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
       </div>
-            <div class="html5buttons col-sm-6">
-                <div class="html5buttons">
+      <div class="html5buttons col-sm-4">
+           <div class="html5buttons">
                   <button class="btn btn-primary buttons-copy buttons-html5"  (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
                   <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
-              </div>
-          </div>
+            </div>
+
+        </div>
     </div>
 
     <div class='tbl-div'>
-      <table class="table table-bordered table-hover" style="width:100%">
+      <table class="table table-bordered table-hover table-striped dataDiplayTable" style="width:100%">
         <thead>
           <tr >
-            <th style="text-align: center; width: 20px;">
+            <th style="text-align: center; width: 20px;" class="no-sort">
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                           <th>Id</th>
-                          
-                           <th>Ma</th>
-                          
-                           <th>ThoiGian</th>
-                          
-                           <th>DiaBan</th>
-                          
-                           <th>GhiChu</th>
-                          
+
+                           <th class="no-sort">Mã</th>
+
+                           <th class="no-sort">Thời gian</th>
+
+                           <th class="no-sort">Địa bàn</th>
+
+                           <th class="no-sort">Ghi chú</th>
+
             <th style="width:60px;"></th>
           </tr>
         </thead>
@@ -50,16 +56,15 @@
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
 
-                               <td>{{item.id}}</td>
-                          
+
                                <td>{{item.ma}}</td>
-                          
+
                                <td>{{item.thoiGian}}</td>
-                          
+
                                <td>{{item.diaBan}}</td>
-                          
+
                                <td>{{item.ghiChu}}</td>
-                                     
+
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>

@@ -12,27 +12,21 @@ import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog
 import { FromType } from 'src/app/shared/commons/form-type';
 
 @Component({
-  selector: 'app-matTran-save',
+  selector: 'app-mat-tran-save',
   templateUrl: './mattran-save.component.html'
 })
 export class MatTranSaveComponent implements OnInit , OnDestroy {
 
   subscription: Subscription;
   submited: boolean;
+  isUpdate: boolean;
   data: MatTranModel = new MatTranModel();
   myForm = this.fb.group({
-   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
-
-   	    id: [''],
-         
-   	    ma: [''],
-         
-   	    thoiGian: [''],
-         
-   	    diaBan: [''],
-         
-   	    ghiChu: [''],
-         
+        id: [''],
+        ma: [''],
+        thoiGian: [''],
+        diaBan: [''],
+        ghiChu: [''],
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
@@ -50,28 +44,21 @@ export class MatTranSaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
+      this.isUpdate = true;
       this.matTranService.getById(this.data.id).subscribe((res) => {
-
-       	    this.myForm.patchValue({'id': res.data.id});
-             
-       	    this.myForm.patchValue({'ma': res.data.ma});
-             
-       	    this.myForm.patchValue({'thoiGian': res.data.thoiGian});
-             
-       	    this.myForm.patchValue({'diaBan': res.data.diaBan});
-             
-       	    this.myForm.patchValue({'ghiChu': res.data.ghiChu});
-             
-	  
+          this.myForm.patchValue({'id': res.data.id});
+          this.myForm.patchValue({'ma': res.data.ma});
+          this.myForm.patchValue({'thoiGian': res.data.thoiGian});
+          this.myForm.patchValue({'diaBan': res.data.diaBan});
+          this.myForm.patchValue({'ghiChu': res.data.ghiChu});
       });
+    } else {
+      this.myForm.patchValue({'id': data.id});
     }
-	else{
-		this.myForm.patchValue({'id': data.id});
-	}
   }
 
   onSubmit() {
-    
+
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -111,7 +98,4 @@ export class MatTranSaveComponent implements OnInit , OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
-  
-  
 }

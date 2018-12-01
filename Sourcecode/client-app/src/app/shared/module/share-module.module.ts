@@ -35,7 +35,8 @@ export function getDatepickerConfig(): BsDatepickerConfig {
   declarations: [ConfirmDialogComponent, PagingComponent],
   exports : [
     DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule ,
-    PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule , BrowserAnimationsModule , BsDatepickerModule
+    PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule ,
+    BrowserAnimationsModule , BsDatepickerModule
   ]
 })
 export class ShareModule { }
