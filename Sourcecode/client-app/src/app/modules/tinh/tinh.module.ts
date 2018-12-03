@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ShareModule } from './../../shared/module/share-module.module';
 import { TinhListComponent } from './components/tinh-list/tinh-list.component';
 import { TinhSaveComponent } from './components/tinh-save/tinh-save.component';
+import { TinhDialogComponent } from './components/tinh-dialog/tinh-dialog.component';
 
 
 
@@ -16,8 +17,12 @@ import { TinhSaveComponent } from './components/tinh-save/tinh-save.component';
     ],
   entryComponents: [
     TinhSaveComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TinhDialogComponent,
+    TinhListComponent
   ],
-  declarations: [TinhListComponent, TinhSaveComponent]
+  declarations: [TinhListComponent, TinhSaveComponent, TinhDialogComponent]
 })
-export class TinhModule { }
+export class TinhModule {
+
+}

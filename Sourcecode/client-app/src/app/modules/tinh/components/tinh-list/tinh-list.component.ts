@@ -42,7 +42,7 @@ export class TinhListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
+
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
@@ -50,9 +50,9 @@ export class TinhListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-		  new SearchInfo('Tentinh', OperationType.Contains, val)
-	  ];
+      this.filterCondition.SearchCondition = [
+    new SearchInfo('Tentinh', OperationType.Contains, val)
+    ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       this.tinhService.search(this.filterCondition).subscribe((res: HttpResult) => {

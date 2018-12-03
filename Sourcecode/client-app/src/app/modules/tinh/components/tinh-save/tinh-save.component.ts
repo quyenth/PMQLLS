@@ -21,22 +21,22 @@ export class TinhSaveComponent implements OnInit , OnDestroy {
   submited: boolean;
   data: TinhModel = new TinhModel();
   myForm = this.fb.group({
-   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
+   // name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
 
-   	    tinhId: [''],
-         
-   	    maTinh: [''],
-         
-   	    tenTinh: [''],
-         
-   	    type: [''],
-         
-   	    active: [''],
-         
-   	    is1990: [''],
-         
-   	    ghiChu: [''],
-         
+    tinhId: [''] ,
+
+    maTinh: ['', [Validators.required, Validators.maxLength(30)]],
+
+    tenTinh: ['', [Validators.required, Validators.maxLength(30)]],
+
+    type: ['', [Validators.required, Validators.maxLength(30)]],
+
+    active: [''],
+
+    is1990: [''],
+
+    ghiChu: [''],
+
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
@@ -49,37 +49,32 @@ export class TinhSaveComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit() {
-
   }
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
       this.tinhService.getById(this.data.tinhId).subscribe((res) => {
 
-       	    this.myForm.patchValue({'tinhId': res.data.tinhId});
-             
-       	    this.myForm.patchValue({'maTinh': res.data.maTinh});
-             
-       	    this.myForm.patchValue({'tenTinh': res.data.tenTinh});
-             
-       	    this.myForm.patchValue({'type': res.data.type});
-             
-       	    this.myForm.patchValue({'active': res.data.active});
-             
-       	    this.myForm.patchValue({'is1990': res.data.is1990});
-             
-       	    this.myForm.patchValue({'ghiChu': res.data.ghiChu});
-             
-	  
+        this.myForm.patchValue({'tinhId': res.data.tinhId});
+
+        this.myForm.patchValue({'maTinh': res.data.maTinh});
+
+        this.myForm.patchValue({'tenTinh': res.data.tenTinh});
+
+        this.myForm.patchValue({'type': res.data.type});
+
+        this.myForm.patchValue({'active': res.data.active});
+
+        this.myForm.patchValue({'is1990': res.data.is1990});
+
+        this.myForm.patchValue({'ghiChu': res.data.ghiChu});
       });
+    } else {
+    this.myForm.patchValue({'tinhId': data.id});
     }
-	else{
-		this.myForm.patchValue({'tinhId': data.id});
-	}
   }
 
   onSubmit() {
-    
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -99,8 +94,8 @@ export class TinhSaveComponent implements OnInit , OnDestroy {
     this.spinner.show();
     this.submited = true;
     const submitData = new TinhModel();
-    //submitData.tinhId = this.data.tinhId;
-    //submitData.text = this.myForm.value.name.trim();
+    // submitData.tinhId = this.data.tinhId;
+    // submitData.text = this.myForm.value.name.trim();
     this.tinhService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
       this.bsModalRef.hide();
@@ -120,6 +115,22 @@ export class TinhSaveComponent implements OnInit , OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  
-  
+  validateNameUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        // return this.tinhService.checkNameIsUnique(this.data.capBacId, control.value.trim())
+        // .pipe(map((res) => {
+        //      if (!res.data) {
+        //        return {'isNameDuplicate' : true};
+        //      }
+        //      return null;
+        // }));
+      })
+    );
+  }
+
+
 }

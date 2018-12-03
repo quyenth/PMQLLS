@@ -29,7 +29,8 @@
               "src/assets/css/style.css",
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "src/assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
             ],
             "scripts": [
               "src/assets/js/jquery-3.1.1.min.js",
