@@ -1,3 +1,4 @@
+import { AppRoutingModule } from './../app-routing/app-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataTablesModule } from 'angular-datatables';
@@ -12,7 +13,8 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     DataTablesModule,
     FormsModule,
     ReactiveFormsModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [
     BsModalService,
@@ -22,6 +24,6 @@ import { LoginPageComponent } from './components/login-page/login-page.component
     LoginPageComponent,
   ],
   declarations: [LoginPageComponent],
-  exports:[LoginPageComponent]
+  exports: [ LoginPageComponent]
 })
 export class LoginModule { }

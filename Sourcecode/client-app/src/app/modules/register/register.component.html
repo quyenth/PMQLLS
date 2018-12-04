@@ -1,0 +1,43 @@
+<div class="middle-box text-center loginscreen animated fadeInDown">
+  <div style="padding:20px; background-color: #F9F9F9;">
+      <h3>TẠO TÀI KHOẢN MỚI</h3>
+      <br>
+
+      <div class="m-t">
+          <form [formGroup]="myForm">
+                <div class="form-group" [ngClass]="{'has-error': submited && !myForm.get('fullName').valid }">
+                  <input type="text" class="form-control" placeholder="Họ và tên" formControlName="fullName">
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('fullName').hasError('required')">Trường này là bắt buộc.</span>
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('fullName').hasError('maxlength')">Độ dài tối đa là 30 ký tự.</span>
+
+              </div>
+              <div class="form-group" [ngClass]="{'has-error': submited && !myForm.get('email').valid }">
+                  <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('email').hasError('required')">Trường này là bắt buộc.</span>
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('email').hasError('maxlength')">Độ dài tối đa là 30 ký tự.</span>
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('email').hasError('email')">Sai dịnh dạng mail.</span>
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('email').hasError('emailDuplicate')">Email đã tồn tại.</span>
+              </div>
+              <div class="form-group" [ngClass]="{'has-error': submited && !myForm.get('password').valid }">
+                  <input type="password" class="form-control" placeholder="Mật khẩu"  formControlName="password">
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('password').hasError('required')">Trường này là bắt buộc.</span>
+                  <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('password').hasError('minlength')">Độ dài tối thiểu là 6 ký tự.</span>
+
+              </div>
+              <div class="form-group" [ngClass]="{'has-error': submited && !myForm.get('rePassword').valid }">
+                <input type="password" class="form-control" placeholder="Xác nhận mật khẩu" formControlName="rePassword">
+                <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('rePassword').hasError('required')">Trường này là bắt buộc.</span>
+                <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('rePassword').hasError('minlength')">Độ dài tối thiểu là 6 ký tự.</span>
+                <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('rePassword').hasError('passNotMatch')">Mật khẩu xác nhận không trùng với mật khẩu.</span>
+
+              </div>
+              <button type="submit" class="btn btn-primary block full-width m-b" (click)="onSubmit()">ĐĂNG KÝ</button>
+
+              <p class="text-muted text-center"><small>Đã có tài khoản?</small></p>
+              <a class="btn btn-sm btn-white btn-block" routerLink = '/login'>Quay lại đăng nhập</a>
+          </form>
+
+      </div>
+
+  </div>
+</div>

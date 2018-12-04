@@ -6,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
+import { RegisterComponent } from './../register/register.component';
 import { MatTranListComponent } from './../mattran/components/mattran-list/mattran-list.component';
 import { XaListComponent } from './../xa/components/xa-list/xa-list.component';
 import { ChucVuListComponent } from './../chucvu/components/chucvu-list/chucvu-list.component';
@@ -28,6 +29,8 @@ const routes: Routes = [
   { path: 'donvi', component: DonViListComponent },
   { path: 'loaidoituong', component: LoaiDoiTuongListComponent },
   { path: 'diemcao', component: DiemCaoListComponent },
+  { path: 'register', component: RegisterComponent },
+
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -5,15 +5,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, interval, pipe, BehaviorSubject } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable()
 export class AuthService extends BaseService implements OnInit {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  constructor(private http: HttpClient,private router: Router) {
+  constructor(private http: HttpClient, private router: Router , private toastr: ToastrService) {
     super();
-    let currentUser = localStorage.getItem("currentUser");
-    if(currentUser!="" && currentUser!= undefined){
+    const currentUser = localStorage.getItem('currentUser');
+    if (currentUser !== '' && currentUser !== undefined) {
       this.loggedIn.next(true);
     }
   }
@@ -38,7 +39,6 @@ export class AuthService extends BaseService implements OnInit {
         console.log(user);
         return user;
       }).subscribe((result: any) => {
-        debugger;
         localStorage.setItem('currentUser', JSON.stringify({
           token: result.data
         }));
@@ -54,6 +54,11 @@ export class AuthService extends BaseService implements OnInit {
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
 
+  }
+
+  register ( username: string, password: string , fullName: string) {
+      this.toastr.success('Tạo mới tài khoản thành công');
+      this.router.navigate(['/login']);
   }
 
   ngOnInit() {

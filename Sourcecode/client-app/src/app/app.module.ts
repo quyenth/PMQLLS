@@ -31,6 +31,7 @@ import { ConfirmationDialogService } from './shared/services/confirmDialog.servi
 import { ThoiKyModule } from './modules/thoiky/thoiky.module';
 import { MatTranModule } from './modules/mattran/mattran.module';
 import { LoaiDoiTuongModule } from './modules/loaidoituong/loaidoituong.module';
+import { RegisterModule } from './modules/register/register.module';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { LoaiDoiTuongModule } from './modules/loaidoituong/loaidoituong.module';
     FormsModule,
     ModalModule,
     LoginModule,
+    RegisterModule,
     AppRoutingModule,
     NgxSpinnerModule,
     ThoiKyModule,
