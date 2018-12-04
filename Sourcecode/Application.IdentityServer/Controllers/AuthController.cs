@@ -20,13 +20,17 @@ namespace Application.IdentityServer.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
 
         private readonly UserManager<ApplicationUser> userManager;
+
+        private readonly RoleManager<ApplicationRole> roleManager;
+
         private readonly ILogger logger;
 
-        public AuthController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger, UserManager<ApplicationUser> userManager)
+        public AuthController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger, UserManager<ApplicationUser> userManager , RoleManager<ApplicationRole> roleManager)
         {
             this.signInManager = signInManager;
             this.logger = logger;
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         /// <summary>
@@ -77,5 +81,24 @@ namespace Application.IdentityServer.Controllers
                 Status = HttpStatus.HandleError
             });
         }
+
+        /// <summary>
+        /// Register new account
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        {
+            var user = new ApplicationUser { UserName = model.UserName, Email = model.Email , FullName = model.FullName };
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            return Ok(new ApiResult()
+            {
+                Message = "",
+                Status = HttpStatus.OK
+            });
+        }
+
     }
 }

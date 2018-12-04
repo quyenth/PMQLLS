@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
@@ -9,13 +9,14 @@ import { AuthService } from 'src/app/shared/services/auth.Service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+
 
   subscription: Subscription;
   submited: boolean;
   myForm = this.fb.group({
     fullName: ['', [Validators.required, Validators.maxLength(30)]],
-    email: ['', [Validators.required, Validators.maxLength(30)]],
+    email: ['', [Validators.required, Validators.maxLength(30), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     rePassword: ['', [Validators.required, Validators.minLength(6), this.checkPassMatch.bind(this)]]
 
@@ -27,6 +28,11 @@ export class RegisterComponent implements OnInit {
               private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.subscription = this.authService.isLoggedIn.subscribe(isLogin => {
+        if (isLogin) {
+          this.router.navigate(['/']);
+        }
+    });
   }
 
   onSubmit() {
@@ -44,5 +50,9 @@ export class RegisterComponent implements OnInit {
      }
 
      return null;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
