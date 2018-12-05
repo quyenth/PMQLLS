@@ -1,3 +1,4 @@
+import { RolesListComponent } from './../role/components/role-list/aspnetroles-list.component';
 import { DiemCaoListComponent } from './../diemcao/components/diemcao-list/diemcao-list.component';
 import { LoaiDoiTuongListComponent } from './../loaidoituong/components/loaidoituong-list/loaidoituong-list.component';
 import { DonViListComponent } from './../donvi/components/donvi-list/donvi-list.component';
@@ -30,7 +31,7 @@ const routes: Routes = [
   { path: 'loaidoituong', component: LoaiDoiTuongListComponent },
   { path: 'diemcao', component: DiemCaoListComponent },
   { path: 'register', component: RegisterComponent },
-
+  { path: 'role', component: RolesListComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

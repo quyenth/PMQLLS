@@ -32,6 +32,7 @@ import { ThoiKyModule } from './modules/thoiky/thoiky.module';
 import { MatTranModule } from './modules/mattran/mattran.module';
 import { LoaiDoiTuongModule } from './modules/loaidoituong/loaidoituong.module';
 import { RegisterModule } from './modules/register/register.module';
+import { RolesModule } from './modules/role/role.module';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { RegisterModule } from './modules/register/register.module';
     DoiTuongModule,
     DonViModule,
     LoaiDoiTuongModule,
-    DiemCaoModule
+    DiemCaoModule,
+    RolesModule
   ],
   providers: [
     AuthService
