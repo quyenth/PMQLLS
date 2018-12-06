@@ -9812,3 +9812,7 @@ table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .so
  table .checkbox label {
   padding-left: 0px;
  }
+ .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background-color: #1ab394;
+  color: #fff;
+}

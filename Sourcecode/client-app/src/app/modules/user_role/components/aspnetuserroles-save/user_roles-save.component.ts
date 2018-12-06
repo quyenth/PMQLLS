@@ -3,7 +3,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { UserRolesModel } from '../../user_role.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
-import { Subscription, timer, of } from 'rxjs';
+import { Subscription, timer, of, Observable } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { ActionType } from 'src/app/shared/commons/action-type';
@@ -25,7 +25,7 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   submited: boolean;
   isUpdate: boolean;
   data: UserRolesModel = new UserRolesModel();
-  listAllRole: Select2Model[];
+  listAllRole: Observable<Select2Model[]>;
   myForm = this.fb.group({
         userId: [''],
 
@@ -41,10 +41,7 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit() {
-     this.roleService.getAllRole().subscribe(res => {
-       console.log(res);
-        this.listAllRole = res;
-     });
+     this.listAllRole = this.roleService.getAllRole();
   }
 
   getDataByID (data) {
