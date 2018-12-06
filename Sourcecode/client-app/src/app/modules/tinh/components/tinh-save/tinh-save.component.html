@@ -8,28 +8,30 @@
     <form [formGroup]="myForm">
       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maTinh').valid }">
         <label class="col-form-label col-sm-2">
-          Mã tỉnh
+          Mã tỉnh <span class="text-danger">*</span>
         </label>
         <div class="col-sm-8">
           <input type="text" class="form-control" formControlName="maTinh" />
           <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('maTinh').hasError('required')">Trường này là bắt buộc.</span>
-          <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('maTinh').hasError('isNameDuplicate')">Mã đã tồn tại.</span>
+          <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('maTinh').hasError('maxlength')">Độ dài tối đa là 30 ký tự.</span>
+          <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('maTinh').hasError('isCodeDuplicate')">Mã đã tồn tại.</span>
         </div>
         </div>
 
       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('tenTinh').valid }">
         <label class="col-form-label col-sm-2">
-          Tên tỉnh
+          Tên tỉnh <span class="text-danger">*</span>
         </label>
         <div class="col-sm-8">
           <input type="text" class="form-control" formControlName="tenTinh" />
           <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('tenTinh').hasError('required')">Trường này là bắt buộc.</span>
+          <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('tenTinh').hasError('isNameDuplicate')">Tên đã tồn tại.</span>
         </div>
         </div>
 
       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('type').valid }">
         <label class="col-form-label col-sm-2">
-          Loại
+          Loại <span class="text-danger">*</span>
         </label>
         <div class="col-sm-8">
           <input type="text" class="form-control" formControlName="type" />

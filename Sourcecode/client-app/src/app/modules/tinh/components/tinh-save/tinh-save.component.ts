@@ -25,11 +25,11 @@ export class TinhSaveComponent implements OnInit , OnDestroy {
 
     tinhId: [''] ,
 
-    maTinh: ['', [Validators.required, Validators.maxLength(30)]],
+    maTinh: ['', [Validators.required, Validators.maxLength(30)], [this.validateCodeUnique.bind(this)] ],
 
-    tenTinh: ['', [Validators.required, Validators.maxLength(30)]],
+    tenTinh: ['', [Validators.required], [this.validateNameUnique.bind(this)]],
 
-    type: ['', [Validators.required, Validators.maxLength(30)]],
+    type: ['', [Validators.required]],
 
     active: [''],
 
@@ -115,19 +115,36 @@ export class TinhSaveComponent implements OnInit , OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  validateCodeUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.tinhService.checkCodeIsUnique(this.data.tinhId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isCodeDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+
   validateNameUnique(control: FormControl) {
     return timer(800).pipe(
       switchMap(() => {
         if (!control.value) {
           return of(null);
         }
-        // return this.tinhService.checkNameIsUnique(this.data.capBacId, control.value.trim())
-        // .pipe(map((res) => {
-        //      if (!res.data) {
-        //        return {'isNameDuplicate' : true};
-        //      }
-        //      return null;
-        // }));
+        return this.tinhService.checkNameIsUnique(this.data.tinhId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isNameDuplicate' : true};
+             }
+             return null;
+        }));
       })
     );
   }

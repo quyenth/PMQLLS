@@ -136,7 +136,39 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// CheckCodeIsUnique
+        /// </summary>
+        /// <param name="tinhId"></param>
+        /// <param name="maTinh"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckCodeIsUnique(int tinhId, string maTinh)
+        {
+            var result = tinhService.CheckCodeIsUnique(tinhId, maTinh);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
 
-        
+        /// <summary>
+        /// CheckNameIsUnique
+        /// </summary>
+        /// <param name="tinhId"></param>
+        /// <param name="tenTinh"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckNameIsUnique(int tinhId, string tenTinh)
+        {
+            var result = tinhService.CheckNameIsUnique(tinhId, tenTinh);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
+
     }
 }

@@ -25,6 +25,7 @@ import { HeaderDropdownMenuComponent } from './shared/component/header/header-dr
 import { HeaderLogoComponent } from './shared/component/header/header-logo/header-logo.component';
 import { ModalService } from './shared/services/modal.Service';
 import { TinhModule } from './modules/tinh/tinh.module';
+import { HuyenModule } from './modules/huyen/huyen.module';
 import { PageNotFoundComponent } from './shared/component/page-not-found/page-not-found.component';
 import { LoginModule } from './modules/login/login.module';
 import { ConfirmationDialogService } from './shared/services/confirmDialog.service';
@@ -51,6 +52,7 @@ import { RolesModule } from './modules/role/role.module';
     ChucVuModule,
     CapbacModule,
     TinhModule,
+    HuyenModule,
     XaModule,
     FormsModule,
     ModalModule,

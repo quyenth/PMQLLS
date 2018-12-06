@@ -1,6 +1,6 @@
 <div class="ibox ">
   <div class="ibox-title">
-    <h5>Huyen</h5>
+    <h5>Huyện</h5>
     <div class="ibox-tools">
 
     </div>
@@ -30,21 +30,18 @@
             <th style="text-align: center; width: 20px;">
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
+                <th>Mã Huyện</th>
 
-                           <th>HuyenId</th>
-                          
-                           <th>MaHuyen</th>
-                          
-                           <th>TenHuyen</th>
-                          
-                           <th>TinhId</th>
-                          
-                           <th>Type</th>
-                          
-                           <th>Active</th>
-                          
-                           <th>Is1990</th>
-                          
+                <th>Tên Huyện</th>
+
+                <th>Tỉnh</th>
+
+                <th>Loại</th>
+
+                <th>Kích hoạt</th>
+
+                <th>Là năm 1990</th>
+
             <th style="width:60px;"></th>
           </tr>
         </thead>
@@ -53,21 +50,17 @@
             <td style="text-align: center;">
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
+                <td>{{item.maHuyen}}</td>
 
-                               <td>{{item.huyenId}}</td>
-                          
-                               <td>{{item.maHuyen}}</td>
-                          
-                               <td>{{item.tenHuyen}}</td>
-                          
-                               <td>{{item.tinhId}}</td>
-                          
-                               <td>{{item.type}}</td>
-                          
-                               <td>{{item.active}}</td>
-                          
-                               <td>{{item.is1990}}</td>
-                                     
+                <td>{{item.tenHuyen}}</td>
+
+                <td>{{item.tinhId}}</td>
+
+                <td>{{item.type}}</td>
+
+                <td>{{item.active}}</td>
+
+                <td>{{item.is1990}}</td>
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>

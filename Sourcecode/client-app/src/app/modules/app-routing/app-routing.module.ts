@@ -14,6 +14,7 @@ import { ChucVuListComponent } from './../chucvu/components/chucvu-list/chucvu-l
 import { PageNotFoundComponent } from './../../shared/component/page-not-found/page-not-found.component';
 import { CapbacListComponent } from './../capbac/components/capbac-list/capbac-list.component';
 import { TinhListComponent } from './../tinh/components/tinh-list/tinh-list.component';
+import { HuyenListComponent } from './../huyen/components/huyen-list/huyen-list.component';
 import { LoginPageComponent } from './../login/components/login-page/login-page.component';
 import { ThoiKyListComponent } from '../thoiky/components/thoiky-list/thoiky-list.component';
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'capbac', component: CapbacListComponent },
   { path: 'xa', component: XaListComponent },
   { path: 'tinh', component: TinhListComponent },
+  { path: 'huyen', component: HuyenListComponent },
   { path: 'thoiky', component: ThoiKyListComponent },
   { path: 'mattran', component: MatTranListComponent },
   { path: 'doituong', component: DoiTuongListComponent },

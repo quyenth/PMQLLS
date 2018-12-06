@@ -43,4 +43,14 @@ export class TinhService extends BaseService {
     const url = this.BaseUrl + '/api/tinh/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+  checkCodeIsUnique (tinhId: number, maTinh: string)  {
+    const params = new HttpParams().set('tinhId', tinhId.toString()).set('maTinh', maTinh);
+    const url = this.BaseUrl + '/api/tinh/CheckCodeIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
+  checkNameIsUnique (tinhId: number, tenTinh: string)  {
+    const params = new HttpParams().set('tinhId', tinhId.toString()).set('tenTinh', tenTinh);
+    const url = this.BaseUrl + '/api/tinh/CheckNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
 }
