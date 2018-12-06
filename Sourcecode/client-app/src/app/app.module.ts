@@ -34,6 +34,7 @@ import { MatTranModule } from './modules/mattran/mattran.module';
 import { LoaiDoiTuongModule } from './modules/loaidoituong/loaidoituong.module';
 import { RegisterModule } from './modules/register/register.module';
 import { RolesModule } from './modules/role/role.module';
+import { UserRolesModule } from './modules/user_role/user_role.module';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { RolesModule } from './modules/role/role.module';
     DonViModule,
     LoaiDoiTuongModule,
     DiemCaoModule,
-    RolesModule
+    RolesModule,
+    UserRolesModule
   ],
   providers: [
     AuthService

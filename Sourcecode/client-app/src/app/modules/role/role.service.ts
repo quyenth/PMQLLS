@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient , HttpHeaders, HttpParams  } from '@angular/common/http';
@@ -6,6 +7,7 @@ import { BaseService } from 'src/app/shared/services/base.service';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { HttpResult } from 'src/app/shared/commons/http-result';
 import { RoleModel } from './role.model';
+import { Select2Model } from 'src/app/shared/models/select2.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,16 @@ export class RoleService extends BaseService {
   getById(id: any): Observable<HttpResult> {
     const url = this.BaseUrl + '/api/Role/GetById/' + id;
     return this.http.get<HttpResult>(url);
+  }
+
+  getAllRole(): Observable<Select2Model[]> {
+    const url = this.BaseUrl + '/api/Role/GetAllRole/';
+    return this.http.get<HttpResult>(url).pipe(map(res => {
+        const result: Select2Model[] = [] ;
+        res.data.forEach(element => {
+          result.push(new Select2Model (element.id, element.name));
+        });
+        return result ;
+    }));
   }
 }

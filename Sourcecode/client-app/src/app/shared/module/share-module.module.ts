@@ -10,6 +10,7 @@ import { PagingComponent } from '../component/paging/paging.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 export function getDatepickerConfig(): BsDatepickerConfig {
@@ -30,13 +31,14 @@ export function getDatepickerConfig(): BsDatepickerConfig {
     NgxSpinnerModule,
     ToastrModule.forRoot({progressBar : true, closeButton : true}),
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgSelectModule
   ],
   declarations: [ConfirmDialogComponent, PagingComponent ],
   exports : [
     DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule ,
     PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule ,
-    BrowserAnimationsModule , BsDatepickerModule
+    BrowserAnimationsModule , BsDatepickerModule , NgSelectModule
   ]
 })
 export class ShareModule { }

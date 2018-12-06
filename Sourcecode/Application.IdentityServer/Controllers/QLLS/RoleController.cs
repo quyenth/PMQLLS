@@ -30,10 +30,15 @@ namespace Application.IdentityServer.Controllers.QLLS
 
         }
 
+        /// <summary>
+        /// Save Role
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ApiResult> Save([FromBody] ApplicationRole model)
         {
-            if (string.IsNullOrEmpty(model.Id))
+            if (string.IsNullOrEmpty(model.Id) || model.Id == "0")
             {
                 var entity = new ApplicationRole();
                 entity.Id = DateTime.Now.ToFileTime().ToString();
@@ -91,7 +96,7 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         /// <summary>
-        /// 
+        /// Delete
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -106,6 +111,11 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// GetRoleById
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
         public async Task<ApiResult> GetById(string id)
@@ -115,6 +125,40 @@ namespace Application.IdentityServer.Controllers.QLLS
             {
                 Status = HttpStatus.OK,
                 Data = result
+            };
+        }
+
+        /// <summary>
+        /// DeleteListRole
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ApiResult> DeleteList([FromBody]List<ApplicationRole> items)
+        {
+            foreach(var role in items)
+            {
+                await this.roleManager.DeleteAsync(role);
+            }
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = null
+            };
+        }
+
+        /// <summary>
+        /// GetAllRole
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> GetAllRole()
+        {
+            var list = this.roleManager?.Roles.ToList();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = list
             };
         }
     }

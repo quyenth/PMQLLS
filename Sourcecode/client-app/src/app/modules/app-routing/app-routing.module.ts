@@ -1,3 +1,4 @@
+import { UserRolesListComponent } from './../user_role/components/aspnetuserroles-list/user_roles-list.component';
 import { RolesListComponent } from './../role/components/role-list/aspnetroles-list.component';
 import { DiemCaoListComponent } from './../diemcao/components/diemcao-list/diemcao-list.component';
 import { LoaiDoiTuongListComponent } from './../loaidoituong/components/loaidoituong-list/loaidoituong-list.component';
@@ -34,6 +35,8 @@ const routes: Routes = [
   { path: 'diemcao', component: DiemCaoListComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'role', component: RolesListComponent },
+  { path: 'user_role', component: UserRolesListComponent },
+
   { path: '**', component: PageNotFoundComponent }
 ];
 
