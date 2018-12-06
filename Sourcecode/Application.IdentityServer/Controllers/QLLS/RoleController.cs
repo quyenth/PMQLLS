@@ -33,8 +33,7 @@ namespace Application.IdentityServer.Controllers.QLLS
         [HttpPost]
         public async Task<ApiResult> Save([FromBody] ApplicationRole model)
         {
-            bool roleIsExist = await roleManager.RoleExistsAsync(model.Name);
-            if (!roleIsExist)
+            if (string.IsNullOrEmpty(model.Id))
             {
                 var entity = new ApplicationRole();
                 entity.Id = DateTime.Now.ToFileTime().ToString();
