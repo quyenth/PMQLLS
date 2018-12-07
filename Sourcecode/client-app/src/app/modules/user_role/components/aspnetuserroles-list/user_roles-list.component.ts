@@ -9,12 +9,14 @@ import { ModalSize } from 'src/app/shared/commons/modal-size';
 import { OperationType } from 'src/app/shared/commons/operation-type';
 import { SearchInfo } from 'src/app/shared/models/search-info';
 import { ActionType } from 'src/app/shared/commons/action-type';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { OrderInfo } from 'src/app/shared/models/order-info';
 import { UserRolesSaveComponent } from '../aspnetuserroles-save/user_roles-save.component';
+import { Select2Model } from 'src/app/shared/models/select2.model';
+import { RoleService } from 'src/app/modules/role/role.service';
 
 
 @Component({
@@ -32,11 +34,13 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
   orderInfo: OrderInfo = new OrderInfo('', true);
+  listAllRole: Observable<Select2Model[]>;
 
   subscription: Subscription;
   checkall = false;
   constructor(private aspNetUserRolesService: UserRolesService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) { }
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService,
+      private toastr: ToastrService , private roleService: RoleService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
@@ -50,11 +54,13 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
 
     this.filterCondition.Orders = [ ];
     this.onSearch();
+    this.listAllRole = this.roleService.getAllRole();
+
   }
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
-      const val = this.searchInput.nativeElement.value;
+      const val = '';
       this.filterCondition.SearchCondition = [ ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;

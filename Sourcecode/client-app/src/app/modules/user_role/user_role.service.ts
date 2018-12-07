@@ -6,6 +6,8 @@ import { BaseService } from 'src/app/shared/services/base.service';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { HttpResult } from 'src/app/shared/commons/http-result';
 import { UserRolesModel } from './user_role.model';
+import { Select2Model } from 'src/app/shared/models/select2.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +24,7 @@ export class UserRolesService extends BaseService {
   }
 
   save(model: UserRolesModel) {
-    const url = this.BaseUrl + '/api/aspNetUserRoles/save';
+    const url = this.BaseUrl + '/api/Role/SaveUserRole';
     return this.http.post<HttpResult>(url, JSON.stringify(model), this.getHeader());
     }
 
@@ -42,5 +44,15 @@ export class UserRolesService extends BaseService {
   getById(id: any): Observable<HttpResult> {
     const url = this.BaseUrl + '/api/aspNetUserRoles/GetById/' + id;
     return this.http.get<HttpResult>(url);
+  }
+  getAllUser(): Observable<Select2Model[]> {
+    const url = this.BaseUrl + '/api/Account/GetListUser';
+    return this.http.get<HttpResult>(url).pipe(map(res => {
+        const result: Select2Model[] = [] ;
+        res.data.forEach(element => {
+          result.push(new Select2Model (element.id, element.userName));
+        });
+        return result ;
+    }));
   }
 }

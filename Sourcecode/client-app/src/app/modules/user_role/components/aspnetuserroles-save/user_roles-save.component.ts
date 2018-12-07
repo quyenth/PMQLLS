@@ -26,14 +26,15 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   isUpdate: boolean;
   data: UserRolesModel = new UserRolesModel();
   listAllRole: Observable<Select2Model[]>;
+  listAllUser: Observable<Select2Model[]>;
   myForm = this.fb.group({
-        userId: [''],
-
-        roleId: [''],
+        userId: ['', [Validators.required]],
+        roleId: ['', [Validators.required]],
   });
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
-          private aspNetUserRolesService: UserRolesService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService , private roleService: RoleService) {
+          private userRolesService: UserRolesService, private spinner: NgxSpinnerService,
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
+          private roleService: RoleService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.userId = data.id;
       this.getDataByID(data);
@@ -42,12 +43,13 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
 
   ngOnInit() {
      this.listAllRole = this.roleService.getAllRole();
+     this.listAllUser = this.userRolesService.getAllUser();
   }
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
       this.isUpdate = true;
-      this.aspNetUserRolesService.getById(this.data.userId).subscribe((res) => {
+      this.userRolesService.getById(this.data.userId).subscribe((res) => {
 
             this.myForm.patchValue({'userId': res.data.userId});
 
@@ -80,9 +82,8 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   submitData() {
     this.spinner.show();
     this.submited = true;
-    const submitData = new UserRolesModel();
 
-    this.aspNetUserRolesService.save(this.myForm.value).subscribe((res) => {
+    this.userRolesService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
       this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();

@@ -77,6 +77,8 @@ namespace Application.IdentityServer
             services.AddTransient<ITinhService, TinhService>();
             services.AddTransient<IXaService, XaService>();
 
+            services.AddTransient<IUserRoleService, UserRoleService>();
+
 
             services.AddMvc();
             //  .AddRazorPagesOptions(options =>

@@ -9,6 +9,7 @@ import { HttpResult } from 'src/app/shared/commons/http-result';
 import { RoleModel } from './role.model';
 import { Select2Model } from 'src/app/shared/models/select2.model';
 
+
 @Injectable({
   providedIn: 'root'
 })

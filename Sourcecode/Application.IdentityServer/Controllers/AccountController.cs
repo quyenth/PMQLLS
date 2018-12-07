@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Domain.model;
 using Framework.AspNetIdentity;
 using Framework.Common;
 using IdentityModel.Client;
@@ -76,6 +77,17 @@ namespace Application.IdentityServer.Controllers
             {
                 Status = HttpStatus.OK
 
+            };
+        }
+
+        [HttpGet]
+        public async Task<ApiResult> GetListUser()
+        {
+            var list = this.userManager?.Users.Select(c => new UserVO { Id = c.Id , FullName = c.FullName , PhoneNumber = c.PhoneNumber , UserName =c.UserName}).ToList();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = list
             };
         }
 

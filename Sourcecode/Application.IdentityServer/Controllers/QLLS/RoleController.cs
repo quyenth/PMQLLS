@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Domain.model;
+using Application.Domain.Services;
 using Framework.AspNetIdentity;
 using Framework.Common;
 using Microsoft.AspNetCore.Http;
@@ -20,14 +22,16 @@ namespace Application.IdentityServer.Controllers.QLLS
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<ApplicationRole> roleManager;
+        private readonly IUserRoleService UserRoleService;
 
-        public RoleController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ILogger<ApplicationUser> logger , RoleManager<ApplicationRole> roleManager)
+        public RoleController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, 
+                        ILogger<ApplicationUser> logger , RoleManager<ApplicationRole> roleManager , IUserRoleService UserRoleService)
         {
             this.logger = logger;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
-
+            this.UserRoleService = UserRoleService;
         }
 
         /// <summary>
@@ -161,5 +165,28 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = list
             };
         }
+
+        /// <summary>
+        /// SaveUserRole
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ApiResult> SaveUserRole([FromBody] UserRoleModel model)
+        {
+            var list = this.roleManager?.Roles.ToList();
+            var role = await this.roleManager.FindByIdAsync(model.roleId);
+            var user = await this.userManager.FindByIdAsync(model.userId);
+            if( ! await userManager.IsInRoleAsync(user , role.Name))
+            {
+                await userManager.AddToRoleAsync(user, role.Name);
+            }
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = model
+            };
+        }
+
     }
 }

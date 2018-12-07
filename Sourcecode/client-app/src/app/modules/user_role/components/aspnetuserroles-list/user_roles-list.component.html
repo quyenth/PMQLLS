@@ -1,6 +1,6 @@
 <div class="ibox ">
   <div class="ibox-title">
-    <h5>AspNetUserRoles</h5>
+    <h5>User role</h5>
     <div class="ibox-tools">
 
     </div>
@@ -10,10 +10,14 @@
 
     <div class="row search-box">
         <div class="col-sm-3">
-            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
-      </div>
+            <ng-select [items]="listAllRole | async"
+                bindLabel="text"
+                bindValue="id"
+                #SearchName               >
+            </ng-select>
+        </div>
       <div class="col-sm-3">
-            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
+            <button type="button" class="btn btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
       </div>
             <div class="html5buttons col-sm-6">
                 <div class="html5buttons">
@@ -32,9 +36,9 @@
             </th>
 
                            <th class='no-sort'>UserId</th>
-                          
+
                            <th class='no-sort'>RoleId</th>
-                          
+
             <th style="width:60px;" class='no-sort'></th>
           </tr>
         </thead>
@@ -45,9 +49,9 @@
             </td>
 
                                <td>{{item.userId}}</td>
-                          
+
                                <td>{{item.roleId}}</td>
-                                     
+
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
