@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using System;
+using Application.Domain.common;
 
 namespace Application.Domain.Services
 {
@@ -36,7 +37,7 @@ namespace Application.Domain.Services
                 Direction = ParameterDirection.Output,
                 SqlDbType = SqlDbType.Int
             };
-            if (string.IsNullOrEmpty(users))
+            if (string.IsNullOrEmpty(users) || users == "null")
             {
                 paras.Add(new SqlParameter("@Users", DBNull.Value));
             }
@@ -45,7 +46,7 @@ namespace Application.Domain.Services
                 paras.Add(new SqlParameter("@Users", users));
             }
 
-            if (string.IsNullOrEmpty(role))
+            if (string.IsNullOrEmpty(role) ||  role == "null")
             {
                 paras.Add(new SqlParameter("@Role", DBNull.Value));
             }
@@ -55,8 +56,23 @@ namespace Application.Domain.Services
             }
 
             paras.Add(countPara);
-            var result = Sqlhelper.ExecDataTable(this.dc, "GetListUserRole", CommandType.StoredProcedure, paras.ToArray());
+            var result = Sqlhelper.ExecDataTable(this.dc, StoredProcedureConstant.GetListUserRole , CommandType.StoredProcedure, paras.ToArray());
             paging.TotalCount = (int)countPara.Value;
+            return result;
+        }
+
+        /// <summary>
+        /// GetUserRoleByUserId
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public DataTable GetUserRoleByUserId(string userId)
+        {
+            List<SqlParameter> paras = new List<SqlParameter>()
+            {
+                new SqlParameter("@userId", userId),
+            };
+            var result = Sqlhelper.ExecDataTable(this.dc, StoredProcedureConstant.GetUserRoleByUserId , CommandType.StoredProcedure, paras.ToArray());
             return result;
         }
     }

@@ -175,12 +175,23 @@ namespace Application.IdentityServer.Controllers.QLLS
         public async Task<ApiResult> SaveUserRole([FromBody] UserRoleModel model)
         {
             var list = this.roleManager?.Roles.ToList();
-            var role = await this.roleManager.FindByIdAsync(model.roleId);
-            var user = await this.userManager.FindByIdAsync(model.userId);
-            if( ! await userManager.IsInRoleAsync(user , role.Name))
+            if (!string.IsNullOrEmpty(model.roleId))
             {
-                await userManager.AddToRoleAsync(user, role.Name);
+                string[] listRoleId = model.roleId.Split(',');
+                var user = await this.userManager.FindByIdAsync(model.userId);
+                var roles = await this.userManager.GetRolesAsync(user);
+                foreach(var item in roles)
+                {
+                    await userManager.RemoveFromRoleAsync(user, item);
+                }
+
+                foreach (var roleId in listRoleId)
+                {
+                    var role = await this.roleManager.FindByIdAsync(roleId);                    
+                    await userManager.AddToRoleAsync(user, role.Name);                    
+                }
             }
+           
             return new ApiResult()
             {
                 Status = HttpStatus.OK,
@@ -188,8 +199,16 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// GetListUserRole
+        /// </summary>
+        /// <param name="users"></param>
+        /// <param name="role"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<ApiResult> GetListUserRole(string users , string role , int pageIndex , int pageSize)
+        public ApiResult GetListUserRole(string users , string role , int pageIndex , int pageSize)
         {
             PagingInfo paging = new PagingInfo { PageIndex = pageIndex, PageSize = pageSize };
             var result = UserRoleService.GetListUserRole(users, role , paging);
@@ -201,6 +220,24 @@ namespace Application.IdentityServer.Controllers.QLLS
                     Total = paging.TotalCount,
                     List = result
                 }
+            };
+        }
+
+        /// <summary>
+        /// GetUserRoleByUserId
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{id}")]
+        public ApiResult GetUserRoleByUserId(string id)
+        {
+            var result = UserRoleService.GetUserRoleByUserId(id);
+
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
             };
         }
     }

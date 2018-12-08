@@ -36,7 +36,7 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   listAllRole: Observable<Select2Model[]>;
   listAllUser: Observable<Select2Model[]>;
   searchUser = [];
-  searchRole = '';
+  searchRole = null;
   subscription: Subscription;
   checkall = false;
   constructor(private userRolesService: UserRolesService, private modalService: ModalService,
@@ -62,9 +62,6 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
-      const val = '';
-      console.log(this.searchRole);
-      console.log(this.searchUser);
       this.filterCondition.SearchCondition = [ ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
@@ -109,7 +106,9 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(item) {
-    this.modalService.openModalWithComponent(UserRolesSaveComponent, { formType: FromType.UPDATE, id: item.userId} , ModalSize.LARGE);
+    console.log(item);
+    this.modalService.openModalWithComponent(UserRolesSaveComponent, { formType: FromType.UPDATE, id: item.id}
+                            , ModalSize.LARGE);
   }
 
   onDeleteItem (item) {

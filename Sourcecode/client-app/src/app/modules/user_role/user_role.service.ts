@@ -29,25 +29,26 @@ export class UserRolesService extends BaseService {
   }
 
   save(model: UserRolesModel) {
+    model.roleId = model.roleId.toString();
     const url = this.BaseUrl + '/api/Role/SaveUserRole';
     return this.http.post<HttpResult>(url, JSON.stringify(model), this.getHeader());
     }
 
   delete(model: UserRolesModel): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/aspNetUserRoles/Delete';
+    const url = this.BaseUrl + '/api/Role/Delete';
     return this.http.post<HttpResult>(url, model , this.getHeader());
   }
 
   saveList(list: UserRolesModel[]): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/aspNetUserRoles/saveList';
+    const url = this.BaseUrl + '/api/Role/saveList';
     return this.http.post<HttpResult>(url, list);
   }
   delectList(list: UserRolesModel[]): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/aspNetUserRoles/DeleteList';
+    const url = this.BaseUrl + '/api/Role/DeleteList';
     return this.http.post<HttpResult>(url, list , this.getHeader());
   }
   getById(id: any): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/aspNetUserRoles/GetById/' + id;
+    const url = this.BaseUrl + '/api/Role/GetUserRoleByUserId/' + id;
     return this.http.get<HttpResult>(url);
   }
   getAllUser(): Observable<Select2Model[]> {

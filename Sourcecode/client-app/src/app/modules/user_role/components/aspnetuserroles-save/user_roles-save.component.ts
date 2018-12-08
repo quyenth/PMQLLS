@@ -51,10 +51,15 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
       this.isUpdate = true;
       this.userRolesService.getById(this.data.userId).subscribe((res) => {
 
-            this.myForm.patchValue({'userId': res.data.userId});
+            this.myForm.patchValue({'userId': this.data.userId});
+            if ( res.data) {
+              const listRole = res.data.reduce( (acc , cur ) => {
+                      acc.push(cur.id);
+                      return acc;
+              } , []);
+              this.myForm.patchValue({'roleId': listRole});
 
-            this.myForm.patchValue({'roleId': res.data.roleId});
-
+            }
 
       });
     } 	else {
