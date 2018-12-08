@@ -180,16 +180,20 @@ namespace Application.IdentityServer.Controllers.QLLS
                 string[] listRoleId = model.roleId.Split(',');
                 var user = await this.userManager.FindByIdAsync(model.userId);
                 var roles = await this.userManager.GetRolesAsync(user);
-                foreach(var item in roles)
-                {
-                    await userManager.RemoveFromRoleAsync(user, item);
-                }
 
+                await userManager.RemoveFromRolesAsync(user, roles);
+
+                var listAllRole = roleManager.Roles?.ToList();
+                List<string> listRole = new List<string>();
                 foreach (var roleId in listRoleId)
                 {
-                    var role = await this.roleManager.FindByIdAsync(roleId);                    
-                    await userManager.AddToRoleAsync(user, role.Name);                    
+                    var role = listAllRole.FirstOrDefault(c=>c.Id == roleId);     
+                    if(role != null)
+                    {
+                        listRole.Add(role.Name);
+                    }                                  
                 }
+                await userManager.AddToRolesAsync(user, listRole.ToArray());
             }
            
             return new ApiResult()
@@ -210,11 +214,8 @@ namespace Application.IdentityServer.Controllers.QLLS
             var user = await this.userManager.FindByEmailAsync(model.UserName);
             var roles = await this.userManager.GetRolesAsync(user);
             if (roles.Count > 0)
-            {               
-                foreach (var item in roles)
-                {
-                    await userManager.RemoveFromRoleAsync(user, item);
-                }                
+            {
+                await userManager.RemoveFromRolesAsync(user, roles.ToArray());                       
             }
 
             return new ApiResult()
