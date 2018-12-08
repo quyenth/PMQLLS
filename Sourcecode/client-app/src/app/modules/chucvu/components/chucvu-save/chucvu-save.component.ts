@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-chucVu-save',
+  selector: 'app-chuc-vu-save',
   templateUrl: './chucvu-save.component.html'
 })
 export class ChucVuSaveComponent implements OnInit , OnDestroy {
@@ -24,19 +24,14 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
   isUpdate: boolean;
   data: ChucVuModel = new ChucVuModel();
   myForm = this.fb.group({
-   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
-
-   	    chucVuId: [''],
-         
-   	    code: [''],
-         
-   	    name: [''],
-         
+        chucVuId: [''],
+        code: ['', [Validators.required, Validators.maxLength(30)] , this.validateCodeUnique.bind(this)],
+        name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)],
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private chucVuService: ChucVuService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.chucVuId = data.id;
       this.getDataByID(data);
@@ -49,25 +44,23 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
-	  this.isUpdate = true;
+    this.isUpdate = true;
       this.chucVuService.getById(this.data.chucVuId).subscribe((res) => {
 
-       	    this.myForm.patchValue({'chucVuId': res.data.chucVuId});
-             
-       	    this.myForm.patchValue({'code': res.data.code});
-             
-       	    this.myForm.patchValue({'name': res.data.name});
-             
-	  
+            this.myForm.patchValue({'chucVuId': res.data.chucVuId});
+
+            this.myForm.patchValue({'code': res.data.code});
+
+            this.myForm.patchValue({'name': res.data.name});
+
       });
+    } 	else {
+      this.myForm.patchValue({'chucVuId': data.id});
     }
-	else{
-		this.myForm.patchValue({'chucVuId': data.id});
-	}
   }
 
   onSubmit() {
-    
+
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -86,12 +79,9 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
   submitData() {
     this.spinner.show();
     this.submited = true;
-    const submitData = new ChucVuModel();
-    //submitData.chucVuId = this.data.chucVuId;
-    //submitData.text = this.myForm.value.name.trim();
     this.chucVuService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
-	  this.toastr.success('Lưu thành công!');
+      this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {
@@ -109,6 +99,38 @@ export class ChucVuSaveComponent implements OnInit , OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  
-  
+
+  validateCodeUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.chucVuService.checkCodeIsUnique(this.data.chucVuId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isCodeDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+
+  validateNameUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.chucVuService.checkNameIsUnique(this.data.chucVuId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isNameDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
 }

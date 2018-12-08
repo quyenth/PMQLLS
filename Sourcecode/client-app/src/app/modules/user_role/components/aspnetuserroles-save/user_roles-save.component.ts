@@ -63,7 +63,7 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
 
       });
     } 	else {
-      this.myForm.patchValue({'userId': data.id});
+      this.myForm.patchValue({'userId': null});
     }
   }
 

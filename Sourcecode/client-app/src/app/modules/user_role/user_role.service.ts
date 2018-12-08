@@ -35,7 +35,7 @@ export class UserRolesService extends BaseService {
     }
 
   delete(model: UserRolesModel): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/Role/Delete';
+    const url = this.BaseUrl + '/api/Role/DeleteUserRole';
     return this.http.post<HttpResult>(url, model , this.getHeader());
   }
 

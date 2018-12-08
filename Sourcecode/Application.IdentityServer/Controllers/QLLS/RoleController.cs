@@ -200,6 +200,31 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         /// <summary>
+        /// DeleteUserRole
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ApiResult> DeleteUserRole([FromBody] UserRoleModel model)
+        {
+            var user = await this.userManager.FindByEmailAsync(model.UserName);
+            var roles = await this.userManager.GetRolesAsync(user);
+            if (roles.Count > 0)
+            {               
+                foreach (var item in roles)
+                {
+                    await userManager.RemoveFromRoleAsync(user, item);
+                }                
+            }
+
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = model
+            };
+        }
+
+        /// <summary>
         /// GetListUserRole
         /// </summary>
         /// <param name="users"></param>

@@ -91,5 +91,27 @@ namespace Application.IdentityServer.Controllers
             };
         }
 
+        /// <summary>
+        /// CheckEmailIsInUse
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckEmailIsInUse(string email)
+        {
+            //var list = this.userManager?.Users.Select(c => new UserVO { Id = c.Id, FullName = c.FullName, PhoneNumber = c.PhoneNumber, UserName = c.UserName }).ToList();
+            var user = await this.userManager.FindByEmailAsync(email);
+            bool result = false;
+            if(user != null)
+            {
+                result = true;
+            }
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
+
     }
 }

@@ -43,4 +43,16 @@ export class ChucVuService extends BaseService {
     const url = this.BaseUrl + '/api/chucVu/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+
+  checkNameIsUnique (id: number, name: string)  {
+    const params = new HttpParams().set('id', id.toString()).set('name', name);
+    const url = this.BaseUrl + '/api/chucVu/CheckNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
+
+  checkCodeIsUnique (id: number, code: string)  {
+    const params = new HttpParams().set('id', id.toString()).set('code', code);
+    const url = this.BaseUrl + '/api/chucVu/checkCodeIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
 }
