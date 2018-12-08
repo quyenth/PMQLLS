@@ -26,7 +26,6 @@ import { RoleService } from 'src/app/modules/role/role.service';
 export class UserRolesListComponent implements OnInit, OnDestroy {
 
 
-  @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
   pageSize = 2;
 
@@ -35,10 +34,12 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   filterCondition: FilterCondition = new FilterCondition();
   orderInfo: OrderInfo = new OrderInfo('', true);
   listAllRole: Observable<Select2Model[]>;
-
+  listAllUser: Observable<Select2Model[]>;
+  searchUser = [];
+  searchRole = '';
   subscription: Subscription;
   checkall = false;
-  constructor(private aspNetUserRolesService: UserRolesService, private modalService: ModalService,
+  constructor(private userRolesService: UserRolesService, private modalService: ModalService,
       private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService,
       private toastr: ToastrService , private roleService: RoleService) { }
 
@@ -55,21 +56,21 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
     this.filterCondition.Orders = [ ];
     this.onSearch();
     this.listAllRole = this.roleService.getAllRole();
+    this.listAllUser = this.userRolesService.getAllUser();
 
   }
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = '';
+      console.log(this.searchRole);
+      console.log(this.searchUser);
       this.filterCondition.SearchCondition = [ ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
-    if (this.orderInfo.FieldName) {
-        this.filterCondition.Orders = [{...this.orderInfo}];
-       } else {
-        this.filterCondition.Orders = [];
-      }
-      this.aspNetUserRolesService.search(this.filterCondition).subscribe((res: HttpResult) => {
+
+      this.userRolesService.search(this.searchUser.toString(), this.searchRole ,
+            this.filterCondition.PageIndex , this.filterCondition.PageSize).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
         this.totalCount = res.data.total;
@@ -116,7 +117,7 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
     const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
-          this.aspNetUserRolesService.delete(item).subscribe((res) => {
+          this.userRolesService.delete(item).subscribe((res) => {
           this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
@@ -136,7 +137,7 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
       const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
-            this.aspNetUserRolesService.delectList(listSelected).subscribe((res) => {
+            this.userRolesService.delectList(listSelected).subscribe((res) => {
             this.toastr.success('Xóa thành công!');
               this.onSearch();
           });

@@ -18,9 +18,14 @@ export class UserRolesService extends BaseService {
     super();
   }
 
-  search(filterCondition: FilterCondition): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/AspNetUserRoles/Search';
-    return this.http.post<HttpResult>(url, filterCondition);
+  search(users: string , role: string , pageIndex: number , pageSize: number ): Observable<HttpResult> {
+    const params = new HttpParams()
+                          .set('users', users)
+                          .set('role', role)
+                          .set('pageIndex', pageIndex.toString())
+                          .set('pageSize', pageSize.toString());
+    const url = this.BaseUrl + '/api/Role/GetListUserRole';
+    return this.http.get<HttpResult>(url, { params: params });
   }
 
   save(model: UserRolesModel) {

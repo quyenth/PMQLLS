@@ -188,5 +188,20 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        [HttpGet]
+        public async Task<ApiResult> GetListUserRole(string users , string role , int pageIndex , int pageSize)
+        {
+            PagingInfo paging = new PagingInfo { PageIndex = pageIndex, PageSize = pageSize };
+            var result = UserRoleService.GetListUserRole(users, role , paging);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = new
+                {
+                    Total = paging.TotalCount,
+                    List = result
+                }
+            };
+        }
     }
 }

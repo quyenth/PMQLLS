@@ -13,13 +13,22 @@
             <ng-select [items]="listAllRole | async"
                 bindLabel="text"
                 bindValue="id"
-                #SearchName               >
+                [(ngModel)]="searchRole"               >
             </ng-select>
         </div>
+        <div class="col-sm-3">
+          <ng-select [items]="listAllUser | async"
+                            bindLabel="text"
+                            bindValue="id"
+                            [multiple]="true"
+                            [(ngModel)]="searchUser"
+                            >
+          </ng-select>
+      </div>
       <div class="col-sm-3">
             <button type="button" class="btn btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
       </div>
-            <div class="html5buttons col-sm-6">
+            <div class="html5buttons col-sm-3">
                 <div class="html5buttons">
                   <button class="btn btn-primary buttons-copy buttons-html5"  (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
                   <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
@@ -35,9 +44,9 @@
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                           <th class='no-sort'>UserId</th>
+                           <th class='no-sort'>User</th>
 
-                           <th class='no-sort'>RoleId</th>
+                           <th class='no-sort'>Roles</th>
 
             <th style="width:60px;" class='no-sort'></th>
           </tr>
@@ -48,9 +57,9 @@
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
 
-                               <td>{{item.userId}}</td>
+                               <td>{{item.userName}}</td>
 
-                               <td>{{item.roleId}}</td>
+                               <td>{{item.roleName}}</td>
 
 
             <td class="action-col">
