@@ -1,3 +1,5 @@
+import { SoQuyenModule } from './modules/soquyen/soquyen.module';
+import { LietSyModule } from './modules/lietsy/lietsy.module';
 import { DiemCaoModule } from './modules/diemcao/diemcao.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -68,7 +70,9 @@ import { UserRolesModule } from './modules/user_role/user_role.module';
     LoaiDoiTuongModule,
     DiemCaoModule,
     RolesModule,
-    UserRolesModule
+    UserRolesModule,
+    LietSyModule,
+    SoQuyenModule
   ],
   providers: [
     AuthService

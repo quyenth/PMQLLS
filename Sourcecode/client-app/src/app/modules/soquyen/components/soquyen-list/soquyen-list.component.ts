@@ -1,7 +1,7 @@
 import { ModalType } from './../../../../shared/commons/modal-type';
-import { LietSySaveComponent } from './../lietsy-save/lietsy-save.component';
+import { SoQuyenSaveComponent } from './../soquyen-save/soquyen-save.component';
 import { HttpResult } from './../../../../shared/commons/http-result';
-import { LietSyService } from './../../lietsy.service';
+import { SoQuyenService } from './../../soquyen.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { ModalService } from 'src/app/shared/services/modal.Service';
@@ -18,10 +18,10 @@ import { OrderInfo } from 'src/app/shared/models/order-info';
 
 
 @Component({
-  selector: 'app-lietSy-list',
-  templateUrl: './lietsy-list.component.html'
+  selector: 'app-soQuyen-list',
+  templateUrl: './soquyen-list.component.html'
 })
-export class LietSyListComponent implements OnInit, OnDestroy {
+export class SoQuyenListComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('SearchName') searchInput: ElementRef ;
@@ -35,7 +35,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   checkall = false;
-  constructor(private lietSyService: LietSyService, private modalService: ModalService,
+  constructor(private soQuyenService: SoQuyenService, private modalService: ModalService,
       private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
        } else {
         this.filterCondition.Orders = [];
       }
-      this.lietSyService.search(this.filterCondition).subscribe((res: HttpResult) => {
+      this.soQuyenService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
         this.totalCount = res.data.total;
@@ -100,11 +100,11 @@ export class LietSyListComponent implements OnInit, OnDestroy {
 
 
   onAddNew () {
-    this.modalService.openModalWithComponent(LietSySaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(SoQuyenSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
   }
 
   onEditItem(item) {
-    this.modalService.openModalWithComponent(LietSySaveComponent, { formType: FromType.UPDATE, id: item.id} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(SoQuyenSaveComponent, { formType: FromType.UPDATE, id: item.id} , ModalSize.LARGE);
   }
 
   onDeleteItem (item) {
@@ -112,7 +112,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
     let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
-          this.lietSyService.delete(item).subscribe((res) => {
+          this.soQuyenService.delete(item).subscribe((res) => {
 		    this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
@@ -132,7 +132,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
       const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
-            this.lietSyService.delectList(listSelected).subscribe((res) => {
+            this.soQuyenService.delectList(listSelected).subscribe((res) => {
 			   this.toastr.success('Xóa thành công!');
               this.onSearch();
           });

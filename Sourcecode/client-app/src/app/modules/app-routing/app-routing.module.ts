@@ -1,3 +1,5 @@
+import { SoQuyenListComponent } from './../soquyen/components/soquyen-list/soquyen-list.component';
+import { LietSyListComponent } from './../lietsy/components/lietsy-list/lietsy-list.component';
 import { UserRolesListComponent } from './../user_role/components/aspnetuserroles-list/user_roles-list.component';
 import { RolesListComponent } from './../role/components/role-list/aspnetroles-list.component';
 import { DiemCaoListComponent } from './../diemcao/components/diemcao-list/diemcao-list.component';
@@ -36,7 +38,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'role', component: RolesListComponent },
   { path: 'user_role', component: UserRolesListComponent },
-
+  { path: 'lietsi', component: LietSyListComponent },
+  { path: 'soquyen', component: SoQuyenListComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

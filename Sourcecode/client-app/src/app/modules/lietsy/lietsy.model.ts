@@ -4,10 +4,6 @@ export class LietSyModel {
 		 
 			 thuTu: number;
 		 
-			 soGoSo: number;
-		 
-			 soQuyen: string;
-		 
 			 hoTen: string;
 		 
 			 ten: string;
@@ -149,5 +145,7 @@ export class LietSyModel {
 		 
 		 
 			 updatedBy: string;
+		 
+			 soQuyenId: number;
 		 
 }

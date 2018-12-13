@@ -14,9 +14,7 @@ namespace Application.Domain.Entity
                 
                     public Int32? ThuTu { get; set; }
                 
-                    public Int32? SoGoSo { get; set; }
-                
-                    public string SoQuyen { get; set; }
+                    public int SoQuyenId { get; set; }
                 
                     public string HoTen { get; set; }
                 

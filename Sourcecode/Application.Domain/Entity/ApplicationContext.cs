@@ -27,6 +27,7 @@ namespace Application.Domain.Entity
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Xa> Xa { get; set; }
 
+        public DbSet<SoQuyen> SoQuyen { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

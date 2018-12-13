@@ -10,6 +10,8 @@ import { LietSyService } from './../../lietsy.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-lietSy-save',
@@ -19,6 +21,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
   subscription: Subscription;
   submited: boolean;
+  isUpdate: boolean;
   data: LietSyModel = new LietSyModel();
   myForm = this.fb.group({
    //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
@@ -26,10 +29,6 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
    	    id: [''],
          
    	    thuTu: [''],
-         
-   	    soGoSo: [''],
-         
-   	    soQuyen: [''],
          
    	    hoTen: [''],
          
@@ -185,11 +184,13 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
          
    	    updatedBy: [''],
          
+   	    soQuyenId: [''],
+         
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private lietSyService: LietSyService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService) {
+          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -202,15 +203,12 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
+	  this.isUpdate = true;
       this.lietSyService.getById(this.data.id).subscribe((res) => {
 
        	    this.myForm.patchValue({'id': res.data.id});
              
        	    this.myForm.patchValue({'thuTu': res.data.thuTu});
-             
-       	    this.myForm.patchValue({'soGoSo': res.data.soGoSo});
-             
-       	    this.myForm.patchValue({'soQuyen': res.data.soQuyen});
              
        	    this.myForm.patchValue({'hoTen': res.data.hoTen});
              
@@ -366,6 +364,8 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
              
        	    this.myForm.patchValue({'updatedBy': res.data.updatedBy});
              
+       	    this.myForm.patchValue({'soQuyenId': res.data.soQuyenId});
+             
 	  
       });
     }
@@ -399,6 +399,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
     //submitData.text = this.myForm.value.name.trim();
     this.lietSyService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
+	  this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {
