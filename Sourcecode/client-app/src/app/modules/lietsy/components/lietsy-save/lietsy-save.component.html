@@ -6,139 +6,114 @@
 </div>
 <div class="modal-body">
     <form [formGroup]="myForm">
-      <!--   <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('name').valid }">
-              <label class="col-sm-2 col-form-label">Tên</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" formControlName="name">
-             <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('required')">Trường này là bắt buộc.</span>
-              <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('maxlength')">Độ dài tối đa là 30 ký tự.</span>
-              <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('name').hasError('isNameDuplicate')">Tên đã tồn tại.</span>
-			  
-            </div>
-        </div>
-	-->
+              <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('soQuyenId').valid }">
+                <label class="col-form-label col-sm-2">
+                  Quyển/Tập số
+                </label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" formControlName="soQuyenId" />
+                </div>
+              </div>
 
-		  			
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('id').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    Id
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="id" />
-		                  </div>
-		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thuTu').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    ThuTu
+		                    Số Thứ tự
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="thuTu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hoTen').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    HoTen
+		                    Họ và tên
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="hoTen" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ten').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    Ten
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="ten" />
-		                  </div>
-		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('tenKhac').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    TenKhac
+		                    Tên khác
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="tenKhac" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('biDanh').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    BiDanh
+		                    Bí danh
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="biDanh" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('gioiTinh').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    GioiTinh
+		                    Giới tính
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="gioiTinh" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('namSinh').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    NamSinh
+		                    Năm sinh
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="namSinh" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('danToc').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    DanToc
+		                    Dân tộc
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="danToc" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('quocTich').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    QuocTich
+		                    Quốc tich
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="quocTich" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queThon').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    QueThon
@@ -147,10 +122,10 @@
 		                    <input type="text" class="form-control" formControlName="queThon" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queXaId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    QueXaId
@@ -159,10 +134,10 @@
 		                    <input type="text" class="form-control" formControlName="queXaId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queHuyenId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    QueHuyenId
@@ -171,10 +146,10 @@
 		                    <input type="text" class="form-control" formControlName="queHuyenId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queTinhId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    QueTinhId
@@ -183,10 +158,10 @@
 		                    <input type="text" class="form-control" formControlName="queTinhId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('truQuanThon').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    TruQuanThon
@@ -195,10 +170,10 @@
 		                    <input type="text" class="form-control" formControlName="truQuanThon" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('truQuanXaId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    TruQuanXaId
@@ -207,10 +182,10 @@
 		                    <input type="text" class="form-control" formControlName="truQuanXaId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('truQuanHuyenId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    TruQuanHuyenId
@@ -219,10 +194,10 @@
 		                    <input type="text" class="form-control" formControlName="truQuanHuyenId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('truQuanTinhId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    TruQuanTinhId
@@ -231,10 +206,10 @@
 		                    <input type="text" class="form-control" formControlName="truQuanTinhId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('diaPhuongNhapNgu').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    DiaPhuongNhapNgu
@@ -243,46 +218,46 @@
 		                    <input type="text" class="form-control" formControlName="diaPhuongNhapNgu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayNhapNgu').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    NgayNhapNgu
+		                    Ngày nhập ngũ
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="ngayNhapNgu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayXuatNgu').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    NgayXuatNgu
+		                    Ngày xuất ngũ
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="ngayXuatNgu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayTaiNgu').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    NgayTaiNgu
+		                    Ngày tái ngũ
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="ngayTaiNgu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayDiBCK').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    NgayDiBCK
@@ -291,94 +266,94 @@
 		                    <input type="text" class="form-control" formControlName="ngayDiBCK" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('donViHuanLuyen').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    DonViHuanLuyen
+		                    Đơn vị huấn luyện
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="donViHuanLuyen" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('doanVien').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    DoanVien
+		                    Là Đoàn viên
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="doanVien" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayVaoDoan').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    NgayVaoDoan
+		                    Ngày vào Đoàn
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="ngayVaoDoan" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('dangVien').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    DangVien
+		                    Là Đảng viên
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="dangVien" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayVaoDang').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    NgayVaoDang
+		                    Ngày vào Đảng
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="ngayVaoDang" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('khenThuong').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    KhenThuong
+		                    Khen thưởng
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="khenThuong" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayHiSinh').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    NgayHiSinh
+		                    Ngày hi sinh
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="ngayHiSinh" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hiSinhLyDoID').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HiSinhLyDoID
@@ -387,10 +362,10 @@
 		                    <input type="text" class="form-control" formControlName="hiSinhLyDoID" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhLyDoChiTiet').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhLyDoChiTiet
@@ -399,10 +374,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhLyDoChiTiet" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhThoiKyId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhThoiKyId
@@ -411,10 +386,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhThoiKyId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('doiTuongId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    DoiTuongId
@@ -423,10 +398,10 @@
 		                    <input type="text" class="form-control" formControlName="doiTuongId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhMatTranId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhMatTranId
@@ -435,10 +410,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhMatTranId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhTranDanh').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhTranDanh
@@ -447,10 +422,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhTranDanh" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhDiaDiem').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhDiaDiem
@@ -459,10 +434,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhDiaDiem" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhXaId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhXaId
@@ -471,10 +446,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhXaId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhHuyenId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhHuyenId
@@ -483,10 +458,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhHuyenId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhTinhId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhTinhId
@@ -495,10 +470,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhTinhId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangXaId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MaiTangXaId
@@ -507,10 +482,10 @@
 		                    <input type="text" class="form-control" formControlName="maiTangXaId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangHuyenId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MaiTangHuyenId
@@ -519,10 +494,10 @@
 		                    <input type="text" class="form-control" formControlName="maiTangHuyenId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangTinhId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MaiTangTinhId
@@ -531,10 +506,10 @@
 		                    <input type="text" class="form-control" formControlName="maiTangTinhId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangBanDo').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MaiTangBanDo
@@ -543,10 +518,10 @@
 		                    <input type="text" class="form-control" formControlName="maiTangBanDo" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangToaDo').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MaiTangToaDo
@@ -555,10 +530,10 @@
 		                    <input type="text" class="form-control" formControlName="maiTangToaDo" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangDiemCaoId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MaiTangDiemCaoId
@@ -567,10 +542,10 @@
 		                    <input type="text" class="form-control" formControlName="maiTangDiemCaoId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('nghiaTrang').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    NghiaTrang
@@ -579,10 +554,10 @@
 		                    <input type="text" class="form-control" formControlName="nghiaTrang" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('viTriMo').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    ViTriMo
@@ -591,10 +566,10 @@
 		                    <input type="text" class="form-control" formControlName="viTriMo" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('quyTap').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    QuyTap
@@ -603,10 +578,10 @@
 		                    <input type="text" class="form-control" formControlName="quyTap" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTang').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MaiTang
@@ -615,10 +590,10 @@
 		                    <input type="text" class="form-control" formControlName="maiTang" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('matThiHai').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MatThiHai
@@ -627,10 +602,10 @@
 		                    <input type="text" class="form-control" formControlName="matThiHai" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('matTich').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    MatTich
@@ -639,34 +614,34 @@
 		                    <input type="text" class="form-control" formControlName="matTich" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayBaoTu').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    NgayBaoTu
+		                    Ngày báo tử
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="ngayBaoTu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('giayBaoTu').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    GiayBaoTu
+		                    Giấy báo tử
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="giayBaoTu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanCha').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    ThanNhanCha
@@ -675,10 +650,10 @@
 		                    <input type="text" class="form-control" formControlName="thanNhanCha" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanMe').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    ThanNhanMe
@@ -687,10 +662,10 @@
 		                    <input type="text" class="form-control" formControlName="thanNhanMe" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanVo').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    ThanNhanVo
@@ -699,10 +674,10 @@
 		                    <input type="text" class="form-control" formControlName="thanNhanVo" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanCon').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    ThanNhanCon
@@ -711,10 +686,10 @@
 		                    <input type="text" class="form-control" formControlName="thanNhanCon" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanKhac').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    ThanNhanKhac
@@ -723,10 +698,10 @@
 		                    <input type="text" class="form-control" formControlName="thanNhanKhac" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanBaoTin').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    ThanNhanBaoTin
@@ -735,10 +710,10 @@
 		                    <input type="text" class="form-control" formControlName="thanNhanBaoTin" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanDiaChi').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    ThanNhanDiaChi
@@ -747,10 +722,10 @@
 		                    <input type="text" class="form-control" formControlName="thanNhanDiaChi" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayCapBangTQGC').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    NgayCapBangTQGC
@@ -759,10 +734,10 @@
 		                    <input type="text" class="form-control" formControlName="ngayCapBangTQGC" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('soBangTQGC').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    SoBangTQGC
@@ -771,10 +746,10 @@
 		                    <input type="text" class="form-control" formControlName="soBangTQGC" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('donViLuuTruId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    DonViLuuTruId
@@ -783,10 +758,10 @@
 		                    <input type="text" class="form-control" formControlName="donViLuuTruId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('donViQuanLyId').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    DonViQuanLyId
@@ -795,10 +770,10 @@
 		                    <input type="text" class="form-control" formControlName="donViQuanLyId" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhDonVi').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhDonVi
@@ -807,10 +782,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhDonVi" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('donVi_B_C_D').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    DonVi_B_C_D
@@ -819,10 +794,10 @@
 		                    <input type="text" class="form-control" formControlName="donVi_B_C_D" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('donVi_E').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    DonVi_E
@@ -831,10 +806,10 @@
 		                    <input type="text" class="form-control" formControlName="donVi_E" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('donVi_F').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    DonVi_F
@@ -843,10 +818,10 @@
 		                    <input type="text" class="form-control" formControlName="donVi_F" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('donVi_G').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    DonVi_G
@@ -855,10 +830,10 @@
 		                    <input type="text" class="form-control" formControlName="donVi_G" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('homThuDonVi').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HomThuDonVi
@@ -867,10 +842,10 @@
 		                    <input type="text" class="form-control" formControlName="homThuDonVi" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhCapBac').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhCapBac
@@ -879,10 +854,10 @@
 		                    <input type="text" class="form-control" formControlName="hySinhCapBac" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhChucVu').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    HySinhChucVu
@@ -891,22 +866,22 @@
 		                    <input type="text" class="form-control" formControlName="hySinhChucVu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ghiChu').valid }">
 		                  <label class="col-form-label col-sm-2">
-		                    GhiChu
+		                    Ghi chú
 		                  </label>
 		                  <div class="col-sm-8">
 		                    <input type="text" class="form-control" formControlName="ghiChu" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
+
+
+
+
 		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('active').valid }">
 		                  <label class="col-form-label col-sm-2">
 		                    Active
@@ -915,69 +890,10 @@
 		                    <input type="text" class="form-control" formControlName="active" />
 		                  </div>
 		                 </div>
-		          
-		  
-		  		   
-		  			
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('created').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    Created
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="created" />
-		                  </div>
-		                 </div>
-		          
-		  
-		  		   
-		  			
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('creatdedBy').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    CreatdedBy
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="creatdedBy" />
-		                  </div>
-		                 </div>
-		          
-		  
-		  		   
-		  			
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('updated').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    Updated
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="updated" />
-		                  </div>
-		                 </div>
-		          
-		  
-		  		   
-		  			
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('updatedBy').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    UpdatedBy
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="updatedBy" />
-		                  </div>
-		                 </div>
-		          
-		  
-		  		   
-		  			
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('soQuyenId').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    SoQuyenId
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="soQuyenId" />
-		                  </div>
-		                 </div>
-		          
-		  
-		  		   
+
+
+
+
 
     </form>
 </div>
