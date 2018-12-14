@@ -78,6 +78,7 @@ namespace Application.IdentityServer
             services.AddTransient<IXaService, XaService>();
 
             services.AddTransient<IUserRoleService, UserRoleService>();
+            services.AddTransient<ISoQuyenService, SoQuyenService>();
 
 
             services.AddMvc();

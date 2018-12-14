@@ -31,10 +31,9 @@
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                           <th class='no-sort'>Id</th>
-                          
-                           <th class='no-sort'>Name</th>
-                          
+
+                           <th class='no-sort'>Tên</th>
+
             <th style="width:60px;" class='no-sort'></th>
           </tr>
         </thead>
@@ -44,10 +43,9 @@
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
 
-                               <td>{{item.id}}</td>
-                          
+
                                <td>{{item.name}}</td>
-                                     
+
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
@@ -70,3 +68,13 @@
 
   </div>
 </div>
+
+<swal
+  #deleteItemSwal
+  text="Bạn thực sự muốn xóa?"
+  type="question"
+  [showCancelButton]="true"
+  >
+</swal>
+
+

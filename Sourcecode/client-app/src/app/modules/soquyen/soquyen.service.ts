@@ -43,4 +43,10 @@ export class SoQuyenService extends BaseService {
     const url = this.BaseUrl + '/api/soQuyen/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+
+  checkNameIsUnique (id: number, name: string)  {
+    const params = new HttpParams().set('id', id.toString()).set('name', name);
+    const url = this.BaseUrl + '/api/soQuyen/CheckNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
 }

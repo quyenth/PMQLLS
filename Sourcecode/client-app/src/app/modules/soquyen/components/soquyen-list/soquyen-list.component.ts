@@ -15,16 +15,19 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { OrderInfo } from 'src/app/shared/models/order-info';
+import {SwalDirective, SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
-  selector: 'app-soQuyen-list',
+  selector: 'app-so-quyen-list',
   templateUrl: './soquyen-list.component.html'
 })
 export class SoQuyenListComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('SearchName') searchInput: ElementRef ;
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
+
   currentPage = 1;
   pageSize = 2;
 
@@ -47,7 +50,7 @@ export class SoQuyenListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
+
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
@@ -55,12 +58,12 @@ export class SoQuyenListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-		//new SearchInfo('Text', OperationType.Contains, val)
-	  ];
+      this.filterCondition.SearchCondition = [
+      new SearchInfo('Name', OperationType.Contains, val)
+    ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
-	  if (this.orderInfo.FieldName) {
+      if (this.orderInfo.FieldName) {
         this.filterCondition.Orders = [{...this.orderInfo}];
        } else {
         this.filterCondition.Orders = [];
@@ -108,43 +111,38 @@ export class SoQuyenListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteItem (item) {
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-        dialogCloseSubscription.unsubscribe();
-        if ( data === ActionType.ACCEPT) {
-          this.soQuyenService.delete(item).subscribe((res) => {
-		    this.toastr.success('Xóa thành công!');
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.soQuyenService.delete(item).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
+  }
+
+
+  onDeleteSelected () {
+    const listSelected = this.list$.filter(c => c.selected === true);
+
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn?' ;
+    this.deleteItemSwal.show().then( (result) => {
+      if ( result.value ) {
+        this.soQuyenService.delectList(listSelected).subscribe((res) => {
+          this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
     });
   }
 
-  onDeleteSelected () {
-    const listSelected = this.list$.filter(c => c.selected === true);
-    if (listSelected.length === 0) {
-        this.confirmationDialogService.confirm('Thông tin!', 'Bạn chưa chọn mục nào?' , ModalType.INFO);
-        return;
-    }
-
-
-      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-          dialogCloseSubscription.unsubscribe();
-          if ( data === ActionType.ACCEPT) {
-            this.soQuyenService.delectList(listSelected).subscribe((res) => {
-			   this.toastr.success('Xóa thành công!');
-              this.onSearch();
-          });
-      }
-      });
-
-  }
-
   onEnter() {
     this.onSearch();
   }
-  
+
+
   reSort(text: string ) {
     console.log(text);
     if ( this.orderInfo.FieldName === text) {
@@ -155,7 +153,7 @@ export class SoQuyenListComponent implements OnInit, OnDestroy {
     }
     this.onSearch();
   }
-  
+
   getSelectedItems() {
     return this.list$.filter(c => c.selected === true);
   }

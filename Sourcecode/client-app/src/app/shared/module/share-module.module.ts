@@ -11,6 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 
 export function getDatepickerConfig(): BsDatepickerConfig {
@@ -32,13 +33,23 @@ export function getDatepickerConfig(): BsDatepickerConfig {
     ToastrModule.forRoot({progressBar : true, closeButton : true}),
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    SweetAlert2Module.forRoot({
+      buttonsStyling: false,
+      customClass: 'modal-content',
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn',
+      cancelButtonText: '<i class="fas fa-times"></i> Đóng',
+      confirmButtonText: '<i class="far fa-save"></i> Lưu',
+      title: 'Xác nhận',
+      focusConfirm: true
+  })
   ],
   declarations: [ConfirmDialogComponent, PagingComponent ],
   exports : [
     DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule ,
     PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule ,
-    BrowserAnimationsModule , BsDatepickerModule , NgSelectModule
+    BrowserAnimationsModule , BsDatepickerModule , NgSelectModule , SweetAlert2Module
   ]
 })
 export class ShareModule { }
