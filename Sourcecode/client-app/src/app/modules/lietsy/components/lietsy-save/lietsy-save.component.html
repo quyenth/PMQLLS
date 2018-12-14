@@ -11,7 +11,11 @@
                   Quyển/Tập số
                 </label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" formControlName="soQuyenId" />
+                  <ng-select [items]="listAllSoQuyen | async"
+                            bindLabel="text"
+                            bindValue="id"
+                            formControlName="soQuyenId">
+                        </ng-select>
                 </div>
               </div>
 

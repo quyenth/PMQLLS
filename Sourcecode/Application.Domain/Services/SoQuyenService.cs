@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -30,6 +31,15 @@ namespace Application.Domain.Services
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// getListAllSoQuyen
+        /// </summary>
+        /// <returns></returns>
+        public IList getListAllSoQuyen()
+        {
+            return this.dc.SoQuyen.ToList();
         }
     }
 }

@@ -1,3 +1,4 @@
+import { SoQuyenService } from './../../../soquyen/soquyen.service';
 import { DiemCaoService } from './../../../diemcao/diemcao.service';
 import { DiemCaoSaveComponent } from './../../../diemcao/components/diemcao-save/diemcao-save.component';
 import { ThoiKyService } from './../../../thoiky/thoiky.service';
@@ -7,7 +8,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { LietSyModel } from './../../lietsy.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
-import { Subscription, timer, of } from 'rxjs';
+import { Subscription, timer, of, Observable } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { ActionType } from 'src/app/shared/commons/action-type';
@@ -16,6 +17,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
+import { Select2Model } from 'src/app/shared/models/select2.model';
 
 
 @Component({
@@ -28,6 +30,8 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   submited: boolean;
   isUpdate: boolean;
   data: LietSyModel = new LietSyModel();
+  listAllSoQuyen: Observable<Select2Model[]>;
+
   myForm = this.fb.group({
 
         id: [''],
@@ -188,7 +192,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         updatedBy: [''],
 
-        soQuyenId: [''],
+        soQuyenId: [null],
 
   });
 
@@ -196,7 +200,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
           private lietSyService: LietSyService, private spinner: NgxSpinnerService,
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService,
           private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
-          , private diemCaoService: DiemCaoService) {
+          , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -204,6 +208,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit() {
+    this.listAllSoQuyen = this.soQuyenService.getListAllSoQuyen();
 
   }
 
