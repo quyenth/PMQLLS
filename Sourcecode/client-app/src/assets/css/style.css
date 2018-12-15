@@ -9822,3 +9822,12 @@ table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .so
 .modal-full{
   max-width: 98%;
 }
+.swal2-container {
+  z-index: 9999!important;
+}
+.swal2-actions button{
+  margin: 5px
+}
+.modal-full .modal-body{
+  background: #f8fafb;
+}
