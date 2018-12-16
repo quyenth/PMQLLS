@@ -1,6 +1,7 @@
 using Application.Domain.Entity;
 using Framework.Common;
 using Microsoft.Extensions.Logging;
+using System.Collections;
 using System.Linq;
 
 namespace Application.Domain.Services
@@ -20,6 +21,11 @@ namespace Application.Domain.Services
             }
 
             return true;
+        }
+
+        public IList GetListAllThoiKy()
+        {
+            return this.dc.ThoiKy.ToList();
         }
     }
 }

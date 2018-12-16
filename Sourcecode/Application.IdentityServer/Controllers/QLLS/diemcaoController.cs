@@ -171,5 +171,20 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// GetListAllDiemCao
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> GetListAllDiemCao()
+        {
+            var result = diemCaoService.GetListAllDiemCao();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
+
     }
 }

@@ -2,6 +2,7 @@ using Framework.Common;
 using Application.Domain.Entity;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -43,6 +44,11 @@ namespace Application.Domain.Services
             }
 
             return true;
+        }
+
+        public IList GetListAllDiemCao()
+        {
+            return this.dc.DiemCao.ToList();
         }
     }
 }

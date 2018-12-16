@@ -153,7 +153,20 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// GetListAllThoiKy
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> GetListAllThoiKy()
+        {
+            var result = thoiKyService.GetListAllThoiKy();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
 
-        
     }
 }

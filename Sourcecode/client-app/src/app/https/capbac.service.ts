@@ -6,6 +6,8 @@ import { BaseService } from '../shared/services/base.service';
 import { FilterCondition } from '../shared/models/filter-condition';
 import { HttpResult } from '../shared/commons/http-result';
 import { CapBac } from '../shared/models/cap-bac.model';
+import { Select2Model } from '../shared/models/select2.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +50,16 @@ export class CapbacService extends BaseService {
     const params = new HttpParams().set('capBacId', capBacId.toString()).set('name', name);
     const url = this.BaseUrl + '/api/capbac/checkNameIsUnique';
     return this.http.get<HttpResult>(url, { params : params});
+  }
+
+  getListAllCapBac(): Observable<Select2Model[]> {
+    const url = this.BaseUrl + '/api/capbac/GetListAllCapBac';
+    return this.http.get<HttpResult>(url).pipe(map(res => {
+        const result: Select2Model[] = [] ;
+        res.data.forEach(element => {
+          result.push(new Select2Model (element.capBacId, element.text));
+        });
+        return result ;
+    }));
   }
 }

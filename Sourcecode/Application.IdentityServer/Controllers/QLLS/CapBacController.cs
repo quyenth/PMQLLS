@@ -153,5 +153,20 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = result
             };
         }
+
+        /// <summary>
+        /// GetListAllCapBac
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> GetListAllCapBac()
+        {
+            var result = capBacService.GetListAllCapBac();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }

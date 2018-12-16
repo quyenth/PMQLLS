@@ -3,7 +3,7 @@ using Application.Domain.Entity;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -23,6 +23,11 @@ namespace Application.Domain.Services
             }
 
             return true;
+        }
+
+        public IList GetListAllCapBac()
+        {
+            return this.dc.CapBac.ToList();
         }
     }
 }

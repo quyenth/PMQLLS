@@ -1,3 +1,4 @@
+import { ChucVuService } from './../../../chucvu/chucvu.service';
 import { SoQuyenService } from './../../../soquyen/soquyen.service';
 import { DiemCaoService } from './../../../diemcao/diemcao.service';
 import { DiemCaoSaveComponent } from './../../../diemcao/components/diemcao-save/diemcao-save.component';
@@ -31,6 +32,9 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   isUpdate: boolean;
   data: LietSyModel = new LietSyModel();
   listAllSoQuyen: Observable<Select2Model[]>;
+  listAllThoiKy: Observable<Select2Model[]>;
+  listAllCapBac: Observable<Select2Model[]>;
+  listAllChucVu: Observable<Select2Model[]>;
 
   myForm = this.fb.group({
 
@@ -98,7 +102,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         hySinhLyDoChiTiet: [''],
 
-        hySinhThoiKyId: [''],
+        hySinhThoiKyId: [null],
 
         doiTuongId: [''],
 
@@ -176,9 +180,9 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         homThuDonVi: [''],
 
-        hySinhCapBac: [''],
+        hySinhCapBac: [null],
 
-        hySinhChucVu: [''],
+        hySinhChucVu: [null],
 
         ghiChu: [''],
 
@@ -200,7 +204,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
           private lietSyService: LietSyService, private spinner: NgxSpinnerService,
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService,
           private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
-          , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService) {
+          , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -209,7 +213,9 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
   ngOnInit() {
     this.listAllSoQuyen = this.soQuyenService.getListAllSoQuyen();
-
+    this.listAllThoiKy = this.thoiKyService.getListAllThoiKy();
+    this.listAllCapBac = this.capbacService.getListAllCapBac();
+    this.listAllChucVu = this.chucVuService.getListAllChucVu();
   }
 
   getDataByID (data) {

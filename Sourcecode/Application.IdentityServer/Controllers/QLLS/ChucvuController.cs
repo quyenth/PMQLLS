@@ -170,5 +170,19 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// getListAllChucVu
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> getListAllChucVu()
+        {
+            var result = chucVuService.GetListAllChucVu();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }

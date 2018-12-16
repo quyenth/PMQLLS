@@ -9831,3 +9831,6 @@ table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .so
 .modal-full .modal-body{
   background: #f8fafb;
 }
+bs-datepicker-container, bs-daterangepicker-container {
+    z-index: 9999;
+}
