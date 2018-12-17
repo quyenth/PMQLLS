@@ -4,6 +4,7 @@ using Framework.Common;
 using Application.Domain.Entity;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -22,6 +23,11 @@ namespace Application.Domain.Services
             }
 
             return true;
+        }
+
+        public IList GetListAllDoiTuong()
+        {
+            return this.dc.DoiTuong.ToList();
         }
     }
 }

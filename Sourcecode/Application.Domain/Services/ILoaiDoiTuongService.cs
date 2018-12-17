@@ -1,5 +1,6 @@
 using Framework.Common;
 using Application.Domain.Entity;
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -21,5 +22,12 @@ namespace Application.Domain.Services
         /// <param name="code"></param>
         /// <returns></returns>
         bool CheckCodeIsUnique(int id, string code);
+
+        /// <summary>
+        /// GetListAllLoaiDoiTuong
+        /// </summary>
+        /// <returns></returns>
+        IList GetListAllLoaiDoiTuong();
+
     }
 }

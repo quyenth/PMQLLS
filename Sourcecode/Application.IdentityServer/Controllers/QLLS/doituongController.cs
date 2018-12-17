@@ -152,6 +152,19 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
-
+        /// <summary>
+        /// GetListAllDoiTuong
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> GetListAllDoiTuong()
+        {
+            var result = doiTuongService.GetListAllDoiTuong();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }

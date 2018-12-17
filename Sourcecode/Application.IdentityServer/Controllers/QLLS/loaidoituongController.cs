@@ -171,5 +171,20 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// GetListAllLoaiDoiTuong
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ApiResult> GetListAllLoaiDoiTuong()
+        {
+            var result = loaiDoiTuongService.GetListAllLoaiDoiTuong();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
+
     }
 }

@@ -6,6 +6,8 @@ import { BaseService } from 'src/app/shared/services/base.service';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { HttpResult } from 'src/app/shared/commons/http-result';
 import { LoaiDoiTuongModel } from './loaidoituong.model';
+import { Select2Model } from 'src/app/shared/models/select2.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +54,16 @@ export class LoaiDoiTuongService extends BaseService {
     const params = new HttpParams().set('id', id.toString()).set('code', code);
     const url = this.BaseUrl + '/api/loaiDoiTuong/CheckCodeIsUnique';
     return this.http.get<HttpResult>(url, { params : params});
+  }
+
+  getListAllLoaiDoiTuong(): Observable<Select2Model[]> {
+    const url = this.BaseUrl + '/api/loaiDoiTuong/GetListAllLoaiDoiTuong';
+    return this.http.get<HttpResult>(url).pipe(map(res => {
+        const result: Select2Model[] = [] ;
+        res.data.forEach(element => {
+          result.push(new Select2Model (element.id, element.name));
+        });
+        return result ;
+    }));
   }
 }

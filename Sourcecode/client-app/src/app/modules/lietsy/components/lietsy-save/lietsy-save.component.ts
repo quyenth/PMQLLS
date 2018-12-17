@@ -1,3 +1,4 @@
+import { DoiTuongService } from './../../../doituong/doituong.service';
 import { ChucVuService } from './../../../chucvu/chucvu.service';
 import { SoQuyenService } from './../../../soquyen/soquyen.service';
 import { DiemCaoService } from './../../../diemcao/diemcao.service';
@@ -35,6 +36,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   listAllThoiKy: Observable<Select2Model[]>;
   listAllCapBac: Observable<Select2Model[]>;
   listAllChucVu: Observable<Select2Model[]>;
+  listAllDoiTuong: Observable<Select2Model[]>;
 
   myForm = this.fb.group({
 
@@ -104,7 +106,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         hySinhThoiKyId: [null],
 
-        doiTuongId: [''],
+        doiTuongId: [null],
 
         hySinhMatTranId: [''],
 
@@ -204,7 +206,8 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
           private lietSyService: LietSyService, private spinner: NgxSpinnerService,
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService,
           private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
-          , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService) {
+          , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
+          , private doiTuongService: DoiTuongService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -216,6 +219,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
     this.listAllThoiKy = this.thoiKyService.getListAllThoiKy();
     this.listAllCapBac = this.capbacService.getListAllCapBac();
     this.listAllChucVu = this.chucVuService.getListAllChucVu();
+    this.listAllDoiTuong = this.doiTuongService.getListAllDoiTuong();
   }
 
   getDataByID (data) {
