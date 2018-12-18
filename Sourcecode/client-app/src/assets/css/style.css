@@ -9834,3 +9834,6 @@ table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .so
 bs-datepicker-container, bs-daterangepicker-container {
     z-index: 9999;
 }
+.form-control {
+  height: 36px;
+}

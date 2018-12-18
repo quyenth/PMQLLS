@@ -10,11 +10,19 @@ import { ModalSize } from 'src/app/shared/commons/modal-size';
 import { OperationType } from 'src/app/shared/commons/operation-type';
 import { SearchInfo } from 'src/app/shared/models/search-info';
 import { ActionType } from 'src/app/shared/commons/action-type';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { OrderInfo } from 'src/app/shared/models/order-info';
+import { Select2Model } from 'src/app/shared/models/select2.model';
+import { DonViService } from 'src/app/modules/donvi/donvi.service';
+import { DiemCaoService } from 'src/app/modules/diemcao/diemcao.service';
+import { DoiTuongService } from 'src/app/modules/doituong/doituong.service';
+import { CapbacService } from 'src/app/https/capbac.service';
+import { SoQuyenService } from 'src/app/modules/soquyen/soquyen.service';
+import { ThoiKyService } from 'src/app/modules/thoiky/thoiky.service';
+import { ChucVuService } from 'src/app/modules/chucvu/chucvu.service';
 
 
 @Component({
@@ -23,6 +31,10 @@ import { OrderInfo } from 'src/app/shared/models/order-info';
 })
 export class LietSyListComponent implements OnInit, OnDestroy {
 
+  listAllSoQuyen: Observable<Select2Model[]>;
+  listAllThoiKy: Observable<Select2Model[]>;
+  listAllCapBac: Observable<Select2Model[]>;
+  listAllChucVu: Observable<Select2Model[]>;
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
@@ -36,9 +48,17 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   checkall = false;
   constructor(private lietSyService: LietSyService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) { }
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
+      private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
+      , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
+      , private doiTuongService: DoiTuongService) { }
 
   ngOnInit() {
+    this.listAllSoQuyen = this.soQuyenService.getListAllSoQuyen();
+    this.listAllThoiKy = this.thoiKyService.getListAllThoiKy();
+    this.listAllCapBac = this.capbacService.getListAllCapBac();
+    this.listAllChucVu = this.chucVuService.getListAllChucVu();
+
     this.subscription = this.modalService.parentData.subscribe(data => {
       if ( data && data.action === ActionType.SUBMIT) {
         this.onSearch();

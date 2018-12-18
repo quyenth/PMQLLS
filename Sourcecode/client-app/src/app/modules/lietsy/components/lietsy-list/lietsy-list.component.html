@@ -1,26 +1,113 @@
 <div class="ibox wrapper wrapper-content animated fadeInRight">
-  <div class="ibox-title">
-    <h5>Liệt sĩ</h5>
+  <div class="ibox-title" style="height: 65px">
+    <h5 style="margin: 0">Tìm kiếm hồ sơ liệt sĩ</h5>
     <div class="ibox-tools">
-
+      <button class="btn btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
+      <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
     </div>
   </div>
 
   <div class="ibox-content inspinia-timeline">
 
     <div class="row search-box">
-        <div class="col-sm-3">
-            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <div class="col-sm-2">
+            <ng-select [items]="listAllSoQuyen | async"
+                bindLabel="text"
+                bindValue="id"
+                [placeholder]="'Quyển/Tập số'">
+            </ng-select>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2">
+          <input placeholder="Số thứ tự" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Giới tính" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Họ và tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Năm sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
       </div>
-            <div class="html5buttons col-sm-6">
-                <div class="html5buttons">
-                  <button class="btn btn-primary buttons-copy buttons-html5"  (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
-                  <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
-              </div>
-          </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+      <div class="col-sm-2">
+        <input placeholder="Quê tỉnh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Quê huyện" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Quê xã" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Quê thôn" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+      <div class="col-sm-2">
+        <input placeholder="Đơn vị" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Cấp b,c,d" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Cấp e" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Cấp f" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Cấp QK,QĐ" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+      <div class="col-sm-2">
+        <input type="text"
+          class="form-control"
+          bsDatepicker formControlName="ngayHiSinh" placeholder="Ngày hy sinh">
+      </div>
+      <div class="col-sm-2">
+        <ng-select [items]="listAllCapBac | async"
+            bindLabel="text"
+            bindValue="id"
+            [placeholder]="'Cấp bậc'">
+          </ng-select>
+      </div>
+      <div class="col-sm-2">
+        <ng-select [items]="listAllChucVu | async"
+            bindLabel="text"
+            bindValue="id"
+            [placeholder]="'Chức vụ'">
+        </ng-select>
+      </div>
+      <div class="col-sm-4">
+        <input placeholder="Lý do hy sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+
+    </div>
+    <div class="row" style="margin-top: 10px">
+      <div class="col-sm-2">
+        <input placeholder="Tỉnh/Tp hy sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Quận, huyện hy sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Thôn xã phường hy sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Tỉnh/Tp mai táng" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Quận, huyện mai táng" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <input placeholder="Thôn xã phường mai táng" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
     </div>
 
     <div class='tbl-div'>
@@ -31,68 +118,37 @@
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
+                        <th class='no-sort'>Quyển</th>
 
-                           <th class='no-sort'>ThuTu</th>
+                           <th class='no-sort'>STT</th>
 
-                           <th class='no-sort'>HoTen</th>
+                           <th class='no-sort'>Họ tên</th>
 
-                           <th class='no-sort'>Ten</th>
+                           <th class='no-sort'>Tên</th>
 
-                           <th class='no-sort'>TenKhac</th>
+                           <th class='no-sort'>Giới tính</th>
 
-                           <th class='no-sort'>BiDanh</th>
+                           <th class='no-sort'>Năm sinh</th>
 
-                           <th class='no-sort'>GioiTinh</th>
+                           <th class='no-sort'>N.Quán thôn</th>
 
-                           <th class='no-sort'>NamSinh</th>
+                           <th class='no-sort'>N.Quán Xã</th>
 
-                           <th class='no-sort'>DanToc</th>
+                           <th class='no-sort'>N.Quán Huyện</th>
 
-                           <th class='no-sort'>QuocTich</th>
+                           <th class='no-sort'>N.Quán Tỉnh</th>
 
-                           <th class='no-sort'>QueThon</th>
+                           <th class='no-sort'>Ngày nhập ngũ</th>
 
-                           <th class='no-sort'>QueXaId</th>
+                           <th class='no-sort'>Cấp bậc</th>
 
-                           <th class='no-sort'>QueHuyenId</th>
+                           <th class='no-sort'>Chức vụ</th>
 
-                           <th class='no-sort'>QueTinhId</th>
+                           <th class='no-sort'>Ngày hy sinh</th>
 
-                           <th class='no-sort'>TruQuanThon</th>
+                           <th class='no-sort'>Đơn vị</th>
 
-                           <th class='no-sort'>TruQuanXaId</th>
-
-                           <th class='no-sort'>TruQuanHuyenId</th>
-
-                           <th class='no-sort'>TruQuanTinhId</th>
-
-                           <th class='no-sort'>DiaPhuongNhapNgu</th>
-
-                           <th class='no-sort'>NgayNhapNgu</th>
-
-                           <th class='no-sort'>NgayXuatNgu</th>
-
-                           <th class='no-sort'>NgayTaiNgu</th>
-
-                           <th class='no-sort'>NgayDiBCK</th>
-
-                           <th class='no-sort'>DonViHuanLuyen</th>
-
-                           <th class='no-sort'>DoanVien</th>
-
-                           <th class='no-sort'>NgayVaoDoan</th>
-
-                           <th class='no-sort'>DangVien</th>
-
-                           <th class='no-sort'>NgayVaoDang</th>
-
-                           <th class='no-sort'>KhenThuong</th>
-
-                           <th class='no-sort'>NgayHiSinh</th>
-
-                           <th class='no-sort'>HiSinhLyDoID</th>
-
-                           <th class='no-sort'>HySinhLyDoChiTiet</th>
+                           <th class='no-sort'>Trường hợp hy sinh</th>
 
                            <th class='no-sort'>HySinhThoiKyId</th>
 
@@ -152,43 +208,15 @@
 
                            <th class='no-sort'>ThanNhanDiaChi</th>
 
-                           <th class='no-sort'>NgayCapBangTQGC</th>
-
-                           <th class='no-sort'>SoBangTQGC</th>
 
                            <th class='no-sort'>DonViLuuTruId</th>
 
                            <th class='no-sort'>DonViQuanLyId</th>
 
-                           <th class='no-sort'>HySinhDonVi</th>
-
-                           <th class='no-sort'>DonVi_B_C_D</th>
-
-                           <th class='no-sort'>DonVi_E</th>
-
-                           <th class='no-sort'>DonVi_F</th>
-
-                           <th class='no-sort'>DonVi_G</th>
-
-                           <th class='no-sort'>HomThuDonVi</th>
-
-                           <th class='no-sort'>HySinhCapBac</th>
-
-                           <th class='no-sort'>HySinhChucVu</th>
-
                            <th class='no-sort'>GhiChu</th>
 
-                           <th class='no-sort'>Active</th>
 
-                           <th class='no-sort'>Created</th>
 
-                           <th class='no-sort'>CreatdedBy</th>
-
-                           <th class='no-sort'>Updated</th>
-
-                           <th class='no-sort'>UpdatedBy</th>
-
-                           <th class='no-sort'>SoQuyenId</th>
 
             <th style="width:60px;" class='no-sort'></th>
           </tr>
@@ -200,7 +228,7 @@
             </td>
 
 
-                               <td>{{item.thuTu}}</td>
+                               <!-- <td>{{item.thuTu}}</td>
 
                                <td>{{item.hoTen}}</td>
 
@@ -362,7 +390,7 @@
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
                 <a class="action-icon" (click)="onDeleteItem(item)"><i class="far fa-trash-alt"></i></a>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>
