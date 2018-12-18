@@ -9837,3 +9837,10 @@ bs-datepicker-container, bs-daterangepicker-container {
 .form-control {
   height: 36px;
 }
+thead {
+  text-align: center;
+}
+
+thead th{
+  vertical-align: middle!important;
+}

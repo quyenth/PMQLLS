@@ -23,6 +23,7 @@ import { CapbacService } from 'src/app/https/capbac.service';
 import { SoQuyenService } from 'src/app/modules/soquyen/soquyen.service';
 import { ThoiKyService } from 'src/app/modules/thoiky/thoiky.service';
 import { ChucVuService } from 'src/app/modules/chucvu/chucvu.service';
+import { StaticDataService } from 'src/app/shared/services/staticData.Service';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   listAllThoiKy: Observable<Select2Model[]>;
   listAllCapBac: Observable<Select2Model[]>;
   listAllChucVu: Observable<Select2Model[]>;
+  listGender: Select2Model[];
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
@@ -51,13 +53,14 @@ export class LietSyListComponent implements OnInit, OnDestroy {
       private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
       private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
       , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
-      , private doiTuongService: DoiTuongService) { }
+      , private doiTuongService: DoiTuongService , private staticDataService: StaticDataService) { }
 
   ngOnInit() {
     this.listAllSoQuyen = this.soQuyenService.getListAllSoQuyen();
     this.listAllThoiKy = this.thoiKyService.getListAllThoiKy();
     this.listAllCapBac = this.capbacService.getListAllCapBac();
     this.listAllChucVu = this.chucVuService.getListAllChucVu();
+    this.listGender = this.staticDataService.getListGender();
 
     this.subscription = this.modalService.parentData.subscribe(data => {
       if ( data && data.action === ActionType.SUBMIT) {

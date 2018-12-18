@@ -37,6 +37,7 @@ import { LoaiDoiTuongModule } from './modules/loaidoituong/loaidoituong.module';
 import { RegisterModule } from './modules/register/register.module';
 import { RolesModule } from './modules/role/role.module';
 import { UserRolesModule } from './modules/user_role/user_role.module';
+import { PhieuCungCapModule } from './modules/ncc_phieucungcap/ncc_phieucungcap.module';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { UserRolesModule } from './modules/user_role/user_role.module';
     RolesModule,
     UserRolesModule,
     LietSyModule,
-    SoQuyenModule
+    SoQuyenModule,
+    PhieuCungCapModule
   ],
   providers: [
     AuthService

@@ -66,7 +66,11 @@
                           Giới tính
                         </label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="gioiTinh" />
+                          <ng-select [items]="listGender"
+                                bindLabel="text"
+                                bindValue="id"
+                                formControlName="gioiTinh">
+                            </ng-select>
                         </div>
                        </div>
                     </div>
@@ -83,14 +87,11 @@
                   </div>
 
                   <div class="hr-line-dashed"></div>
-                  <h5>
-                     Quê quán
-                  </h5>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queTinhId').valid }">
                         <label class="col-form-label col-sm-4">
-                          Tỉnh/TP
+                          N.Quán Tỉnh/TP
                         </label>
                         <div class="col-sm-8">
                           <input type="text" class="form-control" formControlName="queTinhId" />
@@ -100,7 +101,7 @@
                     <div class="col-md-6">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queHuyenId').valid }">
                         <label class="col-form-label col-sm-4">
-                          Quận, Huyện
+                            N.Quán Quận, Huyện
                         </label>
                         <div class="col-sm-8">
                           <input type="text" class="form-control" formControlName="queHuyenId" />
@@ -110,7 +111,7 @@
                     <div class="col-md-6">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queXaId').valid }">
                         <label class="col-form-label col-sm-4">
-                          Xã, phường
+                            N.Quán Xã, phường
                         </label>
                         <div class="col-sm-8">
                           <input type="text" class="form-control" formControlName="queXaId" />
@@ -120,7 +121,7 @@
                     <div class="col-md-6">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queThon').valid }">
                         <label class="col-form-label col-sm-4">
-                          Số nhà thôn
+                            N.Quán Số nhà thôn
                         </label>
                         <div class="col-sm-8">
                           <input type="text" class="form-control" formControlName="queThon" />

@@ -1,7 +1,7 @@
 import { ModalType } from './../../../../shared/commons/modal-type';
-import { Ncc_PhieuCungCapSaveComponent } from './../ncc_phieucungcap-save/ncc_phieucungcap-save.component';
+import { PhieuCungCapSaveComponent } from './../ncc_phieucungcap-save/ncc_phieucungcap-save.component';
 import { HttpResult } from './../../../../shared/commons/http-result';
-import { Ncc_PhieuCungCapService } from './../../ncc_phieucungcap.service';
+import { PhieuCungCapService } from './../../ncc_phieucungcap.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { ModalService } from 'src/app/shared/services/modal.Service';
@@ -13,12 +13,15 @@ import { ActionType } from 'src/app/shared/commons/action-type';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
+import { ToastrService } from 'ngx-toastr';
+import { OrderInfo } from 'src/app/shared/models/order-info';
+
 
 @Component({
-  selector: 'app-ncc_PhieuCungCap-list',
+  selector: 'app-phieu-cung-cap-list',
   templateUrl: './ncc_phieucungcap-list.component.html'
 })
-export class Ncc_PhieuCungCapListComponent implements OnInit, OnDestroy {
+export class PhieuCungCapListComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('SearchName') searchInput: ElementRef ;
@@ -28,10 +31,12 @@ export class Ncc_PhieuCungCapListComponent implements OnInit, OnDestroy {
   list$ = [];
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
+  orderInfo: OrderInfo = new OrderInfo('', true);
+
   subscription: Subscription;
   checkall = false;
-  constructor(private ncc_PhieuCungCapService: Ncc_PhieuCungCapService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
+  constructor(private ncc_PhieuCungCapService: PhieuCungCapService, private modalService: ModalService,
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
@@ -42,7 +47,7 @@ export class Ncc_PhieuCungCapListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
+
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
@@ -50,11 +55,14 @@ export class Ncc_PhieuCungCapListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-		//new SearchInfo('Text', OperationType.Contains, val)
-	  ];
+      this.filterCondition.SearchCondition = [ ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
+      if (this.orderInfo.FieldName) {
+        this.filterCondition.Orders = [{...this.orderInfo}];
+       } else {
+        this.filterCondition.Orders = [];
+      }
       this.ncc_PhieuCungCapService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
@@ -90,19 +98,20 @@ export class Ncc_PhieuCungCapListComponent implements OnInit, OnDestroy {
 
 
   onAddNew () {
-    this.modalService.openModalWithComponent(Ncc_PhieuCungCapSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(PhieuCungCapSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
   }
 
   onEditItem(item) {
-    this.modalService.openModalWithComponent(Ncc_PhieuCungCapSaveComponent, { formType: FromType.UPDATE, id: item.id} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(PhieuCungCapSaveComponent, { formType: FromType.UPDATE, id: item.id} , ModalSize.LARGE);
   }
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.ncc_PhieuCungCapService.delete(item).subscribe((res) => {
+          this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
@@ -122,6 +131,7 @@ export class Ncc_PhieuCungCapListComponent implements OnInit, OnDestroy {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.ncc_PhieuCungCapService.delectList(listSelected).subscribe((res) => {
+            this.toastr.success('Xóa thành công!');
               this.onSearch();
           });
       }
@@ -132,6 +142,18 @@ export class Ncc_PhieuCungCapListComponent implements OnInit, OnDestroy {
   onEnter() {
     this.onSearch();
   }
+
+  reSort(text: string ) {
+    console.log(text);
+    if ( this.orderInfo.FieldName === text) {
+      this.orderInfo.OrderDesc = !this.orderInfo.OrderDesc;
+    } else {
+      this.orderInfo.FieldName = text;
+      this.orderInfo.OrderDesc = false;
+    }
+    this.onSearch();
+  }
+
   getSelectedItems() {
     return this.list$.filter(c => c.selected === true);
   }

@@ -1,3 +1,4 @@
+import { PhieuCungCapListComponent } from './../ncc_phieucungcap/components/ncc_phieucungcap-list/ncc_phieucungcap-list.component';
 import { SoQuyenListComponent } from './../soquyen/components/soquyen-list/soquyen-list.component';
 import { LietSyListComponent } from './../lietsy/components/lietsy-list/lietsy-list.component';
 import { UserRolesListComponent } from './../user_role/components/aspnetuserroles-list/user_roles-list.component';
@@ -40,6 +41,8 @@ const routes: Routes = [
   { path: 'user_role', component: UserRolesListComponent },
   { path: 'lietsi', component: LietSyListComponent },
   { path: 'soquyen', component: SoQuyenListComponent },
+  { path: 'phieucungcap', component: PhieuCungCapListComponent },
+
   { path: '**', component: PageNotFoundComponent }
 ];
 

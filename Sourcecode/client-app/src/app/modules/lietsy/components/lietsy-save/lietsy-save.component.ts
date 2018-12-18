@@ -1,3 +1,4 @@
+import { StaticDataService } from './../../../../shared/services/staticData.Service';
 import { DoiTuongService } from './../../../doituong/doituong.service';
 import { ChucVuService } from './../../../chucvu/chucvu.service';
 import { SoQuyenService } from './../../../soquyen/soquyen.service';
@@ -37,6 +38,8 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   listAllCapBac: Observable<Select2Model[]>;
   listAllChucVu: Observable<Select2Model[]>;
   listAllDoiTuong: Observable<Select2Model[]>;
+  listGender: Select2Model[];
+
 
   myForm = this.fb.group({
 
@@ -52,7 +55,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         biDanh: [''],
 
-        gioiTinh: [''],
+        gioiTinh: [null],
 
         namSinh: [''],
 
@@ -207,7 +210,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService,
           private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
           , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
-          , private doiTuongService: DoiTuongService) {
+          , private doiTuongService: DoiTuongService , private staticDataService: StaticDataService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -220,6 +223,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
     this.listAllCapBac = this.capbacService.getListAllCapBac();
     this.listAllChucVu = this.chucVuService.getListAllChucVu();
     this.listAllDoiTuong = this.doiTuongService.getListAllDoiTuong();
+    this.listGender = this.staticDataService.getListGender();
   }
 
   getDataByID (data) {

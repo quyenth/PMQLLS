@@ -10,7 +10,7 @@ import { Ncc_PhieuCungCapModel } from './ncc_phieucungcap.model';
 @Injectable({
   providedIn: 'root'
 })
-export class Ncc_PhieuCungCapService extends BaseService {
+export class PhieuCungCapService extends BaseService {
 
   constructor(private http: HttpClient ) {
     super();

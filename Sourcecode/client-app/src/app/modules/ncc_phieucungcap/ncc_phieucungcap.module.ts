@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ShareModule } from './../../shared/module/share-module.module';
-import { Ncc_PhieuCungCapListComponent } from './components/ncc_phieucungcap-list/ncc_phieucungcap-list.component';
-import { Ncc_PhieuCungCapSaveComponent } from './components/ncc_phieucungcap-save/ncc_phieucungcap-save.component';
+import { PhieuCungCapListComponent } from './components/ncc_phieucungcap-list/ncc_phieucungcap-list.component';
+import { PhieuCungCapSaveComponent } from './components/ncc_phieucungcap-save/ncc_phieucungcap-save.component';
 
 
 
@@ -15,9 +15,9 @@ import { Ncc_PhieuCungCapSaveComponent } from './components/ncc_phieucungcap-sav
     ShareModule
     ],
   entryComponents: [
-    Ncc_PhieuCungCapSaveComponent,
+    PhieuCungCapSaveComponent,
     ConfirmDialogComponent
   ],
-  declarations: [Ncc_PhieuCungCapListComponent, Ncc_PhieuCungCapSaveComponent]
+  declarations: [PhieuCungCapListComponent, PhieuCungCapSaveComponent]
 })
-export class Ncc_PhieuCungCapModule { }
+export class PhieuCungCapModule { }
