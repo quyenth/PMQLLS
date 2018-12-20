@@ -15,6 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { OrderInfo } from 'src/app/shared/models/order-info';
 import { ToastrService } from 'ngx-toastr';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 @Component({
   selector: 'app-thoi-ky-list',
@@ -22,6 +23,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ThoiKyListComponent implements OnInit, OnDestroy {
 
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
@@ -107,16 +109,16 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteItem (item) {
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-        dialogCloseSubscription.unsubscribe();
-        if ( data === ActionType.ACCEPT) {
-          this.thoiKyService.delete(item).subscribe((res) => {
-            this.toastr.success('Xóa thành công!');
-            this.onSearch();
-        });
-      }
-    });
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.thoiKyService.delete(item).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                this.onSearch();
+            });
+            }
+        }
+    );
   }
 
   onDeleteSelected () {
@@ -126,18 +128,16 @@ export class ThoiKyListComponent implements OnInit, OnDestroy {
         return;
     }
 
-
-      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-          dialogCloseSubscription.unsubscribe();
-          if ( data === ActionType.ACCEPT) {
-            this.thoiKyService.delectList(listSelected).subscribe((res) => {
-              this.toastr.success('Xóa thành công!');
-              this.onSearch();
-          });
-      }
-      });
-
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.thoiKyService.delectList(listSelected).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                this.onSearch();
+            });
+            }
+        }
+    );
   }
 
   reSort(text: string ) {

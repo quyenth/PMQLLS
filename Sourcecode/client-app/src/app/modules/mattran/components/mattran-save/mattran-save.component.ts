@@ -1,6 +1,6 @@
 import { map, switchMap } from 'rxjs/operators';
 import { MatTranModel } from './../../mattran.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription, timer, of } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -8,15 +8,16 @@ import { ModalService } from 'src/app/shared/services/modal.Service';
 import { ActionType } from 'src/app/shared/commons/action-type';
 import { MatTranService } from './../../mattran.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 @Component({
   selector: 'app-mat-tran-save',
   templateUrl: './mattran-save.component.html'
 })
 export class MatTranSaveComponent implements OnInit , OnDestroy {
+  @ViewChild('submitSwal') private submitSwal: SwalComponent;
 
   subscription: Subscription;
   submited: boolean;
@@ -32,7 +33,7 @@ export class MatTranSaveComponent implements OnInit , OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private matTranService: MatTranService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
+          private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -66,13 +67,7 @@ export class MatTranSaveComponent implements OnInit , OnDestroy {
       return;
     }
 
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-      dialogCloseSubscription.unsubscribe();
-      if ( data === ActionType.ACCEPT) {
-        this.submitData();
-      }
-    });
+    this.submitSwal.show();
   }
 
   submitData() {

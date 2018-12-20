@@ -1,6 +1,6 @@
 import { map, switchMap } from 'rxjs/operators';
 import { CapBac } from './../../../../shared/models/cap-bac.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription, timer, of } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -8,9 +8,9 @@ import { ModalService } from 'src/app/shared/services/modal.Service';
 import { ActionType } from 'src/app/shared/commons/action-type';
 import { CapbacService } from 'src/app/https/capbac.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 @Component({
   selector: 'app-capbac-dialog',
@@ -18,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./capbac-dialog.component.css']
 })
 export class CapbacDialogComponent implements OnInit , OnDestroy {
+
+  @ViewChild('submitSwal') private submitSwal: SwalComponent;
 
   subscription: Subscription;
   submited: boolean;
@@ -28,7 +30,7 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private capbacService: CapbacService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
+          private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.capBacId = data.id;
       this.getDataByID(data);
@@ -54,14 +56,7 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
     if ( !this.myForm.valid) {
       return;
     }
-
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-      dialogCloseSubscription.unsubscribe();
-      if ( data === ActionType.ACCEPT) {
-        this.submitData();
-      }
-    });
+    this.submitSwal.show();
   }
 
   submitData() {

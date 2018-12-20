@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { OrderInfo } from 'src/app/shared/models/order-info';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 @Component({
   selector: 'app-doi-tuong-list',
@@ -21,6 +22,7 @@ import { OrderInfo } from 'src/app/shared/models/order-info';
 })
 export class DoiTuongListComponent implements OnInit, OnDestroy {
 
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
@@ -103,15 +105,15 @@ export class DoiTuongListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteItem (item) {
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-        dialogCloseSubscription.unsubscribe();
-        if ( data === ActionType.ACCEPT) {
-          this.doiTuongService.delete(item).subscribe((res) => {
-            this.onSearch();
-        });
-      }
-    });
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.doiTuongService.delete(item).subscribe((res) => {
+                this.onSearch();
+            });
+            }
+        }
+    );
   }
 
   onDeleteSelected () {
@@ -121,17 +123,15 @@ export class DoiTuongListComponent implements OnInit, OnDestroy {
         return;
     }
 
-
-      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-          dialogCloseSubscription.unsubscribe();
-          if ( data === ActionType.ACCEPT) {
-            this.doiTuongService.delectList(listSelected).subscribe((res) => {
-              this.onSearch();
-          });
-      }
-      });
-
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn ?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.doiTuongService.delectList(listSelected).subscribe((res) => {
+                this.onSearch();
+            });
+            }
+        }
+    );
   }
 
   onEnter() {
