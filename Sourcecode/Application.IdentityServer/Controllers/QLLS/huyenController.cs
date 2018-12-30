@@ -135,23 +135,7 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = null
             };
         }
-
-        /// <summary>
-        /// search list huyen
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<ApiResult> SearchHuyen([FromBody]List<Huyen> items)
-        {
-            huyenService.Add(items);
-            return new ApiResult()
-            {
-                Status = HttpStatus.OK,
-                Data = null
-            };
-        }
-
+        
         /// <summary>
         /// CheckCodeIsUnique
         /// </summary>

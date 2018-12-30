@@ -6,6 +6,8 @@ import { BaseService } from 'src/app/shared/services/base.service';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { HttpResult } from 'src/app/shared/commons/http-result';
 import { HuyenModel } from './huyen.model';
+import { Select2Model } from 'src/app/shared/models/select2.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +55,18 @@ export class HuyenService extends BaseService {
     const params = new HttpParams().set('huyenId', huyenId.toString()).set('tenHuyen', tenHuyen);
     const url = this.BaseUrl + '/api/huyen/CheckNameIsUnique';
     return this.http.get<HttpResult>(url, { params : params});
+  }
+
+
+  getListAllHuyen(): Observable<Select2Model[]> {
+    const url = this.BaseUrl + '/api/huyen/getListAllHuyen';
+    return this.http.get<HttpResult>(url).pipe(map(res => {
+        const result: Select2Model[] = [] ;
+        res.data.forEach(element => {
+          result.push(new Select2Model (element.huyenId, element.tenHuyen));
+        });
+        return result ;
+    }));
+
   }
 }

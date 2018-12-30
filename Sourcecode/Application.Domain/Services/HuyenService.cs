@@ -26,7 +26,7 @@ namespace Application.Domain.Services
 
         public bool CheckNameIsUnique(int huyenId, string tenHuyen)
         {
-            var result = this.dc.Huyen.Where(c => c.HuyenId != huyenId && c.MaHuyen == tenHuyen).ToList();
+            var result = this.dc.Huyen.Where(c => c.HuyenId != huyenId && c.TenHuyen == tenHuyen).ToList();
             if (result.Count > 0)
             {
                 return false;

@@ -6,6 +6,8 @@ import { BaseService } from 'src/app/shared/services/base.service';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { HttpResult } from 'src/app/shared/commons/http-result';
 import { XaModel } from './xa.model';
+import { Select2Model } from 'src/app/shared/models/select2.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -43,4 +45,16 @@ export class XaService extends BaseService {
     const url = this.BaseUrl + '/api/xa/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+
+  checkCodeIsUnique (xaId: number, maXa: string)  {
+    const params = new HttpParams().set('xaId', xaId.toString()).set('maXa', maXa);
+    const url = this.BaseUrl + '/api/xa/CheckCodeIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
+  checkNameIsUnique (xaId: number, tenXa: string)  {
+    const params = new HttpParams().set('xaId', xaId.toString()).set('tenHuyen', tenXa);
+    const url = this.BaseUrl + '/api/xa/CheckNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
+
 }
