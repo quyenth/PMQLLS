@@ -136,7 +136,69 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// search list huyen
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ApiResult> SearchHuyen([FromBody]List<Huyen> items)
+        {
+            huyenService.Add(items);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = null
+            };
+        }
 
-        
+        /// <summary>
+        /// CheckCodeIsUnique
+        /// </summary>
+        /// <param name="huyenId"></param>
+        /// <param name="maHuyen"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckCodeIsUnique(int huyenId, string maHuyen)
+        {
+            var result = huyenService.CheckCodeIsUnique(huyenId, maHuyen);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
+
+        /// <summary>
+        /// CheckNameIsUnique
+        /// </summary>
+        /// <param name="huyenId"></param>
+        /// <param name="tenHuyen"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckNameIsUnique(int huyenId, string tenHuyen)
+        {
+            var result = huyenService.CheckNameIsUnique(huyenId, tenHuyen);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
+
+        /// <summary>
+        /// getListAllHuyen
+        /// </summary>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> getListAllHuyen()
+        {
+            var result = huyenService.getListAllHuyen();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }

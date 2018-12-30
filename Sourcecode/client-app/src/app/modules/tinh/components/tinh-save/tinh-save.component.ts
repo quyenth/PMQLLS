@@ -31,9 +31,9 @@ export class TinhSaveComponent implements OnInit , OnDestroy {
 
     type: ['', [Validators.required]],
 
-    active: [''],
+    active: [false],
 
-    is1990: [''],
+    is1990: [false],
 
     ghiChu: [''],
 

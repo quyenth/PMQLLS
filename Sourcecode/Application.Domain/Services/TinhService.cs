@@ -2,7 +2,7 @@ using Framework.Common;
 using Application.Domain.Entity;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -32,6 +32,15 @@ namespace Application.Domain.Services
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// getListAllTinh
+        /// </summary>
+        /// <returns></returns>
+        public IList getListAllTinh()
+        {
+            return this.dc.Tinh.ToList();
         }
     }
 }

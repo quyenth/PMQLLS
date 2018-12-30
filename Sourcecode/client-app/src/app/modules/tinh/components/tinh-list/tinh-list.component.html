@@ -1,8 +1,7 @@
-<div class="ibox ">
+<div class="ibox wrapper wrapper-content animated fadeInRight">
   <div class="ibox-title">
     <h5>Tỉnh</h5>
     <div class="ibox-tools">
-
     </div>
   </div>
 
@@ -23,8 +22,8 @@
           </div>
     </div>
 
-    <div class='tbl-div'>
-      <table class="table table-bordered table-hover" style="width:100%">
+    <div class='tbl-div' style="overflow-x: auto;">
+      <table class="table table-bordered table-hover" style="width:100%; "  >
         <thead>
           <tr >
             <th style="text-align: center; width: 20px;">
@@ -47,23 +46,21 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of list$" [ngClass]="{'selected':item.selected}">
-            <td style="text-align: center;">
+            <td style="text-align: center; " >
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
 
-            <td>{{item.maTinh}}</td>
+            <td style="width: 10%;" >{{item.maTinh}}</td>
 
-            <td>{{item.tenTinh}}</td>
+            <td style="width: 30%;">{{item.tenTinh}}</td>
 
-            <td>{{item.type}} </td>
+            <td style="width: 10%;">{{item.type}} </td>
 
-            <td>{{item.active}}</td>
+            <td style="text-align: center; width: 10%;"><input type="checkbox" disabled="disabled" [(ngModel)]='item.active'></td>
 
-            <td>{{item.is1990}}</td>
+            <td style="text-align: center; width: 10%;"><input type="checkbox" disabled="disabled" [(ngModel)]='item.is1990'></td>
 
             <td>{{item.ghiChu}}</td>
-
-
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
                 <a class="action-icon" (click)="onDeleteItem(item)"><i class="far fa-trash-alt"></i></a>

@@ -43,4 +43,15 @@ export class HuyenService extends BaseService {
     const url = this.BaseUrl + '/api/huyen/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+
+  checkCodeIsUnique (huyenId: number, maHuyen: string)  {
+    const params = new HttpParams().set('huyenId', huyenId.toString()).set('maHuyen', maHuyen);
+    const url = this.BaseUrl + '/api/huyen/CheckCodeIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
+  checkNameIsUnique (huyenId: number, tenHuyen: string)  {
+    const params = new HttpParams().set('huyenId', huyenId.toString()).set('tenHuyen', tenHuyen);
+    const url = this.BaseUrl + '/api/huyen/CheckNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
 }

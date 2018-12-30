@@ -1,6 +1,6 @@
 <div class="ibox ">
   <div class="ibox-title">
-    <h5>Xa</h5>
+    <h5>Xã</h5>
     <div class="ibox-tools">
 
     </div>
@@ -10,7 +10,7 @@
 
     <div class="row search-box">
         <div class="col-sm-3">
-            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+            <input placeholder="Tên xã" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-3">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
@@ -31,22 +31,20 @@
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                           <th>XaId</th>
-                          
-                           <th>MaXa</th>
-                          
-                           <th>TenXa</th>
-                          
-                           <th>HuyenId</th>
-                          
-                           <th>MaDiaChi</th>
-                          
-                           <th>Type</th>
-                          
-                           <th>Active</th>
-                          
-                           <th>Is1990</th>
-                          
+              <th>Mã xã</th>
+
+              <th>Tên xã</th>
+
+              <th>Huyện</th>
+
+              <th>Địa chỉ</th>
+
+              <th>Loại</th>
+
+              <th>Kích hoạt</th>
+
+              <th>Is1990</th>
+
             <th style="width:60px;"></th>
           </tr>
         </thead>
@@ -56,22 +54,20 @@
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
 
-                               <td>{{item.xaId}}</td>
-                          
-                               <td>{{item.maXa}}</td>
-                          
-                               <td>{{item.tenXa}}</td>
-                          
-                               <td>{{item.huyenId}}</td>
-                          
-                               <td>{{item.maDiaChi}}</td>
-                          
-                               <td>{{item.type}}</td>
-                          
-                               <td>{{item.active}}</td>
-                          
-                               <td>{{item.is1990}}</td>
-                                     
+            <td style="text-align: center; width: 10%;">{{item.maXa}}</td>
+
+            <td>{{item.tenXa}}</td>
+
+            <td style="width: 20%;">{{item.huyenId}}</td>
+
+            <td style="width: 10%;">{{item.maDiaChi}}</td>
+
+            <td style="width: 10%;">{{item.type}}</td>
+
+            <td style="text-align: center; width: 10%;"><input type="checkbox" disabled="disabled" [(ngModel)]='item.active'></td>
+
+            <td style="text-align: center; width: 10%;"><input type="checkbox" disabled="disabled" [(ngModel)]='item.is1990'></td>
+
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>

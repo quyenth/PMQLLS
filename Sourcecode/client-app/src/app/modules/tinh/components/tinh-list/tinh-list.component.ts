@@ -13,6 +13,9 @@ import { ActionType } from 'src/app/shared/commons/action-type';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
+import { OrderInfo } from 'src/app/shared/models/order-info';
+import { ToastrService } from 'ngx-toastr';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 @Component({
   selector: 'app-tinh-list',
@@ -22,6 +25,7 @@ export class TinhListComponent implements OnInit, OnDestroy {
 
 
   @ViewChild('SearchName') searchInput: ElementRef ;
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
   currentPage = 1;
   pageSize = 2;
 
@@ -30,8 +34,10 @@ export class TinhListComponent implements OnInit, OnDestroy {
   filterCondition: FilterCondition = new FilterCondition();
   subscription: Subscription;
   checkall = false;
+  orderInfo: OrderInfo = new OrderInfo('', true);
   constructor(private tinhService: TinhService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService) { }
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService,
+      private toastr: ToastrService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
