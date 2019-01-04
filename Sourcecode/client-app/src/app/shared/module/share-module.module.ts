@@ -17,7 +17,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 export function getDatepickerConfig(): BsDatepickerConfig {
   return Object.assign(new BsDatepickerConfig(), {
     dateInputFormat: 'DD/MM/YYYY',
-    containerClass: 'theme-green'
+    containerClass: 'theme-green',
   });
 }
 
@@ -39,8 +39,8 @@ export function getDatepickerConfig(): BsDatepickerConfig {
       customClass: 'modal-content',
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn',
-      cancelButtonText: '<i class="fas fa-times"></i> Đóng',
-      confirmButtonText: '<i class="far fa-save"></i> Lưu',
+      cancelButtonText: '<i class="fa fa-times"></i> Đóng',
+      confirmButtonText: '<i class="fa fa-save"></i> Lưu',
       title: 'Xác nhận',
       focusConfirm: true
   })

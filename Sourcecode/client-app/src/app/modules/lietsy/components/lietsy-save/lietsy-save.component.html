@@ -4,7 +4,7 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
+<div class="modal-body liet-sy-form">
     <form [formGroup]="myForm">
 
         <div class="ibox">
@@ -16,7 +16,7 @@
             </div>
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('soQuyenId').valid }">
                             <label class="col-form-label col-sm-4">
                               Quyển/Tập số
@@ -30,7 +30,7 @@
                             </div>
                           </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thuTu').valid }">
                             <label class="col-form-label col-sm-4">
                               Số Thứ tự
@@ -40,7 +40,7 @@
                             </div>
                            </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hoTen').valid }">
                           <label class="col-form-label col-sm-4">
                             Họ và tên
@@ -50,7 +50,7 @@
                           </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('tenKhac').valid }">
                         <label class="col-form-label col-sm-4">
                           Tên khác
@@ -60,7 +60,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('gioiTinh').valid }">
                         <label class="col-form-label col-sm-4">
                           Giới tính
@@ -74,7 +74,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('namSinh').valid }">
                         <label class="col-form-label col-sm-4">
                           Năm sinh
@@ -88,7 +88,7 @@
 
                   <div class="hr-line-dashed"></div>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queTinhId').valid }">
                         <label class="col-form-label col-sm-4">
                           N.Quán Tỉnh/TP
@@ -98,7 +98,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queHuyenId').valid }">
                         <label class="col-form-label col-sm-4">
                             N.Quán Quận, Huyện
@@ -108,7 +108,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queXaId').valid }">
                         <label class="col-form-label col-sm-4">
                             N.Quán Xã, phường
@@ -118,7 +118,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queThon').valid }">
                         <label class="col-form-label col-sm-4">
                             N.Quán Số nhà thôn
@@ -131,15 +131,17 @@
                   </div>
                   <div class="hr-line-dashed"></div>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queThon').valid }">
-                        <div class="checkbox">
-                          <input type="checkbox" id="inlineCheckbox1" value="option1">
-                          <label for="inlineCheckbox1"> Là Đoàn viên </label>
+                        <div class="checkbox checkbox-success">
+                          <input id="checkbox2" type="checkbox" formControlName="dangVien">
+                          <label for="checkbox2">
+                            Là Đoàn viên
+                          </label>
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('queThon').valid }">
                         <label class="col-form-label col-sm-4">
                           Ngày vào Đoàn
@@ -151,15 +153,18 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('dangVien').valid }">
-                        <div class="checkbox">
-                          <input type="checkbox" id="inlineCheckbox1" value="option1" formControlName="dangVien">
-                          <label for="inlineCheckbox1"> Là Đảng viên </label>
+
+                        <div class="checkbox checkbox-success">
+                          <input id="checkbox3" type="checkbox" formControlName="dangVien">
+                          <label for="checkbox3">
+                            Là Đảng viên
+                          </label>
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayVaoDang').valid }">
                         <label class="col-form-label col-sm-4">
                           Ngày vào Đảng
@@ -171,7 +176,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayNhapNgu').valid }">
                         <label class="col-form-label col-sm-4">
                           Ngày nhập ngũ
@@ -183,7 +188,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayXuatNgu').valid }">
                         <label class="col-form-label col-sm-4">
                           Ngày xuất ngũ
@@ -195,7 +200,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayTaiNgu').valid }">
                         <label class="col-form-label col-sm-4">
                           Ngày tái ngũ
@@ -207,7 +212,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayDiBCK').valid }">
                         <label class="col-form-label col-sm-4">
                           Ngày đi B|C|K
@@ -234,7 +239,7 @@
           </div>
           <div class="ibox-content">
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayHiSinh').valid }">
                         <label class="col-form-label col-sm-4">
                           Ngày hi sinh
@@ -246,7 +251,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhThoiKyId').valid }">
                         <label class="col-form-label col-sm-4">
                           Thời kỳ
@@ -260,7 +265,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('doiTuongId').valid }">
                           <label class="col-form-label col-sm-4">
                               Đối tượng
@@ -274,7 +279,7 @@
                           </div>
                          </div>
                       </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhCapBac').valid }">
                           <label class="col-form-label col-sm-4">
                             Cấp bậc
@@ -289,7 +294,7 @@
                          </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                           <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhChucVu').valid }">
                             <label class="col-form-label col-sm-4">
                               Chức vụ
@@ -602,121 +607,9 @@
                  </div>
           </div>
      </div>
-
-
-
-
-
-		                <!-- <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('truQuanThon').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    TruQuanThon
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="truQuanThon" />
-		                  </div>
-		                 </div>
-
-
-
-
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('truQuanXaId').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    TruQuanXaId
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="truQuanXaId" />
-		                  </div>
-		                 </div>
-
-
-
-
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('truQuanHuyenId').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    TruQuanHuyenId
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="truQuanHuyenId" />
-		                  </div>
-		                 </div>
-
-
-
-
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('truQuanTinhId').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    TruQuanTinhId
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="truQuanTinhId" />
-		                  </div>
-		                 </div> -->
-
-
-
-
-
-
-
-		                <!-- <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTang').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    MaiTang
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="maiTang" />
-		                  </div>
-		                 </div> -->
-
-
-
-
-		                <!-- <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('matThiHai').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    MatThiHai
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="matThiHai" />
-		                  </div>
-		                 </div>
-
-
-
-
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('matTich').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    MatTich
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="matTich" />
-		                  </div>
-		                 </div> -->
-
-
-
-
-		                <!-- <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ngayBaoTu').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    Ngày báo tử
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="ngayBaoTu" />
-		                  </div>
-		                 </div>
-
-
-
-
-		                <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('giayBaoTu').valid }">
-		                  <label class="col-form-label col-sm-2">
-		                    Giấy báo tử
-		                  </label>
-		                  <div class="col-sm-8">
-		                    <input type="text" class="form-control" formControlName="giayBaoTu" />
-		                  </div>
-                     </div> -->
-            </form>
+  </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="onSubmit()"><i class="far fa-save"></i> Lưu</button>
-  <button type="button" class="btn btn-default" (click)="onClose()"><i class="fas fa-times"></i> Đóng</button>
+  <button type="button" class="btn btn-primary" (click)="onSubmit()"><i class="fa fa-save"></i> Lưu</button>
+  <button type="button" class="btn btn-default" (click)="onClose()"><i class="fa fa-times"></i> Đóng</button>
 </div>

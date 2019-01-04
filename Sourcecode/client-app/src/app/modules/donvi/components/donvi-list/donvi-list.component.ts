@@ -18,7 +18,7 @@ import { OrderInfo } from 'src/app/shared/models/order-info';
 
 
 @Component({
-  selector: 'app-donVi-list',
+  selector: 'app-don-vi-list',
   templateUrl: './donvi-list.component.html'
 })
 export class DonViListComponent implements OnInit, OnDestroy {
@@ -47,7 +47,7 @@ export class DonViListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
+
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
@@ -55,12 +55,10 @@ export class DonViListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-		//new SearchInfo('Text', OperationType.Contains, val)
-	  ];
+      this.filterCondition.SearchCondition = [];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
-	  if (this.orderInfo.FieldName) {
+      if (this.orderInfo.FieldName) {
         this.filterCondition.Orders = [{...this.orderInfo}];
        } else {
         this.filterCondition.Orders = [];
@@ -109,11 +107,11 @@ export class DonViListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.donViService.delete(item).subscribe((res) => {
-		    this.toastr.success('Xóa thành công!');
+          this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
@@ -133,7 +131,7 @@ export class DonViListComponent implements OnInit, OnDestroy {
           dialogCloseSubscription.unsubscribe();
           if ( data === ActionType.ACCEPT) {
             this.donViService.delectList(listSelected).subscribe((res) => {
-			   this.toastr.success('Xóa thành công!');
+            this.toastr.success('Xóa thành công!');
               this.onSearch();
           });
       }
@@ -144,7 +142,7 @@ export class DonViListComponent implements OnInit, OnDestroy {
   onEnter() {
     this.onSearch();
   }
-  
+
   reSort(text: string ) {
     console.log(text);
     if ( this.orderInfo.FieldName === text) {
@@ -155,7 +153,7 @@ export class DonViListComponent implements OnInit, OnDestroy {
     }
     this.onSearch();
   }
-  
+
   getSelectedItems() {
     return this.list$.filter(c => c.selected === true);
   }

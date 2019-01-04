@@ -13,12 +13,12 @@
             <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-3">
-            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fa fa-search"></i> Tìm kiếm</button>
       </div>
             <div class="html5buttons col-sm-6">
                 <div class="html5buttons">
-                  <button class="btn btn-primary buttons-copy buttons-html5"  (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
-                  <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
+                  <button class="btn btn-primary buttons-copy buttons-html5"  (click)="onAddNew()" ><span><i class="fa fa-plus"></i>  Thêm mới</span></button>
+                  <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="fa fa-trash"></i>  Xóa đã chọn</span></button>
               </div>
           </div>
     </div>
@@ -41,8 +41,8 @@
             </td>
              <td>{{item.name}}</td>
             <td class="action-col">
-                <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
-                <a class="action-icon" (click)="onDeleteItem(item)"><i class="far fa-trash-alt"></i></a>
+                <a class="action-icon" (click)="onEditItem(item)"><i class="fa fa-pencil-square-o"></i></a>
+                <a class="action-icon" (click)="onDeleteItem(item)"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
         </tbody>

@@ -9629,89 +9629,7 @@ table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .so
 .checkbox {
   padding-left: 20px;
 }
-  .checkbox label {
-    display: inline-block;
-    position: relative;
-    padding-left: 5px;
-   }
-    .checkbox label::before {
-      content: "";
-      display: inline-block;
-      position: absolute;
-      width: 16px;
-      height: 15px;
-      left: 0;
-      margin-left: -20px;
-      border: 1px solid #cccccc;
-      border-radius: 3px;
-      background-color: #fff;
-      -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-      -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-      transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
-     }
-    .checkbox label::after {
-        display: inline-block;
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        left: 0;
-        top: 0;
-        margin-left: -20px;
-        padding-left: 3px;
-        padding-top: 1px;
-        font-size: 11px;
-        color: #555555;
-     }
-  .checkbox input[type="checkbox"] {
-    opacity: 0;     display: none;}
-    .checkbox input[type="checkbox"]:focus + label::before {
-      outline: thin dotted;
-      outline: 5px auto -webkit-focus-ring-color;
-      outline-offset: -2px; }
-    .checkbox input[type="checkbox"]:checked + label::after {
-      font-family: 'Font Awesome 5 Free';
-      content: "\f00c";
-    font-size: 10px
-   }
-    .checkbox input[type="checkbox"]:disabled + label {
-      opacity: 0.65; }
-      .checkbox input[type="checkbox"]:disabled + label::before {
-        background-color: #eeeeee;
-        cursor: not-allowed; }
-  .checkbox.checkbox-circle label::before {
-    border-radius: 50%; }
-  .checkbox.checkbox-inline {
-    margin-top: 0; }
 
-.checkbox-primary input[type="checkbox"]:checked + label::before {
-  background-color: #1ab394;
-  border-color: #1ab394; }
-.checkbox-primary input[type="checkbox"]:checked + label::after {
-  color: #fff; }
-
-.checkbox-danger input[type="checkbox"]:checked + label::before {
-  background-color: #d9534f;
-  border-color: #d9534f; }
-.checkbox-danger input[type="checkbox"]:checked + label::after {
-  color: #fff; }
-
-.checkbox-info input[type="checkbox"]:checked + label::before {
-  background-color: #5bc0de;
-  border-color: #5bc0de; }
-.checkbox-info input[type="checkbox"]:checked + label::after {
-  color: #fff; }
-
-.checkbox-warning input[type="checkbox"]:checked + label::before {
-  background-color: #f0ad4e;
-  border-color: #f0ad4e; }
-.checkbox-warning input[type="checkbox"]:checked + label::after {
-  color: #fff; }
-
-.checkbox-success input[type="checkbox"]:checked + label::before {
-  background-color: #5cb85c;
-  border-color: #5cb85c; }
-.checkbox-success input[type="checkbox"]:checked + label::after {
-  color: #fff; }
 
 .radio {
   padding-left: 20px; }
@@ -9834,8 +9752,8 @@ table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .so
 bs-datepicker-container, bs-daterangepicker-container {
     z-index: 9999;
 }
-.form-control {
-  height: 36px;
+input.form-control {
+  height: 30px;
 }
 thead {
   text-align: center;
@@ -9843,4 +9761,33 @@ thead {
 
 thead th{
   vertical-align: middle!important;
+}
+.ng-select .ng-select-container {
+  border-radius: 0;
+  min-height: 30px;
+}
+.ng-select.ng-select-single .ng-select-container {
+  height: 30px;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+
+  padding: 6px 10px;
+}
+.ng-dropdown-panel.ng-select-bottom .ng-dropdown-panel-items .ng-option:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.navbar-nav .dropdown  ul a i {
+  margin-right: 6px;
+}
+.page-title {
+  color: #1ab394
+}
+.col-form-label {
+  font-weight: 600
+}
+.liet-sy-form .ibox-title h5 {
+  text-transform: uppercase;
+  color: #1ab394
 }

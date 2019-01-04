@@ -1,9 +1,9 @@
 <div class="ibox wrapper wrapper-content animated fadeInRight">
   <div class="ibox-title" style="height: 65px">
-    <h5 style="margin: 0">Tìm kiếm hồ sơ liệt sĩ</h5>
+    <h3 style="margin: 0" class='page-title'>Tìm kiếm hồ sơ liệt sĩ</h3>
     <div class="ibox-tools">
-      <button class="btn btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" ><span><i class="fas fa-plus"></i>  Thêm mới</span></button>
-      <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="far fa-trash-alt"></i>  Xóa đã chọn</span></button>
+      <button class="btn btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" ><span><i class="fa fa-plus"></i>  Thêm mới</span></button>
+      <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="fa fa-trash"></i>  Xóa đã chọn</span></button>
     </div>
   </div>
 
@@ -34,7 +34,7 @@
         <input placeholder="Năm sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-2">
-            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fas fa-search"></i> Tìm kiếm</button>
+            <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fa fa-search"></i> Tìm kiếm</button>
       </div>
     </div>
     <div class="row" style="margin-top: 10px">
