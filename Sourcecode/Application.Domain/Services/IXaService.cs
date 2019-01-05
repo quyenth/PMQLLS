@@ -1,5 +1,6 @@
 using Framework.Common;
 using Application.Domain.Entity;
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -7,5 +8,7 @@ namespace Application.Domain.Services
     {
         bool CheckCodeIsUnique(int xaId, string maXa);
         bool CheckNameIsUnique(int xaId, string tenXa);
+
+        IList getListXaByHuyen(int huyenId);
     }
 }

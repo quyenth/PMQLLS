@@ -95,22 +95,52 @@
     </div>
     <div class="row" style="margin-top: 10px">
       <div class="col-sm-2">
-        <input placeholder="Tỉnh/Tp hy sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listAllTinh | async"
+            bindLabel="text"
+            bindValue="id"
+            placeholder="Tỉnh/Tp hy sinh"
+            (change)="onChangeTinhHySinh($event)">
+          </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="Quận, huyện hy sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listHuyenHySinh | async"
+              bindLabel="text"
+              bindValue="id"
+              placeholder="Quận, huyện hy sinh"
+              (change)="onChangeHuyenHySinh($event)">
+            </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="Thôn xã phường hy sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listXaHySinh | async"
+            bindLabel="text"
+            bindValue="id"
+            placeholder="Thôn xã phường hy sinh"
+            >
+          </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="Tỉnh/Tp mai táng" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listAllTinh | async"
+              bindLabel="text"
+              bindValue="id"
+              placeholder="Tỉnh/Tp mai táng"
+              (change)="onChangeTinhMaiTang($event)">
+          </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="Quận, huyện mai táng" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listHuyenMaiTang | async"
+            bindLabel="text"
+            bindValue="id"
+            placeholder="Quận, huyện mai táng"
+            (change)="onChangeHuyenMaiTang($event)">
+          </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="Thôn xã phường mai táng" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listXaMaiTang | async"
+            bindLabel="text"
+            bindValue="id"
+            placeholder="Thôn xã phường mai táng"
+            >
+        </ng-select>
       </div>
     </div>
 

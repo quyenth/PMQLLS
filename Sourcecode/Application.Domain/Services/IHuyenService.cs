@@ -9,5 +9,7 @@ namespace Application.Domain.Services
         bool CheckCodeIsUnique(int huyenId, string maHuyen);
         bool CheckNameIsUnique(int huyenId, string tenHuyen);
         IList getListAllHuyen();
+
+        IList getListHuyenByTinh(int tinhId);
     }
 }

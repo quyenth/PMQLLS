@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Framework.Common;
 using Application.Domain.Entity;
 using Microsoft.Extensions.Logging;
+using System.Linq;
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -10,6 +10,11 @@ namespace Application.Domain.Services
     {
         public DonViService(ILogger<DonViService> logger, ApplicationContext context) : base(logger,context)
         {
+        }
+
+        public IList getListAllDonVI()
+        {
+            return this.dc.DonVi.ToList();
         }
     }
 }

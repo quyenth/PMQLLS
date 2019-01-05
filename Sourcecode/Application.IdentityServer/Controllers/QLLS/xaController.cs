@@ -176,5 +176,21 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+
+        /// <summary>
+        /// getListXaByHuyen
+        /// </summary>
+        /// <param name="huyenId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ApiResult getListXaByHuyen(int huyenId)
+        {
+            var result = xaService.getListXaByHuyen(huyenId);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }

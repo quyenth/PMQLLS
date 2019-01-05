@@ -57,4 +57,18 @@ export class XaService extends BaseService {
     return this.http.get<HttpResult>(url, { params : params});
   }
 
+  getListXaByHuyen(huyenId: number): Observable<Select2Model[]> {
+    const url = this.BaseUrl + '/api/xa/getListXaByHuyen';
+    const params = new HttpParams()
+          .set('huyenId', huyenId.toString());
+    return this.http.get<HttpResult>(url, {params : params}).pipe(map(res => {
+        const result: Select2Model[] = [] ;
+        res.data.forEach(element => {
+          result.push(new Select2Model (element.xaId, element.tenXa));
+        });
+        return result ;
+    }));
+
+  }
+
 }

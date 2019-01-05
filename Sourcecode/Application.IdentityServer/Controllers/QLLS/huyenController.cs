@@ -184,5 +184,21 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = result
             };
         }
+
+        /// <summary>
+        /// getListHuyenByTinh
+        /// </summary>
+        /// <param name="tinhId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ApiResult getListHuyenByTinh(int tinhId)
+        {
+            var result = huyenService.getListHuyenByTinh(tinhId);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }

@@ -43,6 +43,11 @@ namespace Application.Domain.Services
         {
             return this.dc.Huyen.ToList();
         }
+
+        public IList getListHuyenByTinh(int tinhId)
+        {
+            return this.dc.Huyen.Where(c => c.TinhId == tinhId).ToList();
+        }
     }
 }
 

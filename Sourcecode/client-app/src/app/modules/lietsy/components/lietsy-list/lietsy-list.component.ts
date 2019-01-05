@@ -24,6 +24,9 @@ import { SoQuyenService } from 'src/app/modules/soquyen/soquyen.service';
 import { ThoiKyService } from 'src/app/modules/thoiky/thoiky.service';
 import { ChucVuService } from 'src/app/modules/chucvu/chucvu.service';
 import { StaticDataService } from 'src/app/shared/services/staticData.Service';
+import { TinhService } from '../../../tinh/tinh.service';
+import { HuyenService } from '../../../huyen/huyen.service';
+import { XaService } from '../../../xa/xa.service';
 
 
 @Component({
@@ -36,7 +39,12 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   listAllThoiKy: Observable<Select2Model[]>;
   listAllCapBac: Observable<Select2Model[]>;
   listAllChucVu: Observable<Select2Model[]>;
+  listAllTinh: Observable<Select2Model[]>;
   listGender: Select2Model[];
+  listHuyenHySinh: Observable<Select2Model[]>;
+  listHuyenMaiTang: Observable<Select2Model[]>;
+  listXaHySinh: Observable<Select2Model[]>;
+  listXaMaiTang: Observable<Select2Model[]>;
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
@@ -53,7 +61,8 @@ export class LietSyListComponent implements OnInit, OnDestroy {
       private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
       private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
       , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
-      , private doiTuongService: DoiTuongService , private staticDataService: StaticDataService) { }
+      , private doiTuongService: DoiTuongService , private staticDataService: StaticDataService, private tinhService: TinhService,
+      private huyenService: HuyenService , private xaService: XaService) { }
 
   ngOnInit() {
     this.listAllSoQuyen = this.soQuyenService.getListAllSoQuyen();
@@ -61,7 +70,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
     this.listAllCapBac = this.capbacService.getListAllCapBac();
     this.listAllChucVu = this.chucVuService.getListAllChucVu();
     this.listGender = this.staticDataService.getListGender();
-
+    this.listAllTinh = this.tinhService.getListAllTinh();
     this.subscription = this.modalService.parentData.subscribe(data => {
       if ( data && data.action === ActionType.SUBMIT) {
         this.onSearch();
@@ -178,6 +187,19 @@ export class LietSyListComponent implements OnInit, OnDestroy {
 
   getSelectedItems() {
     return this.list$.filter(c => c.selected === true);
+  }
+
+  onChangeTinhHySinh (item: Select2Model ) {
+     this.listHuyenHySinh = this.huyenService.getListHuyenByTinh(item.id);
+  }
+  onChangeTinhMaiTang (item: Select2Model ) {
+    this.listHuyenMaiTang = this.huyenService.getListHuyenByTinh(item.id);
+  }
+  onChangeHuyenHySinh (item: Select2Model ) {
+    this.listXaHySinh = this.xaService.getListXaByHuyen(item.id);
+  }
+  onChangeHuyenMaiTang (item: Select2Model ) {
+    this.listXaMaiTang = this.xaService.getListXaByHuyen(item.id);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

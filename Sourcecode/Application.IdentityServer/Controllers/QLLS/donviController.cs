@@ -136,7 +136,16 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
-        
+        [HttpGet]
+        public ApiResult getListAllDonVI()
+        {
+            var result = donViService.getListAllDonVI();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
 
     }
 }

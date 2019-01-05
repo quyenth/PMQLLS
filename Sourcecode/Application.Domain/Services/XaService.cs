@@ -2,6 +2,7 @@ using Framework.Common;
 using Application.Domain.Entity;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using System.Collections;
 
 namespace Application.Domain.Services
 {
@@ -31,6 +32,11 @@ namespace Application.Domain.Services
             }
 
             return true;
+        }
+
+        public IList getListXaByHuyen(int huyenId)
+        {
+            return this.dc.Xa.Where(c => c.HuyenId == huyenId).ToList();
         }
     }
 }

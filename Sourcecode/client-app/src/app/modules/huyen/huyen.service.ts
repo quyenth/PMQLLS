@@ -69,4 +69,18 @@ export class HuyenService extends BaseService {
     }));
 
   }
+
+  getListHuyenByTinh(tinhId: number): Observable<Select2Model[]> {
+    const url = this.BaseUrl + '/api/huyen/getListHuyenByTinh';
+    const params = new HttpParams()
+          .set('tinhId', tinhId.toString());
+    return this.http.get<HttpResult>(url, {params : params}).pipe(map(res => {
+        const result: Select2Model[] = [] ;
+        res.data.forEach(element => {
+          result.push(new Select2Model (element.huyenId, element.tenHuyen));
+        });
+        return result ;
+    }));
+
+  }
 }
