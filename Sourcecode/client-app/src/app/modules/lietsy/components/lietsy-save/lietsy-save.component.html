@@ -94,7 +94,14 @@
                           N.Quán Tỉnh/TP
                         </label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="queTinhId" />
+                            <ng-select [items]="listAllTinh "
+                                bindLabel="text"
+                                bindValue="id"
+                                placeholder="N.Quán tỉnh"
+                                (change)="onChangeQueTinh($event)"
+                                formControlName="queTinhId"
+                                >
+                            </ng-select>
                         </div>
                        </div>
                     </div>
@@ -104,7 +111,14 @@
                             N.Quán Quận, Huyện
                         </label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="queHuyenId" />
+                            <ng-select [items]="listQueHuyen "
+                              bindLabel="text"
+                              bindValue="id"
+                              placeholder="N.Quán huyện"
+                              (change)="onChangeQueHuyen($event)"
+                              formControlName="queHuyenId"
+                              >
+                          </ng-select>
                         </div>
                        </div>
                     </div>
@@ -114,7 +128,12 @@
                             N.Quán Xã, phường
                         </label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="queXaId" />
+                            <ng-select [items]="listQueXa "
+                                bindLabel="text"
+                                bindValue="id"
+                                placeholder="N.Quán Xã, phường"
+                                >
+                            </ng-select>
                         </div>
                        </div>
                     </div>
@@ -389,40 +408,57 @@
                       </div>
                     </div>
                     <div class="hr-line-dashed"></div>
-                    <h5>
-                        Nơi hy sinh
-                   </h5>
                     <div class="row">
 
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhTinhId').valid }">
                         <label class="col-form-label col-sm-4">
                           Tỉnh/TP
                         </label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="hySinhTinhId" />
+                            <ng-select [items]="listAllTinh "
+                                bindLabel="text"
+                                bindValue="id"
+                                placeholder="Tỉnh/Tp hy sinh"
+                                (change)="onChangeTinhHySinh($event)"
+                                (clear)="onClearTinhHySinh()"
+                                formControlName="hySinhTinhId"
+                                >
+                              </ng-select>
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhHuyenId').valid }">
                         <label class="col-form-label col-sm-4">
                           Quận, Huyện
                         </label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="hySinhHuyenId" />
+                            <ng-select [items]="listHuyenHySinh "
+                                bindLabel="text"
+                                bindValue="id"
+                                placeholder="Quận, huyện hy sinh"
+                                (change)="onChangeHuyenHySinh($event)"
+                                formControlName="hySinhHuyenId">
+                              </ng-select>
                         </div>
                        </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhXaId').valid }">
                         <label class="col-form-label col-sm-4">
                           Thôn phố, Xã, Phường
                         </label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" formControlName="hySinhXaId" />
+                            <ng-select [items]="listXaHySinh "
+                              bindLabel="text"
+                              bindValue="id"
+                              placeholder="Thôn xã phường hy sinh"
+                              formControlName="hySinhXaId"
+                              >
+                            </ng-select>
                         </div>
                        </div>
                     </div>
@@ -442,7 +478,7 @@
             </div>
             <div class="ibox-content">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTang').valid }">
                           <label class="col-form-label col-sm-4">
                             Tình trạng
@@ -452,37 +488,55 @@
                           </div>
                          </div>
                       </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangTinhId').valid }">
                           <label class="col-form-label col-sm-4">
                             Tỉnh/TP
                           </label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" formControlName="maiTangTinhId" />
+                              <ng-select [items]="listAllTinh "
+                                bindLabel="text"
+                                bindValue="id"
+                                placeholder="Tỉnh/Tp mai táng"
+                                (change)="onChangeTinhMaiTang($event)"
+                                formControlName="maiTangTinhId">
+                            </ng-select>
                           </div>
                          </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangHuyenId').valid }">
                           <label class="col-form-label col-sm-4">
                             Quận, Huyện
                           </label>
                           <div class="col-sm-8">
-                            <input type="text" class="form-control" formControlName="maiTangHuyenId" />
+                              <ng-select [items]="listHuyenMaiTang "
+                                  bindLabel="text"
+                                  bindValue="id"
+                                  placeholder="Quận, huyện mai táng"
+                                  (change)="onChangeHuyenMaiTang($event)"
+                                  formControlName="maiTangHuyenId">
+                              </ng-select>
                           </div>
                          </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                           <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangHuyenId').valid }">
                             <label class="col-form-label col-sm-4">
                               Thôn phố, Xã, Phường
                             </label>
                             <div class="col-sm-8">
-                              <input type="text" class="form-control" formControlName="maiTangHuyenId" />
+                                <ng-select [items]="listXaMaiTang "
+                                    bindLabel="text"
+                                    bindValue="id"
+                                    placeholder="Thôn xã phường mai táng"
+                                    formControlName="maiTangHuyenId"
+                                >
+                              </ng-select>
                             </div>
                            </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangToaDo').valid }">
                             <label class="col-form-label col-sm-4">
                               Sơ đồ, tọa độ
@@ -492,7 +546,7 @@
                             </div>
                            </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('quyTap').valid }">
                               <label class="col-form-label col-sm-4">
                                 Tình trạng quy tập
@@ -502,7 +556,7 @@
                               </div>
                              </div>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('nghiaTrang').valid }">
                               <label class="col-form-label col-sm-4">
                                 Nghĩa trang
@@ -512,7 +566,7 @@
                               </div>
                              </div>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-4">
                             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('viTriMo').valid }">
                               <label class="col-form-label col-sm-4">
                                 Vị trí mộ
@@ -535,7 +589,7 @@
           </div>
           <div class="ibox-content">
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanCha').valid }">
                         <label class="col-form-label col-sm-4">
                           Bố
@@ -545,7 +599,7 @@
                         </div>
                        </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanMe').valid }">
                           <label class="col-form-label col-sm-4">
                             Mẹ
@@ -555,7 +609,7 @@
                           </div>
                          </div>
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                           <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanVo').valid }">
                             <label class="col-form-label col-sm-4">
                               Vợ|Chồng
@@ -565,7 +619,7 @@
                             </div>
                            </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanCon').valid }">
                               <label class="col-form-label col-sm-4">
                                 Con
@@ -575,7 +629,7 @@
                               </div>
                              </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanKhac').valid }">
                               <label class="col-form-label col-sm-4">
                                 Khác

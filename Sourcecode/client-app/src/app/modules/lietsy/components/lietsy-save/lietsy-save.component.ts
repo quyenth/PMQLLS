@@ -21,6 +21,9 @@ import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
 import { Select2Model } from 'src/app/shared/models/select2.model';
+import { TinhService } from 'src/app/modules/tinh/tinh.service';
+import { HuyenService } from 'src/app/modules/huyen/huyen.service';
+import { XaService } from 'src/app/modules/xa/xa.service';
 
 
 @Component({
@@ -40,6 +43,14 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   listAllDoiTuong: Observable<Select2Model[]>;
   listGender: Select2Model[];
 
+
+  listAllTinh: Select2Model[];
+  listHuyenHySinh: Select2Model[];
+  listHuyenMaiTang: Select2Model[];
+  listXaHySinh: Select2Model[];
+  listXaMaiTang: Select2Model[];
+  listQueHuyen: Select2Model[];
+  listQueXa: Select2Model[];
 
   myForm = this.fb.group({
 
@@ -65,11 +76,11 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         queThon: [''],
 
-        queXaId: [''],
+        queXaId: [null],
 
-        queHuyenId: [''],
+        queHuyenId: [null],
 
-        queTinhId: [''],
+        queTinhId: [null],
 
         truQuanThon: [''],
 
@@ -210,7 +221,8 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService,
           private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
           , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
-          , private doiTuongService: DoiTuongService , private staticDataService: StaticDataService) {
+          , private doiTuongService: DoiTuongService , private staticDataService: StaticDataService , private tinhService: TinhService,
+          private huyenService: HuyenService , private xaService: XaService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -224,6 +236,9 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
     this.listAllChucVu = this.chucVuService.getListAllChucVu();
     this.listAllDoiTuong = this.doiTuongService.getListAllDoiTuong();
     this.listGender = this.staticDataService.getListGender();
+    this.tinhService.getListAllTinh().subscribe((res) => {
+      this.listAllTinh = res;
+    });
   }
 
   getDataByID (data) {
@@ -439,5 +454,39 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   }
 
 
+    onChangeTinhHySinh (item: Select2Model ) {
+      this.huyenService.getListHuyenByTinh(item.id).subscribe((res) => {
+        this.listHuyenHySinh = res;
+      });
+  }
+  onChangeTinhMaiTang (item: Select2Model ) {
+    this.huyenService.getListHuyenByTinh(item.id).subscribe((res) => {
+      this.listHuyenMaiTang = res;
+    });
+  }
+  onChangeHuyenHySinh (item: Select2Model ) {
+    this.xaService.getListXaByHuyen(item.id).subscribe((res) => {
+      this.listXaHySinh  = res;
+    });
+  }
+  onChangeHuyenMaiTang (item: Select2Model ) {
+    this.xaService.getListXaByHuyen(item.id).subscribe((res) => {
+      this.listXaMaiTang = res;
+    });
+  }
+  onChangeQueTinh (item: Select2Model ) {
+    this.huyenService.getListHuyenByTinh(item.id).subscribe((res) => {
+        this.listQueHuyen = res;
+    });
+  }
+  onChangeQueHuyen (item: Select2Model ) {
+  this.xaService.getListXaByHuyen(item.id).subscribe((res) => {
+    this.listQueXa = res;
+  });
+  }
+  onClearTinhHySinh () {
+      this.listHuyenHySinh = [];
+      this.listXaHySinh = [];
+  }
 
 }
