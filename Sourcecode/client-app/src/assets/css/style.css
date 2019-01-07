@@ -9738,7 +9738,8 @@ table.dataDiplayTable thead .sorting_asc:before, table.dataDiplayTable thead .so
   padding: 20px;
 }
 .modal-full{
-  max-width: 98%;
+  max-width: 100%;
+  margin: 0
 }
 .swal2-container {
   z-index: 9999!important;
@@ -9785,9 +9786,25 @@ thead th{
   color: #1ab394
 }
 .col-form-label {
-  font-weight: 600
+  font-weight: 600;
+  padding-right: 0;
 }
 .liet-sy-form .ibox-title h5 {
   text-transform: uppercase;
   color: #1ab394
+}
+.form-control, .single-line {
+  border: 1px solid #ccc;
+}
+.liet-sy-form .ibox-title {
+  border: none
+}
+.liet-sy-form .ibox {
+  border: 1px solid #ccc;
+}
+.liet-sy-form .checkbox {
+  padding-left: 8px;
+}
+.form-group.has-error .ng-select-container {
+  border-color: #ed5565;
 }

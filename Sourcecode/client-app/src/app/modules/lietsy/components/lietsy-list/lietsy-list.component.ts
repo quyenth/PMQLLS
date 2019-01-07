@@ -39,12 +39,15 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   listAllThoiKy: Observable<Select2Model[]>;
   listAllCapBac: Observable<Select2Model[]>;
   listAllChucVu: Observable<Select2Model[]>;
-  listAllTinh: Observable<Select2Model[]>;
   listGender: Select2Model[];
-  listHuyenHySinh: Observable<Select2Model[]>;
-  listHuyenMaiTang: Observable<Select2Model[]>;
-  listXaHySinh: Observable<Select2Model[]>;
-  listXaMaiTang: Observable<Select2Model[]>;
+
+  listAllTinh: Select2Model[];
+  listHuyenHySinh: Select2Model[];
+  listHuyenMaiTang: Select2Model[];
+  listXaHySinh: Select2Model[];
+  listXaMaiTang: Select2Model[];
+  listQueHuyen: Select2Model[];
+  listQueXa: Select2Model[];
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
@@ -70,7 +73,9 @@ export class LietSyListComponent implements OnInit, OnDestroy {
     this.listAllCapBac = this.capbacService.getListAllCapBac();
     this.listAllChucVu = this.chucVuService.getListAllChucVu();
     this.listGender = this.staticDataService.getListGender();
-    this.listAllTinh = this.tinhService.getListAllTinh();
+    this.tinhService.getListAllTinh().subscribe((res) => {
+      this.listAllTinh = res;
+    });
     this.subscription = this.modalService.parentData.subscribe(data => {
       if ( data && data.action === ActionType.SUBMIT) {
         this.onSearch();
@@ -190,16 +195,38 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   }
 
   onChangeTinhHySinh (item: Select2Model ) {
-     this.listHuyenHySinh = this.huyenService.getListHuyenByTinh(item.id);
+     this.huyenService.getListHuyenByTinh(item.id).subscribe((res) => {
+        this.listHuyenHySinh = res;
+     });
   }
   onChangeTinhMaiTang (item: Select2Model ) {
-    this.listHuyenMaiTang = this.huyenService.getListHuyenByTinh(item.id);
+    this.huyenService.getListHuyenByTinh(item.id).subscribe((res) => {
+      this.listHuyenMaiTang = res;
+    });
   }
   onChangeHuyenHySinh (item: Select2Model ) {
-    this.listXaHySinh = this.xaService.getListXaByHuyen(item.id);
+    this.xaService.getListXaByHuyen(item.id).subscribe((res) => {
+      this.listXaHySinh  = res;
+    });
   }
   onChangeHuyenMaiTang (item: Select2Model ) {
-    this.listXaMaiTang = this.xaService.getListXaByHuyen(item.id);
+    this.xaService.getListXaByHuyen(item.id).subscribe((res) => {
+      this.listXaMaiTang = res;
+    });
+  }
+  onChangeQueTinh (item: Select2Model ) {
+    this.huyenService.getListHuyenByTinh(item.id).subscribe((res) => {
+       this.listQueHuyen = res;
+    });
+ }
+ onChangeQueHuyen (item: Select2Model ) {
+  this.xaService.getListXaByHuyen(item.id).subscribe((res) => {
+    this.listQueXa = res;
+  });
+}
+  onClearTinhHySinh () {
+      this.listHuyenHySinh = [];
+      this.listXaHySinh = [];
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

@@ -9,7 +9,7 @@ import { CapbacService } from 'src/app/https/capbac.service';
 import { DonViService } from './../../../donvi/donvi.service';
 import { map, switchMap } from 'rxjs/operators';
 import { LietSyModel } from './../../lietsy.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription, timer, of, Observable } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -24,6 +24,7 @@ import { Select2Model } from 'src/app/shared/models/select2.model';
 import { TinhService } from 'src/app/modules/tinh/tinh.service';
 import { HuyenService } from 'src/app/modules/huyen/huyen.service';
 import { XaService } from 'src/app/modules/xa/xa.service';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -52,13 +53,16 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   listQueHuyen: Select2Model[];
   listQueXa: Select2Model[];
 
+  @ViewChild('submitSwal') private submitSwal: SwalComponent;
+
+
   myForm = this.fb.group({
 
         id: [''],
 
         thuTu: [''],
 
-        hoTen: [''],
+        hoTen: ['', [Validators.required]],
 
         ten: [''],
 
@@ -66,9 +70,9 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         biDanh: [''],
 
-        gioiTinh: [null],
+        gioiTinh: [null, [Validators.required]],
 
-        namSinh: [''],
+        namSinh: ['', [Validators.required]],
 
         danToc: [''],
 
@@ -128,17 +132,17 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         hySinhDiaDiem: [''],
 
-        hySinhXaId: [''],
+        hySinhXaId: [null],
 
-        hySinhHuyenId: [''],
+        hySinhHuyenId: [null],
 
-        hySinhTinhId: [''],
+        hySinhTinhId: [null],
 
-        maiTangXaId: [''],
+        maiTangXaId: [null],
 
-        maiTangHuyenId: [''],
+        maiTangHuyenId: [null],
 
-        maiTangTinhId: [''],
+        maiTangTinhId: [null],
 
         maiTangBanDo: [''],
 
@@ -417,17 +421,11 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
     this.submited = true;
     console.log(this.myForm);
+
     if ( !this.myForm.valid) {
       return;
     }
-
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-      dialogCloseSubscription.unsubscribe();
-      if ( data === ActionType.ACCEPT) {
-        this.submitData();
-      }
-    });
+    this.submitSwal.show();
   }
 
   submitData() {

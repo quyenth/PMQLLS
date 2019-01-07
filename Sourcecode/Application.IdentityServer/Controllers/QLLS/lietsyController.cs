@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Domain.Entity;
 using Application.Domain.Services;
+using Framework.AspNetIdentity;
 using Framework.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.IdentityServer.Controllers.QLLS
@@ -16,9 +18,14 @@ namespace Application.IdentityServer.Controllers.QLLS
     public class LietSyController : ControllerBase
     {
         private ILietSyService lietSyService;
-        public LietSyController (ILietSyService lietSyService)
+
+        private readonly UserManager<ApplicationUser> userManager;
+
+        public LietSyController (ILietSyService lietSyService , UserManager<ApplicationUser> userManager)
         {
             this.lietSyService = lietSyService;
+            this.userManager = userManager;
+
         }
         /// <summary>
         /// save lietSy
@@ -31,8 +38,15 @@ namespace Application.IdentityServer.Controllers.QLLS
         [HttpPost]
         public async Task<ApiResult> Save([FromBody] LietSy model)
         {
+            var user = HttpContext.User;
+            var userId = userManager.GetUserId(User);
+
             if (model.Id == 0)
-            {
+            {               
+                model.Created = DateTime.Now;
+                model.Updated = DateTime.Now;
+                model.CreatdedBy = userId;
+                model.UpdatedBy = userId;
                 var added = lietSyService.Add(model);
                 return new ApiResult()
                 {
@@ -43,7 +57,9 @@ namespace Application.IdentityServer.Controllers.QLLS
             //edit
             else
             {
+                model.Updated = DateTime.Now;
                 lietSyService.Update(model);
+                model.UpdatedBy = userId;
                 return new ApiResult()
                 {
                     Status = HttpStatus.OK,

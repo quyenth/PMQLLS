@@ -2,8 +2,8 @@
   <div class="ibox-title" style="height: 65px">
     <h3 style="margin: 0" class='page-title'>Tìm kiếm hồ sơ liệt sĩ</h3>
     <div class="ibox-tools">
-      <button class="btn btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" ><span><i class="fa fa-plus"></i>  Thêm mới</span></button>
-      <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="fa fa-trash"></i>  Xóa đã chọn</span></button>
+      <button class="btn btn-sm btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" ><span><i class="fa fa-plus"></i>  Thêm mới</span></button>
+      <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger btn-sm buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="fa fa-trash"></i>  Xóa đã chọn</span></button>
     </div>
   </div>
 
@@ -39,13 +39,30 @@
     </div>
     <div class="row" style="margin-top: 10px">
       <div class="col-sm-2">
-        <input placeholder="N.Quán tỉnh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listAllTinh "
+            bindLabel="text"
+            bindValue="id"
+            placeholder="N.Quán tỉnh"
+            (change)="onChangeQueTinh($event)"
+            >
+        </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="N.Quán huyện" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listQueHuyen "
+            bindLabel="text"
+            bindValue="id"
+            placeholder="N.Quán huyện"
+            (change)="onChangeQueHuyen($event)"
+            >
+        </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="N.Quán xã" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <ng-select [items]="listQueXa "
+              bindLabel="text"
+              bindValue="id"
+              placeholder="N.Quán xã"
+              >
+          </ng-select>
       </div>
       <div class="col-sm-2">
         <input placeholder="N.Quán thôn" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
@@ -95,15 +112,17 @@
     </div>
     <div class="row" style="margin-top: 10px">
       <div class="col-sm-2">
-          <ng-select [items]="listAllTinh | async"
+          <ng-select [items]="listAllTinh "
             bindLabel="text"
             bindValue="id"
             placeholder="Tỉnh/Tp hy sinh"
-            (change)="onChangeTinhHySinh($event)">
+            (change)="onChangeTinhHySinh($event)"
+            (clear)="onClearTinhHySinh()"
+            >
           </ng-select>
       </div>
       <div class="col-sm-2">
-          <ng-select [items]="listHuyenHySinh | async"
+          <ng-select [items]="listHuyenHySinh "
               bindLabel="text"
               bindValue="id"
               placeholder="Quận, huyện hy sinh"
@@ -111,7 +130,7 @@
             </ng-select>
       </div>
       <div class="col-sm-2">
-          <ng-select [items]="listXaHySinh | async"
+          <ng-select [items]="listXaHySinh "
             bindLabel="text"
             bindValue="id"
             placeholder="Thôn xã phường hy sinh"
@@ -119,7 +138,7 @@
           </ng-select>
       </div>
       <div class="col-sm-2">
-          <ng-select [items]="listAllTinh | async"
+          <ng-select [items]="listAllTinh "
               bindLabel="text"
               bindValue="id"
               placeholder="Tỉnh/Tp mai táng"
@@ -127,7 +146,7 @@
           </ng-select>
       </div>
       <div class="col-sm-2">
-          <ng-select [items]="listHuyenMaiTang | async"
+          <ng-select [items]="listHuyenMaiTang "
             bindLabel="text"
             bindValue="id"
             placeholder="Quận, huyện mai táng"
@@ -135,7 +154,7 @@
           </ng-select>
       </div>
       <div class="col-sm-2">
-          <ng-select [items]="listXaMaiTang | async"
+          <ng-select [items]="listXaMaiTang "
             bindLabel="text"
             bindValue="id"
             placeholder="Thôn xã phường mai táng"
