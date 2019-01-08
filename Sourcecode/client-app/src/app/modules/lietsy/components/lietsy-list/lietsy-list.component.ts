@@ -57,6 +57,27 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
   orderInfo: OrderInfo = new OrderInfo('', true);
+  searchCodition = {
+    soquyenId : null,
+    thutu: null,
+    gioiTinh: null,
+    hoTen: null,
+    namSinh: null,
+    queTinhId: null,
+    queHuyenId: null,
+    queXaId: null,
+    queThon: null,
+    ngayHiSinh: null,
+    hySinhCapBac : null,
+    hySinhChucVu : null,
+    hySinhLyDoChiTiet : null,
+    HySinhTinhId: null,
+    HySinhHuyenId: null,
+    HySinhXaId: null,
+    MaiTangTinhId: null,
+    MaiTangHuyenId: null,
+    MaiTangXaId: null
+  };
 
   subscription: Subscription;
   checkall = false;
@@ -94,12 +115,14 @@ export class LietSyListComponent implements OnInit, OnDestroy {
       this.filterCondition.SearchCondition = [ ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
-      if (this.orderInfo.FieldName) {
-        this.filterCondition.Orders = [{...this.orderInfo}];
-       } else {
-        this.filterCondition.Orders = [];
-      }
-      this.lietSyService.search(this.filterCondition).subscribe((res: HttpResult) => {
+
+      console.log(this.searchCodition);
+      const data = {
+        searchCodition: this.searchCodition,
+        PageIndex : pageIndex,
+        PageSize: this.pageSize
+      };
+      this.lietSyService.search(data).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
         this.totalCount = res.data.total;

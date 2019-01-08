@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Domain.Entity;
 using Application.Domain.Services;
+using AspNetCore.Data;
 using Framework.AspNetIdentity;
 using Framework.Common;
 using Microsoft.AspNetCore.Authorization;
@@ -73,17 +74,18 @@ namespace Application.IdentityServer.Controllers.QLLS
         /// <param name="filterCondition"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task< ApiResult> Search([FromBody]FilterCondition filterCondition)
+        public async Task< ApiResult> Search([FromBody]LietSiFilterCondition filterCondition)
         {
             int total = 0;
-            var list = lietSyService.Filter(filterCondition , out total);
+            var listOfStrings = new List<string>();
+
             return new ApiResult()
             {
                 Status = HttpStatus.OK,
                 Data = new
                 {
-                    Total = total,
-                    List = list
+                    Total = 0,
+                    List = listOfStrings
                 }
             };
         }

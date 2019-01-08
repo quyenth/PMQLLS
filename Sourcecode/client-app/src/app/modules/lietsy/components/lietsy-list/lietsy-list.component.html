@@ -14,24 +14,26 @@
             <ng-select [items]="listAllSoQuyen | async"
                 bindLabel="text"
                 bindValue="id"
-                [placeholder]="'Quyển/Tập số'">
+                [placeholder]="'Quyển/Tập số'"
+                [(ngModel)] = "searchCodition.soquyenId">
             </ng-select>
       </div>
       <div class="col-sm-2">
-          <input placeholder="Số thứ tự" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+          <input placeholder="Số thứ tự" [(ngModel)] = "searchCodition.thutu" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-2">
           <ng-select [items]="listGender"
                                 bindLabel="text"
                                 bindValue="id"
-                                [placeholder]="'Giới tính'">
+                                [placeholder]="'Giới tính'"
+                                [(ngModel)] = "searchCodition.gioiTinh">
             </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="Họ và tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <input placeholder="Họ và tên"  [(ngModel)] = "searchCodition.hoTen" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-2">
-        <input placeholder="Năm sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <input placeholder="Năm sinh" [(ngModel)] = "searchCodition.namSinh" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-2">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fa fa-search"></i> Tìm kiếm</button>
@@ -44,6 +46,7 @@
             bindValue="id"
             placeholder="N.Quán tỉnh"
             (change)="onChangeQueTinh($event)"
+            [(ngModel)] = "searchCodition.queTinhId"
             >
         </ng-select>
       </div>
@@ -53,6 +56,8 @@
             bindValue="id"
             placeholder="N.Quán huyện"
             (change)="onChangeQueHuyen($event)"
+            [(ngModel)] = "searchCodition.queHuyenId"
+
             >
         </ng-select>
       </div>
@@ -61,11 +66,13 @@
               bindLabel="text"
               bindValue="id"
               placeholder="N.Quán xã"
+              [(ngModel)] = "searchCodition.queXaId"
+
               >
           </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="N.Quán thôn" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <input placeholder="N.Quán thôn" [(ngModel)] = "searchCodition.queThon" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
     </div>
     <div class="row" style="margin-top: 10px">
@@ -89,24 +96,24 @@
       <div class="col-sm-2">
         <input type="text"
           class="form-control"
-          bsDatepicker formControlName="ngayHiSinh" placeholder="Ngày hy sinh">
+          bsDatepicker placeholder="Ngày hy sinh" [(ngModel)] = "searchCodition.ngayHiSinh">
       </div>
       <div class="col-sm-2">
         <ng-select [items]="listAllCapBac | async"
             bindLabel="text"
             bindValue="id"
-            [placeholder]="'Cấp bậc'">
+            [placeholder]="'Cấp bậc'" [(ngModel)] = "searchCodition.hySinhCapBac">
           </ng-select>
       </div>
       <div class="col-sm-2">
         <ng-select [items]="listAllChucVu | async"
             bindLabel="text"
             bindValue="id"
-            [placeholder]="'Chức vụ'">
+            [placeholder]="'Chức vụ'" [(ngModel)] = "searchCodition.hySinhChucVu">
         </ng-select>
       </div>
       <div class="col-sm-4">
-        <input placeholder="Lý do hy sinh" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <input placeholder="Lý do hy sinh" [(ngModel)] = "searchCodition.hySinhLyDoChiTiet" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
 
     </div>
@@ -118,6 +125,7 @@
             placeholder="Tỉnh/Tp hy sinh"
             (change)="onChangeTinhHySinh($event)"
             (clear)="onClearTinhHySinh()"
+            [(ngModel)] = "searchCodition.HySinhTinhId"
             >
           </ng-select>
       </div>
@@ -126,7 +134,8 @@
               bindLabel="text"
               bindValue="id"
               placeholder="Quận, huyện hy sinh"
-              (change)="onChangeHuyenHySinh($event)">
+              (change)="onChangeHuyenHySinh($event)"
+              [(ngModel)] = "searchCodition.HySinhHuyenId">
             </ng-select>
       </div>
       <div class="col-sm-2">
@@ -134,6 +143,7 @@
             bindLabel="text"
             bindValue="id"
             placeholder="Thôn xã phường hy sinh"
+            [(ngModel)] = "searchCodition.HySinhXaId"
             >
           </ng-select>
       </div>
@@ -142,7 +152,8 @@
               bindLabel="text"
               bindValue="id"
               placeholder="Tỉnh/Tp mai táng"
-              (change)="onChangeTinhMaiTang($event)">
+              (change)="onChangeTinhMaiTang($event)"
+              [(ngModel)] = "searchCodition.MaiTangTinhId">
           </ng-select>
       </div>
       <div class="col-sm-2">
@@ -150,7 +161,8 @@
             bindLabel="text"
             bindValue="id"
             placeholder="Quận, huyện mai táng"
-            (change)="onChangeHuyenMaiTang($event)">
+            (change)="onChangeHuyenMaiTang($event)"
+            [(ngModel)] = "searchCodition.MaiTangHuyenId">
           </ng-select>
       </div>
       <div class="col-sm-2">
@@ -158,6 +170,7 @@
             bindLabel="text"
             bindValue="id"
             placeholder="Thôn xã phường mai táng"
+            [(ngModel)] = "searchCodition.MaiTangXaId"
             >
         </ng-select>
       </div>

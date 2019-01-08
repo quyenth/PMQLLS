@@ -16,7 +16,7 @@ export class LietSyService extends BaseService {
     super();
   }
 
-  search(filterCondition: FilterCondition): Observable<HttpResult> {
+  search(filterCondition): Observable<HttpResult> {
     const url = this.BaseUrl + '/api/LietSy/Search';
     return this.http.post<HttpResult>(url, filterCondition);
   }
