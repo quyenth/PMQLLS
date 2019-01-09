@@ -10,6 +10,11 @@ namespace Application.Domain.common
 
         public const string GetUserRoleByUserId = "GetUserRoleByUserId";
 
+        public const string SearchListLietSi = "SearchListLietSi";
+
+        public const string ExportListLietSi = "ExportListLietSi";
+
 
     }
+
 }

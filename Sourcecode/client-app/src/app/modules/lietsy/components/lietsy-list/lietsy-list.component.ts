@@ -27,6 +27,7 @@ import { StaticDataService } from 'src/app/shared/services/staticData.Service';
 import { TinhService } from '../../../tinh/tinh.service';
 import { HuyenService } from '../../../huyen/huyen.service';
 import { XaService } from '../../../xa/xa.service';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -50,8 +51,10 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   listQueXa: Select2Model[];
 
   @ViewChild('SearchName') searchInput: ElementRef ;
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
+
   currentPage = 1;
-  pageSize = 2;
+  pageSize = 20;
 
   list$ = [];
   totalCount: number;
@@ -123,6 +126,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
         PageSize: this.pageSize
       };
       this.lietSyService.search(data).subscribe((res: HttpResult) => {
+        console.log(res);
         this.spinner.hide();
         this.list$ = res.data.list;
         this.totalCount = res.data.total;
@@ -165,36 +169,29 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteItem (item) {
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-        dialogCloseSubscription.unsubscribe();
-        if ( data === ActionType.ACCEPT) {
-          this.lietSyService.delete(item).subscribe((res) => {
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.lietSyService.delete(item).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
+  }
+
+  onDeleteSelected () {
+    const listSelected = this.list$.filter(c => c.selected === true);
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn?' ;
+    this.deleteItemSwal.show().then( (result) => {
+      if ( result.value ) {
+        this.lietSyService.delectList(listSelected).subscribe((res) => {
           this.toastr.success('Xóa thành công!');
             this.onSearch();
         });
       }
     });
-  }
-
-  onDeleteSelected () {
-    const listSelected = this.list$.filter(c => c.selected === true);
-    if (listSelected.length === 0) {
-        this.confirmationDialogService.confirm('Thông tin!', 'Bạn chưa chọn mục nào?' , ModalType.INFO);
-        return;
-    }
-
-
-      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-          dialogCloseSubscription.unsubscribe();
-          if ( data === ActionType.ACCEPT) {
-            this.lietSyService.delectList(listSelected).subscribe((res) => {
-            this.toastr.success('Xóa thành công!');
-              this.onSearch();
-          });
-      }
-      });
 
   }
 

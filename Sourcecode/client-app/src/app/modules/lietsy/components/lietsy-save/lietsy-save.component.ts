@@ -43,6 +43,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   listAllChucVu: Observable<Select2Model[]>;
   listAllDoiTuong: Observable<Select2Model[]>;
   listGender: Select2Model[];
+  listAllDiemCao: Observable<Select2Model[]>;
 
 
   listAllTinh: Select2Model[];
@@ -148,15 +149,15 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         maiTangToaDo: [''],
 
-        maiTangDiemCaoId: [''],
+        maiTangDiemCaoId: [null],
 
         nghiaTrang: [''],
 
         viTriMo: [''],
 
-        quyTap: [''],
+        quyTap: [false],
 
-        maiTang: [''],
+        maiTang: [false],
 
         matThiHai: [''],
 
@@ -240,6 +241,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
     this.listAllChucVu = this.chucVuService.getListAllChucVu();
     this.listAllDoiTuong = this.doiTuongService.getListAllDoiTuong();
     this.listGender = this.staticDataService.getListGender();
+    this.listAllDiemCao = this.diemCaoService.getListAllDiemCao();
     this.tinhService.getListAllTinh().subscribe((res) => {
       this.listAllTinh = res;
     });

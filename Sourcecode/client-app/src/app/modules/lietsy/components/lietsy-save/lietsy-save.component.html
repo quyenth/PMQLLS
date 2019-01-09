@@ -492,6 +492,20 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-md-4">
+                        <div class="form-group  row">
+                            <label class="col-form-label col-sm-4" for='maiTangCheckbox'>
+                                Tình trạng mai táng
+                            </label>
+                            <div class="col-sm-8">
+                                <div class="checkbox checkbox-success">
+                                    <input type="checkbox" id="maiTangCheckbox" fformControlName="maiTang" >
+                                    <label for="maiTangCheckbox"> </label>
+                                </div>
+                            </div>
+                          </div>
+
+                    </div>
+                    <!-- <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTang').valid }">
                           <label class="col-form-label col-sm-4">
                             Tình trạng
@@ -500,7 +514,7 @@
                             <input type="text" class="form-control" formControlName="maiTang" />
                           </div>
                          </div>
-                      </div>
+                      </div> -->
                     <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangTinhId').valid }">
                           <label class="col-form-label col-sm-4">
@@ -534,7 +548,7 @@
                          </div>
                       </div>
                       <div class="col-md-4">
-                          <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangHuyenId').valid }">
+                          <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangXaId').valid }">
                             <label class="col-form-label col-sm-4">
                               Thôn phố, Xã, Phường
                             </label>
@@ -543,12 +557,28 @@
                                     bindLabel="text"
                                     bindValue="id"
                                     placeholder="Thôn xã phường mai táng"
-                                    formControlName="maiTangHuyenId"
+                                    formControlName="maiTangXaId"
                                 >
                               </ng-select>
                             </div>
                            </div>
                         </div>
+                        <!-- <div class="col-md-4">
+                            <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangDiemCaoId').valid }">
+                              <label class="col-form-label col-sm-4">
+                                Điểm cao
+                              </label>
+                              <div class="col-sm-8">
+                                  <ng-select [items]="listAllDiemCao "
+                                      bindLabel="text"
+                                      bindValue="id"
+                                      placeholder="Điểm cao"
+                                      formControlName="maiTangDiemCaoId"
+                                  >
+                                </ng-select>
+                              </div>
+                             </div>
+                          </div> -->
                         <div class="col-md-4">
                           <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangToaDo').valid }">
                             <label class="col-form-label col-sm-4">
@@ -560,6 +590,20 @@
                            </div>
                         </div>
                         <div class="col-md-4">
+                            <div class="form-group  row">
+                                <label class="col-form-label col-sm-4" for='quytapCheckbox'>
+                                    Tình trạng quy tập
+                                </label>
+                                <div class="col-sm-8">
+                                    <div class="checkbox checkbox-success">
+                                        <input type="checkbox" id="quytapCheckbox" formControlName="quyTap" >
+                                        <label for="quytapCheckbox"> </label>
+                                    </div>
+                                </div>
+                              </div>
+
+                        </div>
+                        <!-- <div class="col-md-4">
                             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('quyTap').valid }">
                               <label class="col-form-label col-sm-4">
                                 Tình trạng quy tập
@@ -568,7 +612,7 @@
                                 <input type="text" class="form-control" formControlName="quyTap" />
                               </div>
                              </div>
-                          </div>
+                          </div> -->
                           <div class="col-md-4">
                             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('nghiaTrang').valid }">
                               <label class="col-form-label col-sm-4">
@@ -649,6 +693,16 @@
                               </label>
                               <div class="col-sm-8">
                                 <input type="text" class="form-control" formControlName="thanNhanKhac" />
+                              </div>
+                             </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('thanNhanDiaChi').valid }">
+                              <label class="col-form-label col-sm-4">
+                                Địa chỉ
+                              </label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" formControlName="thanNhanDiaChi" />
                               </div>
                              </div>
                         </div>

@@ -76,16 +76,20 @@ namespace Application.IdentityServer.Controllers.QLLS
         [HttpPost]
         public async Task< ApiResult> Search([FromBody]LietSiFilterCondition filterCondition)
         {
-            int total = 0;
             var listOfStrings = new List<string>();
-
+            PagingInfo paging = new PagingInfo
+                                {
+                                    PageIndex = filterCondition.PageIndex,
+                                    PageSize = filterCondition.PageSize
+                                };
+            var result = lietSyService.SearchListLietSi(filterCondition.searchCodition, paging);
             return new ApiResult()
             {
                 Status = HttpStatus.OK,
                 Data = new
                 {
-                    Total = 0,
-                    List = listOfStrings
+                    Total = paging.TotalCount,
+                    List = result
                 }
             };
         }

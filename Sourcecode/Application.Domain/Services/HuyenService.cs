@@ -48,6 +48,25 @@ namespace Application.Domain.Services
         {
             return this.dc.Huyen.Where(c => c.TinhId == tinhId).ToList();
         }
+
+        public IList getSearchListHuyen(string name, PagingInfo paging)
+        {
+            var result = (from a in this.dc.Huyen
+                          join b in this.dc.Tinh on a.TinhId equals b.TinhId
+                          where (name == null || a.TenHuyen.Contains(name))
+                          select new
+                          {
+                              HuyenIdh = a.HuyenId,
+                              Is1990 = a.Is1990,
+                              MaHuyen = a.MaHuyen,
+                              TenHuyen = a.TenHuyen,
+                              TinhId = a.TinhId,
+                              TinhName = b.TenTinh
+                          }).OrderBy(c => c.TenHuyen)
+                            .Skip(paging.PageSize * (paging.PageIndex - 1))
+                            .Take(paging.PageSize).ToList();
+            return result;
+        }
     }
 }
 

@@ -11,5 +11,8 @@ namespace Application.Domain.Services
         IList getListAllHuyen();
 
         IList getListHuyenByTinh(int tinhId);
+
+        IList getSearchListHuyen(string name, PagingInfo paging);
+
     }
 }

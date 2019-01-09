@@ -56,7 +56,7 @@ export class DiemCaoService extends BaseService {
     return this.http.get<HttpResult>(url, { params : params});
   }
 
-  getListAllChucVu(): Observable<Select2Model[]> {
+  getListAllDiemCao(): Observable<Select2Model[]> {
     const url = this.BaseUrl + '/api/diemCao/GetListAllDiemCao';
     return this.http.get<HttpResult>(url).pipe(map(res => {
         const result: Select2Model[] = [] ;

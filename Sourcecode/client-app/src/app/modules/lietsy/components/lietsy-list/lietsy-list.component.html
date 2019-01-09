@@ -177,70 +177,70 @@
     </div>
 
     <div class='tbl-div' style="overflow: auto">
-      <table class="table table-bordered table-hover table-striped dataDiplayTable" style="width:100%; min-width: 2200px;">
+      <table class="table table-bordered table-hover table-striped dataDiplayTable" style="width:100%; min-width: 3000px;">
         <thead>
           <tr >
             <th style="text-align: center; width: 20px;" class='no-sort' rowspan="2">
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-                          <th class='no-sort' rowspan="2">Quyển</th>
+                          <th class='no-sort' rowspan="2" style="width: 90px;">Quyển</th>
 
-                           <th class='no-sort'  rowspan="2">STT</th>
+                           <th class='no-sort'  rowspan="2" style="width: 30px;">STT</th>
 
-                           <th class='no-sort'  rowspan="2">Họ tên</th>
+                           <th class='no-sort'  rowspan="2" style="width: 180px;">Họ tên</th>
 
-                           <th class='no-sort'  rowspan="2">Tên</th>
+                           <!-- <th class='no-sort'  rowspan="2">Tên</th> -->
 
-                           <th class='no-sort'  rowspan="2">Giới tính</th>
+                           <th class='no-sort'  rowspan="2" style="width: 20px;">Giới tính</th>
 
-                           <th class='no-sort'  rowspan="2">Năm sinh</th>
+                           <th class='no-sort'  rowspan="2" style="width: 20px;">Năm sinh</th>
 
                            <th class='no-sort'  rowspan="1" colspan="4">Nguyên quán</th>
 
 
 
-                           <th class='no-sort' rowspan="2">Ngày nhập ngũ</th>
+                           <th class='no-sort' rowspan="2" style="width: 90px;">Ngày nhập ngũ</th>
 
-                           <th class='no-sort' rowspan="2">Cấp bậc</th>
+                           <th class='no-sort' rowspan="2" style="width: 100px;">Cấp bậc</th>
 
-                           <th class='no-sort' rowspan="2">Chức vụ</th>
+                           <th class='no-sort' rowspan="2" style="width: 100px;">Chức vụ</th>
 
-                           <th class='no-sort' rowspan="2">Ngày hy sinh</th>
+                           <th class='no-sort' rowspan="2" style="width: 100px;">Ngày hy sinh</th>
 
-                           <th class='no-sort'rowspan="2">Đơn vị</th>
+                           <th class='no-sort'rowspan="2" style="width: 250px;">Đơn vị</th>
 
-                           <th class='no-sort' rowspan="2">Trường hợp hy sinh</th>
+                           <th class='no-sort' rowspan="2" style="width: 250px;">Trường hợp hy sinh</th>
 
-                           <th class='no-sort' rowspan="2">Trận đánh hy sinh</th>
+                           <th class='no-sort' rowspan="2" style="width: 250px;">Trận đánh hy sinh</th>
 
-                           <th class='no-sort' colspan="3"> Hy sinh </th>
+                           <th class='no-sort' colspan="3" style="width: 20px;"> Hy sinh </th>
 
-                           <th class='no-sort' colspan="6">Mai táng</th>
+                           <th class='no-sort' colspan="6" style="width: 20px;">Mai táng</th>
 
-                           <th class='no-sort' colspan="3">Quy tập</th>
+                           <th class='no-sort' colspan="3" style="width: 20px;">Quy tập</th>
 
-                           <th class='no-sort' colspan="6">Thân nhân</th>
+                           <th class='no-sort' colspan="6" style="width: 20px;">Thân nhân</th>
 
                           <th style="width:60px;" class='no-sort' rowspan="2"></th>
           </tr>
           <tr>
-              <th class='no-sort'>Thôn</th>
-              <th class='no-sort'>Xã</th>
-              <th class='no-sort'>Huyện</th>
-              <th class='no-sort'>Tỉnh</th>
+              <th class='no-sort' style="width: 200px;">Thôn</th>
+              <th class='no-sort' style="width: 200px;">Xã</th>
+              <th class='no-sort' style="width: 200px;">Huyện</th>
+              <th class='no-sort' style="width: 200px;">Tỉnh</th>
 
-              <th class='no-sort'>Thôn, xã</th>
-              <th class='no-sort'>Quận huyện</th>
-              <th class='no-sort'>Tỉnh</th>
+              <th class='no-sort' style="width: 200px;">Thôn, xã</th>
+              <th class='no-sort' style="width: 200px;">Quận huyện</th>
+              <th class='no-sort' style="width: 200px;">Tỉnh</th>
 
-              <th class='no-sort'>Tình trạng</th>
+              <th class='no-sort' style="width: 200px;">Tình trạng</th>
 
-              <th class='no-sort'>Xã</th>
+              <th class='no-sort' style="width: 200px;">Xã</th>
 
-              <th class='no-sort'>Huyện</th>
+              <th class='no-sort' style="width: 200px;">Huyện</th>
 
-              <th class='no-sort'>Tỉnh</th>
+              <th class='no-sort' style="width: 200px;">Tỉnh</th>
 
               <th class='no-sort'>Điểm cao</th>
 
@@ -270,171 +270,50 @@
             <td style="text-align: center;">
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
-
-
-                               <!-- <td>{{item.thuTu}}</td>
-
-                               <td>{{item.hoTen}}</td>
-
-                               <td>{{item.ten}}</td>
-
-                               <td>{{item.tenKhac}}</td>
-
-                               <td>{{item.biDanh}}</td>
-
-                               <td>{{item.gioiTinh}}</td>
-
-                               <td>{{item.namSinh}}</td>
-
-                               <td>{{item.danToc}}</td>
-
-                               <td>{{item.quocTich}}</td>
-
-                               <td>{{item.queThon}}</td>
-
-                               <td>{{item.queXaId}}</td>
-
-                               <td>{{item.queHuyenId}}</td>
-
-                               <td>{{item.queTinhId}}</td>
-
-                               <td>{{item.truQuanThon}}</td>
-
-                               <td>{{item.truQuanXaId}}</td>
-
-                               <td>{{item.truQuanHuyenId}}</td>
-
-                               <td>{{item.truQuanTinhId}}</td>
-
-                               <td>{{item.diaPhuongNhapNgu}}</td>
-
-                               <td>{{item.ngayNhapNgu}}</td>
-
-                               <td>{{item.ngayXuatNgu}}</td>
-
-                               <td>{{item.ngayTaiNgu}}</td>
-
-                               <td>{{item.ngayDiBCK}}</td>
-
-                               <td>{{item.donViHuanLuyen}}</td>
-
-                               <td>{{item.doanVien}}</td>
-
-                               <td>{{item.ngayVaoDoan}}</td>
-
-                               <td>{{item.dangVien}}</td>
-
-                               <td>{{item.ngayVaoDang}}</td>
-
-                               <td>{{item.khenThuong}}</td>
-
-                               <td>{{item.ngayHiSinh}}</td>
-
-                               <td>{{item.hiSinhLyDoID}}</td>
-
-                               <td>{{item.hySinhLyDoChiTiet}}</td>
-
-                               <td>{{item.hySinhThoiKyId}}</td>
-
-                               <td>{{item.doiTuongId}}</td>
-
-                               <td>{{item.hySinhMatTranId}}</td>
-
-                               <td>{{item.hySinhTranDanh}}</td>
-
-                               <td>{{item.hySinhDiaDiem}}</td>
-
-                               <td>{{item.hySinhXaId}}</td>
-
-                               <td>{{item.hySinhHuyenId}}</td>
-
-                               <td>{{item.hySinhTinhId}}</td>
-
-                               <td>{{item.maiTangXaId}}</td>
-
-                               <td>{{item.maiTangHuyenId}}</td>
-
-                               <td>{{item.maiTangTinhId}}</td>
-
-                               <td>{{item.maiTangBanDo}}</td>
-
-                               <td>{{item.maiTangToaDo}}</td>
-
-                               <td>{{item.maiTangDiemCaoId}}</td>
-
-                               <td>{{item.nghiaTrang}}</td>
-
-                               <td>{{item.viTriMo}}</td>
-
-                               <td>{{item.quyTap}}</td>
-
-                               <td>{{item.maiTang}}</td>
-
-                               <td>{{item.matThiHai}}</td>
-
-                               <td>{{item.matTich}}</td>
-
-                               <td>{{item.ngayBaoTu}}</td>
-
-                               <td>{{item.giayBaoTu}}</td>
-
-                               <td>{{item.thanNhanCha}}</td>
-
-                               <td>{{item.thanNhanMe}}</td>
-
-                               <td>{{item.thanNhanVo}}</td>
-
-                               <td>{{item.thanNhanCon}}</td>
-
-                               <td>{{item.thanNhanKhac}}</td>
-
-                               <td>{{item.thanNhanBaoTin}}</td>
-
-                               <td>{{item.thanNhanDiaChi}}</td>
-
-                               <td>{{item.ngayCapBangTQGC}}</td>
-
-                               <td>{{item.soBangTQGC}}</td>
-
-                               <td>{{item.donViLuuTruId}}</td>
-
-                               <td>{{item.donViQuanLyId}}</td>
-
-                               <td>{{item.hySinhDonVi}}</td>
-
-                               <td>{{item.donVi_B_C_D}}</td>
-
-                               <td>{{item.donVi_E}}</td>
-
-                               <td>{{item.donVi_F}}</td>
-
-                               <td>{{item.donVi_G}}</td>
-
-                               <td>{{item.homThuDonVi}}</td>
-
-                               <td>{{item.hySinhCapBac}}</td>
-
-                               <td>{{item.hySinhChucVu}}</td>
-
-                               <td>{{item.ghiChu}}</td>
-
-                               <td>{{item.active}}</td>
-
-                               <td>{{item.created}}</td>
-
-                               <td>{{item.creatdedBy}}</td>
-
-                               <td>{{item.updated}}</td>
-
-                               <td>{{item.updatedBy}}</td>
-
-                               <td>{{item.soQuyenId}}</td>
-
-
+            <td>{{item.soQuyenName}}</td>
+            <td>{{item.thuTu}}</td>
+            <td>{{item.hoTen}}</td>
+            <!-- <td>{{item.ten}}</td> -->
+            <td>{{item.gioiTinh == 1 ? 'Nam' : 'Nữ'}}</td>
+            <td>{{item.namSinh}}</td>
+            <td>{{item.queThon}}</td>
+            <td>{{item.queXaName}}</td>
+            <td>{{item.queHuyenName}}</td>
+            <td>{{item.queTinhName }}</td>
+            <td>{{item.ngayNhapNgu | date: 'dd/MM/yyyy'}}</td>
+            <td>{{item.capBacName}}</td>
+            <td>{{item.chucVuName}}</td>
+            <td>{{item.ngayHiSinh | date: 'dd/MM/yyyy'}}</td>
+
+            <td>{{item.tenDonVi}}</td>
+            <td>{{item.hySinhLyDoChiTiet}}</td>
+            <td>{{item.hySinhTranDanh}}</td>
+            <td>{{item.xaHySinhName}}</td>
+            <td>{{item.huyenHySinhName}}</td>
+            <td>{{item.tinhHySinhName}}</td>
+            <td>{{item.maiTang ? 'Có' : 'Không'}}</td>
+            <td>{{item.maiTangXaName}}</td>
+            <td>{{item.maiTangHuyenName}}</td>
+            <td>{{item.maiTangTinhName}}</td>
+            <td>{{item.diemCaoName}}</td>
+            <td>{{item.maiTangToaDo}}</td>
+            <td>{{item.quyTap? 'Có' : 'Không'}}</td>
+            <td>{{item.nghiaTrang}}</td>
+            <td>{{item.viTriMo}}</td>
+
+
+
+            <td>{{item.thanNhanCha}}</td>
+            <td>{{item.thanNhanMe}}</td>
+            <td>{{item.thanNhanVo}}</td>
+            <td>{{item.thanNhanCon}}</td>
+            <td>{{item.thanNhanKhac}}</td>
+            <td>{{item.thanNhanDiaChi}}</td>
             <td class="action-col">
-                <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
-                <a class="action-icon" (click)="onDeleteItem(item)"><i class="far fa-trash-alt"></i></a>
-            </td> -->
+              <a class="action-icon" (click)="onEditItem(item)"><i class="fa fa-pencil-square-o"></i></a>
+              <a class="action-icon" (click)="onDeleteItem(item)"><i class="fa fa-trash"></i></a>
+           </td>
+
           </tr>
         </tbody>
       </table>
@@ -452,3 +331,10 @@
 
   </div>
 </div>
+<swal
+  #deleteItemSwal
+  text="Bạn thực sự muốn xóa?"
+  type="question"
+  [showCancelButton]="true"
+  >
+</swal>
