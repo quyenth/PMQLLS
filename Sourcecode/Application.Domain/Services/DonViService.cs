@@ -12,6 +12,28 @@ namespace Application.Domain.Services
         {
         }
 
+        public bool CheckCodeIsUnique(int donViId, string maDonVi)
+        {
+            var result = this.dc.DonVi.Where(c => c.DonViId != donViId && c.MaDonVi == maDonVi).ToList();
+            if (result.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool CheckNameIsUnique(int donViId, string tenDonVi)
+        {
+            var result = this.dc.DonVi.Where(c => c.DonViId != donViId && c.TenDonVi == tenDonVi).ToList();
+            if (result.Count > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public IList getListAllDonVI()
         {
             return this.dc.DonVi.ToList();

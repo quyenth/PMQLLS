@@ -147,5 +147,38 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        /// <summary>
+        /// CheckCodeIsUnique
+        /// </summary>
+        /// <param name="donViId"></param>
+        /// <param name="maDonVi"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckCodeIsUnique(int donViId, string maDonVi)
+        {
+            var result = donViService.CheckCodeIsUnique(donViId, maDonVi);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
+
+        /// <summary>
+        /// CheckNameIsUnique
+        /// </summary>
+        /// <param name="donViId"></param>
+        /// <param name="tenDonVi"></param>
+        /// <returns>bool</returns>
+        [HttpGet]
+        public async Task<ApiResult> CheckNameIsUnique(int donViId, string tenDonVi)
+        {
+            var result = donViService.CheckNameIsUnique(donViId, tenDonVi);
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }

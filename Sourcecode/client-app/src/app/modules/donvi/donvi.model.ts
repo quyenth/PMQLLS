@@ -1,39 +1,39 @@
 export class DonViModel {
 
 			 donViId: number;
-		 
+
 			 maDonVi: string;
-		 
+
 			 tenDonVi: string;
-		 
+
 			 tenVietTat: string;
-		 
+
 			 maDonViCha: string;
-		 
+
 			 phanMuc: number;
-		 
+
 			 phanCap: string;
-		 
+
 			 phanKhoi: string;
-		 
+
 			 ghiChu: string;
-		 
+
 			 active: boolean;
-		 
-			 cQCS_Ten: string;
-		 
-			 cQCS_DiaChi: string;
-		 
-			 cQCS_DienThoai: string;
-		 
-			 cQCS_HomThu: string;
-		 
-			 cQCS_ThuTruong: string;
-		 
-			 cQCS_ThuTruongChucVu: number;
-		 
-			 cQCS_NguoiPhuTrach: string;
-		 
-			 cQCS_NguoiPhuTrachPhone: string;
-		 
+
+       cqcS_Ten: string;
+
+			 cqcS_DiaChi: string;
+
+			 cqcS_DienThoai: string;
+
+			 cqcS_HomThu: string;
+
+			 cqcS_ThuTruong: string;
+
+			 cqcS_ThuTruongChucVu: number;
+
+			 cqcS_NguoiPhuTrach: string;
+
+			 cqcS_NguoiPhuTrachPhone: string;
+
 }

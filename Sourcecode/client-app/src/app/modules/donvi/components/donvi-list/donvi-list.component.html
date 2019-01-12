@@ -10,7 +10,7 @@
 
     <div class="row search-box">
         <div class="col-sm-3">
-            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+            <input placeholder="Tên đơn vị" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-3">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fa fa-search"></i> Tìm kiếm</button>
@@ -27,45 +27,50 @@
       <table class="table table-bordered table-hover table-striped dataDiplayTable" style="width:100%; min-width: 2200px;">
         <thead>
           <tr >
-            <th style="text-align: center; width: 20px;" class='no-sort'>
+            <th rowspan="2" style="text-align: center; width: 20px;" class='no-sort'>
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
 
-            <th class='no-sort'>Mã đơn vị</th>
+            <th class='no-sort' rowspan="2">Mã đơn vị</th>
 
-            <th class='no-sort'>Tên đơn vị</th>
+            <th class='no-sort' rowspan="2">Tên đơn vị</th>
 
-            <th class='no-sort'>Tên viết tắt</th>
+            <th class='no-sort' rowspan="2">Tên viết tắt</th>
 
-            <th class='no-sort'>Mã đơn vị cha</th>
+            <th class='no-sort' rowspan="2">Mã đơn vị cha</th>
 
-            <th class='no-sort'>Phân mục</th>
+            <th class='no-sort' rowspan="2">Phân mục</th>
 
-            <th class='no-sort'>Phân cấp</th>
+            <th class='no-sort' rowspan="2">Phân cấp</th>
 
-            <th class='no-sort'>Phân khối</th>
+            <th class='no-sort' rowspan="2">Phân khối</th>
 
-            <th class='no-sort'>Ghi chú</th>
+            <th class='no-sort' rowspan="2">Ghi chú</th>
 
-            <th class='no-sort'>Kích hoạt</th>
+            <th class='no-sort' rowspan="2">Kích hoạt</th>
 
-            <th class='no-sort'>CQCS tên</th>
+            <th class='no-sort' colspan="8">cqcS</th>
 
-            <th class='no-sort'>CQCS địa chỉ</th>
+            <th style="width:60px;" rowspan="2" class='no-sort'></th>
+          </tr>
+          <tr>
+            <th class='no-sort'>Tên</th>
 
-            <th class='no-sort'>CQCS điện thoại</th>
+            <th class='no-sort'>Địa chỉ</th>
 
-            <th class='no-sort'>CQCS hòm thư</th>
+            <th class='no-sort'>Điện thoại</th>
 
-            <th class='no-sort'>CQCS thủ trưởng</th>
+            <th class='no-sort'>Hòm thư</th>
 
-            <th class='no-sort'>CQCS chức vụ thủ trưởng</th>
+            <th class='no-sort'>Thủ trưởng</th>
 
-            <th class='no-sort'>CQCS người phụ trách</th>
+            <th class='no-sort'>Chức vụ thủ trưởng</th>
 
-            <th class='no-sort'>CQCS sđt người phụ trách</th>
+            <th class='no-sort'>Người phụ trách</th>
 
-            <th style="width:60px;" class='no-sort'></th>
+            <th class='no-sort'>Số điện thoại người phụ trách</th>
+
+
           </tr>
         </thead>
         <tbody>
@@ -89,23 +94,23 @@
 
             <td>{{item.ghiChu}}</td>
 
-            <td>{{item.active}}</td>
+            <td style="text-align: center;"><input type="checkbox" disabled="disabled" [(ngModel)]='item.active'></td>
 
-            <td>{{item.cQCS_Ten}}</td>
+            <td>{{item.cqcS_Ten}}</td>
 
-            <td>{{item.cQCS_DiaChi}}</td>
+            <td>{{item.cqcS_DiaChi}}</td>
 
-            <td>{{item.cQCS_DienThoai}}</td>
+            <td>{{item.cqcS_DienThoai}}</td>
 
-            <td>{{item.cQCS_HomThu}}</td>
+            <td>{{item.cqcS_HomThu}}</td>
 
-            <td>{{item.cQCS_ThuTruong}}</td>
+            <td>{{item.cqcS_ThuTruong}}</td>
 
-            <td>{{item.cQCS_ThuTruongChucVu}}</td>
+            <td>{{item.cqcS_ThuTruongChucVu}}</td>
 
-            <td>{{item.cQCS_NguoiPhuTrach}}</td>
+            <td>{{item.cqcS_NguoiPhuTrach}}</td>
 
-            <td>{{item.cQCS_NguoiPhuTrachPhone}}</td>
+            <td>{{item.cqcS_NguoiPhuTrachPhone}}</td>
 
 
             <td class="action-col">

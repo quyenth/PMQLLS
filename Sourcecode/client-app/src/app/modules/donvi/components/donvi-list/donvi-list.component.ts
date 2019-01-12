@@ -55,7 +55,7 @@ export class DonViListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [];
+      this.filterCondition.SearchCondition = [new SearchInfo('tenDonVi', OperationType.Contains, val)];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       if (this.orderInfo.FieldName) {

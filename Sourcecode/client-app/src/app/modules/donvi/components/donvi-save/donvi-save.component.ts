@@ -27,41 +27,41 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
    //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
 
    	    donViId: [''],
-         
-   	    maDonVi: [''],
-         
-   	    tenDonVi: [''],
-         
-   	    tenVietTat: [''],
-         
-   	    maDonViCha: [''],
-         
-   	    phanMuc: [''],
-         
-   	    phanCap: [''],
-         
-   	    phanKhoi: [''],
-         
+
+   	    maDonVi: ['', [Validators.required , Validators.maxLength(30)] , [this.validateCodeUnique.bind(this)]],
+
+   	    tenDonVi: ['', [Validators.required], [this.validateNameUnique.bind(this)]],
+
+   	    tenVietTat: ['', [Validators.required]],
+
+   	    maDonViCha: ['', [Validators.required]],
+
+   	    phanMuc: ['', [Validators.required]],
+
+   	    phanCap: ['', [Validators.required]],
+
+   	    phanKhoi: ['', [Validators.required]],
+
    	    ghiChu: [''],
-         
+
    	    active: [''],
-         
-   	    cQCS_Ten: [''],
-         
-   	    cQCS_DiaChi: [''],
-         
-   	    cQCS_DienThoai: [''],
-         
-   	    cQCS_HomThu: [''],
-         
-   	    cQCS_ThuTruong: [''],
-         
-   	    cQCS_ThuTruongChucVu: [''],
-         
-   	    cQCS_NguoiPhuTrach: [''],
-         
-   	    cQCS_NguoiPhuTrachPhone: [''],
-         
+
+   	    cqcS_Ten: ['', [Validators.required]],
+
+   	    cqcS_DiaChi: ['', [Validators.required]],
+
+   	    cqcS_DienThoai: ['', [Validators.required]],
+
+   	    cqcS_HomThu: ['', [Validators.required]],
+
+   	    cqcS_ThuTruong: ['', [Validators.required]],
+
+   	    cqcS_ThuTruongChucVu: ['', [Validators.required]],
+
+   	    cqcS_NguoiPhuTrach: ['', [Validators.required]],
+
+   	    cqcS_NguoiPhuTrachPhone: ['', [Validators.required]],
+
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
@@ -83,42 +83,42 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
       this.donViService.getById(this.data.donViId).subscribe((res) => {
 
        	    this.myForm.patchValue({'donViId': res.data.donViId});
-             
+
        	    this.myForm.patchValue({'maDonVi': res.data.maDonVi});
-             
+
        	    this.myForm.patchValue({'tenDonVi': res.data.tenDonVi});
-             
+
        	    this.myForm.patchValue({'tenVietTat': res.data.tenVietTat});
-             
+
        	    this.myForm.patchValue({'maDonViCha': res.data.maDonViCha});
-             
+
        	    this.myForm.patchValue({'phanMuc': res.data.phanMuc});
-             
+
        	    this.myForm.patchValue({'phanCap': res.data.phanCap});
-             
+
        	    this.myForm.patchValue({'phanKhoi': res.data.phanKhoi});
-             
+
        	    this.myForm.patchValue({'ghiChu': res.data.ghiChu});
-             
+
        	    this.myForm.patchValue({'active': res.data.active});
-             
-       	    this.myForm.patchValue({'cQCS_Ten': res.data.cQCS_Ten});
-             
-       	    this.myForm.patchValue({'cQCS_DiaChi': res.data.cQCS_DiaChi});
-             
-       	    this.myForm.patchValue({'cQCS_DienThoai': res.data.cQCS_DienThoai});
-             
-       	    this.myForm.patchValue({'cQCS_HomThu': res.data.cQCS_HomThu});
-             
-       	    this.myForm.patchValue({'cQCS_ThuTruong': res.data.cQCS_ThuTruong});
-             
-       	    this.myForm.patchValue({'cQCS_ThuTruongChucVu': res.data.cQCS_ThuTruongChucVu});
-             
-       	    this.myForm.patchValue({'cQCS_NguoiPhuTrach': res.data.cQCS_NguoiPhuTrach});
-             
-       	    this.myForm.patchValue({'cQCS_NguoiPhuTrachPhone': res.data.cQCS_NguoiPhuTrachPhone});
-             
-	  
+
+       	    this.myForm.patchValue({'cqcS_Ten': res.data.cqcS_Ten});
+
+       	    this.myForm.patchValue({'cqcS_DiaChi': res.data.cqcS_DiaChi});
+
+       	    this.myForm.patchValue({'cqcS_DienThoai': res.data.cqcS_DienThoai});
+
+       	    this.myForm.patchValue({'cqcS_HomThu': res.data.cqcS_HomThu});
+
+       	    this.myForm.patchValue({'cqcS_ThuTruong': res.data.cqcS_ThuTruong});
+
+       	    this.myForm.patchValue({'cqcS_ThuTruongChucVu': res.data.cqcS_ThuTruongChucVu});
+
+       	    this.myForm.patchValue({'cqcS_NguoiPhuTrach': res.data.cqcS_NguoiPhuTrach});
+
+       	    this.myForm.patchValue({'cqcS_NguoiPhuTrachPhone': res.data.cqcS_NguoiPhuTrachPhone});
+
+
       });
     }
 	else{
@@ -127,7 +127,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
-    
+
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -169,6 +169,38 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  
-  
+  validateCodeUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.donViService.checkCodeIsUnique(this.data.donViId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isCodeDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+
+  validateNameUnique(control: FormControl) {
+    return timer(800).pipe(
+      switchMap(() => {
+        if (!control.value) {
+          return of(null);
+        }
+        return this.donViService.checkNameIsUnique(this.data.donViId, control.value.trim())
+        .pipe(map((res) => {
+             if (!res.data) {
+               return {'isNameDuplicate' : true};
+             }
+             return null;
+        }));
+      })
+    );
+  }
+
 }

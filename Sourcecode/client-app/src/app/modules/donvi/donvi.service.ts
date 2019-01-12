@@ -43,4 +43,15 @@ export class DonViService extends BaseService {
     const url = this.BaseUrl + '/api/donVi/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+
+  checkCodeIsUnique (donViId: number, maDonVi: string)  {
+    const params = new HttpParams().set('donViId', donViId.toString()).set('maDonVi', maDonVi);
+    const url = this.BaseUrl + '/api/donVi/CheckCodeIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
+  checkNameIsUnique (donViId: number, tenDonVi: string)  {
+    const params = new HttpParams().set('donViId', donViId.toString()).set('tenDonVi', tenDonVi);
+    const url = this.BaseUrl + '/api/donVi/CheckNameIsUnique';
+    return this.http.get<HttpResult>(url, { params : params});
+  }
 }
