@@ -11,8 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Aspose.Words;
 using System.IO;
+using System.Data;
+using Aspose.Words;
 using Aspose.Words.Tables;
 
 namespace Application.IdentityServer.Controllers.QLLS
@@ -170,15 +171,151 @@ namespace Application.IdentityServer.Controllers.QLLS
 
             var data = lietSyService.ExportListLietSi(searhData);
 
+            builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+            Aspose.Words.Font font = builder.Font;
+            font.Size = 16;
+            font.Bold = true;
+            font.Name = "Times New Roman";
             builder.Writeln("DANH SÁCH LIỆT SĨ");
+            builder.Writeln("");
+            builder.Writeln("");
 
+            builder.StartTable();
+
+            font.Size = 12;
+            builder.InsertCell();
+            builder.Write("STT");
+
+            builder.InsertCell();
+            builder.Writeln("Họ và tên");
+            builder.Write("Năm sinh");
+
+
+            builder.InsertCell();
+            builder.Writeln("- Quê quán");
+            builder.Write("- Trú quân");
+
+            builder.InsertCell();
+            builder.Writeln("- Nhập ngũ");
+            builder.Write("- Tái ngũ");
+
+            builder.InsertCell();
+            builder.Writeln("- Đơn vị");
+            builder.Writeln("- Cấp bậc");
+            builder.Write("- Chức vụ");
+
+            builder.InsertCell();
+            builder.Writeln("- Nơi hy sinh");
+            builder.Write("- Nơi mai táng ban đầu");
+
+            builder.InsertCell();
+            builder.Writeln("Thân nhân");
+            font.Bold = false;
+            font.Italic = true;
+            builder.Write("(Họ tên, quan hệ)");
+
+            builder.InsertCell();
+            font.Bold = true;
+            font.Italic = false;
+            builder.Writeln("Đã quy tập");
+            font.Bold = false;
+            font.Italic = true;
+            builder.Write("(Tên nghĩa trang, số mộ)");
+
+            builder.EndRow();
+
+            int i = 1;
+            foreach (DataRow dtRow in data.Rows)
+            {
+                builder.InsertCell();
+                builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+                font.Italic = false;
+                builder.Write(i.ToString());
+
+                builder.InsertCell();
+                builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+
+                if (dtRow["HoTen"] != null)
+                {
+                    builder.Writeln(dtRow["HoTen"].ToString());
+                }
+                if (dtRow["NamSinh"] != null)
+                {
+                    builder.Write(dtRow["NamSinh"].ToString());
+                }
+
+                builder.InsertCell();
+                if (dtRow["QueThon"] != null)
+                {
+                    builder.Write(dtRow["QueThon"].ToString() + "-");
+                }
+                if (dtRow["QueXaName"] != null)
+                {
+                    builder.Write(dtRow["QueXaName"].ToString() + "-");
+                }
+                if (dtRow["QueHuyenName"] != null)
+                {
+                    builder.Write(dtRow["QueHuyenName"].ToString() + "-");
+                }
+                if (dtRow["QueTinhName"] != null)
+                {
+                    builder.Write(dtRow["QueTinhName"].ToString());
+                }
+
+                builder.InsertCell();
+
+
+                builder.InsertCell();
+                if (dtRow["TenDonVi"] != null)
+                {
+                    builder.Writeln("- " + dtRow["TenDonVi"].ToString());
+                }
+                else
+                {
+                    builder.Writeln("- ");
+                }
+                if (dtRow["CapBacName"] != null)
+                {
+                    builder.Write("- " + dtRow["CapBacName"].ToString());
+                }
+                else
+                {
+                    builder.Writeln("- ");
+                }
+
+                if (dtRow["ChucVuName"] != null)
+                {
+                    builder.Write("- " + dtRow["ChucVuName"].ToString());
+                }
+                else
+                {
+                    builder.Writeln("- ");
+                }
+
+                builder.InsertCell();
+
+
+                builder.InsertCell();
+
+
+                builder.InsertCell();
+
+
+
+
+
+                builder.EndRow();
+                i++;
+            }
+
+            builder.EndTable();
 
 
             PageSetup ps = builder.PageSetup;
             ps.PaperSize = Aspose.Words.PaperSize.A4;
             ps.TopMargin = 0;
-            ps.LeftMargin = 1;
-            ps.RightMargin = 1;
+            ps.LeftMargin = 20;
+            ps.RightMargin = 20;
             ps.BottomMargin = 0;
             ps.Orientation = Orientation.Landscape;
             doc.Save(ms, Aspose.Words.SaveFormat.Doc);
