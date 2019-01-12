@@ -28,6 +28,7 @@ import { TinhService } from '../../../tinh/tinh.service';
 import { HuyenService } from '../../../huyen/huyen.service';
 import { XaService } from '../../../xa/xa.service';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { saveAs } from 'file-saver';
 
 
 @Component({
@@ -135,6 +136,13 @@ export class LietSyListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onExport () {
+      this.lietSyService.exportExcel(this.searchCodition).subscribe(res => {
+        console.log(res);
+        const blob = new Blob([res], { type: 'application/msword' });
+        saveAs(blob, `DanhSachLietSi.doc`);
+      });
+  }
 
   onCheckOneChange() {
     if ( this.list$.length === this.list$.filter(c => c.selected === true).length ) {
@@ -198,6 +206,8 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   onEnter() {
     this.onSearch();
   }
+
+
 
   reSort(text: string ) {
     console.log(text);

@@ -43,4 +43,10 @@ export class LietSyService extends BaseService {
     const url = this.BaseUrl + '/api/lietSy/GetById/' + id;
     return this.http.get<HttpResult>(url);
   }
+
+  exportExcel (filterCondition): Observable<any> {
+    const url = this.BaseUrl + '/api/lietSy/ExportListLietSi';
+    return this.http.post(url, filterCondition , { responseType: 'blob' } );
+
+  }
 }

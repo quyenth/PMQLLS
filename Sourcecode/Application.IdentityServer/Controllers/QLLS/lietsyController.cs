@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Aspose.Words;
+using System.IO;
 
 namespace Application.IdentityServer.Controllers.QLLS
 {
@@ -158,7 +160,19 @@ namespace Application.IdentityServer.Controllers.QLLS
             };
         }
 
+        [HttpPost]
+        public ActionResult ExportListLietSi ([FromBody]LietsiSearchCondition data)
+        {
+            MemoryStream ms = new MemoryStream();
+            Document doc = new Document();
+            DocumentBuilder builder = new DocumentBuilder(doc);
 
-        
+            doc.Save(ms, Aspose.Words.SaveFormat.Doc);
+            byte[] bytes = ms.ToArray();
+
+            return File(bytes, "application/msword", "DanhSachLietSi.doc");
+        }
+
+
     }
 }
