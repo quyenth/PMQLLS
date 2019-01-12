@@ -1079,8 +1079,8 @@ ul.nav-second-level {
   align-items: inherit;
 }
 .navbar-static-top .dropdown-menu {
-  right: 0;
-  left: auto;
+  left: 0;
+  right: auto;
 }
 .count-info .label {
   line-height: 12px;
@@ -1401,14 +1401,18 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .top-navigation .nav > li > a {
   padding: 15px 20px;
   color: #676a6c;
+  text-transform:uppercase;
 }
+
+
+
 .top-navigation .nav > li a:hover,
 .top-navigation .nav > li a:focus {
-  background: #fff;
+  background: #F3F3F4;
   color: #1ab394;
 }
 .top-navigation .navbar .nav > li.active {
-  background: #fff;
+  background: #F3F3F4;
   border: none;
 }
 .top-navigation .nav > li.active > a {
@@ -1434,6 +1438,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   padding: 15px 25px;
   font-size: 18px;
   line-height: 20px;
+  margin-right:0 !important;
 }
 .top-navigation .navbar-top-links li:last-child {
   margin-right: 0;
