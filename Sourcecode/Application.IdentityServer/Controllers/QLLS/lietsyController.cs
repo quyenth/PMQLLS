@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Aspose.Words;
 using System.IO;
+using Aspose.Words.Tables;
 
 namespace Application.IdentityServer.Controllers.QLLS
 {
@@ -161,12 +162,25 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         [HttpPost]
-        public ActionResult ExportListLietSi ([FromBody]LietsiSearchCondition data)
+        public ActionResult ExportListLietSi ([FromBody]LietsiSearchCondition searhData)
         {
             MemoryStream ms = new MemoryStream();
             Document doc = new Document();
             DocumentBuilder builder = new DocumentBuilder(doc);
 
+            var data = lietSyService.ExportListLietSi(searhData);
+
+            builder.Writeln("DANH SÁCH LIỆT SĨ");
+
+
+
+            PageSetup ps = builder.PageSetup;
+            ps.PaperSize = Aspose.Words.PaperSize.A4;
+            ps.TopMargin = 0;
+            ps.LeftMargin = 1;
+            ps.RightMargin = 1;
+            ps.BottomMargin = 0;
+            ps.Orientation = Orientation.Landscape;
             doc.Save(ms, Aspose.Words.SaveFormat.Doc);
             byte[] bytes = ms.ToArray();
 
