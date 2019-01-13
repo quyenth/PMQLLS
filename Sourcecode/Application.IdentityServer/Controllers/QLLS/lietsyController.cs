@@ -15,6 +15,10 @@ using System.IO;
 using System.Data;
 using Aspose.Words;
 using Aspose.Words.Tables;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using Microsoft.AspNetCore.Hosting;
+using OfficeOpenXml;
 
 namespace Application.IdentityServer.Controllers.QLLS
 {
@@ -25,11 +29,13 @@ namespace Application.IdentityServer.Controllers.QLLS
         private ILietSyService lietSyService;
 
         private readonly UserManager<ApplicationUser> userManager;
+        private IHostingEnvironment _hostingEnvironment;
 
-        public LietSyController (ILietSyService lietSyService , UserManager<ApplicationUser> userManager)
+        public LietSyController (ILietSyService lietSyService , UserManager<ApplicationUser> userManager, IHostingEnvironment hostingEnvironment)
         {
             this.lietSyService = lietSyService;
             this.userManager = userManager;
+            this._hostingEnvironment = hostingEnvironment;
 
         }
         /// <summary>
@@ -163,165 +169,209 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
         [HttpPost]
-        public ActionResult ExportListLietSi ([FromBody]LietsiSearchCondition searhData)
+        public IActionResult ExportListLietSi ([FromBody]LietsiSearchCondition searhData)
         {
-            MemoryStream ms = new MemoryStream();
-            Document doc = new Document();
-            DocumentBuilder builder = new DocumentBuilder(doc);
+            //MemoryStream ms = new MemoryStream();
+            //Document doc = new Document();
+            //DocumentBuilder builder = new DocumentBuilder(doc);
 
-            var data = lietSyService.ExportListLietSi(searhData);
+            //var data = lietSyService.ExportListLietSi(searhData);
 
-            builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-            Aspose.Words.Font font = builder.Font;
-            font.Size = 16;
-            font.Bold = true;
-            font.Name = "Times New Roman";
-            builder.Writeln("DANH SÁCH LIỆT SĨ");
-            builder.Writeln("");
-            builder.Writeln("");
+            //builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+            //Aspose.Words.Font font = builder.Font;
+            //font.Size = 16;
+            //font.Bold = true;
+            //font.Name = "Times New Roman";
+            //builder.Writeln("DANH SÁCH LIỆT SĨ");
+            //builder.Writeln("");
+            //builder.Writeln("");
 
-            builder.StartTable();
+            //builder.StartTable();
 
-            font.Size = 12;
-            builder.InsertCell();
-            builder.Write("STT");
+            //font.Size = 12;
+            //builder.InsertCell();
+            //builder.Write("STT");
 
-            builder.InsertCell();
-            builder.Writeln("Họ và tên");
-            builder.Write("Năm sinh");
+            //builder.InsertCell();
+            //builder.Writeln("Họ và tên");
+            //builder.Write("Năm sinh");
 
 
-            builder.InsertCell();
-            builder.Writeln("- Quê quán");
-            builder.Write("- Trú quân");
+            //builder.InsertCell();
+            //builder.Writeln("- Quê quán");
+            //builder.Write("- Trú quân");
 
-            builder.InsertCell();
-            builder.Writeln("- Nhập ngũ");
-            builder.Write("- Tái ngũ");
+            //builder.InsertCell();
+            //builder.Writeln("- Nhập ngũ");
+            //builder.Write("- Tái ngũ");
 
-            builder.InsertCell();
-            builder.Writeln("- Đơn vị");
-            builder.Writeln("- Cấp bậc");
-            builder.Write("- Chức vụ");
+            //builder.InsertCell();
+            //builder.Writeln("- Đơn vị");
+            //builder.Writeln("- Cấp bậc");
+            //builder.Write("- Chức vụ");
 
-            builder.InsertCell();
-            builder.Writeln("- Nơi hy sinh");
-            builder.Write("- Nơi mai táng ban đầu");
+            //builder.InsertCell();
+            //builder.Writeln("- Nơi hy sinh");
+            //builder.Write("- Nơi mai táng ban đầu");
 
-            builder.InsertCell();
-            builder.Writeln("Thân nhân");
-            font.Bold = false;
-            font.Italic = true;
-            builder.Write("(Họ tên, quan hệ)");
+            //builder.InsertCell();
+            //builder.Writeln("Thân nhân");
+            //font.Bold = false;
+            //font.Italic = true;
+            //builder.Write("(Họ tên, quan hệ)");
 
-            builder.InsertCell();
-            font.Bold = true;
-            font.Italic = false;
-            builder.Writeln("Đã quy tập");
-            font.Bold = false;
-            font.Italic = true;
-            builder.Write("(Tên nghĩa trang, số mộ)");
+            //builder.InsertCell();
+            //font.Bold = true;
+            //font.Italic = false;
+            //builder.Writeln("Đã quy tập");
+            //font.Bold = false;
+            //font.Italic = true;
+            //builder.Write("(Tên nghĩa trang, số mộ)");
 
-            builder.EndRow();
+            //builder.EndRow();
 
-            int i = 1;
-            foreach (DataRow dtRow in data.Rows)
+            //int i = 1;
+            //foreach (DataRow dtRow in data.Rows)
+            //{
+            //    builder.InsertCell();
+            //    builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+            //    font.Italic = false;
+            //    builder.Write(i.ToString());
+
+            //    builder.InsertCell();
+            //    builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+
+            //    if (dtRow["HoTen"] != null)
+            //    {
+            //        builder.Writeln(dtRow["HoTen"].ToString());
+            //    }
+            //    if (dtRow["NamSinh"] != null)
+            //    {
+            //        builder.Write(dtRow["NamSinh"].ToString());
+            //    }
+
+            //    builder.InsertCell();
+            //    if (dtRow["QueThon"] != null)
+            //    {
+            //        builder.Write(dtRow["QueThon"].ToString() + "-");
+            //    }
+            //    if (dtRow["QueXaName"] != null)
+            //    {
+            //        builder.Write(dtRow["QueXaName"].ToString() + "-");
+            //    }
+            //    if (dtRow["QueHuyenName"] != null)
+            //    {
+            //        builder.Write(dtRow["QueHuyenName"].ToString() + "-");
+            //    }
+            //    if (dtRow["QueTinhName"] != null)
+            //    {
+            //        builder.Write(dtRow["QueTinhName"].ToString());
+            //    }
+
+            //    builder.InsertCell();
+
+
+            //    builder.InsertCell();
+            //    if (dtRow["TenDonVi"] != null)
+            //    {
+            //        builder.Writeln("- " + dtRow["TenDonVi"].ToString());
+            //    }
+            //    else
+            //    {
+            //        builder.Writeln("- ");
+            //    }
+            //    if (dtRow["CapBacName"] != null)
+            //    {
+            //        builder.Write("- " + dtRow["CapBacName"].ToString());
+            //    }
+            //    else
+            //    {
+            //        builder.Writeln("- ");
+            //    }
+
+            //    if (dtRow["ChucVuName"] != null)
+            //    {
+            //        builder.Write("- " + dtRow["ChucVuName"].ToString());
+            //    }
+            //    else
+            //    {
+            //        builder.Writeln("- ");
+            //    }
+
+            //    builder.InsertCell();
+
+
+            //    builder.InsertCell();
+
+
+            //    builder.InsertCell();
+
+
+
+
+
+            //    builder.EndRow();
+            //    i++;
+            //}
+
+            //builder.EndTable();
+
+
+            //PageSetup ps = builder.PageSetup;
+            //ps.PaperSize = Aspose.Words.PaperSize.A4;
+            //ps.TopMargin = 0;
+            //ps.LeftMargin = 20;
+            //ps.RightMargin = 20;
+            //ps.BottomMargin = 0;
+            //ps.Orientation = Orientation.Landscape;
+            //doc.Save(ms, Aspose.Words.SaveFormat.Doc);
+            //byte[] bytes = ms.ToArray();
+
+            //return File(bytes, "application/msword", "DanhSachLietSi.doc");
+
+
+            var comlumHeadrs = new string[]
+           {
+                "Họ Tên",
+                "Năm Sinh",
+                "Quê Thôn"
+           };
+
+            byte[] result;
+
+            using (var package = new ExcelPackage())
             {
-                builder.InsertCell();
-                builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-                font.Italic = false;
-                builder.Write(i.ToString());
+                // add a new worksheet to the empty workbook
 
-                builder.InsertCell();
-                builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-
-                if (dtRow["HoTen"] != null)
+                var worksheet = package.Workbook.Worksheets.Add("Current Employee"); //Worksheet name
+                using (var cells = worksheet.Cells[1, 1, 1, 3]) //(1,1) (1,5)
                 {
-                    builder.Writeln(dtRow["HoTen"].ToString());
-                }
-                if (dtRow["NamSinh"] != null)
-                {
-                    builder.Write(dtRow["NamSinh"].ToString());
+                    cells.Style.Font.Bold = true;
                 }
 
-                builder.InsertCell();
-                if (dtRow["QueThon"] != null)
+                //First add the headers
+                for (var i = 0; i < comlumHeadrs.Count(); i++)
                 {
-                    builder.Write(dtRow["QueThon"].ToString() + "-");
-                }
-                if (dtRow["QueXaName"] != null)
-                {
-                    builder.Write(dtRow["QueXaName"].ToString() + "-");
-                }
-                if (dtRow["QueHuyenName"] != null)
-                {
-                    builder.Write(dtRow["QueHuyenName"].ToString() + "-");
-                }
-                if (dtRow["QueTinhName"] != null)
-                {
-                    builder.Write(dtRow["QueTinhName"].ToString());
+                    worksheet.Cells[1, i + 1].Value = comlumHeadrs[i];
                 }
 
-                builder.InsertCell();
-
-
-                builder.InsertCell();
-                if (dtRow["TenDonVi"] != null)
+                //Add values
+                var j = 2;
+                var data = lietSyService.ExportListLietSi(searhData);
+                foreach (DataRow dtRow in data.Rows)
                 {
-                    builder.Writeln("- " + dtRow["TenDonVi"].ToString());
+                    worksheet.Cells["A" + j].Value = dtRow["HoTen"];
+                    worksheet.Cells["B" + j].Value = dtRow["NamSinh"];
+                    worksheet.Cells["C" + j].Value = dtRow["QueThon"];
+                    //worksheet.Cells["D" + j].Value = employee.Salary.ToString("$#,0.00;($#,0.00)");
+                    //worksheet.Cells["E" + j].Value = employee.JoinedDate.ToString("MM/dd/yyyy");
+
+                    j++;
                 }
-                else
-                {
-                    builder.Writeln("- ");
-                }
-                if (dtRow["CapBacName"] != null)
-                {
-                    builder.Write("- " + dtRow["CapBacName"].ToString());
-                }
-                else
-                {
-                    builder.Writeln("- ");
-                }
-
-                if (dtRow["ChucVuName"] != null)
-                {
-                    builder.Write("- " + dtRow["ChucVuName"].ToString());
-                }
-                else
-                {
-                    builder.Writeln("- ");
-                }
-
-                builder.InsertCell();
-
-
-                builder.InsertCell();
-
-
-                builder.InsertCell();
-
-
-
-
-
-                builder.EndRow();
-                i++;
+                result = package.GetAsByteArray();
             }
 
-            builder.EndTable();
-
-
-            PageSetup ps = builder.PageSetup;
-            ps.PaperSize = Aspose.Words.PaperSize.A4;
-            ps.TopMargin = 0;
-            ps.LeftMargin = 20;
-            ps.RightMargin = 20;
-            ps.BottomMargin = 0;
-            ps.Orientation = Orientation.Landscape;
-            doc.Save(ms, Aspose.Words.SaveFormat.Doc);
-            byte[] bytes = ms.ToArray();
-
-            return File(bytes, "application/msword", "DanhSachLietSi.doc");
+            return File(result, "application/ms-excel", $"DanhSachLietSy.xlsx");
         }
 
 

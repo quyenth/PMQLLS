@@ -139,8 +139,8 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   onExport () {
       this.lietSyService.exportExcel(this.searchCodition).subscribe(res => {
         console.log(res);
-        const blob = new Blob([res], { type: 'application/msword' });
-        saveAs(blob, `DanhSachLietSi.doc`);
+        const blob = new Blob([res], { type: 'application/ms-excel' });
+        saveAs(blob, `DanhSachLietSy.xlsx`);
       });
   }
 
