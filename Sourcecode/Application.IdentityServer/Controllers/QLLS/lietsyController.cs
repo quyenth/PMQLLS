@@ -19,11 +19,14 @@ using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using Microsoft.AspNetCore.Hosting;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System.Drawing;
 
 namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
     [Route("api/LietSy/[action]")]
+    //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
     public class LietSyController : ControllerBase
     {
         private ILietSyService lietSyService;
@@ -332,9 +335,23 @@ namespace Application.IdentityServer.Controllers.QLLS
 
             var comlumHeadrs = new string[]
            {
-                "Họ Tên",
+                "STT",
+                "Họ và tên",
                 "Năm Sinh",
-                "Quê Thôn"
+                "Quê quán",
+                //"Trú quân",
+                "Nhập ngũ" ,
+                "Tái ngũ" ,
+                "Đơn vị",
+                "Cấp bậc",
+                "Chức vụ",
+                "Hy sinh",
+                "Trường hợp hy sinh",
+                "Giấy báo tử",
+                "Nơi hy sinh" ,
+                "Nơi mai táng ban đầu",
+                "Thân nhân",
+                "Đã quy tập"
            };
 
             byte[] result;
@@ -343,30 +360,100 @@ namespace Application.IdentityServer.Controllers.QLLS
             {
                 // add a new worksheet to the empty workbook
 
-                var worksheet = package.Workbook.Worksheets.Add("Current Employee"); //Worksheet name
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                worksheet.Column(1).Width = 5;
+                worksheet.Column(2).Width = 25;
+                worksheet.Column(3).Width = 10;
+                worksheet.Column(4).Width = 30;
+                //worksheet.Column(5).Width = 30;
+                worksheet.Column(5).Width = 15;
+                worksheet.Column(6).Width = 15;
+                worksheet.Column(7).Width = 30;
+                worksheet.Column(8).Width = 20;
+                worksheet.Column(9).Width = 20;
+                worksheet.Column(10).Width = 15;
+                worksheet.Column(11).Width = 30;
+                worksheet.Column(12).Width = 20;
+                worksheet.Column(13).Width = 30;
+                worksheet.Column(14).Width = 30;
+                worksheet.Column(15).Width = 30;
+                worksheet.Column(16).Width = 30;
+
+                worksheet.Cells["A1:Q1"].Merge = true;
+                worksheet.Cells[1, 1].Value = "DANH SÁCH LIỆT SỸ";
+
                 using (var cells = worksheet.Cells[1, 1, 1, 3]) //(1,1) (1,5)
                 {
                     cells.Style.Font.Bold = true;
+                    cells.Style.Font.Size = 18;
+                    cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 }
 
                 //First add the headers
                 for (var i = 0; i < comlumHeadrs.Count(); i++)
                 {
-                    worksheet.Cells[1, i + 1].Value = comlumHeadrs[i];
+                    var cell = worksheet.Cells[3, i + 1];
+                    cell.Value = comlumHeadrs[i];
+                    cell.Style.Font.Bold = true;
+                    cell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    cell.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    cell.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
                 }
 
                 //Add values
-                var j = 2;
+                var j = 4;
+                var k = 1;
                 var data = lietSyService.ExportListLietSi(searhData);
                 foreach (DataRow dtRow in data.Rows)
                 {
-                    worksheet.Cells["A" + j].Value = dtRow["HoTen"];
-                    worksheet.Cells["B" + j].Value = dtRow["NamSinh"];
-                    worksheet.Cells["C" + j].Value = dtRow["QueThon"];
+                    worksheet.Cells["A" + j].Value = k;
+                    worksheet.Cells["B" + j].Value = dtRow["HoTen"];
+                    worksheet.Cells["C" + j].Value = dtRow["NamSinh"];
+                    worksheet.Cells["D" + j].Value = dtRow["QueThon"] + "-" + dtRow["QueXaName"] + "-" + dtRow["QueHuyenName"] + "-" + dtRow["QueTinhName"];
+                    //worksheet.Cells["E" + j].Value = dtRow["QueThon"];
+                    
+                    if (dtRow["NgayNhapNgu"] != null)
+                    {
+                        var date = Convert.ToDateTime(dtRow["NgayNhapNgu"].ToString());
+                        worksheet.Cells["E" + j].Value = date.ToString("dd/MM/yyy");
+                    }
+
+                    if (dtRow["NgayTaiNgu"] != null)
+                    {
+                        var date = Convert.ToDateTime(dtRow["NgayTaiNgu"].ToString());
+                        worksheet.Cells["F" + j].Value = date.ToString("dd/MM/yyy");
+                    }
+                    worksheet.Cells["G" + j].Value = dtRow["TenDonVi"];
+                    worksheet.Cells["H" + j].Value = dtRow["CapBacName"];
+                    worksheet.Cells["I" + j].Value = dtRow["ChucVuName"];
+
+
+                    if (dtRow["NgayHiSinh"] != null)
+                    {
+                        var date = Convert.ToDateTime(dtRow["NgayHiSinh"].ToString());
+                        worksheet.Cells["J" + j].Value = date.ToString("dd/MM/yyy");
+                    }
+                    worksheet.Cells["K" + j].Value = dtRow["ChucVuName"];
+                    worksheet.Cells["L" + j].Value = "";
+                    worksheet.Cells["M" + j].Value = dtRow["XaHySinhName"] + "-" + dtRow["HuyenHySinhName"] + "-" + dtRow["TinhHySinhName"];
+                    worksheet.Cells["N" + j].Value = dtRow["MaiTangXaName"] + "-" + dtRow["MaiTangHuyenName"] + "-" + dtRow["MaiTangTinhName"];
+                    worksheet.Cells["o" + j].Value = dtRow["ThanNhanCha"];
+                    if(dtRow["QuyTap"] != null)
+                    {
+                        worksheet.Cells["P" + j].Value = Convert.ToBoolean(dtRow["QuyTap"]) ? "Đã quy tập" : "Chưa quy tập";
+
+                    }
+                    else
+                    {
+                        worksheet.Cells["P" + j].Value =  "Chưa quy tập";
+                    }
+
                     //worksheet.Cells["D" + j].Value = employee.Salary.ToString("$#,0.00;($#,0.00)");
                     //worksheet.Cells["E" + j].Value = employee.JoinedDate.ToString("MM/dd/yyyy");
 
                     j++;
+                    k++;
                 }
                 result = package.GetAsByteArray();
             }

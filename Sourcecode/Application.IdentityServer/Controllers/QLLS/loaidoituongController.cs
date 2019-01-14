@@ -13,6 +13,7 @@ namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
     [Route("api/LoaiDoiTuong/[action]")]
+    //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
     public class LoaiDoiTuongController : ControllerBase
     {
         private ILoaiDoiTuongService loaiDoiTuongService;

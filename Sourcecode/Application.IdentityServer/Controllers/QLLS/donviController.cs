@@ -13,6 +13,7 @@ namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
     [Route("api/DonVi/[action]")]
+    //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
     public class DonViController : ControllerBase
     {
         private IDonViService donViService;

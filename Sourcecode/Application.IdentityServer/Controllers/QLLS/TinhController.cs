@@ -13,6 +13,7 @@ namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
     [Route("api/Tinh/[action]")]
+    //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
     public class TinhController : ControllerBase
     {
         private ITinhService tinhService;
