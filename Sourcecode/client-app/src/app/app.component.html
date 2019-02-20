@@ -1,4 +1,4 @@
-<div id="wrapper">
+<!-- <div id="wrapper">
     <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom white-bg">
             <app-header></app-header>
@@ -14,4 +14,40 @@
         color = "#37b667"
         type = "ball-scale-multiple"
         ></ngx-spinner>
+</div> -->
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <app-left-navigation-layout></app-left-navigation-layout>
+    </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> Đăng xuất
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+
+        </div>
 </div>
+<ngx-spinner
+        bdColor = "rgba(51, 51, 51, 0.8)"
+        size = "large"
+        color = "#37b667"
+        type = "ball-scale-multiple"
+        ></ngx-spinner>
+

@@ -36,7 +36,6 @@ export class XaListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
       if ( data && data.action === ActionType.SUBMIT) {
-        debugger;
         console.log(this.currentPage);
         this.onSearch(this.currentPage);
       }
@@ -44,7 +43,6 @@ export class XaListComponent implements OnInit, OnDestroy {
     this.filterCondition.Paging = true;
     this.filterCondition.PageIndex = this.currentPage;
     this.filterCondition.PageSize = this.pageSize;
-   
     this.filterCondition.Orders = [ ];
     this.onSearch();
   }
@@ -52,9 +50,9 @@ export class XaListComponent implements OnInit, OnDestroy {
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
-      this.filterCondition.SearchCondition = [ 
-	      new SearchInfo('Tenxa', OperationType.Contains, val)
-	  ];
+      this.filterCondition.SearchCondition = [
+        new SearchInfo('Tenxa', OperationType.Contains, val)
+    ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       this.xaService.search(this.filterCondition).subscribe((res: HttpResult) => {
@@ -101,7 +99,7 @@ export class XaListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.xaService.delete(item).subscribe((res) => {

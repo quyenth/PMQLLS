@@ -1,11 +1,16 @@
-<div class="ibox wrapper wrapper-content animated fadeInRight">
-  <div class="ibox-title" style="height: 65px">
-    <h3 style="margin: 0" class='page-title'>Tìm kiếm hồ sơ liệt sĩ</h3>
-    <div class="ibox-tools">
-      <button class="btn btn-sm btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" ><span><i class="fa fa-plus"></i>  Thêm mới</span></button>
-      <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger btn-sm buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="fa fa-trash"></i>  Xóa đã chọn</span></button>
-    </div>
+<div class="row wrapper border-bottom white-bg page-heading" style='margin-bottom: 10px'>
+  <div class="col-sm-4">
+      <h2 style='font-weight:500 '>Tìm kiếm hồ sơ liệt sĩ</h2>
   </div>
+  <div class="col-sm-8">
+      <div class="title-action">
+        <button class="btn btn-sm btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" ><span><i class="fa fa-plus"></i>  Thêm mới</span></button>
+        <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger btn-sm buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="fa fa-trash"></i>  Xóa đã chọn</span></button>
+      </div>
+  </div>
+</div>
+<div class="ibox wrapper wrapper-content animated fadeInRight">
+
 
   <div class="ibox-content inspinia-timeline">
 

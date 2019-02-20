@@ -38,6 +38,8 @@ import { RegisterModule } from './modules/register/register.module';
 import { RolesModule } from './modules/role/role.module';
 import { UserRolesModule } from './modules/user_role/user_role.module';
 import { PhieuCungCapModule } from './modules/ncc_phieucungcap/ncc_phieucungcap.module';
+import { LeftNavigationLayoutComponent } from './shared/component/left-navigation-layout/left-navigation-layout.component';
+import { HeaderTopComponent } from './shared/component/left-navigation-layout/header-top/header-top.component';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { PhieuCungCapModule } from './modules/ncc_phieucungcap/ncc_phieucungcap.
     HeaderRightComponent,
     HeaderDropdownMenuComponent,
     HeaderLogoComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LeftNavigationLayoutComponent,
+    HeaderTopComponent
   ],
   imports: [
     BrowserModule,

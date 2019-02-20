@@ -105,7 +105,7 @@ export class TinhListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.tinhService.delete(item).subscribe((res) => {

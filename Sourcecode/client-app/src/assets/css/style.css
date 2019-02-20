@@ -1079,8 +1079,8 @@ ul.nav-second-level {
   align-items: inherit;
 }
 .navbar-static-top .dropdown-menu {
-  left: 0;
-  right: auto;
+  right: 0;
+  left: auto;
 }
 .count-info .label {
   line-height: 12px;
@@ -1401,18 +1401,14 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .top-navigation .nav > li > a {
   padding: 15px 20px;
   color: #676a6c;
-  text-transform:uppercase;
 }
-
-
-
 .top-navigation .nav > li a:hover,
 .top-navigation .nav > li a:focus {
-  background: #F3F3F4;
+  background: #fff;
   color: #1ab394;
 }
 .top-navigation .navbar .nav > li.active {
-  background: #F3F3F4;
+  background: #fff;
   border: none;
 }
 .top-navigation .nav > li.active > a {
@@ -1438,7 +1434,6 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   padding: 15px 25px;
   font-size: 18px;
   line-height: 20px;
-  margin-right:0 !important;
 }
 .top-navigation .navbar-top-links li:last-child {
   margin-right: 0;
@@ -5682,8 +5677,7 @@ body.mini-navbar.fixed-sidebar .logo-element {
   padding-top: 110px;
 }
 .loginscreen.middle-box {
-  width: 400px;
-
+  width: 300px;
 }
 .loginColumns {
   max-width: 800px;
@@ -9559,6 +9553,8 @@ body.md-skin {
     margin: 0;
   }
 }
+
+
 .paging-right{
   float: right ;
 }
@@ -9812,4 +9808,12 @@ thead th{
 }
 .form-group.has-error .ng-select-container {
   border-color: #ed5565;
+}
+.title-action {
+  text-align: right;
+  padding-top: 20px;
+}
+.page-heading {
+  border-top: 0;
+  padding: 0 10px 13px 10px;
 }

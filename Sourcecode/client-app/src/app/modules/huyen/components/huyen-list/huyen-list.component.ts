@@ -52,7 +52,7 @@ export class HuyenListComponent implements OnInit, OnDestroy {
       const val = this.searchInput.nativeElement.value;
       this.filterCondition.SearchCondition = [
       new SearchInfo('Tenhuyen', OperationType.Contains, val)
-	  ];
+    ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
       this.huyenService.search(this.filterCondition).subscribe((res: HttpResult) => {
@@ -99,7 +99,7 @@ export class HuyenListComponent implements OnInit, OnDestroy {
 
   onDeleteItem (item) {
     this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
         dialogCloseSubscription.unsubscribe();
         if ( data === ActionType.ACCEPT) {
           this.huyenService.delete(item).subscribe((res) => {
