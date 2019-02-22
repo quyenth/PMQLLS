@@ -36,21 +36,21 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
    	    maDonViCha: ['', [Validators.required]],
 
-   	    phanMuc: ['', [Validators.required]],
+   	    phanMuc: ['', ],
 
-   	    phanCap: ['', [Validators.required]],
+   	    phanCap: ['', ],
 
-   	    phanKhoi: ['', [Validators.required]],
+   	    phanKhoi: ['',[Validators.required]],
 
    	    ghiChu: [''],
 
    	    active: [''],
 
-   	    cqcS_Ten: ['', [Validators.required]],
+   	    cqcS_Ten: ['', ],
 
-   	    cqcS_DiaChi: ['', [Validators.required]],
+   	    cqcS_DiaChi: ['',],
 
-   	    cqcS_DienThoai: ['', [Validators.required]],
+   	    cqcS_DienThoai: ['',],
 
    	    cqcS_HomThu: ['', [Validators.required]],
 
@@ -58,9 +58,9 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
    	    cqcS_ThuTruongChucVu: ['', [Validators.required]],
 
-   	    cqcS_NguoiPhuTrach: ['', [Validators.required]],
+   	    cqcS_NguoiPhuTrach: ['', ],
 
-   	    cqcS_NguoiPhuTrachPhone: ['', [Validators.required]],
+   	    cqcS_NguoiPhuTrachPhone: ['',],
 
   });
 

@@ -44,37 +44,21 @@
 
             <th class='no-sort' rowspan="2">Mã đơn vị cha</th>
 
-            <th class='no-sort' rowspan="2">Phân mục</th>
-
-            <th class='no-sort' rowspan="2">Phân cấp</th>
-
-            <th class='no-sort' rowspan="2">Phân khối</th>
-
             <th class='no-sort' rowspan="2">Ghi chú</th>
 
             <th class='no-sort' rowspan="2">Kích hoạt</th>
 
-            <th class='no-sort' colspan="8">cqcS</th>
+            <th class='no-sort' colspan="3">Thông tin liên hệ</th>
 
             <th style="width:60px;" rowspan="2" class='no-sort'></th>
           </tr>
           <tr>
-            <th class='no-sort'>Tên</th>
-
-            <th class='no-sort'>Địa chỉ</th>
-
-            <th class='no-sort'>Điện thoại</th>
 
             <th class='no-sort'>Hòm thư</th>
 
             <th class='no-sort'>Thủ trưởng</th>
 
             <th class='no-sort'>Chức vụ thủ trưởng</th>
-
-            <th class='no-sort'>Người phụ trách</th>
-
-            <th class='no-sort'>Số điện thoại người phụ trách</th>
-
 
           </tr>
         </thead>
@@ -91,32 +75,15 @@
 
             <td>{{item.maDonViCha}}</td>
 
-            <td>{{item.phanMuc}}</td>
-
-            <td>{{item.phanCap}}</td>
-
-            <td>{{item.phanKhoi}}</td>
-
             <td>{{item.ghiChu}}</td>
 
             <td style="text-align: center;"><input type="checkbox" disabled="disabled" [(ngModel)]='item.active'></td>
-
-            <td>{{item.cqcS_Ten}}</td>
-
-            <td>{{item.cqcS_DiaChi}}</td>
-
-            <td>{{item.cqcS_DienThoai}}</td>
 
             <td>{{item.cqcS_HomThu}}</td>
 
             <td>{{item.cqcS_ThuTruong}}</td>
 
             <td>{{item.cqcS_ThuTruongChucVu}}</td>
-
-            <td>{{item.cqcS_NguoiPhuTrach}}</td>
-
-            <td>{{item.cqcS_NguoiPhuTrachPhone}}</td>
-
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fa fa-pencil-square-o"></i></a>
