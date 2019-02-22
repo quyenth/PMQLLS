@@ -69,36 +69,6 @@
               </div>
               </div>
 
-            <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('phanMuc').valid }">
-              <label class="col-form-label col-sm-2">
-                Phân mục <span class="text-danger">*</span>
-              </label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="phanMuc" />
-                <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('phanMuc').hasError('required')">Trường này là bắt buộc.</span>
-              </div>
-              </div>
-
-            <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('phanCap').valid }">
-              <label class="col-form-label col-sm-2">
-                Phân cấp <span class="text-danger">*</span>
-              </label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="phanCap" />
-                <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('phanCap').hasError('required')">Trường này là bắt buộc.</span>
-              </div>
-              </div>
-
-            <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('phanKhoi').valid }">
-              <label class="col-form-label col-sm-2">
-                Phân khối <span class="text-danger">*</span>
-              </label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="phanKhoi" />
-                <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('phanKhoi').hasError('required')">Trường này là bắt buộc.</span>
-              </div>
-              </div>
-
             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('ghiChu').valid }">
               <label class="col-form-label col-sm-2">
                 Ghi chú
@@ -123,41 +93,12 @@
       </div>
     <div class="ibox ">
       <div class="ibox-title">
-        <h5>II, cqcS</h5>
+        <h5>II, Thông tin liên hệ</h5>
         <div class="ibox-tools">
 
         </div>
       </div>
       <div class="ibox-content">
-        <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('cqcS_Ten').valid }">
-          <label class="col-form-label col-sm-2">
-            Tên <span class="text-danger">*</span>
-          </label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="cqcS_Ten" />
-            <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('cqcS_Ten').hasError('required')">Trường này là bắt buộc.</span>
-          </div>
-        </div>
-
-        <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('cqcS_DiaChi').valid }">
-          <label class="col-form-label col-sm-2">
-            Địa chỉ <span class="text-danger">*</span>
-          </label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="cqcS_DiaChi" />
-            <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('cqcS_DiaChi').hasError('required')">Trường này là bắt buộc.</span>
-          </div>
-        </div>
-
-        <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('cqcS_DienThoai').valid }">
-          <label class="col-form-label col-sm-2">
-            Điện thoại <span class="text-danger">*</span>
-          </label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="cqcS_DienThoai" />
-            <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('cqcS_DienThoai').hasError('required')">Trường này là bắt buộc.</span>
-          </div>
-        </div>
 
         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('cqcS_HomThu').valid }">
           <label class="col-form-label col-sm-2">
@@ -189,25 +130,6 @@
           </div>
         </div>
 
-        <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('cqcS_NguoiPhuTrach').valid }">
-          <label class="col-form-label col-sm-2">
-            Người phụ trách <span class="text-danger">*</span>
-          </label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="cqcS_NguoiPhuTrach" />
-            <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('cqcS_NguoiPhuTrach').hasError('required')">Trường này là bắt buộc.</span>
-          </div>
-        </div>
-
-        <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('cqcS_NguoiPhuTrachPhone').valid }">
-          <label class="col-form-label col-sm-2">
-            Số điện thoại người phụ trách <span class="text-danger">*</span>
-          </label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="cqcS_NguoiPhuTrachPhone" />
-            <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('cqcS_NguoiPhuTrachPhone').hasError('required')">Trường này là bắt buộc.</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
