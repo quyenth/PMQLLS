@@ -14,7 +14,7 @@ namespace Application.IdentityServer.Controllers
     {
         // GET api/values
         [HttpGet]
-        [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+        //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };

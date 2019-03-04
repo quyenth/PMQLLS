@@ -14,6 +14,7 @@ namespace Application.IdentityServer.Controllers.QLLS
     [Produces("application/json")]
     [Route("api/CapBac/[action]")]
     //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    [Authorize]
     public class CapBacController : ControllerBase
     {
         private ICapBacService capBacService;

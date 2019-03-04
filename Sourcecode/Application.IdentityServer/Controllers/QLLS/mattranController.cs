@@ -14,6 +14,7 @@ namespace Application.IdentityServer.Controllers.QLLS
     [Produces("application/json")]
     [Route("api/MatTran/[action]")]
     //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    [Authorize]
     public class MatTranController : ControllerBase
     {
         private IMatTranService matTranService;

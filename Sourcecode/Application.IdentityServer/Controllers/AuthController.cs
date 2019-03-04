@@ -9,6 +9,8 @@ using IdentityModel.Client;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Framework.Common;
+using System.Security.Claims;
+using IdentityModel;
 
 namespace Application.IdentityServer.Controllers
 {
@@ -25,12 +27,16 @@ namespace Application.IdentityServer.Controllers
 
         private readonly ILogger logger;
 
-        public AuthController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger, UserManager<ApplicationUser> userManager , RoleManager<ApplicationRole> roleManager)
+        IJwtTokenManagerService _jwtTokenManagerService;
+
+        public AuthController(SignInManager<ApplicationUser> signInManager, ILogger<AccountController> logger, UserManager<ApplicationUser> userManager , 
+            RoleManager<ApplicationRole> roleManager, IJwtTokenManagerService jwtTokenManagerService)
         {
             this.signInManager = signInManager;
             this.logger = logger;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            this._jwtTokenManagerService = jwtTokenManagerService;
         }
 
         /// <summary>
@@ -43,23 +49,23 @@ namespace Application.IdentityServer.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
 
-            string clientId = "ApiApplication";
-            string secret = "secret";
-            string scope = "api2 openid";
-            var authority = Request.Scheme + "://" + Request.Host;
-            var disco = await DiscoveryClient.GetAsync(authority);
-            if (disco.IsError)
-            {
-                return BadRequest(disco.Error);
-            }
+            //string clientId = "ApiApplication";
+            //string secret = "secret";
+            //string scope = "api2 openid";
+            //var authority = Request.Scheme + "://" + Request.Host;
+            //var disco = await DiscoveryClient.GetAsync(authority);
+            //if (disco.IsError)
+            //{
+            //    return BadRequest(disco.Error);
+            //}
 
-            var tokenClient = new TokenClient(disco.TokenEndpoint, clientId, secret);
-            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync(model.UserName, model.Password, scope);
+            //var tokenClient = new TokenClient(disco.TokenEndpoint, clientId, secret);
+            //var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync(model.UserName, model.Password, scope);
 
-            if (tokenResponse.IsError)
-            {
-                return BadRequest(tokenResponse.Error);
-            }
+            //if (tokenResponse.IsError)
+            //{
+            //    return BadRequest(tokenResponse.Error);
+            //}
            
             //if (!ModelState.IsValid)
             //{
@@ -68,11 +74,16 @@ namespace Application.IdentityServer.Controllers
 
             ////var user = userManager.FindByNameAsync(model.UserName);
 
+
             var result = await userManager.FindByNameAsync(model.UserName);
 
             if (result != null && await userManager.CheckPasswordAsync(result, model.Password))
             {
-                return Ok(new ApiResult() { Data = tokenResponse.AccessToken, Status = HttpStatus.OK });
+                List<Claim> payload = new List<Claim> { 
+                        new Claim(JwtClaimTypes.Name, model.UserName)
+                };
+                var token = _jwtTokenManagerService.GenerateToken(payload);
+                return Ok(new ApiResult() { Data = token, Status = HttpStatus.OK });
             }
 
             return Ok(new ApiResult()

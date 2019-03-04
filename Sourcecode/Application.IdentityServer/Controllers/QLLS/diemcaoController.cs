@@ -14,6 +14,7 @@ namespace Application.IdentityServer.Controllers.QLLS
     [Produces("application/json")]
     [Route("api/DiemCao/[action]")]
     //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    [Authorize]
     public class DiemCaoController : ControllerBase
     {
         private IDiemCaoService diemCaoService;

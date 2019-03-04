@@ -14,6 +14,7 @@ namespace Application.IdentityServer.Controllers.QLLS
     [Produces("application/json")]
     [Route("api/ChucVu/[action]")]
     //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    [Authorize]
     public class ChucVuController : ControllerBase
     {
         private IChucVuService chucVuService;

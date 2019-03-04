@@ -14,7 +14,7 @@ export class AuthService extends BaseService implements OnInit {
   constructor(private http: HttpClient, private router: Router , private toastr: ToastrService) {
     super();
     const currentUser = localStorage.getItem('currentUser');
-    if (currentUser !== '' && currentUser !== undefined) {
+    if (currentUser !== '' && currentUser !== undefined && currentUser !== null) {
       this.loggedIn.next(true);
     }
   }

@@ -17,6 +17,7 @@ namespace Application.IdentityServer.Controllers.QLLS
     [Produces("application/json")]
     [Route("api/Role/[action]")]
     //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    [Authorize]
     public class RoleController : Controller
     {
 

@@ -27,6 +27,7 @@ namespace Application.IdentityServer.Controllers.QLLS
     [Produces("application/json")]
     [Route("api/LietSy/[action]")]
     //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    [Authorize]
     public class LietSyController : ControllerBase
     {
         private ILietSyService lietSyService;

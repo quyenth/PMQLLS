@@ -14,6 +14,7 @@ namespace Application.IdentityServer.Controllers.QLLS
     [Produces("application/json")]
     [Route("api/DoiTuong/[action]")]
     //[Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    [Authorize]
     public class DoiTuongController : ControllerBase
     {
         private IDoiTuongService doiTuongService;

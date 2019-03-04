@@ -14,7 +14,7 @@ namespace Application.IdentityServer.Controllers.QLLS
 {
     [Produces("application/json")]
     [Route("api/Xa/[action]")]
-    [Authorize(AuthenticationSchemes = AuthenticationSchemes.Bearer)]
+    [Authorize]
     public class XaController : ControllerBase
     {
         private ApplicationContext context;

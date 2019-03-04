@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using Application.Domain.Services;
 using Framework.AspNetIdentity;
 using Framework.Common;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -39,29 +42,37 @@ namespace Application.IdentityServer
             services.AddDbContext<Application.Domain.Entity.ApplicationContext>(options =>
               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Application.IdentityServer")));
             //add aspnet identity
-            services.AddIdentity<Framework.AspNetIdentity.ApplicationUser, ApplicationRole>()
+            services.AddIdentity<Framework.AspNetIdentity.ApplicationUser, ApplicationRole>(o =>
+                    {
+                        // configure identity options
+                        o.Password.RequireDigit = false;
+                        o.Password.RequireLowercase = false;
+                        o.Password.RequireUppercase = false;
+                        o.Password.RequireNonAlphanumeric = false;
+                        o.Password.RequiredLength = 5;
+                    })
                 .AddEntityFrameworkStores<ApplicationContext>()
                 .AddUserManager<ApplicationUserManager>()
                 .AddDefaultTokenProviders();
 
-            var clients = Configuration.GetSection("ClientSettings").Get<Client[]>();
-            foreach (var item in clients)
-            {
-                item.ClientSecrets = new List<Secret>{
-                    new Secret("secret".Sha256())
-                    };
-            }
+            //var clients = Configuration.GetSection("ClientSettings").Get<Client[]>();
+            //foreach (var item in clients)
+            //{
+            //    item.ClientSecrets = new List<Secret>{
+            //        new Secret("secret".Sha256())
+            //        };
+            //}
 
-            var apiResources = Configuration.GetSection("ApiResources").Get<ApiResource[]>();
-            //add identityserver
-            services.AddIdentityServer()
-               .AddDeveloperSigningCredential()
-               .AddInMemoryPersistedGrants()
-               .AddInMemoryIdentityResources(Config.GetIdentityResources())
-               .AddInMemoryApiResources(apiResources)
-               //.AddInMemoryClients(Config.GetClients())
-               .AddInMemoryClients(clients)
-               .AddAspNetIdentity<ApplicationUser>();
+            //var apiResources = Configuration.GetSection("ApiResources").Get<ApiResource[]>();
+            ////add identityserver
+            //services.AddIdentityServer()
+            //   .AddDeveloperSigningCredential()
+            //   .AddInMemoryPersistedGrants()
+            //   .AddInMemoryIdentityResources(Config.GetIdentityResources())
+            //   .AddInMemoryApiResources(apiResources)
+            //   //.AddInMemoryClients(Config.GetClients())
+            //   .AddInMemoryClients(clients)
+            //   .AddAspNetIdentity<ApplicationUser>();
 
             services.AddTransient<IProfileService, IdentityClaimsProfileService>();
             services.AddTransient<IChucVuService, ChucVuService>();
@@ -79,6 +90,26 @@ namespace Application.IdentityServer
 
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<ISoQuyenService, SoQuyenService>();
+
+            var JwtSettings = Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.SecurityKey)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
 
             services.AddMvc();
@@ -161,18 +192,20 @@ namespace Application.IdentityServer
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
          
 
-            //add authentication
-            services.AddAuthentication("Bearer")
-                 .AddIdentityServerAuthentication(options =>
-                 {
-                     options.Authority = "http://localhost:57906";
-                     options.RequireHttpsMetadata = false;
+            ////add authentication
+            //services.AddAuthentication("Bearer")
+            //     .AddIdentityServerAuthentication(options =>
+            //     {
+            //         options.Authority = "http://localhost:57907";
+            //         options.RequireHttpsMetadata = false;
 
-                     options.ApiName = "api2";
+            //         options.ApiName = "api2";
                      
-                 });
+            //     });
 
             services.AddScoped<IJwtTokenManagerService, JwtTokenManager>();
+            services.Configure<JwtSettings>(options => Configuration.GetSection("JwtSettings").Bind(options));
+
             //end add authentication
 
         }
@@ -204,7 +237,7 @@ namespace Application.IdentityServer
                 );
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseIdentityServer();
+            //app.UseIdentityServer();
 
             app.UseAccessControlAllowOriginAlways();
             app.UseMvc();
