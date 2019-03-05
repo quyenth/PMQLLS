@@ -1,28 +1,34 @@
 import { AuthService } from './shared/services/auth.Service';
-import { OnInit } from '@angular/core';
+import { OnInit, OnDestroy } from '@angular/core';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'client';
-  isLoggedIn$: Observable<boolean>;
+  isLoggedIn: boolean;
+  subscription: Subscription;
+
  constructor(
     private authService: AuthService
    ) {
 
  }
   ngOnInit() {
-    // this.autService.login('quyenth@gmail.com', 'Admin@123');
-    // this.autService.getValues();
-    this.isLoggedIn$ = this.authService.isLoggedIn;
+   this.subscription =  this.authService.isLoggedIn.subscribe(data => {
+      this.isLoggedIn = data;
+    });
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

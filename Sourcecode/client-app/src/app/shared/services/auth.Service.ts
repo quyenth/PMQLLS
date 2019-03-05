@@ -11,15 +11,20 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable()
 export class AuthService extends BaseService implements OnInit {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  loggedInFalse: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient, private router: Router , private toastr: ToastrService) {
     super();
-    const currentUser = localStorage.getItem('currentUser');
-    if (currentUser !== '' && currentUser !== undefined && currentUser !== null) {
+    let currentUser = null
+    if ( localStorage.getItem('currentUser')) {
+      currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
+    if (currentUser !== '' && currentUser !== undefined && currentUser !== null && currentUser.token !== '') {
       this.loggedIn.next(true);
     }
   }
 
-  get isLoggedIn() {
+   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
   /**
@@ -39,12 +44,15 @@ export class AuthService extends BaseService implements OnInit {
         console.log(user);
         return user;
       }).subscribe((result: any) => {
-        localStorage.setItem('currentUser', JSON.stringify({
-          token: result.data
-        }));
-        console.log(result);
-        this.loggedIn.next(true);
-        this.router.navigate(['']);
+        if (result.data) {
+          localStorage.setItem('currentUser', JSON.stringify({
+            token: result.data
+          }));
+          this.loggedIn.next(true);
+          this.router.navigate(['']);
+        } else {
+          this.loggedInFalse.next(true);
+        }
       });
   }
 

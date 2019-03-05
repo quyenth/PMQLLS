@@ -18,12 +18,12 @@
 
 <div id="wrapper">
 
-    <nav class="navbar-default navbar-static-side" role="navigation" *ngIf="isLoggedIn$|async">
+    <nav class="navbar-default navbar-static-side" role="navigation" *ngIf="isLoggedIn">
         <app-left-navigation-layout ></app-left-navigation-layout>
     </nav>
 
-        <div id="page-wrapper" class="gray-bg">
-          <div class="row border-bottom" *ngIf="isLoggedIn$|async">
+        <div id="page-wrapper" class="gray-bg" [ngClass]="{'no-auth': !isLoggedIn}">
+          <div class="row border-bottom" *ngIf="isLoggedIn">
             <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
               <div class="navbar-header">
                   <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>

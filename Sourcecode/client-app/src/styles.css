@@ -15,5 +15,8 @@ td.action-col{
     text-align: center;
 }
 td.action-col a{
-    padding-left: 5px; 
+    padding-left: 5px;
+}
+.no-auth{
+  margin-left: 0!important;
 }
