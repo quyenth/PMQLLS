@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.Service';
 
 @Component({
   selector: 'app-left-navigation-layout',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftNavigationLayoutComponent implements OnInit {
 
-  constructor() { }
+  isAdmin: boolean;
+  currentUser: string;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.isAdmin.subscribe(data => {
+        this.isAdmin = data;
+    });
+    this.authService.currentUser.subscribe(data => {
+      this.currentUser = data;
+    })
   }
 
 }

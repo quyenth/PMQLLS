@@ -6,12 +6,15 @@ import { Observable, interval, pipe, BehaviorSubject } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { HttpResult } from '../commons/http-result';
 
 
 @Injectable()
 export class AuthService extends BaseService implements OnInit {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loggedInFalse: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  currentUser: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private http: HttpClient, private router: Router , private toastr: ToastrService) {
     super();
@@ -78,6 +81,10 @@ export class AuthService extends BaseService implements OnInit {
          console.log(err);
       });
 
+  }
+
+  getCurentUserInfo() : Observable<HttpResult> {
+    return this.http.get<HttpResult>(this.BaseUrl + '/api/Account/GetCurentUserInfo');
   }
 
   ngOnInit() {

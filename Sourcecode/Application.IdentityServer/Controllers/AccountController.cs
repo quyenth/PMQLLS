@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Application.Domain.model;
 using Framework.AspNetIdentity;
@@ -18,15 +19,19 @@ namespace Application.IdentityServer.Controllers
     [ApiExplorerSettings(IgnoreApi = false)]
     public class AccountController : Controller
     {
-       private readonly ILogger logger;
+        private readonly ILogger logger;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ILogger<ApplicationUser> logger)
+        private readonly RoleManager<ApplicationRole> roleManager;
+        private readonly ApplicationUserRole applicationUserRole;
+
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager
+                    , ILogger<ApplicationUser> logger , RoleManager<ApplicationRole> roleManager)
         {
             this.logger = logger;
             this.userManager = userManager;
             this.signInManager = signInManager;
-
+            this.roleManager = roleManager;
         }
 
         [HttpGet]
@@ -110,6 +115,27 @@ namespace Application.IdentityServer.Controllers
             {
                 Status = HttpStatus.OK,
                 Data = result
+            };
+        }
+
+        public async Task<ApiResult> GetCurentUserInfo()
+        {
+            var emailClaims = User.Claims.FirstOrDefault(c => c.Type == "name");
+            var email = emailClaims != null ? emailClaims.Value : "";
+            var user = await this.userManager.FindByEmailAsync(email);
+            //this.applicationUserRole.get
+            var roles = await userManager.GetRolesAsync(user);
+
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = new
+                {
+                    Email = user.Email,
+                    FullName = user.FullName,
+                    UserName = user.UserName,
+                    roles = roles
+                }
             };
         }
 

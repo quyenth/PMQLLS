@@ -2,14 +2,11 @@
   <ul class="nav metismenu" id="side-menu">
     <li class="nav-header">
       <div class="dropdown profile-element">
-          <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
+          <img alt="image" class="rounded-circle" src="./../../../../assets/img/user-male-icon.png" style="width: 60px;height: 60px;"/>
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-              <span class="block m-t-xs font-bold">David Williams</span>
-              <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
+              <span class="block m-t-xs font-bold">{{currentUser}}</span>
           </a>
-          <ul class="dropdown-menu animated fadeInRight m-t-xs">
-              <li><a class="dropdown-item" href="login.html">Logout</a></li>
-          </ul>
+
       </div>
       <div class="logo-element">
           <img src="./../../../../assets/img/quochuy.png" style='width: 60%;'>
@@ -18,7 +15,7 @@
       <li>
         <a routerLink="/lietsi"><i class="fa fa-database"></i> <span class="nav-label">Danh sách Liệt sĩ</span></a>
     </li>
-      <li>
+      <li *ngIf="isAdmin">
         <a href="#"><i class="fa fa-university"></i> <span class="nav-label">Quản trị </span><span class="fa arrow"></span></a>
 
         <ul class="nav nav-second-level collapse">
@@ -37,7 +34,7 @@
             <li><a routerLink = '/xa'><i class="fa fa-font-awesome"></i> Xã</a></li>
           </ul>
       </li>
-      <li>
+      <li *ngIf="isAdmin">
         <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label">Phân quyền </span><span class="fa arrow"></span></a>
 
         <ul class="nav nav-second-level">
