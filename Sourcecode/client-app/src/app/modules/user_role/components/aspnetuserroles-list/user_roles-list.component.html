@@ -14,10 +14,11 @@
 
     <div class="row search-box">
         <div class="col-sm-3">
-            <ng-select [items]="listAllRole | async"
+            <ng-select [items]="listAllRole"
                 bindLabel="text"
                 bindValue="id"
-                [(ngModel)]="searchRole"               >
+                [(ngModel)]="searchRole"
+                [clearable]= "false"              >
             </ng-select>
         </div>
         <div class="col-sm-3">

@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule, BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
-
+import { Select2Module } from 'ng2-select2';
 
 export function getDatepickerConfig(): BsDatepickerConfig {
   return Object.assign(new BsDatepickerConfig(), {
@@ -34,6 +34,7 @@ export function getDatepickerConfig(): BsDatepickerConfig {
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     NgSelectModule,
+    Select2Module,
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
       customClass: 'modal-content',
@@ -49,7 +50,7 @@ export function getDatepickerConfig(): BsDatepickerConfig {
   exports : [
     DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule ,
     PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule ,
-    BrowserAnimationsModule , BsDatepickerModule , NgSelectModule , SweetAlert2Module
+    BrowserAnimationsModule , BsDatepickerModule , NgSelectModule , SweetAlert2Module , Select2Module
   ]
 })
 export class ShareModule { }

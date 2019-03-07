@@ -37,6 +37,7 @@
             ],
             "scripts": [
               "src/assets/js/jquery-3.1.1.min.js",
+              "node_modules/select2/dist/js/select2.full.js",
               "src/assets/js/popper.min.js",
               "src/assets/js/bootstrap.js",
               "src/assets/js/plugins/metisMenu/jquery.metisMenu.js",

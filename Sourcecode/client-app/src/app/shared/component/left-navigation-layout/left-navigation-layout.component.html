@@ -15,10 +15,10 @@
       <li>
         <a routerLink="/lietsi"><i class="fa fa-database"></i> <span class="nav-label">Danh sách Liệt sĩ</span></a>
     </li>
-      <li *ngIf="isAdmin">
+      <li [hidden]="!isAdmin">
         <a href="#"><i class="fa fa-university"></i> <span class="nav-label">Quản trị </span><span class="fa arrow"></span></a>
 
-        <ul class="nav nav-second-level collapse">
+        <ul class="nav nav-second-level">
             <li><a routerLink = '/'><i class="fa fa-list-ul"></i> Chức vụ</a></li>
             <li><a routerLink = '/capbac'><i class="fa fa-list-ul"></i> Cấp Bậc</a></li>
             <li><a routerLink = '/thoiky'><i class="fa fa-clock-o"></i> Thời kỳ</a></li>
@@ -34,7 +34,7 @@
             <li><a routerLink = '/xa'><i class="fa fa-font-awesome"></i> Xã</a></li>
           </ul>
       </li>
-      <li *ngIf="isAdmin">
+      <li [hidden]="!isAdmin">
         <a href="#"><i class="fa fa-cogs"></i> <span class="nav-label">Phân quyền </span><span class="fa arrow"></span></a>
 
         <ul class="nav nav-second-level">

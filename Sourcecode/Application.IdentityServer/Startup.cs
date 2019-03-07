@@ -107,7 +107,9 @@ namespace Application.IdentityServer
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.SecurityKey)),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    LifetimeValidator = LifetimeValidator
                 };
             });
 
@@ -208,6 +210,15 @@ namespace Application.IdentityServer
 
             //end add authentication
 
+        }
+
+        public bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+        {
+            if (expires != null)
+            {
+                if (DateTime.UtcNow < expires) return true;
+            }
+            return false;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

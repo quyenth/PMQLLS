@@ -33,7 +33,7 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
   orderInfo: OrderInfo = new OrderInfo('', true);
-  listAllRole: Observable<Select2Model[]>;
+  listAllRole: Select2Model[];
   listAllUser: Observable<Select2Model[]>;
   searchUser = [];
   searchRole = null;
@@ -54,8 +54,14 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
     this.filterCondition.PageSize = this.pageSize;
 
     this.filterCondition.Orders = [ ];
-    this.onSearch();
-    this.listAllRole = this.roleService.getAllRole();
+    // this.onSearch();
+    this.roleService.getAllRole().subscribe(data => {
+      this.listAllRole = data ;
+      if ( this.listAllRole != null && this.listAllRole.length > 0) {
+          this.searchRole = this.listAllRole[0].id;
+      }
+      this.onSearch();
+    });
     this.listAllUser = this.userRolesService.getAllUser();
 
   }
