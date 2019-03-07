@@ -23,19 +23,20 @@
                 [(ngModel)] = "searchCodition.soquyenId">
             </ng-select>
       </div>
-      <div class="col-sm-2">
+      <!-- <div class="col-sm-2">
           <input placeholder="Số thứ tự" [(ngModel)] = "searchCodition.thutu" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
-      </div>
-      <div class="col-sm-2">
-          <ng-select [items]="listGender"
-                                bindLabel="text"
-                                bindValue="id"
-                                [placeholder]="'Giới tính'"
-                                [(ngModel)] = "searchCodition.gioiTinh">
-            </ng-select>
-      </div>
+      </div> -->
+      
       <div class="col-sm-2">
         <input placeholder="Họ và tên"  [(ngModel)] = "searchCodition.hoTen" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+      </div>
+      <div class="col-sm-2">
+        <ng-select [items]="listGender"
+                              bindLabel="text"
+                              bindValue="id"
+                              [placeholder]="'Giới tính'"
+                              [(ngModel)] = "searchCodition.gioiTinh">
+          </ng-select>
       </div>
       <div class="col-sm-2">
         <input placeholder="Năm sinh" [(ngModel)] = "searchCodition.namSinh" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
@@ -87,7 +88,7 @@
       <div class="col-sm-2">
         <input placeholder="Đơn vị" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
-      <div class="col-sm-2">
+      <!-- <div class="col-sm-2">
         <input placeholder="Cấp b,c,d" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-2">
@@ -98,9 +99,7 @@
       </div>
       <div class="col-sm-2">
         <input placeholder="Cấp QK,QĐ" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
-      </div>
-    </div>
-    <div class="row" style="margin-top: 10px">
+      </div> -->
       <div class="col-sm-2">
         <input type="text"
           class="form-control"
@@ -120,10 +119,13 @@
             [placeholder]="'Chức vụ'" [(ngModel)] = "searchCodition.hySinhChucVu">
         </ng-select>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-2">
         <input placeholder="Lý do hy sinh" [(ngModel)] = "searchCodition.hySinhLyDoChiTiet" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
 
+    </div>
+    <div class="row" style="margin-top: 10px">
+      
     </div>
     <div class="row" style="margin-top: 10px">
       <div class="col-sm-2">
