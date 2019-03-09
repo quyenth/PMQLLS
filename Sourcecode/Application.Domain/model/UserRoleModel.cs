@@ -16,5 +16,7 @@ namespace Application.Domain.model
 
         public string RoleName { set; get; }
 
+        public string TinhId { set; get; }
+
     }
 }

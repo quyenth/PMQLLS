@@ -20,7 +20,7 @@
 
 		                  </div>
 		                 </div>
-		                <!-- <div class="form-group  row" >
+		                <div class="form-group  row" >
 		                  <label class="col-form-label col-sm-2">
 		                    Role
 		                  </label>
@@ -28,26 +28,25 @@
                         <ng-select [items]="listAllRole | async"
                             bindLabel="text"
                             bindValue="id"
-                            [multiple]="true"
                             formControlName="roleId">
                         </ng-select>
                         <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('roleId').hasError('required')">Trường này là bắt buộc.</span>
 
 		                  </div>
-                     </div> -->
+                     </div>
 
                      <div class="form-group  row" *ngIf='data.roleText !== "Admin"'>
 		                  <label class="col-form-label col-sm-2">
 		                    Tỉnh
 		                  </label>
 		                  <div class="col-sm-8">
-                        <ng-select [items]="listAllRole | async"
+                        <ng-select [items]="listAllTinh | async"
                             bindLabel="text"
                             bindValue="id"
                             [multiple]="true"
-                            formControlName="roleId">
+                            formControlName="tinhId">
                         </ng-select>
-                        <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('roleId').hasError('required')">Trường này là bắt buộc.</span>
+                        <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('tinhId').hasError('required')">Trường này là bắt buộc.</span>
 
 		                  </div>
                      </div>

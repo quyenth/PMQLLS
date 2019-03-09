@@ -13,6 +13,7 @@ import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
 import { UserRolesService } from '../../user_role.service';
 import { Select2Model } from 'src/app/shared/models/select2.model';
+import { TinhService } from 'src/app/modules/tinh/tinh.service';
 
 
 @Component({
@@ -26,19 +27,25 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   isUpdate: boolean;
   data: UserRolesModel = new UserRolesModel();
   listAllRole: Observable<Select2Model[]>;
+  listAllTinh: Observable<Select2Model[]>;
   listAllUser: Observable<Select2Model[]>;
   myForm = this.fb.group({
         userId: ['', [Validators.required]],
-        roleId: ['', [Validators.required]],
+        roleId: [''],
+        tinhId: ['']
+
   });
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private userRolesService: UserRolesService, private spinner: NgxSpinnerService,
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
-          private roleService: RoleService) {
+          private roleService: RoleService , private tinhService: TinhService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       console.log(data)
       this.data.userId = data.id;
       this.data.roleText = data.RoleText;
+      if (data.roleId) {
+        this.myForm.patchValue({'roleId': data.roleId});
+      }
       this.getDataByID(data);
     });
   }
@@ -46,6 +53,7 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   ngOnInit() {
      this.listAllRole = this.roleService.getAllRole();
      this.listAllUser = this.userRolesService.getAllUser();
+     this.listAllTinh = this.tinhService.getListAllTinh();
   }
 
   getDataByID (data) {

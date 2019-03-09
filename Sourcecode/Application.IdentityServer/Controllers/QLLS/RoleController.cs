@@ -177,27 +177,27 @@ namespace Application.IdentityServer.Controllers.QLLS
         [HttpPost]
         public async Task<ApiResult> SaveUserRole([FromBody] UserRoleModel model)
         {
-            var list = this.roleManager?.Roles.ToList();
-            if (!string.IsNullOrEmpty(model.roleId))
-            {
-                string[] listRoleId = model.roleId.Split(',');
-                var user = await this.userManager.FindByIdAsync(model.userId);
-                var roles = await this.userManager.GetRolesAsync(user);
+            //var list = this.roleManager?.Roles.ToList();
+            //if (!string.IsNullOrEmpty(model.roleId))
+            //{
+            //    string[] listRoleId = model.roleId.Split(',');
+            //    var user = await this.userManager.FindByIdAsync(model.userId);
+            //    var roles = await this.userManager.GetRolesAsync(user);
 
-                await userManager.RemoveFromRolesAsync(user, roles);
+            //    await userManager.RemoveFromRolesAsync(user, roles);
 
-                var listAllRole = roleManager.Roles?.ToList();
-                List<string> listRole = new List<string>();
-                foreach (var roleId in listRoleId)
-                {
-                    var role = listAllRole.FirstOrDefault(c=>c.Id == roleId);     
-                    if(role != null)
-                    {
-                        listRole.Add(role.Name);
-                    }                                  
-                }
-                await userManager.AddToRolesAsync(user, listRole.ToArray());
-            }
+            //    var listAllRole = roleManager.Roles?.ToList();
+            //    List<string> listRole = new List<string>();
+            //    foreach (var roleId in listRoleId)
+            //    {
+            //        var role = listAllRole.FirstOrDefault(c=>c.Id == roleId);     
+            //        if(role != null)
+            //        {
+            //            listRole.Add(role.Name);
+            //        }                                  
+            //    }
+            //    await userManager.AddToRolesAsync(user, listRole.ToArray());
+            //}
            
             return new ApiResult()
             {

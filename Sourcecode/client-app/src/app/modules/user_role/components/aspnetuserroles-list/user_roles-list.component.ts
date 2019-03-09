@@ -116,7 +116,7 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
       RoleText = role.text;
     }
     this.modalService.openModalWithComponent(UserRolesSaveComponent,
-        { formType: FromType.INSERT, id: 0 , RoleText: RoleText } , ModalSize.LARGE);
+        { formType: FromType.INSERT, id: 0 , RoleText: RoleText , roleId : this.searchRole} , ModalSize.LARGE);
   }
 
   onEditItem(item) {
@@ -128,7 +128,7 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
       RoleText = role.text;
     }
     this.modalService.openModalWithComponent(UserRolesSaveComponent,
-      { formType: FromType.UPDATE, id: item.id , RoleText: RoleText} , ModalSize.LARGE);
+      { formType: FromType.UPDATE, id: item.id , RoleText: RoleText , roleId : this.searchRole} , ModalSize.LARGE);
   }
 
   onDeleteItem (item) {
