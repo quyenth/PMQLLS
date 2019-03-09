@@ -36,7 +36,9 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
           private roleService: RoleService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
+      console.log(data)
       this.data.userId = data.id;
+      this.data.roleText = data.RoleText;
       this.getDataByID(data);
     });
   }
@@ -70,7 +72,6 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   onSubmit() {
 
     this.submited = true;
-    console.log(this.myForm);
     if ( !this.myForm.valid) {
       return;
     }

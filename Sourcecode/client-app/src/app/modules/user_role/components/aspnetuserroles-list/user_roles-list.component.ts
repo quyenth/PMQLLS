@@ -108,13 +108,27 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
 
 
   onAddNew () {
-    this.modalService.openModalWithComponent(UserRolesSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
+    const role = this.listAllRole.find(item => {
+      return item.id === this.searchRole;
+    });
+    let RoleText = '';
+    if (role) {
+      RoleText = role.text;
+    }
+    this.modalService.openModalWithComponent(UserRolesSaveComponent,
+        { formType: FromType.INSERT, id: 0 , RoleText: RoleText } , ModalSize.LARGE);
   }
 
   onEditItem(item) {
-    console.log(item);
-    this.modalService.openModalWithComponent(UserRolesSaveComponent, { formType: FromType.UPDATE, id: item.id}
-                            , ModalSize.LARGE);
+    const role = this.listAllRole.find(item => {
+      return item.id === this.searchRole;
+    });
+    let RoleText = '';
+    if (role) {
+      RoleText = role.text;
+    }
+    this.modalService.openModalWithComponent(UserRolesSaveComponent,
+      { formType: FromType.UPDATE, id: item.id , RoleText: RoleText} , ModalSize.LARGE);
   }
 
   onDeleteItem (item) {
