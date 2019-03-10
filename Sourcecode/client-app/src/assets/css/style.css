@@ -4378,7 +4378,7 @@ body {
   font-size: 13px;
   color: black;
   overflow-x: hidden;
-  
+
 }
 html,
 body {
@@ -9795,7 +9795,8 @@ thead th{
 }
 .liet-sy-form .ibox-title h5 {
   text-transform: uppercase;
-  color: #1ab394
+  /* color: #1ab394 */
+  color: blue
 }
 .form-control, .single-line {
   border: 1px solid #ccc;
@@ -9820,3 +9821,4 @@ thead th{
   border-top: 0;
   padding: 0 10px 13px 10px;
 }
+

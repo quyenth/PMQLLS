@@ -26,7 +26,7 @@
       <!-- <div class="col-sm-2">
           <input placeholder="Số thứ tự" [(ngModel)] = "searchCodition.thutu" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div> -->
-      
+
       <div class="col-sm-2">
         <input placeholder="Họ và tên"  [(ngModel)] = "searchCodition.hoTen" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
@@ -39,7 +39,9 @@
           </ng-select>
       </div>
       <div class="col-sm-2">
-        <input placeholder="Năm sinh" [(ngModel)] = "searchCodition.namSinh" type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <input type="text"
+          class="form-control"
+          bsDatepicker placeholder="Năm sinh" [(ngModel)] = "searchCodition.namSinh">
       </div>
       <div class="col-sm-2">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fa fa-search"></i> Tìm kiếm</button>
@@ -125,7 +127,7 @@
 
     </div>
     <div class="row" style="margin-top: 10px">
-      
+
     </div>
     <div class="row" style="margin-top: 10px">
       <div class="col-sm-2">

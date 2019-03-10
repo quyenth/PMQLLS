@@ -118,6 +118,7 @@ namespace Application.IdentityServer.Controllers
             };
         }
 
+        [HttpGet]
         public async Task<ApiResult> GetCurentUserInfo()
         {
             var emailClaims = User.Claims.FirstOrDefault(c => c.Type == "name");
