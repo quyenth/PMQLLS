@@ -5,4 +5,6 @@ export class UserRolesModel {
 
       roleText: string;
 
+      tinhId: string;
+
 }

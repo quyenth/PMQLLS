@@ -30,6 +30,7 @@ export class UserRolesService extends BaseService {
 
   save(model: UserRolesModel) {
     model.roleId = model.roleId.toString();
+    model.tinhId = model.tinhId.toString();
     const url = this.BaseUrl + '/api/Role/SaveUserRole';
     return this.http.post<HttpResult>(url, JSON.stringify(model), this.getHeader());
     }

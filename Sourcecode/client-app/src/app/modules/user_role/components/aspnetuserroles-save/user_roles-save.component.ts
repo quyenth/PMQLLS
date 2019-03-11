@@ -1,7 +1,7 @@
 import { RoleService } from './../../../role/role.service';
 import { map, switchMap } from 'rxjs/operators';
 import { UserRolesModel } from '../../user_role.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription, timer, of, Observable } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserRolesService } from '../../user_role.service';
 import { Select2Model } from 'src/app/shared/models/select2.model';
 import { TinhService } from 'src/app/modules/tinh/tinh.service';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -21,6 +22,8 @@ import { TinhService } from 'src/app/modules/tinh/tinh.service';
   templateUrl: './user_roles-save.component.html'
 })
 export class UserRolesSaveComponent implements OnInit , OnDestroy {
+
+  @ViewChild('submitSwal') private submitSwal: SwalComponent;
 
   subscription: Subscription;
   submited: boolean;
@@ -40,7 +43,6 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
           private roleService: RoleService , private tinhService: TinhService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
-      console.log(data)
       this.data.userId = data.id;
       this.data.roleText = data.RoleText;
       if (data.roleId) {
@@ -84,13 +86,7 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
       return;
     }
 
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-      dialogCloseSubscription.unsubscribe();
-      if ( data === ActionType.ACCEPT) {
-        this.submitData();
-      }
-    });
+    this.submitSwal.show();
   }
 
   submitData() {

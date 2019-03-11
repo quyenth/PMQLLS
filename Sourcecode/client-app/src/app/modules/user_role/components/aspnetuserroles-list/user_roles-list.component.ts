@@ -17,6 +17,7 @@ import { OrderInfo } from 'src/app/shared/models/order-info';
 import { UserRolesSaveComponent } from '../aspnetuserroles-save/user_roles-save.component';
 import { Select2Model } from 'src/app/shared/models/select2.model';
 import { RoleService } from 'src/app/modules/role/role.service';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -24,6 +25,7 @@ import { RoleService } from 'src/app/modules/role/role.service';
   templateUrl: './user_roles-list.component.html'
 })
 export class UserRolesListComponent implements OnInit, OnDestroy {
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
 
 
   currentPage = 1;
@@ -132,16 +134,16 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteItem (item) {
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-        dialogCloseSubscription.unsubscribe();
-        if ( data === ActionType.ACCEPT) {
-          this.userRolesService.delete(item).subscribe((res) => {
-          this.toastr.success('Xóa thành công!');
-            this.onSearch();
-        });
-      }
-    });
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.userRolesService.delete(item).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
   }
 
   onDeleteSelected () {
@@ -151,17 +153,16 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
         return;
     }
 
-
-      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-          dialogCloseSubscription.unsubscribe();
-          if ( data === ActionType.ACCEPT) {
-            this.userRolesService.delectList(listSelected).subscribe((res) => {
-            this.toastr.success('Xóa thành công!');
-              this.onSearch();
-          });
-      }
-      });
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.userRolesService.delectList(listSelected).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
 
   }
 
