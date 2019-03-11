@@ -26,15 +26,17 @@ namespace Application.IdentityServer.Controllers.QLLS
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly IUserRoleService UserRoleService;
+        private readonly IUserProvincerService _userProvincerService;
 
         public RoleController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, 
-                        ILogger<ApplicationUser> logger , RoleManager<ApplicationRole> roleManager , IUserRoleService UserRoleService)
+                        ILogger<ApplicationUser> logger , RoleManager<ApplicationRole> roleManager , IUserRoleService UserRoleService , IUserProvincerService UserProvincerService)
         {
             this.logger = logger;
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.UserRoleService = UserRoleService;
+            this._userProvincerService = UserProvincerService;
         }
 
         /// <summary>
@@ -177,7 +179,15 @@ namespace Application.IdentityServer.Controllers.QLLS
         [HttpPost]
         public async Task<ApiResult> SaveUserRole([FromBody] UserRoleModel model)
         {
-            //var list = this.roleManager?.Roles.ToList();
+
+            var list = this.roleManager?.Roles.ToList();
+
+            var adminRole = list.Find(c => c.Name == "Admin");
+
+            if(adminRole != null && adminRole.Id != model.roleId)
+            {
+
+            }
             //if (!string.IsNullOrEmpty(model.roleId))
             //{
             //    string[] listRoleId = model.roleId.Split(',');
@@ -190,15 +200,15 @@ namespace Application.IdentityServer.Controllers.QLLS
             //    List<string> listRole = new List<string>();
             //    foreach (var roleId in listRoleId)
             //    {
-            //        var role = listAllRole.FirstOrDefault(c=>c.Id == roleId);     
-            //        if(role != null)
+            //        var role = listAllRole.FirstOrDefault(c => c.Id == roleId);
+            //        if (role != null)
             //        {
             //            listRole.Add(role.Name);
-            //        }                                  
+            //        }
             //    }
             //    await userManager.AddToRolesAsync(user, listRole.ToArray());
             //}
-           
+
             return new ApiResult()
             {
                 Status = HttpStatus.OK,

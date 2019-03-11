@@ -90,6 +90,7 @@ namespace Application.IdentityServer
 
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<ISoQuyenService, SoQuyenService>();
+            services.AddTransient<IUserProvincerService, UserProvincerService>();
 
             var JwtSettings = Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 
