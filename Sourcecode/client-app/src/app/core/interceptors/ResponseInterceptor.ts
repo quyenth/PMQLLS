@@ -11,10 +11,11 @@ import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/do'
+import { AuthService } from 'src/app/shared/services/auth.Service';
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
-  constructor( private router: Router){}
+  constructor( private router: Router, private AuthService: AuthService){}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(req).do((event: HttpEvent<any>) => {
@@ -23,13 +24,13 @@ export class ResponseInterceptor implements HttpInterceptor {
     }, (err: any) => {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
+            this.AuthService.logout();
             this.router.navigate(['/login']);
-        }
-        else{
+        } else {
           alert(err.message);
         }
       }
     });
-    
+
   }
 }
