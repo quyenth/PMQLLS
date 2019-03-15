@@ -28,6 +28,8 @@ namespace Application.Domain.Entity
         public DbSet<Xa> Xa { get; set; }
         public DbSet<UseProvincer> UseProvincer { get; set; }
 
+		public DbSet<NghiaTrang> NghiaTrang { get; set; }
+
         public DbSet<SoQuyen> SoQuyen { get; set; }
 
 

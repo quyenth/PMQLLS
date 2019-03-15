@@ -41,7 +41,7 @@
       <div class="col-sm-2">
         <input type="text"
           class="form-control"
-          bsDatepicker placeholder="Năm sinh" [(ngModel)] = "searchCodition.namSinh">
+          placeholder="Năm sinh" [(ngModel)] = "searchCodition.namSinh">
       </div>
       <div class="col-sm-2">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fa fa-search"></i> Tìm kiếm</button>
@@ -198,7 +198,7 @@
 
                           <th class='no-sort' rowspan="2" style="width: 90px;">Quyển</th>
 
-                           <th class='no-sort'  rowspan="2" style="width: 30px;">STT</th>
+                           <!-- <th class='no-sort'  rowspan="2" style="width: 30px;">STT</th> -->
 
                            <th class='no-sort'  rowspan="2" style="width: 180px;">Họ tên</th>
 
@@ -228,7 +228,7 @@
 
                            <th class='no-sort' colspan="3" style="width: 20px;"> Hy sinh </th>
 
-                           <th class='no-sort' colspan="6" style="width: 20px;">Mai táng</th>
+                           <th class='no-sort' colspan="4" style="width: 20px;">Mai táng</th>
 
                            <th class='no-sort' colspan="3" style="width: 20px;">Quy tập</th>
 
@@ -254,9 +254,9 @@
 
               <th class='no-sort' style="width: 200px;">Tỉnh</th>
 
-              <th class='no-sort'>Điểm cao</th>
+              <!-- <th class='no-sort'>Điểm cao</th> -->
 
-              <th class='no-sort'>Tọa độ</th>
+              <!-- <th class='no-sort'>Tọa độ</th> -->
 
               <th class='no-sort'>Tình trạng</th>
 
@@ -283,7 +283,7 @@
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
             <td>{{item.soQuyenName}}</td>
-            <td>{{item.thuTu}}</td>
+            <!-- <td>{{item.thuTu}}</td> -->
             <td>{{item.hoTen}}</td>
             <!-- <td>{{item.ten}}</td> -->
             <td>{{item.gioiTinh == 1 ? 'Nam' : 'Nữ'}}</td>
@@ -307,8 +307,8 @@
             <td>{{item.maiTangXaName}}</td>
             <td>{{item.maiTangHuyenName}}</td>
             <td>{{item.maiTangTinhName}}</td>
-            <td>{{item.diemCaoName}}</td>
-            <td>{{item.maiTangToaDo}}</td>
+            <!-- <td>{{item.diemCaoName}}</td> -->
+            <!-- <td>{{item.maiTangToaDo}}</td> -->
             <td>{{item.quyTap? 'Có' : 'Không'}}</td>
             <td>{{item.nghiaTrang}}</td>
             <td>{{item.viTriMo}}</td>
