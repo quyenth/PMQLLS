@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LietsiDocDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Thongtinlietsi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hoten" Type="nvarchar" MaxLength="50" />
+          <Property Name="Namsinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quequan" Type="nvarchar" MaxLength="250" />
+          <Property Name="Truquan" Type="nvarchar" MaxLength="250" />
+          <Property Name="Ngaynhapngu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Donvi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Capbac" Type="nvarchar" MaxLength="50" />
+          <Property Name="Chucvu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ngayhisinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="Truonghophisinh" Type="nvarchar" MaxLength="250" />
+          <Property Name="Noimaitang" Type="nvarchar" MaxLength="450" />
+          <Property Name="Thannhan" Type="nvarchar" MaxLength="450" />
+          <Property Name="Tennghiatrang" Type="nvarchar" MaxLength="250" />
+          <Property Name="Somo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="LietsiDocDataModelStoreContainer">
+          <EntitySet Name="Thongtinlietsi" EntityType="Self.Thongtinlietsi" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LietsiDocDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Thongtinlietsi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quequan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Truquan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Ngaynhapngu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Donvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Capbac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Chucvu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ngayhisinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Truonghophisinh" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Noimaitang" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Thannhan" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="Tennghiatrang" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Somo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Namsinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="LietsiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Thongtinlietsis" EntityType="Self.Thongtinlietsi" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LietsiDocDataModelStoreContainer" CdmEntityContainer="LietsiEntities">
+          <EntitySetMapping Name="Thongtinlietsis">
+            <EntityTypeMapping TypeName="LietsiDocDataModel.Thongtinlietsi">
+              <MappingFragment StoreEntitySet="Thongtinlietsi">
+                <ScalarProperty Name="Namsinh" ColumnName="Namsinh" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+                <ScalarProperty Name="Quequan" ColumnName="Quequan" />
+                <ScalarProperty Name="Truquan" ColumnName="Truquan" />
+                <ScalarProperty Name="Ngaynhapngu" ColumnName="Ngaynhapngu" />
+                <ScalarProperty Name="Donvi" ColumnName="Donvi" />
+                <ScalarProperty Name="Capbac" ColumnName="Capbac" />
+                <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+                <ScalarProperty Name="Ngayhisinh" ColumnName="Ngayhisinh" />
+                <ScalarProperty Name="Truonghophisinh" ColumnName="Truonghophisinh" />
+                <ScalarProperty Name="Noimaitang" ColumnName="Noimaitang" />
+                <ScalarProperty Name="Thannhan" ColumnName="Thannhan" />
+                <ScalarProperty Name="Tennghiatrang" ColumnName="Tennghiatrang" />
+                <ScalarProperty Name="Somo" ColumnName="Somo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

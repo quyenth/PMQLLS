@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LietsiDocDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Thongtinlietsi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Quequan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Truquan" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Ngaynhapngu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Donvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Capbac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Chucvu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ngayhisinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Truonghophisinh" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Noimaitang" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="Thannhan" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="Tennghiatrang" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Somo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Namsinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="LietsiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Thongtinlietsis" EntityType="Self.Thongtinlietsi" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LietsiDocDataModelStoreContainer" CdmEntityContainer="LietsiEntities">
+    <EntitySetMapping Name="Thongtinlietsis">
+      <EntityTypeMapping TypeName="LietsiDocDataModel.Thongtinlietsi">
+        <MappingFragment StoreEntitySet="Thongtinlietsi">
+          <ScalarProperty Name="Namsinh" ColumnName="Namsinh" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Hoten" ColumnName="Hoten" />
+          <ScalarProperty Name="Quequan" ColumnName="Quequan" />
+          <ScalarProperty Name="Truquan" ColumnName="Truquan" />
+          <ScalarProperty Name="Ngaynhapngu" ColumnName="Ngaynhapngu" />
+          <ScalarProperty Name="Donvi" ColumnName="Donvi" />
+          <ScalarProperty Name="Capbac" ColumnName="Capbac" />
+          <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+          <ScalarProperty Name="Ngayhisinh" ColumnName="Ngayhisinh" />
+          <ScalarProperty Name="Truonghophisinh" ColumnName="Truonghophisinh" />
+          <ScalarProperty Name="Noimaitang" ColumnName="Noimaitang" />
+          <ScalarProperty Name="Thannhan" ColumnName="Thannhan" />
+          <ScalarProperty Name="Tennghiatrang" ColumnName="Tennghiatrang" />
+          <ScalarProperty Name="Somo" ColumnName="Somo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

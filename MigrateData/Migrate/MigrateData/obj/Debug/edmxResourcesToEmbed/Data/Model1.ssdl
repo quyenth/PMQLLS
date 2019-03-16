@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LietsiDocDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Thongtinlietsi">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hoten" Type="nvarchar" MaxLength="50" />
+    <Property Name="Namsinh" Type="nvarchar" MaxLength="50" />
+    <Property Name="Quequan" Type="nvarchar" MaxLength="250" />
+    <Property Name="Truquan" Type="nvarchar" MaxLength="250" />
+    <Property Name="Ngaynhapngu" Type="nvarchar" MaxLength="50" />
+    <Property Name="Donvi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Capbac" Type="nvarchar" MaxLength="50" />
+    <Property Name="Chucvu" Type="nvarchar" MaxLength="50" />
+    <Property Name="Ngayhisinh" Type="nvarchar" MaxLength="50" />
+    <Property Name="Truonghophisinh" Type="nvarchar" MaxLength="250" />
+    <Property Name="Noimaitang" Type="nvarchar" MaxLength="450" />
+    <Property Name="Thannhan" Type="nvarchar" MaxLength="450" />
+    <Property Name="Tennghiatrang" Type="nvarchar" MaxLength="250" />
+    <Property Name="Somo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="LietsiDocDataModelStoreContainer">
+    <EntitySet Name="Thongtinlietsi" EntityType="Self.Thongtinlietsi" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
