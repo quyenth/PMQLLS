@@ -182,5 +182,7 @@ namespace Application.IdentityServer.Controllers.QLLS
                 Data = result
             };
         }
+
+       
     }
 }

@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
+import { Select2Model } from 'src/app/shared/models/select2.model';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
   submited: boolean;
   isUpdate: boolean;
   data: DonViModel = new DonViModel();
+  ListAllDonVI: Select2Model[];
   myForm = this.fb.group({
    //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
 
@@ -74,7 +76,10 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit() {
-
+      this.donViService.getListAllDonVi().subscribe(res => {
+        console.log(res)
+        this.ListAllDonVI = res;
+      })
   }
 
   getDataByID (data) {
