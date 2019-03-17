@@ -20,3 +20,10 @@ td.action-col a{
 .no-auth{
   margin-left: 0!important;
 }
+.select2-container{
+  z-index: 10000;
+
+}
+.select2 {
+  width: 100%!important;
+}

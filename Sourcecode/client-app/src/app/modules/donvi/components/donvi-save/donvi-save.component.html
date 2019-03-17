@@ -64,7 +64,7 @@
                 Mã đơn vị cha <span class="text-danger">*</span>
               </label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" formControlName="maDonViCha" />
+                <select2 [data]="ListAllDonVI" [cssImport]="true" [options]="{dropdownAutoWidth: true}" ></select2>
                 <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('maDonViCha').hasError('required')">Trường này là bắt buộc.</span>
               </div>
               </div>

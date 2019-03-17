@@ -9,6 +9,7 @@ import { DonViModel } from './donvi.model';
 import { Select2Model } from 'src/app/shared/models/select2.model';
 import { map } from 'rxjs/operators';
 import { forEach } from '@angular/router/src/utils/collection';
+import { DonViSelectModel } from './DonViSelectModel';
 
 @Injectable({
   providedIn: 'root'
@@ -57,43 +58,47 @@ export class DonViService extends BaseService {
     const url = this.BaseUrl + '/api/donVi/CheckNameIsUnique';
     return this.http.get<HttpResult>(url, { params : params});
   }
-  getListAllDonVi(): Observable<Select2Model[]> {
+  getListAllDonVi(): Observable<DonViSelectModel[]> {
     const url = this.BaseUrl + '/api/DonVi/getListAllDonVi';
     return this.http.get<HttpResult>(url).pipe(map(res => {
-        const result: Select2Model[] = [] ;
-        let tree;
-        tree = this.buildTree(res.data, 'maDonVi', 'maDonViCha', null , tree);
-        tree.forEach(element => {
-          const donviSelect2Model = new Select2Model (element.donViId, element.tenDonVi);
-          donviSelect2Model.children = element.children;
-          result.push(donviSelect2Model);
-        });
-        return result ;
+         const ListDonViMoel : DonViSelectModel[] = [];
+         for(const item of res.data) {
+              const DonViMoel = new DonViSelectModel();
+              DonViMoel.id = item['donViId'];
+              DonViMoel.text = item['tenDonVi'];
+              DonViMoel.maDonVi = item['maDonVi'];
+              DonViMoel.maDonViCha = item['maDonViCha'];
+              ListDonViMoel.push(DonViMoel);
+         }
+         const tree = this.buildTree(ListDonViMoel, 'maDonVi', 'maDonViCha', null , null);
+        return tree ;
     }));
   }
 
-  buildTree(array: [], keyId, parentKeyId, parent, tree) {
-    let selft = this;
-    tree = typeof tree !== 'undefined' ? tree : [];
-    if ( parent === null) {
-        parent = {};
-        parent[keyId] = null;
-    }
+   buildTree(array: object[], keyId, parentKeyId, parent  , tree = [] ) {
+     const selft = this;
+
+     if ( parent === null) {
+         parent = {};
+         parent[keyId] = null;
+     }
 
 
-    let children =  array.filter(child => child[parentKeyId] === parent[keyId]) ;
+     const children =  array.filter(child => child[parentKeyId] === parent[keyId]) ;
 
-    if (children != null && children.length > 0) {
-        if (parent[keyId] == null) {
-            tree = children;
-        } else {
-            parent['children'] = children;
+     if (children != null && children.length > 0) {
+         if (parent[keyId] == null) {
+             tree = children;
+         } else {
+             parent['children'] = children;
+         }
+         for(const child of children){
+           selft.buildTree(array, keyId, parentKeyId, child , tree);
         }
-        for(let child of children){
-          selft.buildTree(array, keyId, parentKeyId, child , tree)
-        }
-    }
+     } else {
+      parent['children'] = null;
+     }
 
-    return tree;
-  }
+     return tree;
+   }
 }

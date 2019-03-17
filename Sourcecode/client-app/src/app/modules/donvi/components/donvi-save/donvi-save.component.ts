@@ -11,11 +11,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
-import { Select2Model } from 'src/app/shared/models/select2.model';
+import { DonViSelectModel } from '../../DonViSelectModel';
 
 
 @Component({
-  selector: 'app-donVi-save',
+  selector: 'app-don-vi-save',
   templateUrl: './donvi-save.component.html'
 })
 export class DonViSaveComponent implements OnInit , OnDestroy {
@@ -24,7 +24,28 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
   submited: boolean;
   isUpdate: boolean;
   data: DonViModel = new DonViModel();
-  ListAllDonVI: Select2Model[];
+  ListAllDonVI: DonViSelectModel[];
+  FRUIT_GROUPS = [
+    {
+        id: '',
+        text: 'Citrus',
+        children: [
+            { id: 'c1', text: 'Grapefruit' , children: [] },
+            { id: 'c2', text: 'Orange' },
+            { id: 'c3', text: 'Lemon' },
+            { id: 'c4', text: 'Lime' }
+        ]
+    },
+    {
+        id: '',
+        text: 'Other',
+        children: [
+            { id: 'o1', text: 'Apple' },
+            { id: 'o2', text: 'Mango' },
+            { id: 'o3', text: 'Banana' }
+        ]
+    }
+];
   myForm = this.fb.group({
    //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
 

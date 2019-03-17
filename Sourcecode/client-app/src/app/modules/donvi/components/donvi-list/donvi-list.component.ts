@@ -15,6 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { OrderInfo } from 'src/app/shared/models/order-info';
+import { DonViSelectModel } from '../../DonViSelectModel';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class DonViListComponent implements OnInit, OnDestroy {
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
   orderInfo: OrderInfo = new OrderInfo('', true);
+  ListAllDonVI: DonViSelectModel[];
 
   subscription: Subscription;
   checkall = false;
@@ -50,6 +52,9 @@ export class DonViListComponent implements OnInit, OnDestroy {
 
     this.filterCondition.Orders = [ ];
     this.onSearch();
+    this.donViService.getListAllDonVi().subscribe(res => {
+      this.ListAllDonVI = res;
+    })
   }
 
   onSearch (pageIndex: number = 1) {
