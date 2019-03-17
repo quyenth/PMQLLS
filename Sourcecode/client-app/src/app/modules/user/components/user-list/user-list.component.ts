@@ -1,6 +1,5 @@
 import { ModalType } from '../../../../shared/commons/modal-type';
 import { HttpResult } from '../../../../shared/commons/http-result';
-import { UserRolesService } from '../../user_role.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { ModalService } from 'src/app/shared/services/modal.Service';
@@ -9,25 +8,23 @@ import { ModalSize } from 'src/app/shared/commons/modal-size';
 import { OperationType } from 'src/app/shared/commons/operation-type';
 import { SearchInfo } from 'src/app/shared/models/search-info';
 import { ActionType } from 'src/app/shared/commons/action-type';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { OrderInfo } from 'src/app/shared/models/order-info';
-import { UserRolesSaveComponent } from '../aspnetuserroles-save/user_roles-save.component';
-import { Select2Model } from 'src/app/shared/models/select2.model';
-import { RoleService } from 'src/app/modules/role/role.service';
-import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { UserSaveComponent } from '../user-save/user-save.component';
+import { UserService } from '../../user.service';
 
 
 @Component({
-  selector: 'app-user-roles-list',
-  templateUrl: './user_roles-list.component.html'
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html'
 })
-export class UserRolesListComponent implements OnInit, OnDestroy {
-  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
+export class UserListComponent implements OnInit, OnDestroy {
 
 
+  @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
   pageSize = 2;
 
@@ -35,15 +32,11 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   totalCount: number;
   filterCondition: FilterCondition = new FilterCondition();
   orderInfo: OrderInfo = new OrderInfo('', true);
-  listAllRole: Select2Model[];
-  listAllUser: Observable<Select2Model[]>;
-  searchUser = [];
-  searchRole = null;
+
   subscription: Subscription;
   checkall = false;
-  constructor(private userRolesService: UserRolesService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService,
-      private toastr: ToastrService , private roleService: RoleService) { }
+  constructor(private user_testService: UserService, private modalService: ModalService,
+      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.subscription = this.modalService.parentData.subscribe(data => {
@@ -56,26 +49,23 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
     this.filterCondition.PageSize = this.pageSize;
 
     this.filterCondition.Orders = [ ];
-    // this.onSearch();
-    this.roleService.getAllRole().subscribe(data => {
-      this.listAllRole = data ;
-      if ( this.listAllRole != null && this.listAllRole.length > 0) {
-          this.searchRole = this.listAllRole[0].id;
-      }
-      this.onSearch();
-    });
-    this.listAllUser = this.userRolesService.getAllUser();
-
+    this.onSearch();
   }
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
-      this.filterCondition.SearchCondition = [ ];
+      const val = this.searchInput.nativeElement.value;
+      this.filterCondition.SearchCondition = [
+		//new SearchInfo('Text', OperationType.Contains, val)
+	  ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
-
-      this.userRolesService.search(this.searchUser.toString(), this.searchRole ,
-            this.filterCondition.PageIndex , this.filterCondition.PageSize).subscribe((res: HttpResult) => {
+	  if (this.orderInfo.FieldName) {
+        this.filterCondition.Orders = [{...this.orderInfo}];
+       } else {
+        this.filterCondition.Orders = [];
+      }
+      this.user_testService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
         this.totalCount = res.data.total;
@@ -110,40 +100,24 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
 
 
   onAddNew () {
-    const role = this.listAllRole.find(item => {
-      return item.id === this.searchRole;
-    });
-    let RoleText = '';
-    if (role) {
-      RoleText = role.text;
-    }
-    this.modalService.openModalWithComponent(UserRolesSaveComponent,
-        { formType: FromType.INSERT, id: 0 , RoleText: RoleText , roleId : this.searchRole} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(UserSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
   }
 
   onEditItem(item) {
-    const role = this.listAllRole.find(item => {
-      return item.id === this.searchRole;
-    });
-    let RoleText = '';
-    if (role) {
-      RoleText = role.text;
-    }
-    this.modalService.openModalWithComponent(UserRolesSaveComponent,
-      { formType: FromType.UPDATE, id: item.id , RoleText: RoleText , roleId : this.searchRole} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(UserSaveComponent, { formType: FromType.UPDATE, id: item.id} , ModalSize.LARGE);
   }
 
   onDeleteItem (item) {
-    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
-    this.deleteItemSwal.show().then( (result) => {
-            if ( result.value ) {
-              this.userRolesService.delete(item).subscribe((res) => {
-                this.toastr.success('Xóa thành công!');
-                  this.onSearch();
-              });
-            }
-        }
-    );
+    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
+    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+        dialogCloseSubscription.unsubscribe();
+        if ( data === ActionType.ACCEPT) {
+          this.user_testService.delete(item).subscribe((res) => {
+		    this.toastr.success('Xóa thành công!');
+            this.onSearch();
+        });
+      }
+    });
   }
 
   onDeleteSelected () {
@@ -153,19 +127,17 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
         return;
     }
 
-    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn?' ;
-    this.deleteItemSwal.show().then( (result) => {
-            if ( result.value ) {
-              this.userRolesService.delectList(listSelected).subscribe((res) => {
-                this.toastr.success('Xóa thành công!');
-                  this.onSearch();
-              });
-            }
-        }
-    );
 
-  }
-  onAddNewUser () {
+      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
+      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
+          dialogCloseSubscription.unsubscribe();
+          if ( data === ActionType.ACCEPT) {
+            this.user_testService.delectList(listSelected).subscribe((res) => {
+			   this.toastr.success('Xóa thành công!');
+              this.onSearch();
+          });
+      }
+      });
 
   }
 

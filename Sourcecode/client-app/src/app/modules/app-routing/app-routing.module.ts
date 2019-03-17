@@ -21,6 +21,7 @@ import { TinhListComponent } from './../tinh/components/tinh-list/tinh-list.comp
 import { HuyenListComponent } from './../huyen/components/huyen-list/huyen-list.component';
 import { LoginPageComponent } from './../login/components/login-page/login-page.component';
 import { ThoiKyListComponent } from '../thoiky/components/thoiky-list/thoiky-list.component';
+import { UserListComponent } from '../user/components/user-list/user-list.component';
 
 const routes: Routes = [
   { path: '', component: ChucVuListComponent },
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'lietsi', component: LietSyListComponent },
   { path: 'soquyen', component: SoQuyenListComponent },
   { path: 'phieucungcap', component: PhieuCungCapListComponent },
+  { path: 'user', component: UserListComponent },
 
   { path: '**', component: PageNotFoundComponent }
 ];

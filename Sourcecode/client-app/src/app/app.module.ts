@@ -40,6 +40,7 @@ import { UserRolesModule } from './modules/user_role/user_role.module';
 import { PhieuCungCapModule } from './modules/ncc_phieucungcap/ncc_phieucungcap.module';
 import { LeftNavigationLayoutComponent } from './shared/component/left-navigation-layout/left-navigation-layout.component';
 import { HeaderTopComponent } from './shared/component/left-navigation-layout/header-top/header-top.component';
+import { UserModule } from './modules/user/user.module';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { HeaderTopComponent } from './shared/component/left-navigation-layout/he
     UserRolesModule,
     LietSyModule,
     SoQuyenModule,
-    PhieuCungCapModule
+    PhieuCungCapModule,
+    UserModule
   ],
   providers: [
     AuthService
