@@ -17,7 +17,7 @@ export class UserService extends BaseService {
   }
 
   search(filterCondition: FilterCondition): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/User_test/Search';
+    const url = this.BaseUrl + '/api/Account/Search';
     return this.http.post<HttpResult>(url, filterCondition);
   }
 
@@ -27,7 +27,7 @@ export class UserService extends BaseService {
     }
 
   delete(model: User_testModel): Observable<HttpResult> {
-    const url = this.BaseUrl + '/api/user_test/Delete';
+    const url = this.BaseUrl + '/api/Account/Delete';
     return this.http.post<HttpResult>(url, model , this.getHeader());
   }
 

@@ -46,3 +46,10 @@
   <button type="button" class="btn btn-primary" (click)="onSubmit()"><i class="fa fa-save"></i> Lưu</button>
   <button type="button" class="btn btn-default" (click)="onClose()"><i class="fa fa-times"></i> Đóng</button>
 </div>
+<swal
+  #submitSwal
+  text="Bạn thực sự muốn lưu?"
+  type="question"
+  [showCancelButton]="true"
+  (confirm)="submitData()">
+</swal>

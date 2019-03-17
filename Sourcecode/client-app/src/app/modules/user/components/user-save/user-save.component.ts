@@ -1,6 +1,6 @@
 import { map, switchMap } from 'rxjs/operators';
 import { User_testModel } from '../../user_test.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription, timer, of } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -12,6 +12,7 @@ import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterService } from 'src/app/modules/register/register.service';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { RegisterService } from 'src/app/modules/register/register.service';
 })
 export class UserSaveComponent implements OnInit , OnDestroy {
 
+  @ViewChild('submitSwal') private submitSwal: SwalComponent;
 
   isUpdate: boolean;
   subscription: Subscription;
@@ -52,19 +54,12 @@ export class UserSaveComponent implements OnInit , OnDestroy {
       return;
     }
 
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-      dialogCloseSubscription.unsubscribe();
-      if ( data === ActionType.ACCEPT) {
-        this.submitData();
-      }
-    });
+    this.submitSwal.show();
   }
 
   submitData() {
     this.spinner.show();
     this.submited = true;
-    const submitData = new User_testModel();
 
     this.userService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();

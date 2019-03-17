@@ -15,6 +15,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { ToastrService } from 'ngx-toastr';
 import { OrderInfo } from 'src/app/shared/models/order-info';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -23,11 +24,12 @@ import { OrderInfo } from 'src/app/shared/models/order-info';
 })
 export class ChucVuListComponent implements OnInit, OnDestroy {
 
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
 
   @ViewChild('SearchName') searchName: ElementRef ;
   @ViewChild('SearchCode') searchCode: ElementRef ;
   currentPage = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   list$ = [];
   totalCount: number;
@@ -112,16 +114,16 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteItem (item) {
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-        dialogCloseSubscription.unsubscribe();
-        if ( data === ActionType.ACCEPT) {
-          this.chucVuService.delete(item).subscribe((res) => {
-          this.toastr.success('Xóa thành công!');
-            this.onSearch();
-        });
-      }
-    });
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.chucVuService.delete(item).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
   }
 
   onDeleteSelected () {
@@ -132,17 +134,16 @@ export class ChucVuListComponent implements OnInit, OnDestroy {
     }
 
 
-      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-          dialogCloseSubscription.unsubscribe();
-          if ( data === ActionType.ACCEPT) {
-            this.chucVuService.delectList(listSelected).subscribe((res) => {
-            this.toastr.success('Xóa thành công!');
-              this.onSearch();
-          });
-      }
-      });
-
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.chucVuService.delectList(listSelected).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
   }
 
   onEnter() {

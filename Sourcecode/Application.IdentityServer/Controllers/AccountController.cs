@@ -97,6 +97,34 @@ namespace Application.IdentityServer.Controllers
         }
 
         /// <summary>
+        /// Search List User
+        /// </summary>
+        /// <param name="filterCondition"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ApiResult> Search([FromBody]FilterCondition filterCondition)
+        {
+            int total = 0;
+            var emalSearchValue = filterCondition.SearchCondition[0].Value;
+            var emalSearch = emalSearchValue != null ? emalSearchValue.ToString() : string.Empty;
+            var list = this.userManager?.Users.Where(c=> c.Email.Contains(emalSearch)).Select(c => new UserVO { Id = c.Id, FullName = c.FullName, PhoneNumber = c.PhoneNumber, UserName = c.UserName }).ToList();
+            if(list != null)
+            {
+                total = list.Count();
+                var skip = (filterCondition.PageIndex - 1) * filterCondition.PageSize;
+                list = list.OrderBy(c=>c.FullName).Skip(skip).Take(filterCondition.PageSize).ToList();
+            }
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = new
+                {
+                    Total = total,
+                    List = list
+                }
+            };
+        }
+        /// <summary>
         /// CheckEmailIsInUse
         /// </summary>
         /// <param name="email"></param>

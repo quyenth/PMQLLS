@@ -10,7 +10,7 @@
 
     <div class="row search-box">
         <div class="col-sm-3">
-            <input placeholder="Tên" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+            <input placeholder="Email" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
       </div>
       <div class="col-sm-3">
             <button type="button" class="btn btn-sm btn-primary" (click)="onSearch()"><i class="fa fa-search"></i> Tìm kiếm</button>
@@ -53,13 +53,12 @@
                                <td>{{item.fullName}}</td>
 
 
-                               <td>{{item.email}}</td>
+                               <td>{{item.userName}}</td>
 
 
 
             <td class="action-col">
-                <a class="action-icon" (click)="onEditItem(item)"><i class="fas fa-pen-fancy"></i></a>
-                <a class="action-icon" (click)="onDeleteItem(item)"><i class="far fa-trash-alt"></i></a>
+                <a class="action-icon" (click)="onDeleteItem(item)"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
         </tbody>
@@ -78,3 +77,10 @@
 
   </div>
 </div>
+<swal
+  #deleteItemSwal
+  text="Bạn thực sự muốn xóa?"
+  type="question"
+  [showCancelButton]="true"
+  >
+</swal>

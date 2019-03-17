@@ -2,7 +2,7 @@
   <div class='col-sm-4'>
     <div class='pag-size-div'>
         <p class="show-text">Hiển thị</p>
-        <select   name="dataTable_length" aria-controls="dataTable" class="form-control input-sm" (change)="onChangePageSize($event.target.value)">
+        <select   name="dataTable_length" aria-controls="dataTable" class="form-control input-sm" (change)="onChangePageSize($event.target.value)" [(ngModel)]="PageSize">
             <option value="2">2</option>
             <option value="5">5</option>
             <option value="10">10</option>

@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { OrderInfo } from 'src/app/shared/models/order-info';
 import { UserSaveComponent } from '../user-save/user-save.component';
 import { UserService } from '../../user.service';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -23,10 +24,11 @@ import { UserService } from '../../user.service';
 })
 export class UserListComponent implements OnInit, OnDestroy {
 
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   list$ = [];
   totalCount: number;
@@ -35,7 +37,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   checkall = false;
-  constructor(private user_testService: UserService, private modalService: ModalService,
+  constructor(private userService: UserService, private modalService: ModalService,
       private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -56,16 +58,16 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.spinner.show();
       const val = this.searchInput.nativeElement.value;
       this.filterCondition.SearchCondition = [
-		//new SearchInfo('Text', OperationType.Contains, val)
-	  ];
+        new SearchInfo('Email', OperationType.Contains, val)
+      ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
-	  if (this.orderInfo.FieldName) {
+    if (this.orderInfo.FieldName) {
         this.filterCondition.Orders = [{...this.orderInfo}];
        } else {
         this.filterCondition.Orders = [];
       }
-      this.user_testService.search(this.filterCondition).subscribe((res: HttpResult) => {
+      this.userService.search(this.filterCondition).subscribe((res: HttpResult) => {
         this.spinner.hide();
         this.list$ = res.data.list;
         this.totalCount = res.data.total;
@@ -108,16 +110,16 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteItem (item) {
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    let dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-        dialogCloseSubscription.unsubscribe();
-        if ( data === ActionType.ACCEPT) {
-          this.user_testService.delete(item).subscribe((res) => {
-		    this.toastr.success('Xóa thành công!');
-            this.onSearch();
-        });
-      }
-    });
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.userService.delete(item).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                    this.onSearch();
+                });
+            }
+        }
+    );
   }
 
   onDeleteSelected () {
@@ -127,18 +129,16 @@ export class UserListComponent implements OnInit, OnDestroy {
         return;
     }
 
-
-      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-          dialogCloseSubscription.unsubscribe();
-          if ( data === ActionType.ACCEPT) {
-            this.user_testService.delectList(listSelected).subscribe((res) => {
-			   this.toastr.success('Xóa thành công!');
-              this.onSearch();
-          });
-      }
-      });
-
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.userService.delectList(listSelected).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
   }
 
   onEnter() {
