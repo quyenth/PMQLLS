@@ -9,7 +9,9 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpResult } from '../commons/http-result';
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService extends BaseService implements OnInit {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loggedInFalse: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

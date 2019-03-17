@@ -11,6 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
+import { RegisterService } from 'src/app/modules/register/register.service';
 
 
 @Component({
@@ -19,60 +20,29 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UserSaveComponent implements OnInit , OnDestroy {
 
+
+  isUpdate: boolean;
   subscription: Subscription;
   submited: boolean;
-  isUpdate: boolean;
-  data: User_testModel = new User_testModel();
   myForm = this.fb.group({
-   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
-
-   	    id: [''],
-
-   	    userName: [''],
-
-   	    password: [''],
-
-   	    email: [''],
-
-   	    fullName: [''],
+    fullName: ['', [Validators.required, Validators.maxLength(30)]],
+    email: ['', [Validators.required, Validators.maxLength(30), Validators.email], [this.validateCodeUnique.bind(this)]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    rePassword: ['', [Validators.required, Validators.minLength(6), this.checkPassMatch.bind(this)]]
 
   });
-
-  constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
+  constructor(public bsModalRef: BsModalRef, private registerService: RegisterService,
+            private fb: FormBuilder, private modalService: ModalService ,
           private userService: UserService, private spinner: NgxSpinnerService,
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
-    this.subscription = this.modalService.dialogData.subscribe(data => {
-      this.data.id = data.id;
-      this.getDataByID(data);
-    });
+
   }
 
   ngOnInit() {
 
   }
 
-  getDataByID (data) {
-    if (data.formType === FromType.UPDATE) {
-	  this.isUpdate = true;
-      this.userService.getById(this.data.id).subscribe((res) => {
 
-       	    this.myForm.patchValue({'id': res.data.id});
-
-       	    this.myForm.patchValue({'userName': res.data.userName});
-
-       	    this.myForm.patchValue({'password': res.data.password});
-
-       	    this.myForm.patchValue({'email': res.data.email});
-
-       	    this.myForm.patchValue({'fullName': res.data.fullName});
-
-
-      });
-    }
-	else{
-		this.myForm.patchValue({'id': data.id});
-	}
-  }
 
   onSubmit() {
 
@@ -112,9 +82,34 @@ export class UserSaveComponent implements OnInit , OnDestroy {
     this.modalService.passDataToParent({action: ActionType.CLOSE});
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  checkPassMatch (control: FormControl) {
+    if ( control.value && this.myForm.get('password').value && control.value !== this.myForm.get('password').value) {
+         return {'passNotMatch' : true};
+    }
+
+    return null;
+ }
+
+ ngOnDestroy(): void {
+   this.subscription.unsubscribe();
+ }
+
+ validateCodeUnique(control: FormControl) {
+   return timer(800).pipe(
+     switchMap(() => {
+       if (!control.value) {
+         return of(null);
+       }
+       return this.registerService.checkEmailIsInUse( control.value.trim())
+       .pipe(map((res) => {
+            if (res.data) {
+              return {'emailDuplicate' : true};
+            }
+            return null;
+       }));
+     })
+   );
+ }
 
 
 

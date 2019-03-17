@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.Service';
-import { ActionType } from 'src/app/shared/commons/action-type';
 
 @Component({
   selector: 'app-login-page',
@@ -23,9 +21,6 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
       private authService: AuthService,
       private fb: FormBuilder,
       ) {}
