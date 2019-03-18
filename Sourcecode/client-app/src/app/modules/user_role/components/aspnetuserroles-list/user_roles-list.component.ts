@@ -122,7 +122,7 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(item) {
-    const role = this.listAllRole.find(item => {
+    const role = this.listAllRole.find( item => {
       return item.id === this.searchRole;
     });
     let RoleText = '';
@@ -184,6 +184,9 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
     this.onSearch();
   }
 
+  onSelectChange() {
+      this.onSearch();
+  }
   getSelectedItems() {
     return this.list$.filter(c => c.selected === true);
   }

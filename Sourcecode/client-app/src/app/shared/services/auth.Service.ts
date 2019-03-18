@@ -70,19 +70,12 @@ export class AuthService extends BaseService implements OnInit {
   }
 
   register ( username: string, password: string , fullName: string) {
-      this.http.post(this.BaseUrl + '/api/auth/register', {
+     return  this.http.post(this.BaseUrl + '/api/auth/register', {
         userName: username,
         email: username,
         passWord: password,
         fullName: fullName
-      }).subscribe((res) => {
-        this.toastr.success('Tạo mới tài khoản thành công');
-        this.router.navigate(['/login']);
-      }, (err) => {
-        this.toastr.error('Error');
-         console.log(err);
       });
-
   }
 
   getCurentUserInfo() : Observable<HttpResult> {

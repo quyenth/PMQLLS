@@ -25,10 +25,11 @@
 		                    Role
 		                  </label>
 		                  <div class="col-sm-8">
-                        <ng-select [items]="listAllRole | async"
+                        <ng-select [items]="listAllRole"
                             bindLabel="text"
                             bindValue="id"
-                            formControlName="roleId">
+                            formControlName="roleId"
+                            (change)="onSelectRoleChange()">
                         </ng-select>
                         <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('roleId').hasError('required')">Trường này là bắt buộc.</span>
 

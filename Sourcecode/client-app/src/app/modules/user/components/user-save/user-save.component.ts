@@ -13,6 +13,7 @@ import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterService } from 'src/app/modules/register/register.service';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { AuthService } from 'src/app/shared/services/auth.Service';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class UserSaveComponent implements OnInit , OnDestroy {
   constructor(public bsModalRef: BsModalRef, private registerService: RegisterService,
             private fb: FormBuilder, private modalService: ModalService ,
           private userService: UserService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
+          private authService: AuthService, private toastr: ToastrService) {
 
   }
 
@@ -61,16 +62,17 @@ export class UserSaveComponent implements OnInit , OnDestroy {
     this.spinner.show();
     this.submited = true;
 
-    this.userService.save(this.myForm.value).subscribe((res) => {
-      this.spinner.hide();
-      this.toastr.success('Lưu thành công!');
-      this.bsModalRef.hide();
-      this.modalService.passDataToParent({action: ActionType.SUBMIT});
-    }, (error) => {
-      console.log(error);
-      this.spinner.hide();
-    });
-  }
+    this.authService.register(this.myForm.get('email').value , this.myForm.get('password').value , this.myForm.get('fullName').value)
+        .subscribe((res) => {
+            this.spinner.hide();
+            this.toastr.success('Lưu thành công!');
+            this.bsModalRef.hide();
+            this.modalService.passDataToParent({action: ActionType.SUBMIT});
+          }, (error) => {
+            console.log(error);
+            this.spinner.hide();
+          });
+        }
 
   onClose() {
     this.bsModalRef.hide();

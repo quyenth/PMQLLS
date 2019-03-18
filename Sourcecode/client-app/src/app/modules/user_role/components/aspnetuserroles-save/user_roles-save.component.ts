@@ -29,7 +29,7 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   submited: boolean;
   isUpdate: boolean;
   data: UserRolesModel = new UserRolesModel();
-  listAllRole: Observable<Select2Model[]>;
+  listAllRole: Select2Model[];
   listAllTinh: Observable<Select2Model[]>;
   listAllUser: Observable<Select2Model[]>;
   myForm = this.fb.group({
@@ -40,7 +40,7 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   });
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
           private userRolesService: UserRolesService, private spinner: NgxSpinnerService,
-          private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
+           private toastr: ToastrService ,
           private roleService: RoleService , private tinhService: TinhService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.userId = data.id;
@@ -53,7 +53,9 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit() {
-     this.listAllRole = this.roleService.getAllRole();
+     this.roleService.getAllRole().subscribe(res => {
+      this.listAllRole = res;
+     });
      this.listAllUser = this.userRolesService.getAllUser();
      this.listAllTinh = this.tinhService.getListAllTinh();
   }
@@ -113,6 +115,12 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
     this.subscription.unsubscribe();
   }
 
-
+  onSelectRoleChange() {
+      const roleId = this.myForm.get('roleId').value;
+      const role = this.listAllRole.find(c => c.id === roleId) ;
+      if(role != null) {
+        this.data.roleText = role.text;
+      }
+  }
 
 }

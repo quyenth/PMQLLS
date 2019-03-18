@@ -41,6 +41,7 @@ namespace Application.IdentityServer.Controllers.QLLS
             this.roleManager = roleManager;
             this.UserRoleService = UserRoleService;
             this._userProvincerService = UserProvincerService;
+            this.context = context;
         }
 
         /// <summary>

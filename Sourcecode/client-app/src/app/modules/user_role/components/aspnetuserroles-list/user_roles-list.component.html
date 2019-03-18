@@ -18,7 +18,8 @@
                 bindLabel="text"
                 bindValue="id"
                 [(ngModel)]="searchRole"
-                [clearable]= "false"              >
+                [clearable]= "false"
+                (change)="onSelectChange()"            >
             </ng-select>
         </div>
         <div class="col-sm-3">
@@ -27,6 +28,7 @@
                             bindValue="id"
                             [multiple]="true"
                             [(ngModel)]="searchUser"
+                            (change)="onSelectChange()"
                             >
           </ng-select>
       </div>
