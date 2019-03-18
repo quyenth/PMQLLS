@@ -53,7 +53,7 @@
 
                            <th class='no-sort'>Tài khoản</th>
 
-                           <th class='no-sort'>Phân quyền</th>
+                           <th class='no-sort' *ngIf='!searhAdmin'>Phân quyền</th>
 
             <th style="width:60px;" class='no-sort'></th>
           </tr>
@@ -66,7 +66,7 @@
 
                                <td>{{item.userName}}</td>
 
-                               <td>{{item.roleName}}</td>
+                               <td *ngIf='!searhAdmin'>{{item.roleName}}</td>
 
 
             <td class="action-col">

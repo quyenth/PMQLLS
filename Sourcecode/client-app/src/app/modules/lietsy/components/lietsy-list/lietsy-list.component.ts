@@ -29,6 +29,7 @@ import { HuyenService } from '../../../huyen/huyen.service';
 import { XaService } from '../../../xa/xa.service';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import { saveAs } from 'file-saver';
+import { AuthService } from 'src/app/shared/services/auth.Service';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   listAllCapBac: Observable<Select2Model[]>;
   listAllChucVu: Observable<Select2Model[]>;
   listGender: Select2Model[];
+  isAdmin: boolean;
 
   listAllTinh: Select2Model[];
   listHuyenHySinh: Select2Model[];
@@ -55,7 +57,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
 
   currentPage = 1;
-  pageSize = 20;
+  pageSize = 10;
 
   list$ = [];
   totalCount: number;
@@ -86,13 +88,16 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   checkall = false;
   constructor(private lietSyService: LietSyService, private modalService: ModalService,
-      private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService ,
-      private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
-      , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
-      , private doiTuongService: DoiTuongService , private staticDataService: StaticDataService, private tinhService: TinhService,
-      private huyenService: HuyenService , private xaService: XaService) { }
+      private spinner: NgxSpinnerService, private toastr: ToastrService ,
+       private capbacService: CapbacService , private thoiKyService: ThoiKyService
+      , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
+      ,  private staticDataService: StaticDataService, private tinhService: TinhService,
+      private huyenService: HuyenService , private xaService: XaService ,private authService: AuthService) { }
 
   ngOnInit() {
+    this.authService.isAdmin.subscribe(data => {
+      this.isAdmin = data;
+  });
     this.listAllSoQuyen = this.soQuyenService.getListAllSoQuyen();
     this.listAllThoiKy = this.thoiKyService.getListAllThoiKy();
     this.listAllCapBac = this.capbacService.getListAllCapBac();

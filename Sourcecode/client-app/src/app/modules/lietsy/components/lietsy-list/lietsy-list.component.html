@@ -4,8 +4,8 @@
   </div>
   <div class="col-sm-8">
       <div class="title-action">
-        <button class="btn btn-sm btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" ><span><i class="fa fa-plus"></i>  Thêm mới</span></button>
-        <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger btn-sm buttons-csv buttons-html5"  (click)="onDeleteSelected()"><span><i class="fa fa-trash"></i>  Xóa đã chọn</span></button>
+        <button class="btn btn-sm btn-primary buttons-copy buttons-html5"  style="margin-right: 5px" (click)="onAddNew()" *ngIf='isAdmin'><span><i class="fa fa-plus"></i>  Thêm mới</span></button>
+        <button [disabled]="getSelectedItems().length==0"  class="btn btn-danger btn-sm buttons-csv buttons-html5"  (click)="onDeleteSelected()" *ngIf='isAdmin'><span><i class="fa fa-trash"></i>  Xóa đã chọn</span></button>
       </div>
   </div>
 </div>
@@ -331,7 +331,7 @@
       </table>
     </div>
 
-    <div>
+    <div style='margin-top: 10px'>
        <app-paging
                 [TotalCount]='totalCount'
                 [PageIndex]='currentPage'

@@ -48,9 +48,11 @@ export class UserRolesService extends BaseService {
     const url = this.BaseUrl + '/api/Role/DeleteList';
     return this.http.post<HttpResult>(url, list , this.getHeader());
   }
-  getById(id: any): Observable<HttpResult> {
+  getById(id: any,  roleId: any): Observable<HttpResult> {
     const url = this.BaseUrl + '/api/Role/GetUserRoleByUserId/' + id;
-    return this.http.get<HttpResult>(url);
+    const params = new HttpParams()
+                          .set('roleId', roleId);
+    return this.http.get<HttpResult>(url, { params: params });
   }
   getAllUser(): Observable<Select2Model[]> {
     const url = this.BaseUrl + '/api/Account/GetListUser';

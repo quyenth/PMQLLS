@@ -41,6 +41,7 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   searchRole = null;
   subscription: Subscription;
   checkall = false;
+  searhAdmin: boolean;
   constructor(private userRolesService: UserRolesService, private modalService: ModalService,
       private spinner: NgxSpinnerService, private confirmationDialogService: ConfirmationDialogService,
       private toastr: ToastrService , private roleService: RoleService) { }
@@ -61,6 +62,11 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
       this.listAllRole = data ;
       if ( this.listAllRole != null && this.listAllRole.length > 0) {
           this.searchRole = this.listAllRole[0].id;
+          if ( this.listAllRole[0].text === 'Admin') {
+            this.searhAdmin = true;
+          } else {
+            this.searhAdmin = true;
+          }
       }
       this.onSearch();
     });
@@ -122,8 +128,8 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(item) {
-    const role = this.listAllRole.find( item => {
-      return item.id === this.searchRole;
+    const role = this.listAllRole.find( a => {
+      return a.id === this.searchRole;
     });
     let RoleText = '';
     if (role) {
@@ -185,6 +191,10 @@ export class UserRolesListComponent implements OnInit, OnDestroy {
   }
 
   onSelectChange() {
+      const role = this.listAllRole.find(c => c.id === this.searchRole) ;
+      if ( role != null) {
+        this.searhAdmin = role.text === 'Admin';
+      }
       this.onSearch();
   }
   getSelectedItems() {

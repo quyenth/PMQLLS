@@ -1,15 +1,11 @@
 import { map, switchMap } from 'rxjs/operators';
-import { User_testModel } from '../../user_test.model';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription, timer, of } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { ActionType } from 'src/app/shared/commons/action-type';
-import { UserService } from '../../user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog.service';
-import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterService } from 'src/app/modules/register/register.service';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
@@ -36,7 +32,7 @@ export class UserSaveComponent implements OnInit , OnDestroy {
   });
   constructor(public bsModalRef: BsModalRef, private registerService: RegisterService,
             private fb: FormBuilder, private modalService: ModalService ,
-          private userService: UserService, private spinner: NgxSpinnerService,
+           private spinner: NgxSpinnerService,
           private authService: AuthService, private toastr: ToastrService) {
 
   }

@@ -45,6 +45,7 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.userId = data.id;
       this.data.roleText = data.RoleText;
+      this.data.roleId = data.roleId;
       if (data.roleId) {
         this.myForm.patchValue({'roleId': data.roleId});
       }
@@ -63,16 +64,14 @@ export class UserRolesSaveComponent implements OnInit , OnDestroy {
   getDataByID (data) {
     if (data.formType === FromType.UPDATE) {
       this.isUpdate = true;
-      this.userRolesService.getById(this.data.userId).subscribe((res) => {
+      this.userRolesService.getById(this.data.userId, this.data.roleId).subscribe((res) => {
 
             this.myForm.patchValue({'userId': this.data.userId});
-            if ( res.data) {
-              const listRole = res.data.reduce( (acc , cur ) => {
-                      acc.push(cur.id);
-                      return acc;
-              } , []);
-              this.myForm.patchValue({'roleId': listRole});
+            this.myForm.patchValue({'roleId': this.data.roleId});
 
+            if ( res.data && res.data.tinhId) {
+                const array = res.data.tinhId.split(',');
+                this.myForm.patchValue({'tinhId': array.map(item => +item)});
             }
 
       });

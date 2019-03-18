@@ -289,10 +289,19 @@ namespace Application.IdentityServer.Controllers.QLLS
         /// <returns></returns>
         [HttpGet]
         [Route("{id}")]
-        public ApiResult GetUserRoleByUserId(string id)
+        public ApiResult GetUserRoleByUserId(string id , string roleId)
         {
-            var result = UserRoleService.GetUserRoleByUserId(id);
-
+            var result = new UserRoleModel();
+            result.userId = id;
+            result.roleId = roleId;
+            var listTinh = this.context.UseProvincer.Where(c => c.RoleId == roleId && c.UserId == id).Select( c => c.ProvincerId).ToList();
+            if(listTinh != null)
+            {
+                result.TinhId = string.Join(",", listTinh);
+            }else
+            {
+                result.TinhId = string.Empty;
+            }
             return new ApiResult()
             {
                 Status = HttpStatus.OK,
