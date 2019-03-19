@@ -24,7 +24,7 @@ import { ThoiKyListComponent } from '../thoiky/components/thoiky-list/thoiky-lis
 import { UserListComponent } from '../user/components/user-list/user-list.component';
 
 const routes: Routes = [
-  { path: '', component: ChucVuListComponent },
+  { path: '', component: LietSyListComponent },
   { path: 'chucvu', component: ChucVuListComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'capbac', component: CapbacListComponent },

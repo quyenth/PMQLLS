@@ -100,7 +100,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
       this.donViService.getListAllDonVi().subscribe(res => {
         console.log(res)
         this.ListAllDonVI = res;
-      })
+      });
   }
 
   getDataByID (data) {

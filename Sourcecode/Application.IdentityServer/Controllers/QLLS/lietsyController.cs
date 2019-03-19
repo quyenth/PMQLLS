@@ -90,13 +90,15 @@ namespace Application.IdentityServer.Controllers.QLLS
         [HttpPost]
         public async Task< ApiResult> Search([FromBody]LietSiFilterCondition filterCondition)
         {
+            var user = HttpContext.User.Identity.Name;
+
             var listOfStrings = new List<string>();
             PagingInfo paging = new PagingInfo
                                 {
                                     PageIndex = filterCondition.PageIndex,
                                     PageSize = filterCondition.PageSize
                                 };
-            var result = lietSyService.SearchListLietSi(filterCondition.searchCodition, paging);
+            var result = lietSyService.SearchListLietSi(filterCondition.searchCodition, paging , user);
             return new ApiResult()
             {
                 Status = HttpStatus.OK,
@@ -175,164 +177,8 @@ namespace Application.IdentityServer.Controllers.QLLS
         [HttpPost]
         public IActionResult ExportListLietSi ([FromBody]LietsiSearchCondition searhData)
         {
-            //MemoryStream ms = new MemoryStream();
-            //Document doc = new Document();
-            //DocumentBuilder builder = new DocumentBuilder(doc);
 
-            //var data = lietSyService.ExportListLietSi(searhData);
-
-            //builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-            //Aspose.Words.Font font = builder.Font;
-            //font.Size = 16;
-            //font.Bold = true;
-            //font.Name = "Times New Roman";
-            //builder.Writeln("DANH SÁCH LIỆT SĨ");
-            //builder.Writeln("");
-            //builder.Writeln("");
-
-            //builder.StartTable();
-
-            //font.Size = 12;
-            //builder.InsertCell();
-            //builder.Write("STT");
-
-            //builder.InsertCell();
-            //builder.Writeln("Họ và tên");
-            //builder.Write("Năm sinh");
-
-
-            //builder.InsertCell();
-            //builder.Writeln("- Quê quán");
-            //builder.Write("- Trú quân");
-
-            //builder.InsertCell();
-            //builder.Writeln("- Nhập ngũ");
-            //builder.Write("- Tái ngũ");
-
-            //builder.InsertCell();
-            //builder.Writeln("- Đơn vị");
-            //builder.Writeln("- Cấp bậc");
-            //builder.Write("- Chức vụ");
-
-            //builder.InsertCell();
-            //builder.Writeln("- Nơi hy sinh");
-            //builder.Write("- Nơi mai táng ban đầu");
-
-            //builder.InsertCell();
-            //builder.Writeln("Thân nhân");
-            //font.Bold = false;
-            //font.Italic = true;
-            //builder.Write("(Họ tên, quan hệ)");
-
-            //builder.InsertCell();
-            //font.Bold = true;
-            //font.Italic = false;
-            //builder.Writeln("Đã quy tập");
-            //font.Bold = false;
-            //font.Italic = true;
-            //builder.Write("(Tên nghĩa trang, số mộ)");
-
-            //builder.EndRow();
-
-            //int i = 1;
-            //foreach (DataRow dtRow in data.Rows)
-            //{
-            //    builder.InsertCell();
-            //    builder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
-            //    font.Italic = false;
-            //    builder.Write(i.ToString());
-
-            //    builder.InsertCell();
-            //    builder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
-
-            //    if (dtRow["HoTen"] != null)
-            //    {
-            //        builder.Writeln(dtRow["HoTen"].ToString());
-            //    }
-            //    if (dtRow["NamSinh"] != null)
-            //    {
-            //        builder.Write(dtRow["NamSinh"].ToString());
-            //    }
-
-            //    builder.InsertCell();
-            //    if (dtRow["QueThon"] != null)
-            //    {
-            //        builder.Write(dtRow["QueThon"].ToString() + "-");
-            //    }
-            //    if (dtRow["QueXaName"] != null)
-            //    {
-            //        builder.Write(dtRow["QueXaName"].ToString() + "-");
-            //    }
-            //    if (dtRow["QueHuyenName"] != null)
-            //    {
-            //        builder.Write(dtRow["QueHuyenName"].ToString() + "-");
-            //    }
-            //    if (dtRow["QueTinhName"] != null)
-            //    {
-            //        builder.Write(dtRow["QueTinhName"].ToString());
-            //    }
-
-            //    builder.InsertCell();
-
-
-            //    builder.InsertCell();
-            //    if (dtRow["TenDonVi"] != null)
-            //    {
-            //        builder.Writeln("- " + dtRow["TenDonVi"].ToString());
-            //    }
-            //    else
-            //    {
-            //        builder.Writeln("- ");
-            //    }
-            //    if (dtRow["CapBacName"] != null)
-            //    {
-            //        builder.Write("- " + dtRow["CapBacName"].ToString());
-            //    }
-            //    else
-            //    {
-            //        builder.Writeln("- ");
-            //    }
-
-            //    if (dtRow["ChucVuName"] != null)
-            //    {
-            //        builder.Write("- " + dtRow["ChucVuName"].ToString());
-            //    }
-            //    else
-            //    {
-            //        builder.Writeln("- ");
-            //    }
-
-            //    builder.InsertCell();
-
-
-            //    builder.InsertCell();
-
-
-            //    builder.InsertCell();
-
-
-
-
-
-            //    builder.EndRow();
-            //    i++;
-            //}
-
-            //builder.EndTable();
-
-
-            //PageSetup ps = builder.PageSetup;
-            //ps.PaperSize = Aspose.Words.PaperSize.A4;
-            //ps.TopMargin = 0;
-            //ps.LeftMargin = 20;
-            //ps.RightMargin = 20;
-            //ps.BottomMargin = 0;
-            //ps.Orientation = Orientation.Landscape;
-            //doc.Save(ms, Aspose.Words.SaveFormat.Doc);
-            //byte[] bytes = ms.ToArray();
-
-            //return File(bytes, "application/msword", "DanhSachLietSi.doc");
-
+            var user = HttpContext.User.Identity.Name;
 
             var comlumHeadrs = new string[]
            {
@@ -405,7 +251,7 @@ namespace Application.IdentityServer.Controllers.QLLS
                 //Add values
                 var j = 4;
                 var k = 1;
-                var data = lietSyService.ExportListLietSi(searhData);
+                var data = lietSyService.ExportListLietSi(searhData, user);
                 foreach (DataRow dtRow in data.Rows)
                 {
                     worksheet.Cells["A" + j].Value = k;
@@ -414,13 +260,13 @@ namespace Application.IdentityServer.Controllers.QLLS
                     worksheet.Cells["D" + j].Value = dtRow["QueThon"] + "-" + dtRow["QueXaName"] + "-" + dtRow["QueHuyenName"] + "-" + dtRow["QueTinhName"];
                     //worksheet.Cells["E" + j].Value = dtRow["QueThon"];
                     
-                    if (dtRow["NgayNhapNgu"] != null)
+                    if (dtRow["NgayNhapNgu"] != null && !string.IsNullOrEmpty(dtRow["NgayNhapNgu"].ToString()))
                     {
                         var date = Convert.ToDateTime(dtRow["NgayNhapNgu"].ToString());
                         worksheet.Cells["E" + j].Value = date.ToString("dd/MM/yyy");
                     }
 
-                    if (dtRow["NgayTaiNgu"] != null)
+                    if (dtRow["NgayTaiNgu"] != null && !string.IsNullOrEmpty(dtRow["NgayTaiNgu"].ToString()))
                     {
                         var date = Convert.ToDateTime(dtRow["NgayTaiNgu"].ToString());
                         worksheet.Cells["F" + j].Value = date.ToString("dd/MM/yyy");

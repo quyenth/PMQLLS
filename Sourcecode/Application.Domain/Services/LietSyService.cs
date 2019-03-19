@@ -16,12 +16,14 @@ namespace Application.Domain.Services
         {
         }
 
-        public DataTable ExportListLietSi(LietsiSearchCondition searchCodition)
+        public DataTable ExportListLietSi(LietsiSearchCondition searchCodition, string UserName)
         {
             List<SqlParameter> paras = new List<SqlParameter>()
             {
                 
             };
+
+            paras.Add(new SqlParameter("@UserName", UserName));
 
             if (string.IsNullOrEmpty(searchCodition.hoTen))
             {
@@ -218,13 +220,15 @@ namespace Application.Domain.Services
             return result;
         }
 
-        public DataTable SearchListLietSi(LietsiSearchCondition searchCodition, PagingInfo paging)
+        public DataTable SearchListLietSi(LietsiSearchCondition searchCodition, PagingInfo paging, string UserName)
         {
             List<SqlParameter> paras = new List<SqlParameter>()
             {
                 new SqlParameter("@PageSize", paging.PageSize),
                 new SqlParameter("@PageIndex", paging.PageIndex)
             };
+
+            paras.Add(new SqlParameter("@UserName", UserName));
 
             if (string.IsNullOrEmpty(searchCodition.hoTen))
             {

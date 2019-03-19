@@ -7,9 +7,9 @@ namespace Application.Domain.Services
 {
     public interface ILietSyService : IBaseService<LietSy, ApplicationContext>
     {
-        DataTable SearchListLietSi(LietsiSearchCondition searchCodition, PagingInfo paging);
+        DataTable SearchListLietSi(LietsiSearchCondition searchCodition, PagingInfo paging , string UserId);
 
-        DataTable ExportListLietSi(LietsiSearchCondition searchCodition);
+        DataTable ExportListLietSi(LietsiSearchCondition searchCodition, string UserId);
 
 
     }

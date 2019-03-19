@@ -25,6 +25,7 @@ import { TinhService } from 'src/app/modules/tinh/tinh.service';
 import { HuyenService } from 'src/app/modules/huyen/huyen.service';
 import { XaService } from 'src/app/modules/xa/xa.service';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
+import { DonViSelectModel } from 'src/app/modules/donvi/DonViSelectModel';
 
 
 @Component({
@@ -32,7 +33,7 @@ import { SwalComponent } from '@toverux/ngx-sweetalert2';
   templateUrl: './lietsy-save.component.html'
 })
 export class LietSySaveComponent implements OnInit , OnDestroy {
-
+  ListAllDonVI: DonViSelectModel[];
   subscription: Subscription;
   submited: boolean;
   isUpdate: boolean;
@@ -189,7 +190,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         donViQuanLyId: [''],
 
-        hySinhDonVi: [''],
+        hySinhDonVi: [null],
 
         donVi_B_C_D: [''],
 
@@ -244,6 +245,10 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
     this.listAllDiemCao = this.diemCaoService.getListAllDiemCao();
     this.tinhService.getListAllTinh().subscribe((res) => {
       this.listAllTinh = res;
+    });
+    this.donViService.getListAllDonVi().subscribe(res => {
+      console.log(res)
+      this.ListAllDonVI = res;
     });
   }
 

@@ -80,7 +80,10 @@ namespace Application.IdentityServer.Controllers
             if (result != null && await userManager.CheckPasswordAsync(result, model.Password))
             {
                 List<Claim> payload = new List<Claim> { 
-                        new Claim(JwtClaimTypes.Name, model.UserName)
+                        new Claim(JwtClaimTypes.Name, model.UserName),
+                         new Claim(ClaimTypes.Name, model.UserName),
+                        new Claim(ClaimTypes.Authentication, 1.ToString())
+
                 };
                 var token = _jwtTokenManagerService.GenerateToken(payload);
                 return Ok(new ApiResult() { Data = token, Status = HttpStatus.OK });
