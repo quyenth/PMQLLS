@@ -41,6 +41,7 @@ import { PhieuCungCapModule } from './modules/ncc_phieucungcap/ncc_phieucungcap.
 import { LeftNavigationLayoutComponent } from './shared/component/left-navigation-layout/left-navigation-layout.component';
 import { HeaderTopComponent } from './shared/component/left-navigation-layout/header-top/header-top.component';
 import { UserModule } from './modules/user/user.module';
+import { NghiaTrangModule } from './modules/nghiatrang/nghiatrang.module';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { UserModule } from './modules/user/user.module';
     LietSyModule,
     SoQuyenModule,
     PhieuCungCapModule,
-    UserModule
+    UserModule,
+    NghiaTrangModule
   ],
   providers: [
     AuthService

@@ -91,6 +91,8 @@ namespace Application.IdentityServer
             services.AddTransient<IUserRoleService, UserRoleService>();
             services.AddTransient<ISoQuyenService, SoQuyenService>();
             services.AddTransient<IUserProvincerService, UserProvincerService>();
+            services.AddTransient<INghiaTrangService, NghiaTrangService>();
+
 
             var JwtSettings = Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 
