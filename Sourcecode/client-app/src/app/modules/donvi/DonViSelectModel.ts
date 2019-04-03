@@ -4,4 +4,6 @@ export class DonViSelectModel {
   maDonVi: string;
   maDonViCha: string;
   children: DonViSelectModel[] = [];
+  level: number;
+
 }

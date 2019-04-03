@@ -6,6 +6,8 @@ import { BaseService } from 'src/app/shared/services/base.service';
 import { FilterCondition } from 'src/app/shared/models/filter-condition';
 import { HttpResult } from 'src/app/shared/commons/http-result';
 import { NghiaTrangModel } from './nghiatrang.model';
+import { Select2Model } from 'src/app/shared/models/select2.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,16 @@ export class NghiaTrangService extends BaseService {
   getById(id: any): Observable<HttpResult> {
     const url = this.BaseUrl + '/api/nghiaTrang/GetById/' + id;
     return this.http.get<HttpResult>(url);
+  }
+  getListNghiaTrang(): Observable<Select2Model[]> {
+    const url = this.BaseUrl + '/api/nghiaTrang/getListNghiaTrang';
+    return this.http.get<HttpResult>(url).pipe(map(res => {
+        const result: Select2Model[] = [] ;
+        res.data.forEach(element => {
+          result.push(new Select2Model (element.nghiaTrangId, element.tenNghiaTrang));
+        });
+        return result ;
+    }));
+
   }
 }

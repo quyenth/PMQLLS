@@ -8,5 +8,6 @@ namespace Application.Domain.Services
 {
     public interface INghiaTrangService : IBaseService<NghiaTrang, ApplicationContext>
     {
+        object getListNghiaTrang();
     }
 }

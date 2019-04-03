@@ -57,13 +57,13 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
    	    tenVietTat: ['', [Validators.required]],
 
-   	    maDonViCha: ['', [Validators.required]],
+   	    maDonViCha: [null, [Validators.required]],
 
-   	    phanMuc: ['', ],
+   	    phanMuc: [0, ],
 
    	    phanCap: ['', ],
 
-   	    phanKhoi: ['',[Validators.required]],
+   	    phanKhoi: [''],
 
    	    ghiChu: [''],
 
@@ -153,7 +153,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
-
+    debugger;
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {

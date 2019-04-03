@@ -26,6 +26,7 @@ import { HuyenService } from 'src/app/modules/huyen/huyen.service';
 import { XaService } from 'src/app/modules/xa/xa.service';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import { DonViSelectModel } from 'src/app/modules/donvi/DonViSelectModel';
+import { NghiaTrangService } from 'src/app/modules/nghiatrang/nghiatrang.service';
 
 
 @Component({
@@ -54,6 +55,8 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   listXaMaiTang: Select2Model[];
   listQueHuyen: Select2Model[];
   listQueXa: Select2Model[];
+  listNghiaTrang: Select2Model[];
+
 
   @ViewChild('submitSwal') private submitSwal: SwalComponent;
 
@@ -152,7 +155,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         maiTangDiemCaoId: [null],
 
-        nghiaTrang: [''],
+        nghiaTrang: [null],
 
         viTriMo: [''],
 
@@ -228,7 +231,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
           private donViService: DonViService , private capbacService: CapbacService , private thoiKyService: ThoiKyService
           , private diemCaoService: DiemCaoService , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
           , private doiTuongService: DoiTuongService , private staticDataService: StaticDataService , private tinhService: TinhService,
-          private huyenService: HuyenService , private xaService: XaService) {
+          private huyenService: HuyenService , private xaService: XaService , private nghiaTrangService: NghiaTrangService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.id = data.id;
       this.getDataByID(data);
@@ -250,6 +253,9 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
       console.log(res)
       this.ListAllDonVI = res;
     });
+    this.nghiaTrangService.getListNghiaTrang().subscribe(res=> {
+      this.listNghiaTrang = res;
+    })
   }
 
   getDataByID (data) {

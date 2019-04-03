@@ -194,12 +194,13 @@ namespace Application.IdentityServer.Controllers.QLLS
                 "Chức vụ",
                 "Hy sinh",
                 "Trường hợp hy sinh",
-                "Giấy báo tử",
+                //"Giấy báo tử",
                 "Nơi hy sinh" ,
                 "Nơi mai táng ban đầu",
                 "Thân nhân",
                 "Đã quy tập"
            };
+            var data = lietSyService.ExportListLietSi(searhData, user);
 
             byte[] result;
 
@@ -211,9 +212,8 @@ namespace Application.IdentityServer.Controllers.QLLS
 
                 worksheet.Column(1).Width = 5;
                 worksheet.Column(2).Width = 25;
-                worksheet.Column(3).Width = 10;
+                worksheet.Column(3).Width = 15;
                 worksheet.Column(4).Width = 30;
-                //worksheet.Column(5).Width = 30;
                 worksheet.Column(5).Width = 15;
                 worksheet.Column(6).Width = 15;
                 worksheet.Column(7).Width = 30;
@@ -227,31 +227,40 @@ namespace Application.IdentityServer.Controllers.QLLS
                 worksheet.Column(15).Width = 30;
                 worksheet.Column(16).Width = 30;
 
-                worksheet.Cells["A1:Q1"].Merge = true;
+                worksheet.Cells["A1:O1"].Merge = true;
                 worksheet.Cells[1, 1].Value = "DANH SÁCH LIỆT SỸ";
 
                 using (var cells = worksheet.Cells[1, 1, 1, 3]) //(1,1) (1,5)
                 {
                     cells.Style.Font.Bold = true;
-                    cells.Style.Font.Size = 18;
+                    cells.Style.Font.Size = 20;
+                    cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                }
+
+                worksheet.Cells["A2:O2"].Merge = true;
+                worksheet.Cells[2, 1].Value = "( " + data.Rows.Count  + " Liệt sĩ Đoàn 559 - Binh đoàn 12 quản lý)";
+                using (var cells = worksheet.Cells[2, 1, 2, 3]) //(1,1) (1,5)
+                {
+                    cells.Style.Font.Bold = true;
+                    cells.Style.Font.Size = 12;
                     cells.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 }
 
                 //First add the headers
                 for (var i = 0; i < comlumHeadrs.Count(); i++)
                 {
-                    var cell = worksheet.Cells[3, i + 1];
+                    var cell = worksheet.Cells[4, i + 1];
                     cell.Value = comlumHeadrs[i];
                     cell.Style.Font.Bold = true;
+                    cell.Style.Font.Size = 14;
                     cell.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     cell.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     cell.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
                 }
 
                 //Add values
-                var j = 4;
+                var j = 5;
                 var k = 1;
-                var data = lietSyService.ExportListLietSi(searhData, user);
                 foreach (DataRow dtRow in data.Rows)
                 {
                     worksheet.Cells["A" + j].Value = k;
@@ -282,13 +291,13 @@ namespace Application.IdentityServer.Controllers.QLLS
                         worksheet.Cells["J" + j].Value = date.ToString("dd/MM/yyy");
                     }
                     worksheet.Cells["K" + j].Value = dtRow["ChucVuName"];
-                    worksheet.Cells["L" + j].Value = "";
-                    worksheet.Cells["M" + j].Value = dtRow["XaHySinhName"] + "-" + dtRow["HuyenHySinhName"] + "-" + dtRow["TinhHySinhName"];
-                    worksheet.Cells["N" + j].Value = dtRow["MaiTangXaName"] + "-" + dtRow["MaiTangHuyenName"] + "-" + dtRow["MaiTangTinhName"];
-                    worksheet.Cells["o" + j].Value = dtRow["ThanNhanCha"];
+                    //worksheet.Cells["L" + j].Value = "";
+                    worksheet.Cells["L" + j].Value = dtRow["XaHySinhName"] + "-" + dtRow["HuyenHySinhName"] + "-" + dtRow["TinhHySinhName"];
+                    worksheet.Cells["M" + j].Value = dtRow["MaiTangXaName"] + "-" + dtRow["MaiTangHuyenName"] + "-" + dtRow["MaiTangTinhName"];
+                    worksheet.Cells["N" + j].Value = dtRow["ThanNhanCha"];
                     if(dtRow["QuyTap"] != null)
                     {
-                        worksheet.Cells["P" + j].Value = Convert.ToBoolean(dtRow["QuyTap"]) ? "Đã quy tập" : "Chưa quy tập";
+                        worksheet.Cells["O" + j].Value = Convert.ToBoolean(dtRow["QuyTap"]) ? "Đã quy tập" : "Chưa quy tập";
 
                     }
                     else

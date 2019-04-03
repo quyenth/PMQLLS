@@ -138,6 +138,15 @@ namespace Application.IdentityServer.Controllers.QLLS
         }
 
 
-        
+        [HttpGet]
+        public async Task<ApiResult> getListNghiaTrang()
+        {
+            var result = nghiaTrangService.getListNghiaTrang();
+            return new ApiResult()
+            {
+                Status = HttpStatus.OK,
+                Data = result
+            };
+        }
     }
 }

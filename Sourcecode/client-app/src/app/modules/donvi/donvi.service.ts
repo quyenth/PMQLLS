@@ -71,33 +71,52 @@ export class DonViService extends BaseService {
               ListDonViMoel.push(DonViMoel);
          }
          const tree = this.buildTree(ListDonViMoel, 'maDonVi', 'maDonViCha', null , null);
+        console.log(tree)
+        //  let data = this.tranformTreeData(tree);
+        //  console.log(data)
+
         return tree ;
     }));
   }
 
-   buildTree(array: object[], keyId, parentKeyId, parent  , tree = [] ) {
-     const selft = this;
+  // tranformTreeData (list: DonViSelectModel[] , data: DonViSelectModel[] = []) {
+  //       for(let item of list){
+  //           data.push(item);
+  //           this.tranformTreeData(item['children'] , data);
+  //       }
+  // }
 
+   buildTree(array: object[], keyId, parentKeyId, parent  , tree = [], level = -1) {
+     const selft = this;
+     if(tree == null){
+       tree = [];
+     }
      if ( parent === null) {
          parent = {};
          parent[keyId] = null;
-     }
-
-
-     const children =  array.filter(child => child[parentKeyId] === parent[keyId]) ;
-
-     if (children != null && children.length > 0) {
-         if (parent[keyId] == null) {
-             tree = children;
-         } else {
-             parent['children'] = children;
-         }
-         for(const child of children){
-           selft.buildTree(array, keyId, parentKeyId, child , tree);
-        }
      } else {
-      parent['children'] = null;
+        tree.push(parent);
      }
+
+     parent['level'] = level;
+     const children =  array.filter(child => child[parentKeyId] === parent[keyId]) ;
+     if (children != null && children.length > 0) {
+         level++;
+         for (const child of children) {
+            selft.buildTree(array, keyId, parentKeyId, child , tree , level);
+         }
+        //  if (parent[keyId] == null) {
+        //      tree = children;
+        //  } else {
+        //      parent['children'] = children;
+        //  }
+        //  for(const child of children){
+        //    selft.buildTree(array, keyId, parentKeyId, child , tree , level);
+        // }
+     };
+    //  else {
+    //   parent['children'] = null;
+    //  }
 
      return tree;
    }

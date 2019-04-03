@@ -660,7 +660,13 @@
                                 Nghĩa trang
                               </label>
                               <div class="col-sm-8">
-                                <input type="text" class="form-control" formControlName="nghiaTrang" />
+                                <ng-select [items]="listNghiaTrang "
+                                    bindLabel="text"
+                                    bindValue="id"
+                                    placeholder="Chọn nghĩa trang"
+                                    formControlName="nghiaTrang"
+                                >
+                              </ng-select>
                               </div>
                              </div>
                           </div>

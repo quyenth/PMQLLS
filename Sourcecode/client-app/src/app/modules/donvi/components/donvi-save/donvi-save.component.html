@@ -65,15 +65,29 @@
               </label>
               <div class="col-sm-8">
                 <!-- <select2 [data]="ListAllDonVI" [cssImport]="true" [options]="{dropdownAutoWidth: true}" ></select2> -->
-                      <ng-select [items]="ListAllDonVI"
+                      <!-- <ng-select [items]="ListAllDonVI"
                                 bindLabel="text"
                                 bindValue="id"
                                 groupBy="children"
-                                formControlName="hySinhDonVi">
+                                formControlName="maDonViCha">
                                 <ng-template ng-optgroup-tmp let-item="item">
                                     {{item.text}}
                                 </ng-template>
+                        </ng-select> -->
+                        <!-- <select name="" id="" class="form-control">
+                          <option *ngFor='let item of ListAllDonVI'>
+                              <span [style.margin-left]="item.level * 10 + 'px'" class="optionClass">{{item.text}}</span>
+                          </option>
+                        </select> -->
+                        <ng-select [items]="ListAllDonVI"
+                                bindLabel="text"
+                                bindValue="maDonVi"
+                                formControlName="maDonViCha">
+                                <ng-template ng-option-tmp let-item="item">
+                                  <span [style.margin-left]="item.level * 10 + 'px'">{{item.text}}</span>
+                              </ng-template>
                         </ng-select>
+
                 <span class="form-text m-b-none text-danger" *ngIf="submited && myForm.get('maDonViCha').hasError('required')">Trường này là bắt buộc.</span>
               </div>
               </div>
