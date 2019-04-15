@@ -27,7 +27,7 @@ export class DonViListComponent implements OnInit, OnDestroy {
 
   @ViewChild('SearchName') searchInput: ElementRef ;
   currentPage = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   list$ = [];
   totalCount: number;

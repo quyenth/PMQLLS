@@ -12,6 +12,6 @@ export class HuyenModel {
 
 			 active: boolean;
 
-			 is1990: boolean;
+       is1990: boolean;
 
 }

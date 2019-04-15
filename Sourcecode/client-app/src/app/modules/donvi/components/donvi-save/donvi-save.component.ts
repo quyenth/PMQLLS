@@ -57,33 +57,33 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
    	    tenVietTat: ['', [Validators.required]],
 
-   	    maDonViCha: [null, [Validators.required]],
+   	    maDonViCha: [null, ],
 
-   	    phanMuc: [0, ],
+   	    // phanMuc: [0, ],
 
-   	    phanCap: ['', ],
+   	    // phanCap: ['', ],
 
-   	    phanKhoi: [''],
+   	    // phanKhoi: [''],
 
    	    ghiChu: [''],
 
    	    active: [''],
 
-   	    cqcS_Ten: ['', ],
+   	    // cqcS_Ten: ['', ],
 
    	    cqcS_DiaChi: ['',],
 
-   	    cqcS_DienThoai: ['',],
+   	    // cqcS_DienThoai: ['',],
 
-   	    cqcS_HomThu: ['', [Validators.required]],
+   	    // cqcS_HomThu: ['', ],
 
-   	    cqcS_ThuTruong: ['', [Validators.required]],
+   	    cqcS_ThuTruong: ['', ],
 
-   	    cqcS_ThuTruongChucVu: ['', [Validators.required]],
+   	    cqcS_ThuTruongChucVu: ['', ],
 
-   	    cqcS_NguoiPhuTrach: ['', ],
+   	    // cqcS_NguoiPhuTrach: ['', ],
 
-   	    cqcS_NguoiPhuTrachPhone: ['',],
+   	    // cqcS_NguoiPhuTrachPhone: ['',],
 
   });
 
@@ -118,31 +118,31 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
        	    this.myForm.patchValue({'maDonViCha': res.data.maDonViCha});
 
-       	    this.myForm.patchValue({'phanMuc': res.data.phanMuc});
+       	    // this.myForm.patchValue({'phanMuc': res.data.phanMuc});
 
-       	    this.myForm.patchValue({'phanCap': res.data.phanCap});
+       	    // this.myForm.patchValue({'phanCap': res.data.phanCap});
 
-       	    this.myForm.patchValue({'phanKhoi': res.data.phanKhoi});
+       	    // this.myForm.patchValue({'phanKhoi': res.data.phanKhoi});
 
        	    this.myForm.patchValue({'ghiChu': res.data.ghiChu});
 
        	    this.myForm.patchValue({'active': res.data.active});
 
-       	    this.myForm.patchValue({'cqcS_Ten': res.data.cqcS_Ten});
+       	    // this.myForm.patchValue({'cqcS_Ten': res.data.cqcS_Ten});
 
        	    this.myForm.patchValue({'cqcS_DiaChi': res.data.cqcS_DiaChi});
 
-       	    this.myForm.patchValue({'cqcS_DienThoai': res.data.cqcS_DienThoai});
+       	    // this.myForm.patchValue({'cqcS_DienThoai': res.data.cqcS_DienThoai});
 
-       	    this.myForm.patchValue({'cqcS_HomThu': res.data.cqcS_HomThu});
+       	    // this.myForm.patchValue({'cqcS_HomThu': res.data.cqcS_HomThu});
 
        	    this.myForm.patchValue({'cqcS_ThuTruong': res.data.cqcS_ThuTruong});
 
        	    this.myForm.patchValue({'cqcS_ThuTruongChucVu': res.data.cqcS_ThuTruongChucVu});
 
-       	    this.myForm.patchValue({'cqcS_NguoiPhuTrach': res.data.cqcS_NguoiPhuTrach});
+       	    // this.myForm.patchValue({'cqcS_NguoiPhuTrach': res.data.cqcS_NguoiPhuTrach});
 
-       	    this.myForm.patchValue({'cqcS_NguoiPhuTrachPhone': res.data.cqcS_NguoiPhuTrachPhone});
+       	    // this.myForm.patchValue({'cqcS_NguoiPhuTrachPhone': res.data.cqcS_NguoiPhuTrachPhone});
 
 
       });
