@@ -88,20 +88,12 @@
     </div>
     <div class="row" style="margin-top: 10px">
       <div class="col-sm-2">
-        <input placeholder="Đơn vị" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
+        <ng-select [items]="ListAllDonVI" bindLabel="text" bindValue="id" [(ngModel)] = "searchCodition.donviId" placeholder="Đơn vị">
+          <ng-template ng-option-tmp let-item="item">
+            <span [style.margin-left]="item.level * 10 + 'px'">{{item.text}}</span>
+          </ng-template>
+        </ng-select>
       </div>
-      <!-- <div class="col-sm-2">
-        <input placeholder="Cấp b,c,d" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
-      </div>
-      <div class="col-sm-2">
-        <input placeholder="Cấp e" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
-      </div>
-      <div class="col-sm-2">
-        <input placeholder="Cấp f" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
-      </div>
-      <div class="col-sm-2">
-        <input placeholder="Cấp QK,QĐ" #SearchName type="text" class="form-control form-control-sm" (keyup.enter)="onEnter()">
-      </div> -->
       <div class="col-sm-2">
         <input type="text"
           class="form-control"
@@ -331,7 +323,7 @@
       </table>
     </div>
 
-    <div style='margin-top: 10px'>
+    <div style='margin-top: 10px; margin-bottom: 20px'>
        <app-paging
                 [TotalCount]='totalCount'
                 [PageIndex]='currentPage'

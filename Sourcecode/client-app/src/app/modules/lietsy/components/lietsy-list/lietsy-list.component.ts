@@ -30,6 +30,7 @@ import { XaService } from '../../../xa/xa.service';
 import { SwalComponent } from '@toverux/ngx-sweetalert2';
 import { saveAs } from 'file-saver';
 import { AuthService } from 'src/app/shared/services/auth.Service';
+import { DonViSelectModel } from 'src/app/modules/donvi/DonViSelectModel';
 
 
 @Component({
@@ -52,8 +53,8 @@ export class LietSyListComponent implements OnInit, OnDestroy {
   listXaMaiTang: Select2Model[];
   listQueHuyen: Select2Model[];
   listQueXa: Select2Model[];
+  ListAllDonVI: DonViSelectModel[];
 
-  @ViewChild('SearchName') searchInput: ElementRef ;
   @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
 
   currentPage = 1;
@@ -82,7 +83,8 @@ export class LietSyListComponent implements OnInit, OnDestroy {
     HySinhXaId: null,
     MaiTangTinhId: null,
     MaiTangHuyenId: null,
-    MaiTangXaId: null
+    MaiTangXaId: null,
+    donviId: null
   };
 
   subscription: Subscription;
@@ -91,7 +93,7 @@ export class LietSyListComponent implements OnInit, OnDestroy {
       private spinner: NgxSpinnerService, private toastr: ToastrService ,
        private capbacService: CapbacService , private thoiKyService: ThoiKyService
       , private soQuyenService: SoQuyenService , private chucVuService: ChucVuService
-      ,  private staticDataService: StaticDataService, private tinhService: TinhService,
+      ,  private staticDataService: StaticDataService, private tinhService: TinhService,private donViService: DonViService,
       private huyenService: HuyenService , private xaService: XaService ,private authService: AuthService) { }
 
   ngOnInit() {
@@ -105,6 +107,9 @@ export class LietSyListComponent implements OnInit, OnDestroy {
     this.listGender = this.staticDataService.getListGender();
     this.tinhService.getListAllTinh().subscribe((res) => {
       this.listAllTinh = res;
+    });
+    this.donViService.getListAllDonVi().subscribe(res => {
+      this.ListAllDonVI = res;
     });
     this.subscription = this.modalService.parentData.subscribe(data => {
       if ( data && data.action === ActionType.SUBMIT) {
@@ -120,7 +125,6 @@ export class LietSyListComponent implements OnInit, OnDestroy {
 
   onSearch (pageIndex: number = 1) {
       this.spinner.show();
-      const val = this.searchInput.nativeElement.value;
       this.filterCondition.SearchCondition = [ ];
       this.filterCondition.PageIndex = pageIndex;
       this.currentPage = pageIndex;
@@ -132,7 +136,6 @@ export class LietSyListComponent implements OnInit, OnDestroy {
         PageSize: this.pageSize
       };
       this.lietSyService.search(data).subscribe((res: HttpResult) => {
-        console.log(res);
         this.spinner.hide();
         this.list$ = res.data.list;
         this.totalCount = res.data.total;
@@ -143,7 +146,6 @@ export class LietSyListComponent implements OnInit, OnDestroy {
 
   onExport () {
       this.lietSyService.exportExcel(this.searchCodition).subscribe(res => {
-        console.log(res);
         const blob = new Blob([res], { type: 'application/ms-excel' });
         saveAs(blob, `DanhSachLietSy.xlsx`);
       });

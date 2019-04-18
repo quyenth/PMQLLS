@@ -16,6 +16,7 @@ import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog
 import { ToastrService } from 'ngx-toastr';
 import { OrderInfo } from 'src/app/shared/models/order-info';
 import { DonViSelectModel } from '../../DonViSelectModel';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -23,6 +24,7 @@ import { DonViSelectModel } from '../../DonViSelectModel';
   templateUrl: './donvi-list.component.html'
 })
 export class DonViListComponent implements OnInit, OnDestroy {
+  @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
 
 
   @ViewChild('SearchName') searchInput: ElementRef ;
@@ -111,16 +113,16 @@ export class DonViListComponent implements OnInit, OnDestroy {
   }
 
   onDeleteItem (item) {
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?');
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-        dialogCloseSubscription.unsubscribe();
-        if ( data === ActionType.ACCEPT) {
-          this.donViService.delete(item).subscribe((res) => {
-          this.toastr.success('Xóa thành công!');
-            this.onSearch();
-        });
-      }
-    });
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.donViService.delete(item).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
   }
 
   onDeleteSelected () {
@@ -130,18 +132,16 @@ export class DonViListComponent implements OnInit, OnDestroy {
         return;
     }
 
-
-      this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn xóa?' );
-      const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-          dialogCloseSubscription.unsubscribe();
-          if ( data === ActionType.ACCEPT) {
-            this.donViService.delectList(listSelected).subscribe((res) => {
-            this.toastr.success('Xóa thành công!');
-              this.onSearch();
-          });
-      }
-      });
-
+    this.deleteItemSwal.text = 'Bạn thực sự muốn xóa các mục đã chọn ?' ;
+    this.deleteItemSwal.show().then( (result) => {
+            if ( result.value ) {
+              this.donViService.delectList(listSelected).subscribe((res) => {
+                this.toastr.success('Xóa thành công!');
+                  this.onSearch();
+              });
+            }
+        }
+    );
   }
 
   onEnter() {

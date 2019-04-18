@@ -1,6 +1,6 @@
 import { map, switchMap } from 'rxjs/operators';
 import { DonViModel } from './../../donvi.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription, timer, of, Observable } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DonViSelectModel } from '../../DonViSelectModel';
 import { ChucVuService } from './../../../chucvu/chucvu.service';
 import { Select2Model } from 'src/app/shared/models/select2.model';
+import { SwalComponent } from '@toverux/ngx-sweetalert2';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { Select2Model } from 'src/app/shared/models/select2.model';
   templateUrl: './donvi-save.component.html'
 })
 export class DonViSaveComponent implements OnInit , OnDestroy {
+  @ViewChild('submitSwal') private submitSwal: SwalComponent;
 
   subscription: Subscription;
   submited: boolean;
@@ -140,24 +142,16 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
     if ( !this.myForm.valid) {
       return;
     }
+    this.submitSwal.show();
 
-    this.confirmationDialogService.confirm('Xác nhận!', 'Bạn có thực sự muốn lưu?' );
-    const dialogCloseSubscription = this.confirmationDialogService.subject.subscribe((data) => {
-      dialogCloseSubscription.unsubscribe();
-      if ( data === ActionType.ACCEPT) {
-        this.submitData();
-      }
-    });
   }
 
   submitData() {
     this.spinner.show();
     this.submited = true;
-    const submitData = new DonViModel();
-
     this.donViService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
-	  this.toastr.success('Lưu thành công!');
+      this.toastr.success('Lưu thành công!');
       this.bsModalRef.hide();
       this.modalService.passDataToParent({action: ActionType.SUBMIT});
     }, (error) => {

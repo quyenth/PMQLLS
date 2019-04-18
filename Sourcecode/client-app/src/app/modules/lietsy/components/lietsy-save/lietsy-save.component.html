@@ -378,22 +378,11 @@
                             Đơn vị hy sinh
                           </label>
                           <div class="col-sm-10">
-                            <!-- <select2 [data]="ListAllDonVI" [cssImport]="true" formControlName="hySinhDonVi" [options]="{dropdownAutoWidth: true}" ></select2> -->
-                           <!-- <ng-select [items]="ListAllDonVI"
-                                bindLabel="text"
-                                bindValue="id"
-                                groupBy="children"
-                                formControlName="hySinhDonVi">
-                                <ng-template ng-optgroup-tmp let-item="item">
-                                    {{item.text}}
-                                </ng-template>
-
-                            </ng-select> -->
-                            <ng-select [items]="ListAllDonVI" bindLabel="text" bindValue="donViId" formControlName="hySinhDonVi">
+                            <ng-select [items]="ListAllDonVI" bindLabel="text" bindValue="id" formControlName="hySinhDonVi">
                                 <ng-template ng-option-tmp let-item="item">
                                   <span [style.margin-left]="item.level * 10 + 'px'">{{item.text}}</span>
                                 </ng-template>
-                              </ng-select>     
+                              </ng-select>
                           </div>
                          </div>
                       </div>
