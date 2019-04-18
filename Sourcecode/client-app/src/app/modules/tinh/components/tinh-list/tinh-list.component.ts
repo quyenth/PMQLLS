@@ -27,7 +27,7 @@ export class TinhListComponent implements OnInit, OnDestroy {
   @ViewChild('SearchName') searchInput: ElementRef ;
   @ViewChild('deleteItemSwal') private deleteItemSwal: SwalComponent;
   currentPage = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   list$ = [];
   totalCount: number;

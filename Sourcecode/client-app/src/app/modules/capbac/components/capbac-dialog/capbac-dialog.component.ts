@@ -25,7 +25,8 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
   submited: boolean;
   data: CapBac = new CapBac();
   myForm = this.fb.group({
-    name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
+    name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)],
+    code: ['']
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
@@ -45,7 +46,9 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
     if (data.formType === FromType.UPDATE) {
       this.capbacService.getById(this.data.capBacId).subscribe((res) => {
         this.data.text = res.data.text;
+        this.data.code = res.data.code;
         this.myForm.patchValue({'name': this.data.text});
+        this.myForm.patchValue({'code': this.data.code});
       });
     }
   }
@@ -65,6 +68,7 @@ export class CapbacDialogComponent implements OnInit , OnDestroy {
     const submitData = new CapBac ();
     submitData.capBacId = this.data.capBacId;
     submitData.text = this.myForm.value.name.trim();
+    submitData.code = this.myForm.value.code.trim();
     this.capbacService.save(submitData).subscribe((res) => {
       this.spinner.hide();
       this.toastr.success('Lưu thành công!');

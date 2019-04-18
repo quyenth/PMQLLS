@@ -103,11 +103,11 @@ export class DonViListComponent implements OnInit, OnDestroy {
 
 
   onAddNew () {
-    this.modalService.openModalWithComponent(DonViSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(DonViSaveComponent, { formType: FromType.INSERT, id: 0} , ModalSize.FULL);
   }
 
   onEditItem(item) {
-    this.modalService.openModalWithComponent(DonViSaveComponent, { formType: FromType.UPDATE, id: item.donViId} , ModalSize.LARGE);
+    this.modalService.openModalWithComponent(DonViSaveComponent, { formType: FromType.UPDATE, id: item.donViId} , ModalSize.FULL);
   }
 
   onDeleteItem (item) {

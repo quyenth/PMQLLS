@@ -56,6 +56,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
   listQueHuyen: Select2Model[];
   listQueXa: Select2Model[];
   listNghiaTrang: Select2Model[];
+  ListAllDonVI: DonViSelectModel[];
 
 
   @ViewChild('submitSwal') private submitSwal: SwalComponent;
@@ -250,7 +251,6 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
       this.listAllTinh = res;
     });
     this.donViService.getListAllDonVi().subscribe(res => {
-      console.log(res)
       this.ListAllDonVI = res;
     });
     this.nghiaTrangService.getListNghiaTrang().subscribe(res=> {

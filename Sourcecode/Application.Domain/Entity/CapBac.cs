@@ -13,6 +13,9 @@ namespace Application.Domain.Entity
                     public Int32 CapBacId { get; set; }
                 
                     public string Text { get; set; }
-                 
+
+                     public string Code { get; set; }
+
+
     }
 }

@@ -28,7 +28,7 @@ export class LoaiDoiTuongListComponent implements OnInit, OnDestroy {
   @ViewChild('SearchMa') searchMa: ElementRef ;
 
   currentPage = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   list$ = [];
   totalCount: number;

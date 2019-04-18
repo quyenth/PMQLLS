@@ -44,6 +44,8 @@ namespace Application.IdentityServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Code");
+
                     b.Property<string>("Text");
 
                     b.HasKey("CapBacId");

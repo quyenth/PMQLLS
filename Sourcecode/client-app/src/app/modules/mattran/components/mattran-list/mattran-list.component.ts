@@ -30,7 +30,7 @@ export class MatTranListComponent implements OnInit, OnDestroy {
   @ViewChild('SearchDiaBan') searchDiaBan: ElementRef ;
 
   currentPage = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   list$ = [];
   totalCount: number;

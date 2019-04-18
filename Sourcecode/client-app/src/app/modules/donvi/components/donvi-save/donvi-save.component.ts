@@ -2,7 +2,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { DonViModel } from './../../donvi.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
-import { Subscription, timer, of } from 'rxjs';
+import { Subscription, timer, of, Observable } from 'rxjs';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ModalService } from 'src/app/shared/services/modal.Service';
 import { ActionType } from 'src/app/shared/commons/action-type';
@@ -12,6 +12,8 @@ import { ConfirmationDialogService } from 'src/app/shared/services/confirmDialog
 import { FromType } from 'src/app/shared/commons/form-type';
 import { ToastrService } from 'ngx-toastr';
 import { DonViSelectModel } from '../../DonViSelectModel';
+import { ChucVuService } from './../../../chucvu/chucvu.service';
+import { Select2Model } from 'src/app/shared/models/select2.model';
 
 
 @Component({
@@ -24,30 +26,10 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
   submited: boolean;
   isUpdate: boolean;
   data: DonViModel = new DonViModel();
+  listAllChucVu: Observable<Select2Model[]>;
   ListAllDonVI: DonViSelectModel[];
-  FRUIT_GROUPS = [
-    {
-        id: '',
-        text: 'Citrus',
-        children: [
-            { id: 'c1', text: 'Grapefruit' , children: [] },
-            { id: 'c2', text: 'Orange' },
-            { id: 'c3', text: 'Lemon' },
-            { id: 'c4', text: 'Lime' }
-        ]
-    },
-    {
-        id: '',
-        text: 'Other',
-        children: [
-            { id: 'o1', text: 'Apple' },
-            { id: 'o2', text: 'Mango' },
-            { id: 'o3', text: 'Banana' }
-        ]
-    }
-];
+
   myForm = this.fb.group({
-   //name: ['', [Validators.required, Validators.maxLength(30)] , this.validateNameUnique.bind(this)]
 
    	    donViId: [''],
 
@@ -79,7 +61,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
    	    cqcS_ThuTruong: ['', ],
 
-   	    cqcS_ThuTruongChucVu: ['', ],
+   	    cqcS_ThuTruongChucVu: [null, ],
 
    	    // cqcS_NguoiPhuTrach: ['', ],
 
@@ -88,7 +70,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
   });
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private modalService: ModalService ,
-          private donViService: DonViService, private spinner: NgxSpinnerService,
+          private donViService: DonViService, private spinner: NgxSpinnerService, private chucVuService: ChucVuService,
           private confirmationDialogService: ConfirmationDialogService, private toastr: ToastrService) {
     this.subscription = this.modalService.dialogData.subscribe(data => {
       this.data.donViId = data.id;
@@ -98,9 +80,9 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
 
   ngOnInit() {
       this.donViService.getListAllDonVi().subscribe(res => {
-        console.log(res)
         this.ListAllDonVI = res;
       });
+      this.listAllChucVu = this.chucVuService.getListAllChucVu();
   }
 
   getDataByID (data) {
@@ -153,7 +135,6 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
   }
 
   onSubmit() {
-    debugger;
     this.submited = true;
     console.log(this.myForm);
     if ( !this.myForm.valid) {
@@ -173,8 +154,7 @@ export class DonViSaveComponent implements OnInit , OnDestroy {
     this.spinner.show();
     this.submited = true;
     const submitData = new DonViModel();
-    //submitData.donViId = this.data.donViId;
-    //submitData.text = this.myForm.value.name.trim();
+
     this.donViService.save(this.myForm.value).subscribe((res) => {
       this.spinner.hide();
 	  this.toastr.success('Lưu thành công!');

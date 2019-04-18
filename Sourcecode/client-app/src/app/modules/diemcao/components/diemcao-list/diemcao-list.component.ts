@@ -29,7 +29,7 @@ export class DiemCaoListComponent implements OnInit, OnDestroy {
   @ViewChild('SearchDiachi') searchDiachi: ElementRef ;
 
   currentPage = 1;
-  pageSize = 2;
+  pageSize = 10;
 
   list$ = [];
   totalCount: number;
