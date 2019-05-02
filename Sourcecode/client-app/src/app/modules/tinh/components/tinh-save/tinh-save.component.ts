@@ -29,7 +29,7 @@ export class TinhSaveComponent implements OnInit , OnDestroy {
 
     tenTinh: ['', [Validators.required], [this.validateNameUnique.bind(this)]],
 
-    type: ['', [Validators.required]],
+    //type: ['', [Validators.required]],
 
     active: [false],
 

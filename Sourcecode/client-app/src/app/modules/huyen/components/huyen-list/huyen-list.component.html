@@ -35,13 +35,13 @@
             <th style="text-align: center; width: 20px;">
               <input type="checkbox" [(ngModel)]="checkall" (change)="onCheckAllChange()" >
             </th>
-                <th>Mã Huyện</th>
+                <!-- <th>Mã Huyện</th> -->
 
                 <th>Tên Huyện</th>
 
                 <th>Tỉnh</th>
 
-                <th>Loại</th>
+                <!-- <th>Loại</th> -->
 
                 <th>Kích hoạt</th>
 
@@ -55,13 +55,13 @@
             <td style="text-align: center;">
               <input type="checkbox" [(ngModel)]='item.selected' (change)="onCheckOneChange()">
             </td>
-                <td style="width: 10%;">{{item.maHuyen}}</td>
+                <!-- <td style="width: 10%;">{{item.maHuyen}}</td> -->
 
                 <td >{{item.tenHuyen}}</td>
 
-                <td style="width: 20%;">{{item.tinhId}}</td>
+                <td style="width: 20%;">{{item.tinhName}}</td>
 
-                <td style="width: 10%;">{{item.type}}</td>
+                <!-- <td style="width: 10%;">{{item.type}}</td> -->
 
                 <td style="text-align: center; width: 10%;"><input type="checkbox" disabled="disabled" [(ngModel)]='item.active'></td>
 

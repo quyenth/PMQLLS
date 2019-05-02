@@ -34,7 +34,7 @@ export class HuyenSaveComponent implements OnInit , OnDestroy {
 
    	    tinhId: ['', [Validators.required] ],
 
-   	    type: ['', [Validators.required]],
+   	    // type: ['', [Validators.required]],
 
    	    active: [''],
 

@@ -33,11 +33,11 @@ export class XaSaveComponent implements OnInit , OnDestroy {
 
    	    tenXa: ['', [Validators.required, Validators.maxLength(30)], [this.validateNameUnique.bind(this)] ],
 
-   	    huyenId: ['', [Validators.required] ],
+   	    huyenId: [null, [Validators.required] ],
 
    	    maDiaChi: ['', [Validators.required] ],
 
-   	    type: ['', [Validators.required] ],
+   	   // type: ['', [Validators.required] ],
 
    	    active: [''],
 

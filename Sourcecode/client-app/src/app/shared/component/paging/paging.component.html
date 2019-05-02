@@ -17,7 +17,7 @@
   <div class='col-sm-4'>
     <div class='paging-right'>
         <pagination [boundaryLinks]="true" [totalItems]="TotalCount" [itemsPerPage]="PageSize" (pageChanged)="pageChanged($event)" [(ngModel)]="PageIndex"
-        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
         </pagination>
     </div>
   </div>
