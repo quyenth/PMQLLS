@@ -122,7 +122,17 @@
 
     </div>
     <div class="row" style="margin-top: 10px">
-      <div class="col-sm-2">
+      <div class="col-sm-4">
+        <input type="text"
+          class="form-control"
+           placeholder="Địa điểm hy sinh" [(ngModel)] = "searchCodition.diaDiemHySinh">
+      </div>
+      <div class="col-sm-4">
+        <input type="text"
+          class="form-control"
+           placeholder="Địa điểm mai táng" [(ngModel)] = "searchCodition.diaDiemMaiTang">
+      </div>
+      <!-- <div class="col-sm-2">
           <ng-select [items]="listAllTinh "
             bindLabel="text"
             bindValue="id"
@@ -177,7 +187,7 @@
             [(ngModel)] = "searchCodition.MaiTangXaId"
             >
         </ng-select>
-      </div>
+      </div> -->
     </div>
 
     <div class='tbl-div' style="overflow: auto">
@@ -218,9 +228,9 @@
 
                            <th class='no-sort' rowspan="2" style="width: 250px;">Trận đánh hy sinh</th>
 
-                           <th class='no-sort' colspan="3" style="width: 20px;"> Hy sinh </th>
+                           <th class='no-sort' rowspan="2" style="width: 250px;"> Hy sinh địa điểm </th>
 
-                           <th class='no-sort' colspan="4" style="width: 20px;">Mai táng</th>
+                           <th class='no-sort' colspan="2" style="width: 20px;">Mai táng</th>
 
                            <th class='no-sort' colspan="3" style="width: 20px;">Quy tập</th>
 
@@ -234,17 +244,17 @@
               <th class='no-sort' style="width: 200px;">Huyện</th>
               <th class='no-sort' style="width: 200px;">Tỉnh</th>
 
-              <th class='no-sort' style="width: 200px;">Thôn, xã</th>
+              <!-- <th class='no-sort' style="width: 200px;">Thôn, xã</th>
               <th class='no-sort' style="width: 200px;">Quận huyện</th>
-              <th class='no-sort' style="width: 200px;">Tỉnh</th>
+              <th class='no-sort' style="width: 200px;">Tỉnh</th> -->
 
               <th class='no-sort' style="width: 200px;">Tình trạng</th>
 
-              <th class='no-sort' style="width: 200px;">Xã</th>
+              <th class='no-sort' style="width: 250px;">Địa điểm</th>
 
-              <th class='no-sort' style="width: 200px;">Huyện</th>
+              <!-- <th class='no-sort' style="width: 200px;">Huyện</th>
 
-              <th class='no-sort' style="width: 200px;">Tỉnh</th>
+              <th class='no-sort' style="width: 200px;">Tỉnh</th> -->
 
               <!-- <th class='no-sort'>Điểm cao</th> -->
 
@@ -292,13 +302,13 @@
             <td>{{item.tenDonVi}}</td>
             <td>{{item.hySinhLyDoChiTiet}}</td>
             <td>{{item.hySinhTranDanh}}</td>
-            <td>{{item.xaHySinhName}}</td>
-            <td>{{item.huyenHySinhName}}</td>
-            <td>{{item.tinhHySinhName}}</td>
+            <td>{{item.hySinhDiaDiem}}</td>
+            <!-- <td>{{item.huyenHySinhName}}</td>
+            <td>{{item.tinhHySinhName}}</td> -->
             <td>{{item.maiTang ? 'Có' : 'Không'}}</td>
-            <td>{{item.maiTangXaName}}</td>
-            <td>{{item.maiTangHuyenName}}</td>
-            <td>{{item.maiTangTinhName}}</td>
+            <td>{{item.maiTangDiaDiem}}</td>
+            <!-- <td>{{item.maiTangHuyenName}}</td>
+            <td>{{item.maiTangTinhName}}</td> -->
             <!-- <td>{{item.diemCaoName}}</td> -->
             <!-- <td>{{item.maiTangToaDo}}</td> -->
             <td>{{item.quyTap? 'Có' : 'Không'}}</td>

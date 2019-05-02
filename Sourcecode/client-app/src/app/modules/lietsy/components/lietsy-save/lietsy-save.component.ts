@@ -137,17 +137,19 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
         hySinhDiaDiem: [''],
 
-        hySinhXaId: [null],
+        maiTangDiaDiem: [''],
 
-        hySinhHuyenId: [null],
+        // hySinhXaId: [null],
 
-        hySinhTinhId: [null],
+        // hySinhHuyenId: [null],
 
-        maiTangXaId: [null],
+        // hySinhTinhId: [null],
 
-        maiTangHuyenId: [null],
+        // maiTangXaId: [null],
 
-        maiTangTinhId: [null],
+        // maiTangHuyenId: [null],
+
+        // maiTangTinhId: [null],
 
         maiTangBanDo: [''],
 
@@ -422,6 +424,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
             this.myForm.patchValue({'updatedBy': res.data.updatedBy});
 
             this.myForm.patchValue({'soQuyenId': res.data.soQuyenId});
+            this.myForm.patchValue({'maiTangDiaDiem': res.data.maiTangDiaDiem});
 
 
       });

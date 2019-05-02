@@ -84,7 +84,9 @@ export class LietSyListComponent implements OnInit, OnDestroy {
     MaiTangTinhId: null,
     MaiTangHuyenId: null,
     MaiTangXaId: null,
-    donviId: null
+    donviId: null,
+    diaDiemHySinh: null,
+    diaDiemMaiTang: null
   };
 
   subscription: Subscription;

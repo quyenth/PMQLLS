@@ -441,6 +441,18 @@
                           </div>
                          </div>
                       </div>
+                      <div class="col-md-12">
+                        <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhLyDoChiTiet').valid }">
+                          <label class="col-form-label col-sm-2">
+                            Địa điểm hy sinh
+                          </label>
+                          <div class="col-sm-10">
+                            <textarea  class="form-control" formControlName="hySinhDiaDiem">
+
+                            </textarea>
+                          </div>
+                         </div>
+                      </div>
                       <!-- <div class="col-md-12">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhTranDanh').valid }">
                           <label class="col-form-label col-sm-2">
@@ -457,7 +469,7 @@
                     <div class="row">
 
 
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                       <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('hySinhTinhId').valid }">
                         <label class="col-form-label col-sm-4">
                           Tỉnh/TP
@@ -507,7 +519,7 @@
                             </ng-select>
                         </div>
                        </div>
-                    </div>
+                    </div> -->
 
                   </div>
 
@@ -538,6 +550,16 @@
                           </div>
 
                     </div>
+                    <div class="col-md-4">
+                      <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangDiaDiem').valid }">
+                        <label class="col-form-label col-sm-4">
+                          Địa điểm
+                        </label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" formControlName="maiTangDiaDiem" placeholder="Mai táng địa điểm"/>
+                        </div>
+                       </div>
+                    </div>
                     <!-- <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTang').valid }">
                           <label class="col-form-label col-sm-4">
@@ -548,7 +570,7 @@
                           </div>
                          </div>
                       </div> -->
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangTinhId').valid }">
                           <label class="col-form-label col-sm-4">
                             Tỉnh/TP
@@ -595,7 +617,7 @@
                               </ng-select>
                             </div>
                            </div>
-                        </div>
+                        </div> -->
                         <!-- <div class="col-md-4">
                             <div class="form-group  row" [ngClass]="{'has-error': submited && !myForm.get('maiTangDiemCaoId').valid }">
                               <label class="col-form-label col-sm-4">
@@ -622,7 +644,7 @@
                             </div>
                            </div>
                         </div>
-                        <div class="col-md-4"></div>
+                        <!-- <div class="col-md-4"></div> -->
                         <div class="col-md-4">
                             <div class="form-group  row">
                                 <label class="col-form-label col-sm-4" for='quytapCheckbox'>
