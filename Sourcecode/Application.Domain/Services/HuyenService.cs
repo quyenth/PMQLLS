@@ -4,6 +4,7 @@ using Application.Domain.Entity;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Collections;
+using Application.Domain.model;
 
 namespace Application.Domain.Services
 {
@@ -53,10 +54,10 @@ namespace Application.Domain.Services
         {
             var result = (from a in this.dc.Huyen
                           join b in this.dc.Tinh on a.TinhId equals b.TinhId
-                          where (name == null || a.TenHuyen.Contains(name))
-                          select new
+                          where (name == null || name == "" || a.TenHuyen.Contains(name))
+                          select new HuyenVo
                           {
-                              HuyenIdh = a.HuyenId,
+                              HuyenId = a.HuyenId,
                               Is1990 = a.Is1990,
                               MaHuyen = a.MaHuyen,
                               TenHuyen = a.TenHuyen,
@@ -65,6 +66,9 @@ namespace Application.Domain.Services
                           }).OrderBy(c => c.TenHuyen)
                             .Skip(paging.PageSize * (paging.PageIndex - 1))
                             .Take(paging.PageSize).ToList();
+
+            paging.TotalCount = this.dc.Huyen.Where( c => name == null || name == "" || c.TenHuyen.Contains(name)).Count();
+
             return result;
         }
     }

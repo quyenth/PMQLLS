@@ -85,19 +85,22 @@ namespace Application.Domain.Entity
                     public string HySinhTranDanh { get; set; }
                 
                     public string HySinhDiaDiem { get; set; }
-                
-                    public Int32? HySinhXaId { get; set; }
-                
-                    public Int32? HySinhHuyenId { get; set; }
-                
-                    public Int32? HySinhTinhId { get; set; }
-                
-                    public Int32? MaiTangXaId { get; set; }
-                
-                    public Int32? MaiTangHuyenId { get; set; }
-                
-                    public Int32? MaiTangTinhId { get; set; }
-                
+
+                    public string maiTangDiaDiem { get; set; }
+
+
+                    //public Int32? HySinhXaId { get; set; }
+
+                    //public Int32? HySinhHuyenId { get; set; }
+
+                    //public Int32? HySinhTinhId { get; set; }
+
+                    //public Int32? MaiTangXaId { get; set; }
+
+                    //public Int32? MaiTangHuyenId { get; set; }
+
+                    //public Int32? MaiTangTinhId { get; set; }
+
                     public string MaiTangBanDo { get; set; }
                 
                     public string MaiTangToaDo { get; set; }

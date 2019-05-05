@@ -147,63 +147,81 @@ namespace Application.Domain.Services
                 paras.Add(new SqlParameter("@hySinhLyDo", "%" + searchCodition.hySinhLyDoChiTiet + "%"));
             }
 
-
-            if (searchCodition.HySinhTinhId == null || searchCodition.HySinhTinhId == 0)
+            if (string.IsNullOrEmpty(searchCodition.diaDiemHySinh))
             {
-                paras.Add(new SqlParameter("@HySinhTinhId", DBNull.Value));
+                paras.Add(new SqlParameter("@diaDiemHySinh", DBNull.Value));
             }
             else
             {
-                paras.Add(new SqlParameter("@HySinhTinhId", searchCodition.HySinhTinhId));
+                paras.Add(new SqlParameter("@diaDiemHySinh", "%" + searchCodition.diaDiemHySinh + "%"));
             }
 
-
-            if (searchCodition.HySinhHuyenId == null || searchCodition.HySinhHuyenId == 0)
+            if (string.IsNullOrEmpty(searchCodition.diaDiemMaiTang))
             {
-                paras.Add(new SqlParameter("@HySinhHuyenId", DBNull.Value));
+                paras.Add(new SqlParameter("@diaDiemMaiTang", DBNull.Value));
             }
             else
             {
-                paras.Add(new SqlParameter("@HySinhHuyenId", searchCodition.HySinhHuyenId));
-            }
-
-            if (searchCodition.HySinhXaId == null || searchCodition.HySinhXaId == 0)
-            {
-                paras.Add(new SqlParameter("@HySinhXaId", DBNull.Value));
-            }
-            else
-            {
-                paras.Add(new SqlParameter("@HySinhXaId", searchCodition.HySinhXaId));
+                paras.Add(new SqlParameter("@diaDiemMaiTang", "%" + searchCodition.diaDiemMaiTang + "%"));
             }
 
 
-            if (searchCodition.MaiTangTinhId == null || searchCodition.MaiTangTinhId == 0)
-            {
-                paras.Add(new SqlParameter("@MaiTangTinhId", DBNull.Value));
-            }
-            else
-            {
-                paras.Add(new SqlParameter("@MaiTangTinhId", searchCodition.MaiTangTinhId));
-            }
+            //if (searchCodition.HySinhTinhId == null || searchCodition.HySinhTinhId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@HySinhTinhId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@HySinhTinhId", searchCodition.HySinhTinhId));
+            //}
 
 
-            if (searchCodition.MaiTangHuyenId == null || searchCodition.MaiTangHuyenId == 0)
-            {
-                paras.Add(new SqlParameter("@MaiTangHuyenId", DBNull.Value));
-            }
-            else
-            {
-                paras.Add(new SqlParameter("@MaiTangHuyenId", searchCodition.MaiTangHuyenId));
-            }
+            //if (searchCodition.HySinhHuyenId == null || searchCodition.HySinhHuyenId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@HySinhHuyenId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@HySinhHuyenId", searchCodition.HySinhHuyenId));
+            //}
 
-            if (searchCodition.MaiTangXaId == null || searchCodition.MaiTangXaId == 0)
-            {
-                paras.Add(new SqlParameter("@MaiTangXaId", DBNull.Value));
-            }
-            else
-            {
-                paras.Add(new SqlParameter("@MaiTangXaId", searchCodition.MaiTangXaId));
-            }
+            //if (searchCodition.HySinhXaId == null || searchCodition.HySinhXaId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@HySinhXaId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@HySinhXaId", searchCodition.HySinhXaId));
+            //}
+
+
+            //if (searchCodition.MaiTangTinhId == null || searchCodition.MaiTangTinhId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangTinhId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangTinhId", searchCodition.MaiTangTinhId));
+            //}
+
+
+            //if (searchCodition.MaiTangHuyenId == null || searchCodition.MaiTangHuyenId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangHuyenId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangHuyenId", searchCodition.MaiTangHuyenId));
+            //}
+
+            //if (searchCodition.MaiTangXaId == null || searchCodition.MaiTangXaId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangXaId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangXaId", searchCodition.MaiTangXaId));
+            //}
 
             if (searchCodition.donviId == null || searchCodition.donviId == 0)
             {
@@ -352,63 +370,81 @@ namespace Application.Domain.Services
                 paras.Add(new SqlParameter("@hySinhLyDo", "%" + searchCodition.hySinhLyDoChiTiet + "%"));
             }
 
-
-            if (searchCodition.HySinhTinhId == null || searchCodition.HySinhTinhId == 0)
+            if (string.IsNullOrEmpty(searchCodition.diaDiemHySinh))
             {
-                paras.Add(new SqlParameter("@HySinhTinhId", DBNull.Value));
+                paras.Add(new SqlParameter("@diaDiemHySinh", DBNull.Value));
             }
             else
             {
-                paras.Add(new SqlParameter("@HySinhTinhId", searchCodition.HySinhTinhId));
+                paras.Add(new SqlParameter("@diaDiemHySinh", "%" + searchCodition.diaDiemHySinh + "%"));
             }
 
-
-            if (searchCodition.HySinhHuyenId == null || searchCodition.HySinhHuyenId == 0)
+            if (string.IsNullOrEmpty(searchCodition.diaDiemMaiTang))
             {
-                paras.Add(new SqlParameter("@HySinhHuyenId", DBNull.Value));
+                paras.Add(new SqlParameter("@diaDiemMaiTang", DBNull.Value));
             }
             else
             {
-                paras.Add(new SqlParameter("@HySinhHuyenId", searchCodition.HySinhHuyenId));
-            }
-
-            if (searchCodition.HySinhXaId == null || searchCodition.HySinhXaId == 0)
-            {
-                paras.Add(new SqlParameter("@HySinhXaId", DBNull.Value));
-            }
-            else
-            {
-                paras.Add(new SqlParameter("@HySinhXaId", searchCodition.HySinhXaId));
+                paras.Add(new SqlParameter("@diaDiemMaiTang", "%" + searchCodition.diaDiemMaiTang + "%"));
             }
 
 
-            if (searchCodition.MaiTangTinhId == null || searchCodition.MaiTangTinhId == 0)
-            {
-                paras.Add(new SqlParameter("@MaiTangTinhId", DBNull.Value));
-            }
-            else
-            {
-                paras.Add(new SqlParameter("@MaiTangTinhId", searchCodition.MaiTangTinhId));
-            }
+            //if (searchCodition.HySinhTinhId == null || searchCodition.HySinhTinhId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@HySinhTinhId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@HySinhTinhId", searchCodition.HySinhTinhId));
+            //}
 
 
-            if (searchCodition.MaiTangHuyenId == null || searchCodition.MaiTangHuyenId == 0)
-            {
-                paras.Add(new SqlParameter("@MaiTangHuyenId", DBNull.Value));
-            }
-            else
-            {
-                paras.Add(new SqlParameter("@MaiTangHuyenId", searchCodition.MaiTangHuyenId));
-            }
+            //if (searchCodition.HySinhHuyenId == null || searchCodition.HySinhHuyenId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@HySinhHuyenId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@HySinhHuyenId", searchCodition.HySinhHuyenId));
+            //}
 
-            if (searchCodition.MaiTangXaId == null || searchCodition.MaiTangXaId == 0)
-            {
-                paras.Add(new SqlParameter("@MaiTangXaId", DBNull.Value));
-            }
-            else
-            {
-                paras.Add(new SqlParameter("@MaiTangXaId", searchCodition.MaiTangXaId));
-            }
+            //if (searchCodition.HySinhXaId == null || searchCodition.HySinhXaId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@HySinhXaId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@HySinhXaId", searchCodition.HySinhXaId));
+            //}
+
+
+            //if (searchCodition.MaiTangTinhId == null || searchCodition.MaiTangTinhId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangTinhId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangTinhId", searchCodition.MaiTangTinhId));
+            //}
+
+
+            //if (searchCodition.MaiTangHuyenId == null || searchCodition.MaiTangHuyenId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangHuyenId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangHuyenId", searchCodition.MaiTangHuyenId));
+            //}
+
+            //if (searchCodition.MaiTangXaId == null || searchCodition.MaiTangXaId == 0)
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangXaId", DBNull.Value));
+            //}
+            //else
+            //{
+            //    paras.Add(new SqlParameter("@MaiTangXaId", searchCodition.MaiTangXaId));
+            //}
 
             if (searchCodition.donviId == null || searchCodition.donviId == 0)
             {
@@ -426,10 +462,17 @@ namespace Application.Domain.Services
                 SqlDbType = SqlDbType.Int
             };
             paras.Add(countPara);
-            var result = Sqlhelper.ExecDataTable(this.dc, StoredProcedureConstant.SearchListLietSi, CommandType.StoredProcedure, paras.ToArray());
-            paging.TotalCount = (int)countPara.Value;
+            try
+            {
+                var result = Sqlhelper.ExecDataTable(this.dc, StoredProcedureConstant.SearchListLietSi, CommandType.StoredProcedure, paras.ToArray());
+                paging.TotalCount = (int)countPara.Value;
 
-            return result;
+                return result;
+            }catch(Exception ex)
+            {
+                return null;
+            }
+          
         }
     }
 }

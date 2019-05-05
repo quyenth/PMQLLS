@@ -49,6 +49,8 @@ namespace AspNetCore.Data
         public int? MaiTangXaId { get; set; }
 
         public int? donviId { get; set; }
+        public String diaDiemHySinh { get; set; }
+        public String diaDiemMaiTang { get; set; }
 
     }
 }

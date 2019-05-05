@@ -62,14 +62,17 @@ namespace Application.IdentityServer.Controllers.QLLS
         [HttpPost]
         public async Task< ApiResult> Search([FromBody]FilterCondition filterCondition)
         {
-            int total = 0;
-            var list = huyenService.Filter(filterCondition , out total);
+            var searchName = filterCondition.SearchCondition.Find(c => c.FieldName == "Tenhuyen");
+            PagingInfo paging = new PagingInfo();
+            paging.PageIndex = filterCondition.PageIndex;
+            paging.PageSize = filterCondition.PageSize;
+            var list = huyenService.getSearchListHuyen(searchName == null ? "" : searchName.Value.ToString(), paging);
             return new ApiResult()
             {
                 Status = HttpStatus.OK,
                 Data = new
                 {
-                    Total = total,
+                    Total = paging.TotalCount,
                     List = list
                 }
             };

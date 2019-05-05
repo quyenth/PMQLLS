@@ -153,19 +153,31 @@ namespace Application.IdentityServer.Controllers
             var email = emailClaims != null ? emailClaims.Value : "";
             var user = await this.userManager.FindByEmailAsync(email);
             //this.applicationUserRole.get
-            var roles = await userManager.GetRolesAsync(user);
-
-            return new ApiResult()
+            try
             {
-                Status = HttpStatus.OK,
-                Data = new
+                var roles = await userManager.GetRolesAsync(user);
+
+                return new ApiResult()
                 {
-                    Email = user.Email,
-                    FullName = user.FullName,
-                    UserName = user.UserName,
-                    roles = roles
-                }
-            };
+                    Status = HttpStatus.OK,
+                    Data = new
+                    {
+                        Email = user.Email,
+                        FullName = user.FullName,
+                        UserName = user.UserName,
+                        roles = roles
+                    }
+                };
+            }
+            catch
+            {
+                return new ApiResult()
+                {
+                    Status = HttpStatus.OK,
+                    Data = {}
+                };
+            }
+           
         }
 
     }

@@ -351,6 +351,8 @@ namespace Application.IdentityServer.Migrations
 
                     b.Property<string>("ViTriMo");
 
+                    b.Property<string>("maiTangDiaDiem");
+
                     b.HasKey("Id");
 
                     b.ToTable("LietSy");

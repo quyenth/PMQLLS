@@ -118,12 +118,20 @@ namespace Application.IdentityServer.Controllers.QLLS
         [Route("{id}")]
         public async Task<ApiResult> GetById(int id)
         {
-            var result = lietSyService.Find(id);
-            return new ApiResult()
+            try
             {
-                Status = HttpStatus.OK,
-                Data = result
-            };
+                var result = lietSyService.Find(id);
+                return new ApiResult()
+                {
+                    Status = HttpStatus.OK,
+                    Data = result
+                };
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+          
         }
 
         /// <summary>
@@ -292,8 +300,8 @@ namespace Application.IdentityServer.Controllers.QLLS
                     }
                     worksheet.Cells["K" + j].Value = dtRow["ChucVuName"];
                     //worksheet.Cells["L" + j].Value = "";
-                    worksheet.Cells["L" + j].Value = dtRow["XaHySinhName"] + "-" + dtRow["HuyenHySinhName"] + "-" + dtRow["TinhHySinhName"];
-                    worksheet.Cells["M" + j].Value = dtRow["MaiTangXaName"] + "-" + dtRow["MaiTangHuyenName"] + "-" + dtRow["MaiTangTinhName"];
+                    worksheet.Cells["L" + j].Value = dtRow["HySinhDiaDiem"] ;
+                    worksheet.Cells["M" + j].Value = dtRow["maiTangDiaDiem"];
                     worksheet.Cells["N" + j].Value = dtRow["ThanNhanCha"];
                     if(dtRow["QuyTap"] != null)
                     {
