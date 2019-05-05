@@ -221,7 +221,7 @@ namespace Application.IdentityServer.Controllers.QLLS
                 worksheet.Column(1).Width = 5;
                 worksheet.Column(2).Width = 25;
                 worksheet.Column(3).Width = 15;
-                worksheet.Column(4).Width = 30;
+                worksheet.Column(4).Width = 60;
                 worksheet.Column(5).Width = 15;
                 worksheet.Column(6).Width = 15;
                 worksheet.Column(7).Width = 30;
@@ -229,10 +229,10 @@ namespace Application.IdentityServer.Controllers.QLLS
                 worksheet.Column(9).Width = 20;
                 worksheet.Column(10).Width = 15;
                 worksheet.Column(11).Width = 30;
-                worksheet.Column(12).Width = 20;
-                worksheet.Column(13).Width = 30;
-                worksheet.Column(14).Width = 30;
-                worksheet.Column(15).Width = 30;
+                worksheet.Column(12).Width = 60;
+                worksheet.Column(13).Width = 60;
+                worksheet.Column(14).Width = 60;
+                worksheet.Column(15).Width = 60;
                 worksheet.Column(16).Width = 30;
 
                 worksheet.Cells["A1:O1"].Merge = true;
@@ -293,7 +293,7 @@ namespace Application.IdentityServer.Controllers.QLLS
                     worksheet.Cells["I" + j].Value = dtRow["ChucVuName"];
 
 
-                    if (dtRow["NgayHiSinh"] != null)
+                    if (dtRow["NgayHiSinh"] != null && !string.IsNullOrEmpty(dtRow["NgayHiSinh"].ToString()))
                     {
                         var date = Convert.ToDateTime(dtRow["NgayHiSinh"].ToString());
                         worksheet.Cells["J" + j].Value = date.ToString("dd/MM/yyy");
@@ -303,14 +303,14 @@ namespace Application.IdentityServer.Controllers.QLLS
                     worksheet.Cells["L" + j].Value = dtRow["HySinhDiaDiem"] ;
                     worksheet.Cells["M" + j].Value = dtRow["maiTangDiaDiem"];
                     worksheet.Cells["N" + j].Value = dtRow["ThanNhanCha"];
-                    if(dtRow["QuyTap"] != null)
+                    if(dtRow["QuyTap"] != null && !string.IsNullOrEmpty(dtRow["QuyTap"].ToString()))
                     {
                         worksheet.Cells["O" + j].Value = Convert.ToBoolean(dtRow["QuyTap"]) ? "Đã quy tập" : "Chưa quy tập";
 
                     }
                     else
                     {
-                        worksheet.Cells["P" + j].Value =  "Chưa quy tập";
+                        worksheet.Cells["O" + j].Value =  "Chưa quy tập";
                     }
 
                     //worksheet.Cells["D" + j].Value = employee.Salary.ToString("$#,0.00;($#,0.00)");
