@@ -21,10 +21,38 @@ export class LietSyService extends BaseService {
     return this.http.post<HttpResult>(url, filterCondition);
   }
 
-  save(model: LietSyModel) {
+  save(model) {
+    if(model.ngayXuatNgu){
+      model.ngayXuatNgu = this.fixDateFomat(model.ngayXuatNgu);
+    }
+    if(model.ngayNhapNgu){
+      model.ngayNhapNgu = this.fixDateFomat(model.ngayNhapNgu);
+    }
+    if(model.ngayVaoDoan){
+      model.ngayVaoDoan = this.fixDateFomat(model.ngayVaoDoan);
+    }
+    if(model.ngayVaoDang){
+      model.ngayVaoDang = this.fixDateFomat(model.ngayVaoDang);
+    }
+    if(model.ngayHiSinh){
+      model.ngayHiSinh = this.fixDateFomat(model.ngayHiSinh);
+    }
+    if(model.ngayTaiNgu){
+      model.ngayTaiNgu = this.fixDateFomat(model.ngayTaiNgu);
+    }
     const url = this.BaseUrl + '/api/lietSy/save';
     return this.http.post<HttpResult>(url, JSON.stringify(model), this.getHeader());
     }
+
+   fixDateFomat (date: Date){
+    const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes()));
+    let result = JSON.stringify(utcDate);
+    if(result){
+      result = result.substring(0, result.length - 1);
+      result = result.substr(1);
+    }
+    return result;
+   }
 
   delete(model: LietSyModel): Observable<HttpResult> {
     const url = this.BaseUrl + '/api/lietSy/Delete';
