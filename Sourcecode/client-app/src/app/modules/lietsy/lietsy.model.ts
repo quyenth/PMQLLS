@@ -48,7 +48,6 @@ export class LietSyModel {
 		 
 			 dangVien: boolean;
 		 
-		 
 			 khenThuong: string;
 		 
 		 
@@ -147,5 +146,7 @@ export class LietSyModel {
 			 updatedBy: string;
 		 
 			 soQuyenId: number;
+
+       tenNghiaTrang: string;
 		 
 }

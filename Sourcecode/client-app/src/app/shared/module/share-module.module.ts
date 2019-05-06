@@ -16,7 +16,7 @@ import { Select2Module } from 'ng2-select2';
 
 export function getDatepickerConfig(): BsDatepickerConfig {
   return Object.assign(new BsDatepickerConfig(), {
-    dateInputFormat: 'DD/MM/YYYY',
+    dateInputFormat: 'YYYY/MM/DD',
     containerClass: 'theme-green',
   });
 }
@@ -47,6 +47,7 @@ export function getDatepickerConfig(): BsDatepickerConfig {
   })
   ],
   declarations: [ConfirmDialogComponent, PagingComponent ],
+  providers: [{ provide: BsDatepickerConfig, useFactory: getDatepickerConfig }],
   exports : [
     DataTablesModule, FormsModule, ReactiveFormsModule , ModalModule ,
     PaginationModule, NgxSpinnerModule, PagingComponent , ToastrModule ,

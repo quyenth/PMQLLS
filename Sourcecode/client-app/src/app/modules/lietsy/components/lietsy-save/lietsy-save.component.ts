@@ -265,6 +265,16 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
       this.isUpdate = true;
       this.lietSyService.getById(this.data.id).subscribe((res) => {
 
+            if(res.data.queTinhId != null){
+              this.huyenService.getListHuyenByTinh(res.data.queTinhId).subscribe((res) => {
+                this.listQueHuyen = res;
+              });
+            }
+            if(res.data.queHuyenId != null){
+              this.xaService.getListXaByHuyen(res.data.queHuyenId).subscribe((res) => {
+                this.listQueXa = res;
+              });
+            }
             this.myForm.patchValue({'id': res.data.id});
 
             this.myForm.patchValue({'thuTu': res.data.thuTu});
@@ -303,7 +313,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
             this.myForm.patchValue({'diaPhuongNhapNgu': res.data.diaPhuongNhapNgu});
 
-            this.myForm.patchValue({'ngayNhapNgu': res.data.ngayNhapNgu});
+            this.myForm.patchValue({'ngayNhapNgu': res.data.ngayNhapNgu  });
 
             this.myForm.patchValue({'ngayXuatNgu': res.data.ngayXuatNgu});
 
@@ -425,7 +435,7 @@ export class LietSySaveComponent implements OnInit , OnDestroy {
 
             this.myForm.patchValue({'soQuyenId': res.data.soQuyenId});
             this.myForm.patchValue({'maiTangDiaDiem': res.data.maiTangDiaDiem});
-
+    
 
       });
     } 	else {

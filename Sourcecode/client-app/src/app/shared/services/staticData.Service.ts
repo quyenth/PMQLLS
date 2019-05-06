@@ -10,7 +10,7 @@ export class StaticDataService implements OnInit  {
   }
 
   getListGender(): Select2Model[]  {
-      const list: Select2Model[] = [new Select2Model('0', 'Nữ'), new Select2Model('1', 'Nam')] ;
+      const list: Select2Model[] = [new Select2Model(0, 'Nữ'), new Select2Model(1, 'Nam')] ;
       return list;
   }
 

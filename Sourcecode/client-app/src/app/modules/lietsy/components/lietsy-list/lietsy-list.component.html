@@ -210,7 +210,7 @@
 
                            <th class='no-sort'  rowspan="2" style="width: 20px;">Năm sinh</th>
 
-                           <th class='no-sort'  rowspan="1" colspan="4">Nguyên quán</th>
+                           <th class='no-sort'  rowspan="1" colspan="3">Nguyên quán</th>
 
 
 
@@ -226,7 +226,7 @@
 
                            <th class='no-sort' rowspan="2" style="width: 250px;">Trường hợp hy sinh</th>
 
-                           <th class='no-sort' rowspan="2" style="width: 250px;">Trận đánh hy sinh</th>
+                           <!-- <th class='no-sort' rowspan="2" style="width: 250px;">Trận đánh hy sinh</th> -->
 
                            <th class='no-sort' rowspan="2" style="width: 250px;"> Hy sinh địa điểm </th>
 
@@ -234,13 +234,13 @@
 
                            <th class='no-sort' colspan="3" style="width: 20px;">Quy tập</th>
 
-                           <th class='no-sort' colspan="6" style="width: 20px;">Thân nhân</th>
+                           <!-- <th class='no-sort' colspan="6" style="width: 20px;">Thân nhân</th> -->
 
                           <th style="width:60px;" class='no-sort' rowspan="2"></th>
           </tr>
           <tr>
               <th class='no-sort' style="width: 200px;">Thôn</th>
-              <th class='no-sort' style="width: 200px;">Xã</th>
+              <!-- <th class='no-sort' style="width: 200px;">Xã</th> -->
               <th class='no-sort' style="width: 200px;">Huyện</th>
               <th class='no-sort' style="width: 200px;">Tỉnh</th>
 
@@ -248,7 +248,7 @@
               <th class='no-sort' style="width: 200px;">Quận huyện</th>
               <th class='no-sort' style="width: 200px;">Tỉnh</th> -->
 
-              <th class='no-sort' style="width: 200px;">Tình trạng</th>
+              <th class='no-sort' style="width: 100px;">Tình trạng</th>
 
               <th class='no-sort' style="width: 250px;">Địa điểm</th>
 
@@ -260,13 +260,13 @@
 
               <!-- <th class='no-sort'>Tọa độ</th> -->
 
-              <th class='no-sort'>Tình trạng</th>
+              <th class='no-sort' style="width: 100px;">Tình trạng</th>
 
-              <th class='no-sort'>Nghĩa trang</th>
+              <th class='no-sort' style="width: 200px;">Nghĩa trang</th>
 
-              <th class='no-sort'>Vị trí mộ</th>
+              <th class='no-sort' style="width: 200px;">Vị trí mộ</th>
 
-              <th class='no-sort'>Bố</th>
+              <!-- <th class='no-sort'>Bố</th>
 
               <th class='no-sort'>Mẹ</th>
 
@@ -276,7 +276,7 @@
 
               <th class='no-sort'>Khác</th>
 
-              <th class='no-sort'>Địa chỉ thân nhân</th>
+              <th class='no-sort'>Địa chỉ thân nhân</th> -->
           </tr>
         </thead>
         <tbody>
@@ -288,10 +288,10 @@
             <!-- <td>{{item.thuTu}}</td> -->
             <td>{{item.hoTen}}</td>
             <!-- <td>{{item.ten}}</td> -->
-            <td>{{item.gioiTinh == 1 ? 'Nam' : 'Nữ'}}</td>
+            <td>{{(item.gioiTinh != 1 && item.gioiTinh != 0) ? '' : (item.gioiTinh == 1 ? 'Nam' : 'Nữ')}}</td>
             <td>{{item.namSinh}}</td>
             <td>{{item.queThon}}</td>
-            <td>{{item.queXaName}}</td>
+            <!-- <td>{{item.queXaName}}</td> -->
             <td>{{item.queHuyenName}}</td>
             <td>{{item.queTinhName }}</td>
             <td>{{item.ngayNhapNgu | date: 'dd/MM/yyyy'}}</td>
@@ -301,7 +301,7 @@
 
             <td>{{item.tenDonVi}}</td>
             <td>{{item.hySinhLyDoChiTiet}}</td>
-            <td>{{item.hySinhTranDanh}}</td>
+            <!-- <td>{{item.hySinhTranDanh}}</td> -->
             <td>{{item.hySinhDiaDiem}}</td>
             <!-- <td>{{item.huyenHySinhName}}</td>
             <td>{{item.tinhHySinhName}}</td> -->
@@ -312,17 +312,18 @@
             <!-- <td>{{item.diemCaoName}}</td> -->
             <!-- <td>{{item.maiTangToaDo}}</td> -->
             <td>{{item.quyTap? 'Có' : 'Không'}}</td>
-            <td>{{item.nghiaTrang}}</td>
+            <!-- <td>{{item.nghiaTrang}}</td> -->
+            <td>{{item.tenNghiaTrang}}</td>
             <td>{{item.viTriMo}}</td>
 
 
 
-            <td>{{item.thanNhanCha}}</td>
+            <!-- <td>{{item.thanNhanCha}}</td>
             <td>{{item.thanNhanMe}}</td>
             <td>{{item.thanNhanVo}}</td>
             <td>{{item.thanNhanCon}}</td>
             <td>{{item.thanNhanKhac}}</td>
-            <td>{{item.thanNhanDiaChi}}</td>
+            <td>{{item.thanNhanDiaChi}}</td> -->
             <td class="action-col">
               <a class="action-icon" (click)="onEditItem(item)"><i class="fa fa-pencil-square-o"></i></a>
               <a class="action-icon" (click)="onDeleteItem(item)"><i class="fa fa-trash"></i></a>
