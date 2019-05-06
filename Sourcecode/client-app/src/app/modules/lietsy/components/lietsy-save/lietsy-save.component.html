@@ -544,7 +544,7 @@
                             </label>
                             <div class="col-sm-8">
                                 <div class="checkbox checkbox-success">
-                                    <input type="checkbox" id="maiTangCheckbox" fformControlName="maiTang" >
+                                    <input type="checkbox" id="maiTangCheckbox" formControlName="maiTang" >
                                     <label for="maiTangCheckbox"> </label>
                                 </div>
                             </div>
@@ -676,10 +676,9 @@
                                 Nghĩa trang
                               </label>
                               <div class="col-sm-8">
-                                <ng-select [items]="listNghiaTrang "
+                                <ng-select [items]="listNghiaTrang"
                                     bindLabel="text"
                                     bindValue="id"
-                                    placeholder="Chọn nghĩa trang"
                                     formControlName="nghiaTrang"
                                 >
                               </ng-select>

@@ -49,19 +49,19 @@
 
             <th class='no-sort' rowspan="2">Kích hoạt</th>
 
-            <th class='no-sort' colspan="3">Thông tin liên hệ</th>
-
+            <!-- <th class='no-sort' colspan="2">Thông tin liên hệ</th> -->
+            <th class='no-sort'>Thủ trưởng</th>
             <th style="width:60px;" rowspan="2" class='no-sort'></th>
           </tr>
-          <tr>
+          <!-- <tr> -->
 
-            <th class='no-sort'>Hòm thư</th>
+            <!-- <th class='no-sort'>Hòm thư</th> -->
 
-            <th class='no-sort'>Thủ trưởng</th>
+            
 
-            <th class='no-sort'>Chức vụ thủ trưởng</th>
+            <!-- <th class='no-sort'>Chức vụ thủ trưởng</th> -->
 
-          </tr>
+          <!-- </tr> -->
         </thead>
         <tbody>
           <tr *ngFor="let item of list$" [ngClass]="{'selected':item.selected}">
@@ -80,11 +80,11 @@
 
             <td style="text-align: center;"><input type="checkbox" disabled="disabled" [(ngModel)]='item.active'></td>
 
-            <td>{{item.cqcS_HomThu}}</td>
+            <!-- <td>{{item.cqcS_HomThu}}</td> -->
 
             <td>{{item.cqcS_ThuTruong}}</td>
 
-            <td>{{item.cqcS_ThuTruongChucVu}}</td>
+            <!-- <td>{{item.cqcS_ThuTruongChucVu}}</td> -->
 
             <td class="action-col">
                 <a class="action-icon" (click)="onEditItem(item)"><i class="fa fa-pencil-square-o"></i></a>

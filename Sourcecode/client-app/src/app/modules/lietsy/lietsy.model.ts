@@ -83,7 +83,7 @@ export class LietSyModel {
 		 
 			 maiTangDiemCaoId: number;
 		 
-			 nghiaTrang: string;
+			 nghiaTrang: number;
 		 
 			 viTriMo: string;
 		 
@@ -94,7 +94,6 @@ export class LietSyModel {
 			 matThiHai: boolean;
 		 
 			 matTich: boolean;
-		 
 		 
 			 giayBaoTu: string;
 		 
@@ -111,7 +110,6 @@ export class LietSyModel {
 			 thanNhanBaoTin: string;
 		 
 			 thanNhanDiaChi: string;
-		 
 		 
 			 soBangTQGC: string;
 		 
@@ -139,9 +137,7 @@ export class LietSyModel {
 		 
 			 active: boolean;
 		 
-		 
 			 creatdedBy: string;
-		 
 		 
 			 updatedBy: string;
 		 

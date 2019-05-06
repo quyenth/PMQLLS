@@ -51,6 +51,7 @@ export class NghiaTrangService extends BaseService {
         const result: Select2Model[] = [] ;
         res.data.forEach(element => {
           result.push(new Select2Model (element.nghiaTrangId, element.tenNghiaTrang));
+          console.log(element.nghiaTrangId + element.tenNghiaTrang);
         });
         return result ;
     }));

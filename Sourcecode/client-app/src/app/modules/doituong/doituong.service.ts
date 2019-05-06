@@ -57,7 +57,7 @@ export class DoiTuongService extends BaseService {
     return this.http.get<HttpResult>(url).pipe(map(res => {
         const result: Select2Model[] = [] ;
         res.data.forEach(element => {
-          result.push(new Select2Model (element.id, element.name));
+          result.push(new Select2Model (element.doiTuongId, element.name));
         });
         return result ;
     }));

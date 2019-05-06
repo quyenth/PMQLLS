@@ -15,6 +15,15 @@ export class AppComponent implements OnInit, OnDestroy {
   isAdmin: boolean;
   subscription: Subscription;
 
+  modelDate = '';
+
+  onOpenCalendar(container) {
+    container.monthSelectHandler = (event: any): void => {
+      container._store.dispatch(container._actions.select(event.date));
+    };     
+    container.setViewMode('month');
+  }
+
  constructor(
     private authService: AuthService
    ) {
