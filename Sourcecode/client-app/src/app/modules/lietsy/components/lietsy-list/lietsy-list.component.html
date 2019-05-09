@@ -236,7 +236,7 @@
 
                            <!-- <th class='no-sort' colspan="6" style="width: 20px;">Thân nhân</th> -->
 
-                          <th style="width:60px;" class='no-sort' rowspan="2"></th>
+                          <th style="width:60px;" class='no-sort' rowspan="2" ></th>
           </tr>
           <tr>
               <th class='no-sort' style="width: 200px;">Thôn</th>
@@ -325,8 +325,8 @@
             <td>{{item.thanNhanKhac}}</td>
             <td>{{item.thanNhanDiaChi}}</td> -->
             <td class="action-col">
-              <a class="action-icon" (click)="onEditItem(item)"><i class="fa fa-pencil-square-o"></i></a>
-              <a class="action-icon" (click)="onDeleteItem(item)"><i class="fa fa-trash"></i></a>
+              <a *ngIf='isAdmin' class="action-icon" (click)="onEditItem(item)"><i class="fa fa-pencil-square-o"></i></a>
+              <a *ngIf='isAdmin' class="action-icon" (click)="onDeleteItem(item)"><i class="fa fa-trash"></i></a>
            </td>
 
           </tr>
