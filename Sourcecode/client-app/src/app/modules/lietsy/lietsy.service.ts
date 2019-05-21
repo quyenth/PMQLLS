@@ -17,12 +17,15 @@ export class LietSyService extends BaseService {
   }
 
   search(filterCondition): Observable<HttpResult> {
+    if (filterCondition && filterCondition.searchCodition && filterCondition.searchCodition.ngayHiSinh){
+      filterCondition.searchCodition.ngayHiSinh = this.fixDateFomat(filterCondition.searchCodition.ngayHiSinh);
+    }
     const url = this.BaseUrl + '/api/LietSy/Search';
     return this.http.post<HttpResult>(url, filterCondition);
   }
 
   save(model) {
-    if(model.ngayXuatNgu){
+    if (model.ngayXuatNgu) {
       model.ngayXuatNgu = this.fixDateFomat(model.ngayXuatNgu);
     }
     if(model.ngayNhapNgu){
@@ -47,7 +50,7 @@ export class LietSyService extends BaseService {
    fixDateFomat (date: Date){
     const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes()));
     let result = JSON.stringify(utcDate);
-    if(result){
+    if (result) {
       result = result.substring(0, result.length - 1);
       result = result.substr(1);
     }
